@@ -1,0 +1,123 @@
+\documentclass[parskip=half, bibliography=totoc, captions=tableheading, titlepage=firstiscover]{scrartcl}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+
+
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+
+%\usepackage{polyglossia}
+
+
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+%\usepackage{fontspec}
+%\defaultfontfeatures{Ligatures=TeX}
+
+%\usepackage[
+%  math-style=ISO,
+%  bold-style=ISO,
+%  sans-style=italic,
+%  nabla=upright,
+%]{unicode-math}
+%\setmathfont{Latin Modern Math}
+
+\usepackage[autostyle]{csquotes}
+
+\usepackage[
+  locale=DE,                   % deutsche Einstellungen
+  separate-uncertainty=true,   % Immer Fehler mit \pm
+  per-mode=symbol-or-fraction, % m/s im Text, sonst Brüche
+]{siunitx}
+
+\usepackage{xfrac}
+
+\usepackage[section, below]{placeins}
+\usepackage[
+  labelfont=bf,
+  font=small,
+  width=0.9\textwidth,
+]{caption}
+
+\usepackage{subcaption}
+%\usepackage{subfig}
+
+\usepackage{graphicx}
+
+\usepackage{float}
+\floatplacement{figure}{h}
+\floatplacement{table}{h}
+
+\usepackage{booktabs}
+
+
+
+\usepackage{bookmark}
+
+\usepackage[shortcuts]{extdash}
+
+\usepackage[math]{blindtext}
+
+%\usepackage{microtype}
+
+\usepackage[
+  backend=biber,
+]{biblatex}
+% Quellendatenbank
+\addbibresource{lit.bib}
+
+\usepackage{hyperref}
+
+\usepackage{color}
+
+\usepackage{makeidx}
+\makeindex
+
+\usepackage[version=3]{mhchem}
+\usepackage{enumitem}
+\usepackage{expl3}
+\usepackage{xparse}
+
+\RequirePackage{etoolbox}
+\AtEndPreamble{
+    \usepackage{fontspec}
+    \usepackage{microtype}
+    \usepackage{fontspec}
+    \defaultfontfeatures{Ligatures=TeX}
+    \usepackage{polyglossia}
+    \setmainlanguage{german}
+    \usepackage[
+      math-style=ISO,
+      bold-style=ISO,
+      sans-style=italic,
+      nabla=upright,
+      ]{unicode-math}
+    \setmathfont{Latin Modern Math}
+
+}
+
+\usepackage{yfonts}
+
+
+%\usepackage{showframe}
+\input{../data.tex}
+\author{Steven Becker \\
+steven.becker@tu-dortmund.de \\
+und \\
+Stefan Grisard \\
+stefan.grisard@tu-dortmund.de}
+\title{\versuch}
+\subtitle{PHY641 Versuch \vnr}
+
+\date{\vd \\
+\va}
+\ohead{\today}
+\cfoot{\pagemark}
+
+
+
+%\usepackage{scrlayer-scrpage}
