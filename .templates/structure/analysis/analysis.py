@@ -36,6 +36,6 @@ f = unp.uarray(a, b) #EXAMPLE UARRAY
 
 
 
-r.app(value = Q_(2, 'meter'), name = 'x')
-r.app(value = Q_(ufloat(1.34, 0.02), 'meter / second'), name = 'x_{0}')
+r.add_result(value = Q_(2, 'meter'), name = 'x')
+r.add_result(value = Q_(ufloat(1.34, 0.02), 'meter / second'), name = 'x_{0}')
 r.makeresults()

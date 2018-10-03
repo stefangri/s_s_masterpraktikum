@@ -82,7 +82,7 @@ class Latexdocument(object):
                             f.write(('{:.' + str(places[j]) + 'f}' + ' & ').format(data[j][i]))
             f.write('\\bottomrule \n\\end{tabular} \n\\end{table}')
 
-    def app(self, name, value):
+    def add_result(self, name, value):
             if (type(value.magnitude) == uncertainties.core.Variable or type(value.magnitude) == uncertainties.core.AffineScalarFunc):
                 s = '{:Lx}'.format(Q_(2, value.units)) + '~'
                 value = value.magnitude
