@@ -1,4 +1,45 @@
 \setcounter{page}{1}
 \section*{Zielsetzung}
+In dem Versuch $V64$ wird mittels eines \emph{Sagnac Interferometer}
+der Brechungsindex $n$ von Luft und einer Glasplatte bestimmt.
+Hierbei bietet ein Sagnac Interferometer den Vorteil, dass sich
+die beiden Strahlen des Interfeometer die selbe Strecke zurücklegen.
+Hierdurch ist das Sagnac Interfeometer stabiler gegen externe Störung
+als bspw. ein Michelson Interfeometer.
 
 \section{Theorie}
+Der Brechungsindex $n$ wird in mit einem Interferometer mit Hilfe von
+Interferenzeffekten bestimmt. Interferent entstehen durch
+eine Phasendifferenz $\Delta\phi$ zwischen zwei kohärenten Lichtstrahlen.
+Eine solche Phasendifferenz wird in Gasen und Festkörpern unterschiedlich erzeugt.
+
+%Brechungsindex von Gasen
+%Brechungsindex von Festkörpern(Glasen)
+%Polarisation
+\subsection{Brechungsindex von Gasen}
+Propagiert ein Lichtrahl von Medium $A$ durch eine Gasezelle der Länge $L$ mit Medium $B$,
+so führt das zu einer Phasendifferenz $\Delta\phi$ relativ gesehen zu einem Lichtstrahl der sich
+nur durch Medium $A$ bewegt. Erzeugt wird diese Phasendifferenz durch die Änderung der
+Phasengeschwindigkeit im Medium $v\ua{ph}=\frac{\map{c}}{n_B}=\frac{\omega}{k}$, wobei $\map{c}$
+die Vakuumlichtgeschwindigkeit repräsentiert. Eine Änderung der Phasengeschwindigkeit
+verursacht eine Änderung der Wellenzahl $k$ und somit eine Phasenverschiebung
+\begin{equation}
+  \label{eq:phase_shit_gases}
+\Delta\phi = kL = \frac{2\pi}{\lambda\ua{vac}}(n_B-n_A)L,
+\end{equation}
+mit der Vakuumwellenlänge $\lambda\ua{vac}$ und den Brechungsindizies der
+Medien $A$ und $B$.
+Zu beachten ist, dass der Brechungsindex eines Gases allgemein von dem Druck abhängt.
+Die Abhängigkeit wird in einem Interferometer verwendet,um zwei kohärente Strahlen
+interfiereren zu lassen. Hierbei hängt die Art der Interfernz von der Phasenverschiebung ab:
+\begin{align}
+  \Delta\phi &=0,2\pi,4\pi,\dots \qquad \text{Konstruktive Interfernz} \label{eq:Konstruktive}\\
+  \Delta\phi &= \pi, 3\pi, 5\pi,\dots \qquad \text{Destruktive Interferenz}. \label{eq:Destruktive}
+\end{align}
+Durch eine Beobachtung bzw. Zählung der Interferenzmaxima $M$ bei einer gegebenen Druckdifferenz
+ist es möglich den Brechungsindex zu bestimmen.
+\textbf{Lorentz-Lorenz Kurve}
+
+\subesction{Brechungsindex von Festkörpern}
+Im Gegensatz zu Gasen ist der Brechungsindex eines Festkörpers nicht Druckabhaängig.
+Deshalb muss hier eine andere Methodik verwendet werden
