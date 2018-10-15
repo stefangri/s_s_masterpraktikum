@@ -48,7 +48,7 @@ entfernt und stattdessen der um $\SI{45}{\degree}$ geneigte PBSC mit den Photodi
 montiert. Bevor nun die Brechungsindices vo Luft und Glas bestimmt werden, wird eine
 Kontrastbestimmung durchgeführt. Hierzu mehr im nächsten Kapitel.
 
-\subsection{Kontrastbestimmung}
+\subsection{Kontrastbestimmung}\label{sec:Kontrastbestimmung}
 Der Kontrast des Interferometers ist ein Maß für das Auflösungsvermögen und wird
 wie folgt definiert
 \begin{equation}
@@ -67,3 +67,58 @@ bei einer beispielweisen Drehung der Probe um $\SI{1}{\degree}$, ein Glas
 einen Winkel von $\SI{9}{\degree}$ und das Andere von $\SI{11}{\degree}$ zu den jeweiligen
 Strahlen besitzen. Die Intensität wird nun mit Hilfe einer Photodiode und einem Oszilloskop
 gemessen. Die Messungen erfolgen bei verschiedenen Filterwinkeln des Polarisationsfilters.
+Durch den Polarisationsfilter wird das elektrische Feld auf die Filterachse projiziert, dass
+kann mathematisch durch den folgenden Zusammenhang beschrieben werden:
+\begin{equation}
+  \label{eq:projektion_des_e_feldes}
+  E'\ua{0,x} = E_0 \cos(\vartheta), \quad E'\ua{0,y} = E_0 \cos(\vartheta)
+\end{equation}
+Wird Gleichung \eqref{eq:projektion_des_e_feldes} in Gleichung \eqref{eq:Interferenz_enstehung}
+eingesetzt so ergibt sich
+\begin{equation}
+  \label{eq:Interferenz}
+  I\propto E^2(1+2\cos(\vartheta)\sin(\vartheta)\cos(\Delta\phi)).
+\end{equation}
+Nachdem das elektrische Feld den zweiten PBSC durchquert besitzen die beiden elektrischen Felder
+die selbe Polarisation, $\delta = 0$. Aus der Gleichung \eqref{eq:Interferenz_enstehung}
+kann $I\ua{max}$ und $I\ua{min}$ bestimmt werden:
+\begin{align}
+  \label{eq:I_max_und_I_min}
+  \begin{aligned}
+  I\ua{max} & = E^2(1+2\cos(\vartheta)\sin(\vartheta)), \quad \text{Konstruktive Interferenz} \\
+  I\ua{min} & = E^2(1-2\cos(\vartheta)\sin(\vartheta)), \quad \text{Destuktive Interfetenz}.
+\end{aligned}
+\end{align}
+Werden nun die Gleichungen \eqref{eq:I_max_und_I_min} in die Definiton des Kontrastes \eqref{eq:kontrast}
+eingestzt wird, ergibt sich die Winkelabhängigkeit
+\begin{equation}
+  \label{eq:first_definition_kontrast}
+  K=\sin(2\vartheta).
+\end{equation}
+Der Wert des Kontrastes sollte immer größer gleich null sein, deshalb wird Gleichung \eqref{eq:first_definition_kontrast},
+wie folgt umdefiniert
+\begin{equation}
+  \label{eq:definition_dontrast}
+  K:=\be{\sin(2\vartheta)}.
+\end{equation}
+Der Polarisationsfilter wird für die nachfolgenden Bestimmung der Brechungsindizies
+so eingestellt, dass der Kontrast maximal ist.
+\subsection{Bestimmung der Brechungsindizes}
+Untersucht wird der Brechungsindex von Luft und von Glas.
+Für die Luftbestimmung wird eine Gaszelle der Länge $L=\SI{100\pm0.1}{\milli\meter}$
+verwendet. Evakuiert wird die Zelle mit Hilfer einer Vaakumpumpe auf einen
+Druck in der Größenordung von $p\sim\mathcal{O}(\SI{10}{\milli\bar})$.
+Die Anzahl der Interferenzmaxima wird mit zwei Photodioden bestimmt.
+Hierfür werden die Signale der Dioden subtrahiert, um so unabhängige gegenüber
+Leistungsfluktuationen des Lasers zu sein. Jeder Nulldurchgang der Subtraktion
+repräsentiert ein Interferenzmaximum. Die Nulldurchgänge werden mit einem digitalten
+Zählwerk gezählt. Nach der Evakuierung der Gaszelle wird langsam Luft in die Zelle
+gelassen und in $\SI{100}{\milli\bar}$ Schritten die gezählten Maxima notiert. Die Prozedur wird
+drei mal durchgeführt.
+
+Der Brechungsindex von Glas wird mit der in Abschnitt \ref{sec:Kontrastbestimmung}
+beschriebenen Glasprobe bestimmt. Die Gläser besitzen eine Dicke von $H=\SI{1.0}{\milli\meter}$.
+Hierfür werden, wie bei der Gasuntersuchung,
+die beiden Signale der Photodioden subtrahiert. Jedoch werden hier die Anzahl der Maxima
+bei einer Drehung des Festkörpers gezählt. Der Festkörper wird zehn Mal um
+$\SI{10}{\degree}$ gedreht. Nach jeder Drehung wird das Zählwerk zurückgesetzt.
