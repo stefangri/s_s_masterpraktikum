@@ -16,6 +16,33 @@ Eine solche Phasendifferenz wird in Gasen und Festkörpern unterschiedlich erzeu
 %Brechungsindex von Gasen
 %Brechungsindex von Festkörpern(Glasen)
 %Polarisation
+\subsection{Beschreibung von Licht}
+
+Licht kann als Elektromagnetische Welle beschrieben werden.
+Weil der elektrische und magnetische Teil miteinander gekopplet sind, reicht
+es für eine vollständige Beschreibung aus nur den elektrischen Teil zu betrachten.
+Für monochromatisches Licht kann das Elektrischefeld $\vec{E}$ mathematisch beschrieben
+werden als
+\begin{equation*}
+  \vec{E} = \vec{E_0} \map{exp}\left(i (\omega t-\vec{k}\vec{r})\right),
+\end{equation*}
+hierbei repräsentiert $\vec{E_0}$ die Polarisation des Feldes.
+Bei der Überlagerung von zwei Wellen kann es nun zu Interferenzeffekten kommen.
+Hierbei gilt im allgemein für die Überlagerungsintensität
+\begin{align}
+  \label{eq:Interferenz_enstehung}
+  \begin{aligned}
+  \vec{E}_1&=\vec{E_{0,1}} \map{exp}\left(i (\omega t-\vec{k}\vec{r})\right) \qquad \vec{E}_2 =\vec{E_{0,2}} \map{exp}\left(i (\omega t-\vec{k}\vec{r}+\Delta\phi)\right) \\
+  I &\propto \left<\be{E_1+E_2}^2\right> = E_{0,1}^2 + E_{0,2}^2 + 2E_{0,1}E_{0,1}\cos(\delta)\cos(\Delta\phi),
+\end{aligned}
+\end{align}
+wobei $\Delta\phi$ die Phasendifferenz zwischen $\vec{E_1}$ und $\vec{E_2}$ darstellt und
+$\delta$ der Polarisationswinkel der beiden Felder repräsentiert.
+Die Art der Interfernz hängt somit von der Phasenverschiebung ab:
+\begin{align}
+  \Delta\phi &=0,2\pi,4\pi,\dots \qquad \text{Konstruktive Interfernz} \label{eq:Konstruktive}\\
+  \Delta\phi &= \pi, 3\pi, 5\pi,\dots \qquad \text{Destruktive Interferenz}. \label{eq:Destruktive}
+\end{align}
 \subsection{Brechungsindex von Gasen}
 Propagiert ein Lichtrahl von Medium $A$ durch eine Gasezelle der Länge $L$ mit Medium $B$,
 so führt das zu einer Phasendifferenz $\Delta\phi$ relativ gesehen zu einem Lichtstrahl der sich
@@ -31,11 +58,7 @@ mit der Vakuumwellenlänge $\lambda\ua{vac}$ und den Brechungsindizies der
 Medien $A$ und $B$.
 Zu beachten ist, dass der Brechungsindex eines Gases allgemein von dem Druck abhängt.
 Die Abhängigkeit wird in einem Interferometer verwendet,um zwei kohärente Strahlen
-interfiereren zu lassen. Hierbei hängt die Art der Interfernz von der Phasenverschiebung ab:
-\begin{align}
-  \Delta\phi &=0,2\pi,4\pi,\dots \qquad \text{Konstruktive Interfernz} \label{eq:Konstruktive}\\
-  \Delta\phi &= \pi, 3\pi, 5\pi,\dots \qquad \text{Destruktive Interferenz}. \label{eq:Destruktive}
-\end{align}
+interfiereren zu lassen.
 Durch eine Beobachtung bzw. Zählung der Interferenzmaxima $M$ bei einer gegebenen Druckdifferenz
 ist es möglich den Brechungsindex zu bestimmen.
 \textbf{Lorentz-Lorenz Kurve}
