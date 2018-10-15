@@ -40,6 +40,47 @@ Durch eine Beobachtung bzw. Zählung der Interferenzmaxima $M$ bei einer gegeben
 ist es möglich den Brechungsindex zu bestimmen.
 \textbf{Lorentz-Lorenz Kurve}
 
-\subesction{Brechungsindex von Festkörpern}
+\subsection{Brechungsindex von Festkörpern}
 Im Gegensatz zu Gasen ist der Brechungsindex eines Festkörpers nicht Druckabhaängig.
-Deshalb muss hier eine andere Methodik verwendet werden
+Deshalb wird hier eine andere Bestimmungsmöglichkeit verwendet.
+Propagiert ein Lichtstrahl, wie in Abbildung \ref{fig:slag} gezeigt durch einen Festkörper der Länge $T$,
+so wird dieser nach dem Snelliussches Brechungsgesetz gebrochen.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./content/images/slab.png}
+\caption{Ein Lichtstahl propagiert durch einen Festkörper z.\,B. Glas der Länge $T$ \cite{anleitung64}.}
+\label{fig:slag}
+\end{figure}
+Hierdurch entsteht ein Gangunterschied der sich in eine Phasendifferenz übersetzt.
+Mathematisch bestimmt werden kann die Phasendifferenz über den folgenden Zusammenhang
+\begin{equation}
+  \label{eq:Phasendifferenz_festkörper}
+  \Delta\phi=\frac{ 2\pi T }{ \lambda\ua{vac} }\left( \frac{ n-\cos(\theta-\theta') }{ \cos(\theta') } - n+1\right),
+\end{equation}
+wobei $n$ der Brechungsindex des Festkörpers repräsentiert.
+\textbf{TAylorentwicklung}
+Mit der Phasendifferenz ist es nun möglich die Anzahl an Interfernzmaxima $M$ anzugeben, die bei einer Änderung
+des Festkörpers um den Winkel $\theta$ entstehen. Zu beachten ist, dass der Laserstrahl zweimal den Festkörper
+durchquert.
+\begin{equation}
+  \label{eq:Interferenzmaxima_solid_state}
+  M=2\frac{\Delta\phi}{2\pi}=\textbf{HierNochTaylorentwicklungEinfügen}
+\end{equation}
+Wird die Gleichung \eqref{eq:Interferenzmaxima_solid_state} nach dem Brechungsindex $n$
+umgestellt, ist es möglichen diesen aus $M$ zu bestimmen.
+\begin{equation}
+  \textbf{HiernochdieNeueFormeleinfügen}
+\end{equation}
+
+\subsection{Polarisation}
+Bisher wurde nur der Wellencharakter von Licht betrachtet. Jedoch besitzt eine
+Elektromagnetische Welle einen weiteren Freiheitsgrad, die Polarisation.
+Die Polarisation gibt die Richtung des Elektrischenfeld Vektor an.
+Eine Änderung der Polarisation kann mit Hilfe von Polarisationsfiltern bewirkt werden.
+Der Filter absorbiert den Lichtanteil, welcher um $\frac{pi}{2}$ zum eingestellt Filterwinkel
+gedreht ist. Somit wird das transmitierte Licht auf die Filterachse projiziert.
+
+Zusätzlich werden in dem Versuch \emph{polarizing beam-splitter cubes} (PBSCs) verwendet.
+Hergestellt wird ein solche Würfel, wenn zwei $45-45-\SI{90}{\degree}$ Prismen
+an der Hypotenuse mit einander verklebt werden. Wichtig ist das an dieser, vor dem verkleben,
+eine dielekrische Schicht aufgebracht wird.
