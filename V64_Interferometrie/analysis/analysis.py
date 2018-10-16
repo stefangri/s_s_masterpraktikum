@@ -132,13 +132,26 @@ l.Latexdocument(filename = abs_path('results/fitparams_druck.tex')).tabular(
 
 
 
-#p = [p_1, p_2, p_3]
-#M = [M_1, M_2, M_3]
-#p_mid = unp.uarray(np.mean(p, axis = 0), np.std(p, axis = 0))
-#M_mid = unp.uarray(np.mean(M, axis = 0), np.std(M, axis = 0) / np.sqrt(3))
-#plt.clf()
-#plt.errorbar(x = noms(p_mid), y = noms(M_mid), xerr = stds(p_mid), yerr = stds(M_mid),
-#            fmt = '.')
+#Brechungsindex Glas
+T = Q_(1, 'millimeter')
 
+def n_glas(counts, theta):
+    alpha = counts * lam / 4 / T 
+    return ((alpha**2 + 2 *  (1 - np.cos(theta)) * (1 - alpha)) / ( 2 * (1 - np.cos(theta) - alpha))).to('dimensionless')
+
+def n_glas2(counts, theta1, theta2):
+    return 1 / (1 - counts * lam /  T / (theta1**2 - theta2**2))   
+
+#def n_glas3(counts, theta):
+#    return 
+
+counts_glas = np.genfromtxt('data/n_glas.txt') 
+
+print((n_glas(counts_glas, 10 / 180 * np.pi)))
+print(n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi))
+n_glas = n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi)
+n_glas = ufloat(np.mean(n_glas), np.std(n_glas, ddof = 1))
+
+print(n_glas)
 
 
