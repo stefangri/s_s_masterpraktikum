@@ -35,7 +35,7 @@ def sign_digits(num):
 def best_value(num):
     value = f'{num}'.split('+/-')[0]
     return value
-        
+
 
 
 
@@ -94,7 +94,7 @@ class Latexdocument(object):
                 value = value.magnitude
                 df = DataFrame({'var': pd.Series(value, index = [name] ),
                 'tex': f'{name} &= \SI{{{value}}}{{' + s[s.index('}{') + 2:s.index('~')]})
-                
+
             self.data = self.data.append(df, sort = True)
             with open(abs_path('results/result_' + name.replace('\\', '') + '.tex'), 'w') as f:
                 #f.write('\\begin{equation} \n')
