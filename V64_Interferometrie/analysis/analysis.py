@@ -72,6 +72,15 @@ print(params[1])
 r.add_result(name = r'C', value = Q_(params[2]))
 
 
+l.Latexdocument(filename = abs_path('results/kontrast_tabelle.tex')).tabular(
+    data = [angle * 180 / np.pi, U_max, U_min, K * 100], 
+    header = [r'\text{Winkel} / \degree', r'U_{max} / \volt', r'U_{min} / \volt', r'\text{Kontrast} / \percent'],
+    places = [0, 2, 2, 1],
+    caption = 'Winkel des Polarisationsfilter, sowie maximal und minimal gemessene Spannung zur Bestimmung des Kontrast des Interferometers.',
+    label = 'messwerte_kontrast'
+)   
+
+
 
 # DRUCKABHÄNGIGKEIT
 def lin_model(x, A, B):
@@ -137,21 +146,30 @@ T = Q_(1, 'millimeter')
 
 def n_glas(counts, theta):
     alpha = counts * lam / 4 / T 
-    return ((alpha**2 + 2 *  (1 - np.cos(theta)) * (1 - alpha)) / ( 2 * (1 - np.cos(theta) - alpha))).to('dimensionless')
+    return (((alpha**2 + 2 *  (1 - np.cos(theta)) * (1 - alpha)) / ( 2 * (1 - np.cos(theta) - alpha))).to('dimensionless')).magnitude
 
 def n_glas2(counts, theta1, theta2):
-    return 1 / (1 - counts * lam /  T / (theta1**2 - theta2**2))   
+    return ((1 / (1 - counts * lam /  T / (theta1**2 - theta2**2))).to('dimensionless')).magnitude
 
 #def n_glas3(counts, theta):
 #    return 
 
-counts_glas = np.genfromtxt('data/n_glas.txt') 
+counts_glas = np.genfromtxt(abs_path('data/n_glas.txt')) 
 
-print((n_glas(counts_glas, 10 / 180 * np.pi)))
-print(n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi))
+#print((n_glas(counts_glas, 10 / 180 * np.pi)))
+#print(n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi))
 n_glas = n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi)
-n_glas = ufloat(np.mean(n_glas), np.std(n_glas, ddof = 1))
 
-print(n_glas)
+l.Latexdocument(filename = abs_path('results/counts_glas.tex')).tabular(
+    data = [counts_glas, n_glas], 
+    header = [r'\text{Counts} / ', r'n / '],
+    places = [0, 2],
+    caption = 'Gemessene Anzahl der $2\pi$ Phasenverschiebungen (Counts) unter Drehung der Glasplatten um $\SI{10}{\degree}$, sowie daraus berechnete Brechungsindices $n$.',
+    label = 'fitparams_druck'
+)  
+
+
+n_glas = ufloat(np.mean(n_glas), np.std(n_glas, ddof = 1))
+r.add_result(name = 'n_glas', value = Q_(n_glas))
 
 

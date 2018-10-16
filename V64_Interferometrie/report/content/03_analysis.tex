@@ -2,16 +2,22 @@
 
 
 \subsection{Kontrastmessung}
+Die gemessenen maximal- und minimal Diodenspannungen unter variablem Winkel des Polarisationswinkels sind in 
+Tabelle~\ref{tab: messwerte_kontrast} eingetragen.
+
+\input{../analysis/results/kontrast_tabelle.tex}
 
 
 \begin{figure}
     \centering
     \includegraphics[scale = 1]{../analysis/results/kontrast_fit.pdf}
+    \label{fig: kontrast_fit}
+    \caption{Darstellung der Messwerte und des Fits zur Untersuchung des Kontrasts in Abhängigkeit vom eingestellten Winkel des Polarisationsfilters.}
 \end{figure}
 
 Die Daten werden, wie in der Abschnitt \ref{} motiviert, an eine Funktion der Gestalt
 \begin{equation}
-    K(\vartheta) = A \sin \left(2 \vartheta + \vartheta_0 \right) + c 
+    K(\vartheta) = A \left|\sin \left(2 \vartheta + \vartheta_0 \right)\right| + B 
 \end{equation}
 angepasst. Für die Fitparameter ergeben sich die folgenden Werte:
 \begin{align}
@@ -20,10 +26,20 @@ angepasst. Für die Fitparameter ergeben sich die folgenden Werte:
     C &= \input{../analysis/results/result_C.tex}.
     \end{aligned}
 \end{align}
+Eine Darstellung des Fits und der Messwerte ist in Abbildung~\ref{fig: kontrast_fit} einzusehen.
+Die nachfolgenden Messungen sind mit der Einstellung $\vartheta = \SI{55}{\degree}$ durchgeführt worden, da hier der maximale 
+Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde.  
 
 
 
 \subsection{Messung des Brechungsindex von Glas}
+
+
+\input{../analysis/results/counts_glas.tex}
+
+\begin{equation}
+    n_{\text{Glas}} = \input{../analysis/results/result_n_glas.tex}
+\end{equation}
 
 
 
