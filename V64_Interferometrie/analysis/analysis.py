@@ -83,8 +83,6 @@ p_2, counts_2 = np.genfromtxt(abs_path('data/n_gas2.txt'), unpack = True)
 p_3, counts_3 = np.genfromtxt(abs_path('data/n_gas3.txt'), unpack = True)
 
 p = [p_1, p_2, p_3]
-#p = unp.uarray(p, np.full(np.shape(p), 1))
-#print(p)
 counts = [counts_1, counts_2, counts_3]
 unp.uarray(counts, np.full(np.shape(counts), 1))
 
@@ -111,13 +109,26 @@ for i in range(3):
     ax.set_ylabel(r'Brechungsindex $n$')
     ax.legend()
     fig.tight_layout()
-    fig.savefig(abs_path(f'results/druck_fit_{i + 1}.pdf'))
+    fig.savefig(abs_path(f'results/druck_fit_{i + 1}.pdf'), bbox_inches = 'tight', pad_inches = 0)
 
 all_params = np.array(all_params).T
+all_params = unp.uarray(noms(all_params), stds(all_params))
 n_1000 = all_params[0] * 1000 + all_params[1]
-print(n_1000[0])
-for i in [1, 2, 3]:
-    r.add_result(name = f'n_{i}', value = Q_(n_1000[i - 1]))
+n_1000 = unp.uarray(noms(n_1000), stds(n_1000))
+n_1000_mean = ufloat(np.mean(noms(n_1000)), np.std(noms(n_1000)))
+r.add_result(name = r'n', value = Q_(n_1000_mean))
+
+#for i in [1, 2, 3]:
+#    r.add_result(name = f'n_{i}', value = Q_(n_1000[i - 1]))
+
+l.Latexdocument(filename = abs_path('results/fitparams_druck.tex')).tabular(
+    data = [[1, 2, 3], unp.uarray(noms(all_params[0]*1e7), stds(all_params[0]*1e7)), all_params[1], n_1000], 
+    header = ['Messung / ', r'A / 10^{-7}\milli\bar^-1', 'B / ', r'n_\mathup{norm} / '],
+    places = [0, (1.2, 1.2), (1.7, 1.7), (1.7, 1.7)],
+    caption = 'Ermittelte Regressionsparameter $A$ und $B$ der Messung zur Bestimmung der Abhängigkeit zwischen Brechungsindex $n$ und Druck p. Zudem ist jeweils der Wert $n_{\mathup{norm}}$ zum Vergleich mit der Literatur angegeben.',
+    label = 'fitparams_druck'
+)    
+
 
 
 
@@ -129,7 +140,5 @@ for i in [1, 2, 3]:
 #plt.errorbar(x = noms(p_mid), y = noms(M_mid), xerr = stds(p_mid), yerr = stds(M_mid),
 #            fmt = '.')
 
-plt.savefig(abs_path('results/beispiel_druck_fit.pdf'))
 
 
-#print(noms(n_1), n_2, n_3)
