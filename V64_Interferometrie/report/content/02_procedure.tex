@@ -3,12 +3,12 @@ Der wesentliche Aufbau eines Sagnac Interfermoeters ist in Abildung \ref{fig:sag
 dargetsellt.
 \begin{figure}
 \centering
-\includegraphics[width=0.7\linewidth]{./content/images/aufbau.png}
+\includegraphics[width=0.6\linewidth]{./content/images/aufbau.png}
 \caption{Schmeatischer Aufbau eines Sagnac Interferometers \cite{anleitung64}.}
 \label{fig:sagnac_interferometer}
 \end{figure}
 Als Lichtquelle wird ein $\ce{HeNe}$ Laser mit einer Wellenlänge von
-$\lambda\ua{vac}=\SI{632.990}{\nano\meter}$ verwendet. Der Laser wird mittels zweier Spiegel
+$\lambda\ua{vac}=\SI{632.990}{\nano\meter}$ verwendet. Der Laser wird mittels zweier Steuerspiegel
 über einen PBSC in das Interfermoeter eingeleitet. Ausgekoppelt wird das Licht, wie
 in Abbildung \ref{fig:sagnac_interferometer} zu erkennen, über die vierte Seite
 des Würfels.
@@ -21,21 +21,21 @@ ist somit interferenzfähig. Das von dem zweiten PBSC aufgeteilte Licht wird
 anschließend auf zwei Photodioden gerichtet.
 
 \subsection{Justage}
-Zu Beginn wird der Versuchsaufbau mit einigen Schritten justiert werden.
+Zu Beginn wird der Versuchsaufbau in einigen Schritten justiert werden.
 Erklärt wird die Justage mit den in Abbildung \ref{fig:sagnac_interferometer} verwendeten Bezeichnern.
 Nachdem die benötigten Komponenten auf dem optischen Tisch montiert sind,
 wird mit Hilfe von zwei Justagehilfen, der Lichtstrahl optimal auf den Spiegel $M_C$
 ausgerichtet. Hierbei wird der von $M_A$ kommende Strahl blockiert.
-Anschließend werden die Justagehilfe dazu verwende, um den Laserstrahl optimal auf
+Anschließend werden die Justagehilfe dazu verwendet, um den Laserstrahl optimal auf
 die Spiegel $M_A$ und $M_B$ auszurichten. Vor dem ersten PCBS wird zusätzlich noch ein Polarisationsfilter
-mit einem Filterwinkel von $\SI{45}{\degree}$. Zusätlich werden mit Hilfe der Justagehilfen
-und des zweiten Steuersiegels die beiden polarisierten Strahlen horizontal voneinander
-getrennt.
+mit einem Filterwinkel von $\SI{45}{\degree}$ plaziert. Zusätlich werden mit Hilfe der Justagehilfen
+und des zweiten Steuerspiegels die beiden senkrecht zueiander polarisierten Strahlen räumlich (horizontal)
+voneinander getrennt.
 
-Nachdem der Laserstrahl ausgerichtet ist, kann der Laserstrahl an der vierten Seite des PCBS
-mit einem Schirm untersucht werden.
-Liegen die beiden Strahlen auf dem Schirm nicht aufeinander, wird mit Hilfe der
-Feinschrauben der Spiegel $M_A$, $M_B$ und $M_C$ nachjustiert. Wichtig ist das zum
+Nachdem das Interferometer ausgerichtet ist, können die beiden Lichtrahlen an der vierten Seite des PCBS
+, mit einem Schirm, untersucht werden.
+Liegen die beiden Lichtpunkte, auf dem Schirm, nicht aufeinander, werden mit Hilfe der
+Feinschrauben der Spiegel $M_A$, $M_B$ und $M_C$ eine Nachjustage vorgenommen. Wichtig ist, dass zum
 jetzigen Zeitpunkt noch keine Interferenzen beobachtet werden können. Erst nach
 dem Einbau eines weiteren Polarisationsfilter (Filterwinkel $\SI{45}{\degree}$)
 ist es möglich Interferenzen auf dem Schirm zu erkennen.
@@ -45,7 +45,7 @@ $M_A$ und $M_C$ verwendet werden.
 
 Wurde die "Interferenzfrequenz" minimiert, wird der zweite Polarisationsfilter wieder
 entfernt und stattdessen der um $\SI{45}{\degree}$ geneigte PBSC mit den Photodioden
-montiert. Bevor nun die Brechungsindices vo Luft und Glas bestimmt werden, wird eine
+montiert. Bevor nun die Brechungsindizes von Luft und Glas bestimmt werden, wird eine
 Kontrastbestimmung durchgeführt. Hierzu mehr im nächsten Kapitel.
 
 \subsection{Kontrastbestimmung}\label{sec:Kontrastbestimmung}
@@ -56,32 +56,31 @@ wie folgt definiert
   K = \frac{I\ua{max} - I\ua{min}}{I\ua{max}+I\ua{min}}.
 \end{equation}
 Für die Bestimmung der Intensitäten $I\ua{max}$ und $I\ua{min}$ wird der zweite
-PBSC und die Glasprobe benötigt.
-Die Glasrpo
-Hierzu wird eine Glaseprobe in den Strahlengang montiert. Die Glasprobe
-besteht aus zwei Gläsern die jeweils zu einem der horizontal seperierten Strahlen
-im Interfermoter einen Winkel von $\SI{10}{\degree}$ steht. Durch die Gläser soll
-ein Gangunterschied bzw. eine Phasendifferenz zwischen den beiden Strahl erzeugt werden.
-Hierzu wird kann die Probe um $\SI{10}{\degree}$ gedreht werden. Zu beachten ist, dass
-bei einer beispielweisen Drehung der Probe um $\SI{1}{\degree}$, ein Glas
+PBSC und die Glasprobe benötigt. Die Probe
+besteht aus zwei Gläsern die jeweils zu einem der räumlich seperierten Strahlen
+des Interfermoters einen Winkel von $\SI{10}{\degree}$ stehen. Durch die Gläser wird
+ein Gangunterschied bzw. eine Phasendifferenz zwischen den beiden Strahl erzeugt.
+Hierzu kann die Probe um $\SI{10}{\degree}$ gedreht werden. Zu beachten ist, dass
+bei einer beispielweisen Drehung der Gläser um $\SI{1}{\degree}$, ein Glas
 einen Winkel von $\SI{9}{\degree}$ und das Andere von $\SI{11}{\degree}$ zu den jeweiligen
-Strahlen besitzen. Die Intensität wird nun mit Hilfe einer Photodiode und einem Oszilloskop
+Strahlen besitzen. Somit ist die Gesamtewinkeländerung in Gleichung \eqref{} $\theta = \SI{2}{\degree}$.
+Die Intensität wird nun mit Hilfe einer Photodiode und einem Oszilloskop
 gemessen. Die Messungen erfolgen bei verschiedenen Filterwinkeln des Polarisationsfilters.
-Durch den Polarisationsfilter wird das elektrische Feld auf die Filterachse projiziert, dass
-kann mathematisch durch den folgenden Zusammenhang beschrieben werden:
+Die Projektions des der Polarisation des elektrischen Feldes $\vec{E_0}=E\ua{0,x}\vec{e}\ua{x}
++E\ua{0,y}\vec{e}\ua{y}$, kann mathemaisch wie folgt beschrieben werden:
 \begin{equation}
   \label{eq:projektion_des_e_feldes}
-  E'\ua{0,x} = E_0 \cos(\vartheta), \quad E'\ua{0,y} = E_0 \cos(\vartheta)
+  \vec{E_0}'=\left(E\ua{0,x}\vec{e}\ua{x}+E\ua{0,y}\vec{e}\ua{y}\right) \begin{pmatrix} \cos(\vartheta) \\ \sin(\vartheta) \end{pmatrix}
 \end{equation}
-Wird Gleichung \eqref{eq:projektion_des_e_feldes} in Gleichung \eqref{eq:Interferenz_enstehung}
+Wird die Gleichung \eqref{eq:projektion_des_e_feldes} in Formel \eqref{eq:Interferenz_enstehung}
 eingesetzt so ergibt sich
 \begin{equation}
   \label{eq:Interferenz}
   I\propto E^2(1+2\cos(\vartheta)\sin(\vartheta)\cos(\Delta\phi)).
 \end{equation}
 Nachdem das elektrische Feld den zweiten PBSC durchquert besitzen die beiden elektrischen Felder
-die selbe Polarisation, $\delta = 0$. Aus der Gleichung \eqref{eq:Interferenz_enstehung}
-kann $I\ua{max}$ und $I\ua{min}$ bestimmt werden:
+die selbe Polarisation, $\delta = 0$. Aus der Gleichung \eqref{eq:Interferenz}
+kann $I\ua{max}$ und $I\ua{min}$ abgeleitet werden:
 \begin{align}
   \label{eq:I_max_und_I_min}
   \begin{aligned}
@@ -90,7 +89,7 @@ kann $I\ua{max}$ und $I\ua{min}$ bestimmt werden:
 \end{aligned}
 \end{align}
 Werden nun die Gleichungen \eqref{eq:I_max_und_I_min} in die Definiton des Kontrastes \eqref{eq:kontrast}
-eingestzt wird, ergibt sich die Winkelabhängigkeit
+eingestzt, ergibt sich die Winkelabhängigkeit des Kontrastes
 \begin{equation}
   \label{eq:first_definition_kontrast}
   K=\sin(2\vartheta).
@@ -106,7 +105,7 @@ so eingestellt, dass der Kontrast maximal ist.
 \subsection{Bestimmung der Brechungsindizes}
 Untersucht wird der Brechungsindex von Luft und von Glas.
 Für die Luftbestimmung wird eine Gaszelle der Länge $L=\SI{100\pm0.1}{\milli\meter}$
-verwendet. Evakuiert wird die Zelle mit Hilfer einer Vaakumpumpe auf einen
+verwendet. Evakuiert wird die Zelle mit Hilfe einer Vaakumpumpe auf einen
 Druck in der Größenordung von $p\sim\mathcal{O}(\SI{10}{\milli\bar})$.
 Die Anzahl der Interferenzmaxima wird mit zwei Photodioden bestimmt.
 Hierfür werden die Signale der Dioden subtrahiert, um so unabhängige gegenüber
@@ -119,6 +118,7 @@ drei mal durchgeführt.
 Der Brechungsindex von Glas wird mit der in Abschnitt \ref{sec:Kontrastbestimmung}
 beschriebenen Glasprobe bestimmt. Die Gläser besitzen eine Dicke von $H=\SI{1.0}{\milli\meter}$.
 Hierfür werden, wie bei der Gasuntersuchung,
-die beiden Signale der Photodioden subtrahiert. Jedoch werden hier die Anzahl der Maxima
-bei einer Drehung des Festkörpers gezählt. Der Festkörper wird zehn Mal um
+die beiden Signale der Photodioden subtrahiert. Die Anazahl der Maxima
+werden in Abhängigkeit des Drehwinkels aufgenommen.
+Der Festkörper wird zehn Mal um
 $\SI{10}{\degree}$ gedreht. Nach jeder Drehung wird das Zählwerk zurückgesetzt.
