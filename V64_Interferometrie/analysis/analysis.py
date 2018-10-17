@@ -151,6 +151,10 @@ def n_glas(counts, theta):
 def n_glas2(counts, theta1, theta2):
     return ((1 / (1 - counts * lam /  T / (theta1**2 - theta2**2))).to('dimensionless')).magnitude
 
+
+def n_glas3(counts, deltheta, theta0 = 10 / 180 * np.pi):
+    return ((1 / (1 - counts * lam  /T / (theta0**2 + 2 * theta0 * deltheta))).to('dimensionless')).magnitude   
+
 #def n_glas3(counts, theta):
 #    return 
 
@@ -158,7 +162,8 @@ counts_glas = np.genfromtxt(abs_path('data/n_glas.txt'))
 
 #print((n_glas(counts_glas, 10 / 180 * np.pi)))
 #print(n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi))
-n_glas = n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi)
+n_glas = n_glas3(counts = counts_glas, deltheta = 10 / 180 * np.pi)
+print(n_glas)
 
 l.Latexdocument(filename = abs_path('results/counts_glas.tex')).tabular(
     data = [counts_glas, n_glas], 
@@ -170,6 +175,14 @@ l.Latexdocument(filename = abs_path('results/counts_glas.tex')).tabular(
 
 
 n_glas = ufloat(np.mean(n_glas), np.std(n_glas, ddof = 1))
+print(n_glas)
 r.add_result(name = 'n_glas', value = Q_(n_glas))
 
+
+#diskussion
+
+plt.clf()
+M = np.linspace(0, 100)
+plt.plot(M, n_glas3(M, deltheta = 10 / 180 * np.pi))
+plt.savefig('test.pdf')
 
