@@ -14,6 +14,7 @@ Q_ = ureg.Quantity
 
 def return_int(num):
     num_str = str(num)
+    
     num_str = num_str.split('.')[1]
     num_str = num_str[0:1]
     return int(num_str)

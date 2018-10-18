@@ -9,6 +9,7 @@ Tabelle~\ref{tab: messwerte_kontrast} eingetragen.
 Die Daten werden, wie in der Abschnitt \ref{sec: procedure} motiviert, an eine Funktion der Gestalt
 \begin{equation}
     K(\vartheta) = A \left|\sin \left(2 \vartheta + \vartheta_0 \right)\right| + B 
+    \label{eq: model_contrast}
 \end{equation}
 angepasst. Für die Fitparameter ergeben sich die folgenden Werte:
 \begin{align}
@@ -21,29 +22,30 @@ Eine Darstellung des Fits und der Messwerte ist in Abbildung~\ref{fig: kontrast_
 Die nachfolgenden Messungen sind mit der Einstellung $\vartheta = \SI{55}{\degree}$ durchgeführt worden, da hier der maximale 
 Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde.  
 
-\input{../analysis/results/kontrast_tabelle.tex}
+\input{tabs/kontrast_tabelle.tex}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[scale = 1]{../analysis/results/kontrast_fit.pdf}
-    \label{fig: kontrast_fit}
     \caption{Darstellung der Messwerte und des Fits zur Untersuchung des Kontrasts in Abhängigkeit vom eingestellten Winkel des Polarisationsfilters.}
+    \label{fig: kontrast_fit}
 \end{figure}
 
 
 \subsection{Messung des Brechungsindex von Glas}
 In Tabelle~\ref{tab: counts_glas} sin die Messwerte für die Anzahl der $2\pi$-Phasenverschiebungen unter Drehung der Glasplatten um $\SI{10}{\degree}$
-eingetragen. Aus diesen können mittels Gleichung~\eqref{tab: counts_glas} jeweils die Brechungsindices berechnet werden. Diese sind ebenfalls in Tabelle~\ref{}  
+eingetragen. Aus diesen können mittels Gleichung~\eqref{tab: counts_glas} 
+(mit $\Delta\vartheta = \vartheta_0 = \SI{10}{\degree}$) jeweils die Brechungsindices berechnet werden. Diese sind ebenfalls in Tabelle~\ref{tab: counts_glas}  
 aufgeführt. Als Mittelwert ergibt sich 
 \begin{equation}
     n_{\text{Glas}} = \input{../analysis/results/result_n_glas.tex}.
 \end{equation}
 
-\input{../analysis/results/counts_glas.tex}
+\input{tabs/counts_glas.tex}
 
 \subsection{Druckabhängigkeit des Brechungsindex von Luft}
 Die Ergebnisse der drei Messungen zur Untersuchung des Zusammenhangs zwischen dem Brechungsindex von Luft und dem Druck sind in 
-Tabelle~\ref{} eingetragen. Es ist ersichtlich, dass die Messwerte der drei Reihen fast übereinstimmen, weswegen eine grafische
+Tabelle~\ref{tab: messwerte_n_gas} eingetragen. Es ist ersichtlich, dass die Messwerte der drei Reihen fast übereinstimmen, weswegen eine grafische
 Darstellung nur exemplarisch für eine Messreihe in Abbildung~\ref{fig: fit_druck} erfolgt. Für alle Messreihen analog werden aus 
 den $2\pi$-Phasenverschiebungen gemäß~\eqref{eq:phase_shit_gases} die Brechungsindices bestimmt und die Daten $(n, p)$ für eine Regression an 
 das lineare Modell
@@ -51,23 +53,29 @@ das lineare Modell
     n = A p + B
 \end{equation}
 verwendet. Für die Parameter $A$ und $B$ ergeben sich die in Tabelle~\ref{tab: fitparams_druck} aufgeführten Werte. Hier ist ebenfalls eine 
-Berechnung für den Brechungsindex bei $\SI{1}{\bar}$ angegeben. Als ungewichteter Mittelwert ergibt sichW
+Berechnung für den Brechungsindex bei $\SI{1}{\bar}$ angegeben. Als ungewichteter Mittelwert ergibt sich
 \begin{equation}
     \overline{n}\left(\SI{1}{\bar} \right) = \input{../analysis/results/result_n.tex},
 \end{equation}
-welcher im folgenden Abschnitt durch den Vergleich mit einem Literaturwert% (Brechungsindex von Luft bei $\SI{1}{\bar}$ und $\SI{24}{\celsius}$)
+welcher im folgenden Abschnitt durch den Vergleich mit einem Literaturwert
 diskutiert werden kann. 
 
 \begin{figure}
     \centering
     \includegraphics[scale = 1]{../analysis/results/druck_fit_1.pdf}
-    \label{fig: fit_druck}
     \caption{Grafische Darstellung der Messwerte der ersten Messreihe zur Bestimmung des Zusammenhangs zwischen 
     Druck $p$ und Brechungsindex $n$. Zusätzlich ist eine Regressionsgerade eingezeichnet, deren Parameter in 
     Tabelle~\ref{tab: fitparams_druck} eingetragen sind.}
+    \label{fig: fit_druck}
 \end{figure}
 
-\input{../analysis/results/fitparams_druck.tex}
+
+\input{tabs/gas_tabelle.tex}
+\input{tabs/n_gas_tabelle.tex}
+
+
+
+\input{tabs/fitparams_druck.tex}
 
 
 

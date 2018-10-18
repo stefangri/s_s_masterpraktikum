@@ -72,7 +72,7 @@ print(params[1])
 r.add_result(name = r'C', value = Q_(params[2]))
 
 
-l.Latexdocument(filename = abs_path('results/kontrast_tabelle.tex')).tabular(
+l.Latexdocument(filename = abs_path('tabs/kontrast_tabelle.tex')).tabular(
     data = [angle * 180 / np.pi, U_max, U_min, K * 100], 
     header = [r'\text{Winkel} / \degree', r'U_{max} / \volt', r'U_{min} / \volt', r'\text{Kontrast} / \percent'],
     places = [0, 2, 2, 1],
@@ -99,6 +99,26 @@ lam = Q_(632.99, 'nanometer') #wavelength
 L = Q_(ufloat(100, 0.1), 'mm') #length of the gas chamber
 
 n = lam / 2 / L * counts + 1 #index of refraction
+n = unp.uarray(noms(n), stds(n))
+#print(n)
+
+l.Latexdocument(filename = abs_path('tabs/gas_tabelle.tex')).tabular(
+    data = [p_1, counts_1, p_2, counts_2, p_3, counts_3], 
+    header = [r'p_1 / \milli\bar', r'\text{Counts}_1 / ', r'p_2 / \milli\bar', 
+            r'\text{Counts}_2 / ', r'p_3 / \milli\bar', r'\text{Counts}_3 / ', 
+            ],
+    places = [0, 0, 0, 0, 0, 0],
+    caption = r'Messwerte der drei Reihen zur Bestimmung des Brechungsindex von Luft. Hierhi bezeichnet $p_i$ den gemessenen Druck und $\text{Counts}_i$ die gezählte Anzahl an $2\pi$ Phasenverschiebungen.',
+    label = 'messwerte_n_gas'
+) 
+
+l.Latexdocument(filename = abs_path('tabs/n_gas_tabelle.tex')).tabular(
+    data = [n[0], n[1], n[2]], 
+    header = [ r'n_1 / ', r'n_2 / ', r'n_3 / '],
+    places = [(1.8, 1.8), (1.8, 1.8), (1.8, 1.8)],
+    caption = r'Berechnete Brechungsindices aus den Werten der Tabelle~\ref{tab: messwerte_n_gas}.',
+    label = 'berechnete_n_gas'
+) 
 
 plt.clf()
 all_params = []
@@ -130,7 +150,7 @@ r.add_result(name = r'n', value = Q_(n_1000_mean))
 #for i in [1, 2, 3]:
 #    r.add_result(name = f'n_{i}', value = Q_(n_1000[i - 1]))
 
-l.Latexdocument(filename = abs_path('results/fitparams_druck.tex')).tabular(
+l.Latexdocument(filename = abs_path('tabs/fitparams_druck.tex')).tabular(
     data = [[1, 2, 3], unp.uarray(noms(all_params[0]*1e7), stds(all_params[0]*1e7)), all_params[1], n_1000], 
     header = ['Messung / ', r'A / 10^{-7}\milli\bar^-1', 'B / ', r'n_\mathup{norm} / '],
     places = [0, (1.2, 1.2), (1.7, 1.7), (1.7, 1.7)],
@@ -165,7 +185,7 @@ counts_glas = np.genfromtxt(abs_path('data/n_glas.txt'))
 n_glas = n_glas3(counts = counts_glas, deltheta = 10 / 180 * np.pi)
 print(n_glas)
 
-l.Latexdocument(filename = abs_path('results/counts_glas.tex')).tabular(
+l.Latexdocument(filename = abs_path('tabs/counts_glas.tex')).tabular(
     data = [counts_glas, n_glas], 
     header = [r'\text{Counts} / ', r'n / '],
     places = [0, 2],
@@ -179,10 +199,5 @@ print(n_glas)
 r.add_result(name = 'n_glas', value = Q_(n_glas))
 
 
-#diskussion
 
-plt.clf()
-M = np.linspace(0, 100)
-plt.plot(M, n_glas3(M, deltheta = 10 / 180 * np.pi))
-plt.savefig('test.pdf')
 
