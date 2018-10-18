@@ -170,7 +170,7 @@ l.Latexdocument(filename = abs_path('results/counts_glas.tex')).tabular(
     header = [r'\text{Counts} / ', r'n / '],
     places = [0, 2],
     caption = 'Gemessene Anzahl der $2\pi$ Phasenverschiebungen (Counts) unter Drehung der Glasplatten um $\SI{10}{\degree}$, sowie daraus berechnete Brechungsindices $n$.',
-    label = 'fitparams_druck'
+    label = 'counts_glas'
 )  
 
 

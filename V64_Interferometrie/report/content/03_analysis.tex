@@ -1,3 +1,4 @@
+\newpage
 \section{Auswertung}
 Im Folgenden werden die gewonnenen Messergebnisse vorgestellt. Die notwendigen Ausgleichsrechungen werden 
 mit Hilfe der \emph{python} Bibliothek \emph{scipy.optimize} durchgeführt.
@@ -5,7 +6,7 @@ mit Hilfe der \emph{python} Bibliothek \emph{scipy.optimize} durchgeführt.
 \subsection{Kontrastmessung}
 Die gemessenen maximalen und minimalen Diodenspannungen unter variablem Winkel des Polarisationsfilters sind in 
 Tabelle~\ref{tab: messwerte_kontrast} eingetragen.
-Die Daten werden, wie in der Abschnitt \ref{} motiviert, an eine Funktion der Gestalt
+Die Daten werden, wie in der Abschnitt \ref{sec: procedure} motiviert, an eine Funktion der Gestalt
 \begin{equation}
     K(\vartheta) = A \left|\sin \left(2 \vartheta + \vartheta_0 \right)\right| + B 
 \end{equation}
@@ -31,8 +32,8 @@ Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde.
 
 
 \subsection{Messung des Brechungsindex von Glas}
-In Tabelle~\ref{} sin die Messwerte für die Anzahl der $2\pi$-Phasenverschiebungen unter Drehung der Glasplatten um $\SI{10}{\degree}$
-eingetragen. Aus diesen können mittels Gleichung\eqref{} jeweils die Brechungsindices berechnet werden. Diese sind ebenfalls in Tabelle~\ref{}  
+In Tabelle~\ref{tab: counts_glas} sin die Messwerte für die Anzahl der $2\pi$-Phasenverschiebungen unter Drehung der Glasplatten um $\SI{10}{\degree}$
+eingetragen. Aus diesen können mittels Gleichung~\eqref{tab: counts_glas} jeweils die Brechungsindices berechnet werden. Diese sind ebenfalls in Tabelle~\ref{}  
 aufgeführt. Als Mittelwert ergibt sich 
 \begin{equation}
     n_{\text{Glas}} = \input{../analysis/results/result_n_glas.tex}.
@@ -43,14 +44,14 @@ aufgeführt. Als Mittelwert ergibt sich
 \subsection{Druckabhängigkeit des Brechungsindex von Luft}
 Die Ergebnisse der drei Messungen zur Untersuchung des Zusammenhangs zwischen dem Brechungsindex von Luft und dem Druck sind in 
 Tabelle~\ref{} eingetragen. Es ist ersichtlich, dass die Messwerte der drei Reihen fast übereinstimmen, weswegen eine grafische
-Darstellung nur exemplarisch für eine Messreihe in Abbildung~\ref{fig: fit_druck}. Für alle Messreihen analog werden aus 
-den $2\pi$-Phasenverschiebungen gemäß~\eqref{} die Brechungsindice bestimmt und die Daten $(n, p)$ für eine Regression an 
+Darstellung nur exemplarisch für eine Messreihe in Abbildung~\ref{fig: fit_druck} erfolgt. Für alle Messreihen analog werden aus 
+den $2\pi$-Phasenverschiebungen gemäß~\eqref{eq:phase_shit_gases} die Brechungsindices bestimmt und die Daten $(n, p)$ für eine Regression an 
 das lineare Modell
 \begin{equation}
     n = A p + B
 \end{equation}
-verwendet. Für die Parameter $A$ und $B$ ergeben sich die in Tabelle~\ref{} aufgeführten Werte. Hier ist ebenfalls eine 
-Berechnung für den Brechungsindex bei $\SI{1}{\bar}$ angegeben. Als Mittelwert ergibt sich für diesen Wert
+verwendet. Für die Parameter $A$ und $B$ ergeben sich die in Tabelle~\ref{tab: fitparams_druck} aufgeführten Werte. Hier ist ebenfalls eine 
+Berechnung für den Brechungsindex bei $\SI{1}{\bar}$ angegeben. Als ungewichteter Mittelwert ergibt sichW
 \begin{equation}
     \overline{n}\left(\SI{1}{\bar} \right) = \input{../analysis/results/result_n.tex},
 \end{equation}
