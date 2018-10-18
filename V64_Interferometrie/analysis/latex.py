@@ -35,7 +35,7 @@ def sign_digits(num):
 def best_value(num):
     value = f'{num}'.split('+/-')[0]
     return value
-        
+
 
 
 
@@ -87,20 +87,20 @@ class Latexdocument(object):
                 s = '{:Lx}'.format(Q_(2, value.units)) + '~'
                 value = value.magnitude
                 df = DataFrame({'var': pd.Series(value, index = [name] ),
-                'tex': f'{name} = \SI{{{best_value(value)}({sign_digits(value)})}}{{' + s[s.index('}{') + 2:s.index('~')]})
+                'tex': f' \SI{{{best_value(value)}({sign_digits(value)})}}{{' + s[s.index('}{') + 2:s.index('~')]})
 
             else:
                 s = '{:Lx}'.format(Q_(2, value.units)) + '~'
                 value = value.magnitude
                 df = DataFrame({'var': pd.Series(value, index = [name] ),
-                'tex': f'{name} = \SI{{{value}}}{{' + s[s.index('}{') + 2:s.index('~')]})
-                
+                'tex': f' \SI{{{value}}}{{' + s[s.index('}{') + 2:s.index('~')]})
+
             self.data = self.data.append(df, sort = True)
-            with open(abs_path(f'results/result_{name}.tex'), 'w') as f:
-                f.write('\\begin{equation} \n')
-                f.write('\t' + self.data['tex'][name] + '\n')
-                f.write('\label{eq: result_' +  name +  '}\n')
-                f.write(r'\end{equation}')
+            with open(abs_path('results/result_' + name.replace('\\', '') + '.tex'), 'w') as f:
+                #f.write('\\begin{equation} \n')
+                f.write(self.data['tex'][name] + '\n')
+                #f.write('\label{eq: result_' +  name +  '}\n')
+                #f.write(r'\end{equation}')
 
 
     def makeresults(self):
