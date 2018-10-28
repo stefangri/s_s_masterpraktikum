@@ -98,7 +98,7 @@ unp.uarray(counts, np.full(np.shape(counts), 1))
 lam = Q_(632.99, 'nanometer') #wavelength
 L = Q_(ufloat(100, 0.1), 'mm') #length of the gas chamber
 
-n = lam / 2 / L * counts + 1 #index of refraction
+n = lam / L * counts + 1 #index of refraction
 n = unp.uarray(noms(n), stds(n))
 #print(n)
 
@@ -126,23 +126,23 @@ all_params = []
 p_plot = np.linspace(-50, 1050, 10000)
 for i in range(3):
     fig, ax = plt.subplots(1, 1)
-    params, cov = curve_fit(lin_model, xdata = p[i], ydata = noms(n[i]),
+    params, cov = curve_fit(lin_model, xdata = p[i], ydata = noms(n[i]**2),
                             #sigma = stds(n[i]),
                             p0 = [0.0000001, 0])
     all_params.append(correlated_values(params, cov))
 
-    ax.plot(p[i], noms(n[i]), 'o', label = 'Messwerte')
+    ax.plot(p[i], noms(n[i]**2), 'o', label = 'Messwerte')
     ax.plot(p_plot, lin_model(p_plot, *params), 'r-', label = 'Regression')
     ax.set_xlim(-50, 1050)
     ax.set_xlabel(r'Druck $p / \si{\milli \bar}$')
-    ax.set_ylabel(r'Brechungsindex $n$')
+    ax.set_ylabel(r'$n^2$')
     ax.legend()
     fig.tight_layout()
     fig.savefig(abs_path(f'results/druck_fit_{i + 1}.pdf'), bbox_inches = 'tight', pad_inches = 0)
 
 all_params = np.array(all_params).T
 all_params = unp.uarray(noms(all_params), stds(all_params))
-n_1000 = all_params[0] * 1000 + all_params[1]
+n_1000 = unp.sqrt(all_params[0] * 1000 + all_params[1])
 n_1000 = unp.uarray(noms(n_1000), stds(n_1000))
 n_1000_mean = ufloat(np.mean(noms(n_1000)), np.std(noms(n_1000)))
 r.add_result(name = r'n', value = Q_(n_1000_mean))
@@ -164,16 +164,9 @@ l.Latexdocument(filename = abs_path('tabs/fitparams_druck.tex')).tabular(
 #Brechungsindex Glas
 T = Q_(1, 'millimeter')
 
-def n_glas(counts, theta):
-    alpha = counts * lam / 4 / T 
-    return (((alpha**2 + 2 *  (1 - np.cos(theta)) * (1 - alpha)) / ( 2 * (1 - np.cos(theta) - alpha))).to('dimensionless')).magnitude
 
-def n_glas2(counts, theta1, theta2):
-    return ((1 / (1 - counts * lam /  T / (theta1**2 - theta2**2))).to('dimensionless')).magnitude
-
-
-def n_glas3(counts, deltheta, theta0 = 10 / 180 * np.pi):
-    return ((1 / (1 - counts * lam  /T / (theta0**2 + 2 * theta0 * deltheta))).to('dimensionless')).magnitude   
+def n_glas(counts, deltheta, theta0 = 10 / 180 * np.pi):
+    return ((1 / (1 - counts * lam  /T / (2 * theta0 * deltheta))).to('dimensionless')).magnitude   
 
 #def n_glas3(counts, theta):
 #    return 
@@ -182,7 +175,7 @@ counts_glas = np.genfromtxt(abs_path('data/n_glas.txt'))
 
 #print((n_glas(counts_glas, 10 / 180 * np.pi)))
 #print(n_glas2(counts_glas, 20 / 180 * np.pi, 10 / 180 * np.pi))
-n_glas = n_glas3(counts = counts_glas, deltheta = 10 / 180 * np.pi)
+n_glas = n_glas(counts = counts_glas, deltheta = 10 / 180 * np.pi)
 print(n_glas)
 
 l.Latexdocument(filename = abs_path('tabs/counts_glas.tex')).tabular(

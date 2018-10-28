@@ -20,7 +20,8 @@ angepasst. Für die Fitparameter ergeben sich die folgenden Werte:
 \end{align}
 Eine Darstellung des Fits und der Messwerte ist in Abbildung~\ref{fig: kontrast_fit} einzusehen.
 Die nachfolgenden Messungen sind mit der Einstellung $\vartheta = \SI{55}{\degree}$ durchgeführt worden, da hier der maximale 
-Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde.  
+Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde. Der Fit wurde erst nach der Messung bestimmt und dient hier nur 
+zur Verdeutlichung des theoretischen Zusammenhangs~\eqref{eq: model_contrast}.
 
 \input{tabs/kontrast_tabelle.tex}
 
@@ -47,10 +48,10 @@ aufgeführt. Als Mittelwert ergibt sich
 Die Ergebnisse der drei Messungen zur Untersuchung des Zusammenhangs zwischen dem Brechungsindex von Luft und dem Druck sind in 
 Tabelle~\ref{tab: messwerte_n_gas} eingetragen. Es ist ersichtlich, dass die Messwerte der drei Reihen fast übereinstimmen, weswegen eine grafische
 Darstellung nur exemplarisch für eine Messreihe in Abbildung~\ref{fig: fit_druck} erfolgt. Für alle Messreihen analog werden aus 
-den $2\pi$-Phasenverschiebungen gemäß~\eqref{eq:phase_shit_gases} die Brechungsindices bestimmt und die Daten $(n, p)$ für eine Regression an 
+den $2\pi$-Phasenverschiebungen gemäß~\eqref{eq:phase_shit_gases} die Brechungsindices bestimmt und die Daten $(n^2, p)$ für eine Regression an 
 das lineare Modell
 \begin{equation}
-    n = A p + B
+    n^2 = A p + B
 \end{equation}
 verwendet. Für die Parameter $A$ und $B$ ergeben sich die in Tabelle~\ref{tab: fitparams_druck} aufgeführten Werte. Hier ist ebenfalls eine 
 Berechnung für den Brechungsindex bei $\SI{1}{\bar}$ angegeben. Als ungewichteter Mittelwert ergibt sich
@@ -72,8 +73,6 @@ diskutiert werden kann.
 
 \input{tabs/gas_tabelle.tex}
 \input{tabs/n_gas_tabelle.tex}
-
-
 
 \input{tabs/fitparams_druck.tex}
 
