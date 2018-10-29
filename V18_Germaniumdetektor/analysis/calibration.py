@@ -5,6 +5,7 @@ from uncertainties.unumpy import nominal_values as noms
 from uncertainties.unumpy import std_devs as stds
 from uncertainties import correlated_values
 import math
+import datetime
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 from pint import UnitRegistry
@@ -104,15 +105,47 @@ halbwertszeit = ufloat(4943, 5)  # days
 A_0 = ufloat(4130, 60)  # Bq
 
 
+def decay_rate(test_time, half_life, start_decay_rate):
+    ''' Function to calculate the decay_rate of europium at any given date '''
+    ''' half_life has to be in units of days '''
+
+    test_time = test_time.split('.')
+    test_date = datetime.date(int(test_time[0]), int(test_time[1]), int(test_time[2]))  # test_time should be someting like: '2018.10.29'
+    # Source: user_manual
+    creation_date = datetime.date(2000, 10, 1)
+    # How many days past since the creation
+    past_time = (test_date-creation_date).days
+    # Dif has to be bigger then zero
+    assert past_time >= 0
+    # Calculate decay_rate of test_date
+    return start_decay_rate * unp.exp(- past_time / half_life)
 
 
-#plt.hist(range(0, len(channel_content_eu), 1),
-#    bins=np.linspace(0,len(channel_content_eu),len(channel_content_eu)),
-#    weights=channel_content_eu)
-#
-#plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], 'x', markersize=0.8)
-#plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], 'x', markersize=0.8)
-#
-#plt.xlim(0, 4000)
-## plt.show()
-#plt.savefig('./results/europium/test.pdf')
+decay_rate_29_10_18 = decay_rate('2018.10.29', halbwertszeit, A_0)
+
+# --- Definiere Funktion um die Effizienz zu bestimmen --- #
+
+
+def full_energy_efficiency(measured_decay_rate, angle_distribution,
+                           soll_decay_rate, transition_probaility):
+    ''' Function to calculate the full_energy_efficiency '''
+    return measured_decay_rate / (angle_distribution * soll_decay_rate
+                                  * transition_probaility)
+
+
+# --- Bestimmte die gemessene Aktivität um jeden Peak herum --- ###
+'''  Um die Aktivität um jeden Peak herum zu bestimmen, gehe ich vom Peaks
+    4 Bins nach rechts und links summiere dann über den Bininhalt  '''
+
+
+plt.clf()
+plt.hist(range(0, len(channel_content_eu), 1),
+    bins=np.linspace(0,len(channel_content_eu),len(channel_content_eu)),
+    weights=channel_content_eu)
+
+plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], 'x', markersize=0.8)
+plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], 'x', markersize=0.8)
+plt.ylim(0,500)
+plt.xlim(250, 350)
+# plt.show()
+plt.savefig('./results/europium/test.pdf')
