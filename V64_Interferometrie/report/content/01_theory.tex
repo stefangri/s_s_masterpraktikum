@@ -75,11 +75,10 @@ Durch eine Beobachtung bzw. Zählung der Interferenzmaxima $M$, bei einer gegebe
 Hierbei gilt für die Anzahl der Maxima bei einem gegebenen Druck der folgende Zusammenhang:
 \begin{equation}
   \label{eq:anzahl_maxima_gas}
-  M=2\frac{\Delta\phi}{2\pi}= 2\frac{ n_B-n_A }{ \lambda\ua{vac} }L.
+  M=\frac{\Delta\phi}{2\pi}= \frac{ n_B-n_A }{ \lambda\ua{vac} }L.
 \end{equation}
-Der Faktor $2$ in Formel \eqref{eq:anzahl_maxima_gas} ist damit zu begründen, dass der Laserstrahl, zweimal die Gaszelle durchquert.
 \subsection{Brechungsindex von Festkörpern}
-Im Gegensatz zu Gasen ist der Brechungsindex eines Festkörpers nicht druckabhängig.
+Im Gegensatz zu Gasen hängt Brechungsindex eines Festkörpers kaum vom Druck ab.
 Deshalb muss hier eine andere Methodik zur Ermittlung des Brechungsindexes verwendet werden.
 Propagiert ein Lichtstrahl, wie in Abbildung \ref{fig:slag} gezeigt, durch einen Festkörper der Länge $T$,
 so wird dieser nach dem Snelliussches Brechungsgesetz gebrochen.
@@ -107,9 +106,8 @@ des Festkörpers um den Winkel $\theta$ entstehen. Zu beachten ist, dass der Las
   \label{eq:Interferenzmaxima_solid_state}
   M=2\frac{\Delta\phi}{2\pi}\approx \frac{T}{\lambda\ua{vac}}\frac{n-1}{2n}\theta^2.
 \end{equation}
-Die in dem Versuch verwendete Glasprobe ist um $\theta_0 = \SI{10}{\degree}$ zur Probe angewinkelt,
-damit der Offset berücksichtigt ist, wird die Gleichung \eqref{eq:Interferenzmaxima_solid_state},
-um $\theta_0$ entwickelt:
+Die Gleichung \eqref{eq:Interferenzmaxima_solid_state} wird im folegenden
+durch den linearen Term einer Taylorentwicklung umgeschrieben:
 \begin{equation}
 \label{eq:entwicklung_interferenzmaxima}
   M\approx\frac{T}{\lambda\ua{vac}}\frac{n-1}{n}\left(\theta_0^2 + 2\theta_0 \Delta \vartheta \right).
