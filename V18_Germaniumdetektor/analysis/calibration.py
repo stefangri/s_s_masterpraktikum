@@ -71,6 +71,12 @@ print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
 print('------------------------------------------------------------------\n\n')
 
+# Speichere die Parameter in eine .txt damit ich sie für die spätere Auswertung
+# verwenden kann.
+
+np.savetxt('./umrechnungen_bins_to_energy.txt',
+           np.column_stack([params, errors]), header='param error')
+
 # Plotte Fit and values
 plt.plot(index, energies, '.', label='Datenpunkte')
 plt.plot(index_intervall, g(index_intervall, *params), label='Fit')
@@ -277,12 +283,17 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
 
 # Plot with Energies as x axis
 
-plt.clf()
-
-index_to_energie = g(range(0, len(channel_content_eu), 1), *params)
-print(index_to_energie)
-
-plt.hist(range(0, len(channel_content_eu), 1),
-         bins=index_to_energie, weights=channel_content_eu)
-
-plt.show()
+# plt.clf()
+#
+# index_to_energie = g(range(0, len(channel_content_eu), 1), *params)
+#
+# plt.hist(np.linspace(0., max(index_to_energie), len(channel_content_eu)),
+#          bins=np.linspace(0., max(index_to_energie), len(channel_content_eu)),
+#          weights=channel_content_eu, label='Spektrum')
+#
+# plt.xlim(0, max(index_to_energie))
+# plt.ylabel(r'$\mathrm{Counts}$')
+# plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
+# plt.legend()
+# plt.savefig('./plots/europium/spektrum_energie.pdf')
+# ült.show()
