@@ -57,24 +57,26 @@ errors = np.sqrt(np.diag(cov))
 index_intervall = np.linspace(min(index)-10, max(index)+10, 10000)
 
 # Print FitParameters
-print('\n\n----------------------------------------------------------------------')
+print('\n\n------------------------------------------------------------------')
 print('--------------- Fit Parameter Skalen Trafo ---------------------------')
 print('----------------------------------------------------------------------',
       '\n')
 
 print('Steigung:', ufloat(params[0], errors[0]))
-print('y-Abschnitt:', ufloat(params[0], errors[0]))
+m = ufloat(params[0], errors[0])
+print('y-Abschnitt:', ufloat(params[1], errors[1]))
+b = ufloat(params[1], errors[1])
 
-print('\n----------------------------------------------------------------------')
+print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
-print('----------------------------------------------------------------------\n\n')
+print('------------------------------------------------------------------\n\n')
 
 # Plotte Fit and values
 plt.plot(index, energies, '.', label='Datenpunkte')
 plt.plot(index_intervall, g(index_intervall, *params), label='Fit')
 
 plt.xlabel('Binnummer')
-plt.ylabel(r'$\mathrm{Energie} \, / \, \mathrm{eV}$')
+plt.ylabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.legend()
 plt.savefig('./results/europium/skalen_trafo_fit.pdf')
 
@@ -92,11 +94,24 @@ radiant_of_detector = 45e-3 / 2
 def winkelverteilung(distance_probe_detektor, radiant_of_detector):
     ''' Function to calculate angle distribution OMEGA '''
 
-    return 1/2 * (1 - (distance_probe_detektor / (np.sqrt(distance_probe_detektor**2 + radiant_of_detector**2))))
+    return 1/2 * (1 - (distance_probe_detektor /
+                  (np.sqrt(distance_probe_detektor**2
+                   + radiant_of_detector**2))))
 
 
 angle_distribution = winkelverteilung(distance_probe_detektor,
                                       radiant_of_detector)
+
+print('\n\n----------------------------------------------------------------------')
+print('--------------- Winkelverteilung ---------------------------')
+print('----------------------------------------------------------------------',
+      '\n')
+
+print('Winkelverteilung:', angle_distribution)
+
+print('\n----------------------------------------------------------------------')
+print('----------------------------------------------------------------------')
+print('----------------------------------------------------------------------\n\n')
 
 
 # --- Bestimme die heutige Aktivität --- #
@@ -123,19 +138,111 @@ def decay_rate(test_time, half_life, start_decay_rate):
 
 decay_rate_29_10_18 = decay_rate('2018.10.29', halbwertszeit, A_0)
 
+print('\n\n----------------------------------------------------------------------')
+print('--------------- Aktivität am Messtag ---------------------------')
+print('----------------------------------------------------------------------',
+      '\n')
+
+print('Aktivität am 29.10.18:', decay_rate_29_10_18)
+
+print('\n----------------------------------------------------------------------')
+print('----------------------------------------------------------------------')
+print('----------------------------------------------------------------------\n\n')
+
+
 # --- Definiere Funktion um die Effizienz zu bestimmen --- #
 
 
 def full_energy_efficiency(measured_decay_rate, angle_distribution,
-                           soll_decay_rate, transition_probaility):
+                           soll_decay_rate, transition_probaility,
+                           measurment_time):
     ''' Function to calculate the full_energy_efficiency '''
     return measured_decay_rate / (angle_distribution * soll_decay_rate
-                                  * transition_probaility)
+                                  * transition_probaility * measurment_time)
 
 
 # --- Bestimmte die gemessene Aktivität um jeden Peak herum --- ###
 '''  Um die Aktivität um jeden Peak herum zu bestimmen, gehe ich vom Peaks
     4 Bins nach rechts und links summiere dann über den Bininhalt  '''
+
+transition_probaility = [0.286, 0.076, 0.265, 0.022, 0.031, 0.129, 0.042,
+                         0.146, 0.102, 0.136, 0.210]
+
+efficiency = []
+measurment_time = 3380
+for i in range(len(index)):
+    summierte_aktivität = sum(channel_content_eu[index[i]-4:index[i]+4])
+    print(i, summierte_aktivität)
+
+    efficiency.append(full_energy_efficiency(summierte_aktivität,
+                                             angle_distribution,
+                                             decay_rate_29_10_18,
+                                             transition_probaility[i],
+                                             measurment_time))
+
+print('\n\n----------------------------------------------------------------------')
+print('--------------- Bestimmten Effizienz ---------------------------')
+print('----------------------------------------------------------------------',
+      '\n')
+
+print('Energie-Effizienz-Wertepaar:')
+
+for i in range(len(energies)):
+    print('E/keV:', energies[i],'Q:', efficiency[i])
+
+print('\n----------------------------------------------------------------------')
+print('----------------------------------------------------------------------')
+print('----------------------------------------------------------------------\n\n')
+
+
+# --- Fitte an die Effizienz eine exp() --- #
+
+
+def exp(x, a, b, c):
+    return a * np.exp(-b * x) + c
+
+
+'Beachte das ich hier den ersten Wert wie in der Anleitung gefordert wegwerfe!'
+params_exp, cov_exp = curve_fit(exp, energies[1:], noms(efficiency[1:]),
+                                p0=[0.5, 0.01, 0.1])
+errors_exp = np.sqrt(np.diag(cov_exp))
+
+print('\n\n------------------------------------------------------------------')
+print('----------- Fit Parameter Effizienzbestimmung -----------------------')
+print('----------------------------------------------------------------------',
+      '\n')
+
+print('a:', ufloat(params_exp[0], errors_exp[0]))
+a = ufloat(params_exp[0], errors_exp[0])
+print('b:', ufloat(params_exp[1], errors_exp[1]))
+b = ufloat(params_exp[1], errors_exp[1])
+print('c:', ufloat(params_exp[2], errors_exp[2]))
+c = ufloat(params_exp[2], errors_exp[2])
+
+print('\n--------------------------------------------------------------------')
+print('----------------------------------------------------------------------')
+print('------------------------------------------------------------------\n\n')
+
+#  Generating some values to plot the fit
+
+e = np.linspace(energies[1]-100, energies[-1]+100, 1000)
+
+plt.clf()
+plt.errorbar(energies, noms(efficiency), yerr=stds(efficiency), fmt='.',
+             label='Datenpunkte')
+plt.plot(e, exp(e, *params_exp), label='Fit')
+
+plt.xlim(energies[1]-50, energies[-1]+50)
+plt.xlabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
+plt.ylabel(r'$\mathrm{Effizienz}$')
+plt.legend()
+
+plt.savefig('./results/europium/effizienz.pdf')
+
+# ########################################################################### #
+# ############ --- Speicherergebnisse in eine Tabelle --- ################### #
+# ########################################################################### #
+
 
 
 plt.clf()
@@ -145,7 +252,7 @@ plt.hist(range(0, len(channel_content_eu), 1),
 
 plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], 'x', markersize=0.8)
 plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], 'x', markersize=0.8)
-plt.ylim(0,500)
-plt.xlim(250, 350)
+# plt.ylim(0, )
+plt.xlim(0, 4000)
 # plt.show()
 plt.savefig('./results/europium/test.pdf')
