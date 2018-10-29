@@ -10,7 +10,7 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 from pint import UnitRegistry
 import latex as l
-r = l.Latexdocument('results.tex')
+r = l.Latexdocument('plots.tex')
 u = UnitRegistry()
 Q_ = u.Quantity
 import pandas as pd
@@ -78,7 +78,7 @@ plt.plot(index_intervall, g(index_intervall, *params), label='Fit')
 plt.xlabel('Binnummer')
 plt.ylabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.legend()
-plt.savefig('./results/europium/skalen_trafo_fit.pdf')
+plt.savefig('./plots/europium/skalen_trafo_fit.pdf')
 
 
 # ########################################################################### #
@@ -237,22 +237,52 @@ plt.xlabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.ylabel(r'$\mathrm{Effizienz}$')
 plt.legend()
 
-plt.savefig('./results/europium/effizienz.pdf')
+plt.savefig('./plots/europium/effizienz.pdf')
 
 # ########################################################################### #
 # ############ --- Speicherergebnisse in eine Tabelle --- ################### #
 # ########################################################################### #
 
 
+l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/results_europium.tex').tabular(
+    data = [index, energies, unp.uarray(noms(efficiency), stds(efficiency))],
+    header = ['Binnummer / ', r'Energie \, / \kilo\eV', r'Effizienz /'],
+    places = [0, 2, (1.4, 1.4)],
+    caption = 'Bestimmten Energie und Effizienzwerte.',
+    label = 'results_europium'
+)
+
+
+# ########################################################################### #
+# ############ --- Plotte das Spektrum mit Peak-Detection --- ############### #
+# ########################################################################### #
+
+# Plot with Binnumbers as x axis
+# plt.clf()
+# plt.hist(range(0, len(channel_content_eu), 1),
+#          bins=np.linspace(0, len(channel_content_eu), len(channel_content_eu)),
+#          weights=channel_content_eu, label='Spektrum')
+#
+# plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], 'x',
+#          markersize=1, label='Peaks', color='C1', alpha=0.6)
+# plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], 'x',
+#          markersize=1, color='C1', alpha=0.6)
+# # plt.ylim(0, )
+# plt.xlim(0, 4000)
+#
+# plt.ylabel(r'$\mathrm{Counts}$')
+# plt.xlabel(r'$\mathrm{Binnummer}$')
+# plt.legend()
+# plt.savefig('./plots/europium/spektrum_index.pdf')
+
+# Plot with Energies as x axis
 
 plt.clf()
-plt.hist(range(0, len(channel_content_eu), 1),
-    bins=np.linspace(0,len(channel_content_eu),len(channel_content_eu)),
-    weights=channel_content_eu)
 
-plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], 'x', markersize=0.8)
-plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], 'x', markersize=0.8)
-# plt.ylim(0, )
-plt.xlim(0, 4000)
-# plt.show()
-plt.savefig('./results/europium/test.pdf')
+index_to_energie = g(range(0, len(channel_content_eu), 1), *params)
+print(index_to_energie)
+
+plt.hist(range(0, len(channel_content_eu), 1),
+         bins=index_to_energie, weights=channel_content_eu)
+
+plt.show()
