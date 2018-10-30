@@ -51,7 +51,8 @@ def g(x, m, b):
 
 # Get Regressionparameters with curve_fit
 
-params, cov = curve_fit(g, index, energies)
+params, cov = curve_fit(g, np.append(index, 0), np.append(energies, 0),
+                        bounds=[(-1000, 0), (1000, 1)])
 errors = np.sqrt(np.diag(cov))
 
 index_intervall = np.linspace(min(index)-10, max(index)+10, 10000)
