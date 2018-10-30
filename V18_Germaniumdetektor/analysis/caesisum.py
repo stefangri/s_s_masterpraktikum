@@ -80,21 +80,77 @@ print('----------------------------------------------------------------------',
       '\n')
 
 print('Flächephotopeak:', area_photo_peak)
+
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
 print('------------------------------------------------------------------\n\n')
 
 
-index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20,1e3)
+# index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
+#
+# plt.xlim( peak_indexes[0]-30, peak_indexes[0]+30)
+#
+# plt.hist(range(0, len(channel_content_ca), 1),
+#          bins=np.linspace(0, len(channel_content_ca),
+#          len(channel_content_ca)),
+#          weights=channel_content_ca, label='Spektrum')
+# plt.plot(index, gaus(index, *params_gaus), label='Fit')
+#
+# plt.xlabel(r'$\mathrm{Binnummer}$')
+# plt.ylabel(r'$\mathrm{Counts}$')
+# plt.legend()
+# plt.savefig('./plots/caesium/photopeak.pdf')
 
-plt.xlim( peak_indexes[0]-30, peak_indexes[0]+30)
+
+# ########################################################################### #
+# ################# --- Untersuchung des Comptpon-Spektrums --- ############ #
+# ########################################################################### #
+
+# --- Suche den Rückstreu und "Compton-Kanten-Peak" --- #
+
+# Habe den Mittelpunktes des Peaks erst mit PeakDetection abgeschätzt und dann
+# aus dem Histogramm abgelesen, hierbei wollte ich den Mittelpunkt des Peaks
+# treffen. Bin analog für die Compton Kante vorgenagen
+
+index_peak_rückstreu = 480
+index_compton_kante = 1182
+
+# --- Transformiere die obgien Indicies in full_energy_efficiency --- #
+
+energy_peak_rückstreuung = g(index_peak_rückstreu, *params)
+energy_compton_kante = g(index_compton_kante, *params)
+
+print('\n\n------------------------------------------------------------------')
+print('----------- Fläche unter dem Photopeak -----------------------')
+print('----------------------------------------------------------------------',
+      '\n')
+
+print('RückstreuPeak: Index, Energie[eV]:', index_peak_rückstreu,
+      energy_peak_rückstreuung)
+
+print('Compton_peak: Index, Energie[eV]:', index_compton_kante,
+      energy_compton_kante)
+
+print('\n--------------------------------------------------------------------')
+print('----------------------------------------------------------------------')
+print('------------------------------------------------------------------\n\n')
+
+
+plt.clf()
+# index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
+
+plt.xlim(0, 1700)
+plt.ylim(0, 400)
 plt.hist(range(0, len(channel_content_ca), 1),
-          bins=np.linspace(0, len(channel_content_ca), len(channel_content_ca)),
-          weights=channel_content_ca, label='Spektrum')
-plt.plot(index, gaus(index, *params_gaus), label='Fit')
+         bins=np.linspace(0, len(channel_content_ca),
+         len(channel_content_ca)),
+         weights=channel_content_ca, label='Spektrum')
+
+plt.plot(index_peak_rückstreu, channel_content_ca[index_peak_rückstreu], '.')
+plt.plot(index_compton_kante, channel_content_ca[index_compton_kante], '.')
 
 plt.xlabel(r'$\mathrm{Binnummer}$')
 plt.ylabel(r'$\mathrm{Counts}$')
 plt.legend()
-#plt.show()
-plt.savefig('./plots/caesium/photopeak.pdf')
+plt.show()
+# plt.savefig('./plots/caesium/photopeak.pdf')
