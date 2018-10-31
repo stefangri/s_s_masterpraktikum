@@ -109,20 +109,20 @@ print('----------------------------------------------------------------------',
       '\n')
 
 print('Halbwertsbreite gemessen: Binnummer, Energie[keV]',
-      np.abs(offset-index_halb), g(np.abs(offset-index_halb), *params))
+      np.abs(offset-index_halb), g(np.abs(offset-index_halb),  m, b))
 
 print('Halbwertsbreite berechnet: Binnummer, Energie[keV]',
-      halbebreite_berechnet, g(halbebreite_berechnet, *params), '\n')
+      halbebreite_berechnet, g(halbebreite_berechnet,  m, b), '\n')
 
 print('Zehntelbreite gemessen: Binnummer, Energie[keV]', offset-index_zehntel,
-      g(offset-index_zehntel, *params))
+      g(offset-index_zehntel,  m, b))
 
 print('Zehntelbreite berechnet aus Sigma: Binnummer, Energie[keV]',
-      zehntelbreite_berechnet, g(zehntelbreite_berechnet, *params), '\n')
+      zehntelbreite_berechnet, g(zehntelbreite_berechnet,  m, b), '\n')
 
 print('Zehntelbreite berechnet aus Messwert: Binnummer, Energie[keV]',
       np.abs(offset-index_halb) * 1.823,
-      g(np.abs(offset-index_halb) * 1.823, *params))
+      g(np.abs(offset-index_halb) * 1.823,  m, b))
 
 
 print('\n--------------------------------------------------------------------')
@@ -135,13 +135,13 @@ print('----------------------------------------------------------------------',
       '\n')
 
 print('Halbwertsbreite gemessen: Binnummer, Energie[keV]',
-      np.abs(offset-index_halb), g(np.abs(offset-index_halb), *params))
+      np.abs(offset-index_halb), g(np.abs(offset-index_halb),  m, b))
 
 print('Halbwertsbreite berechnet: Binnummer, Energie[keV]',
-      halbebreite_berechnet, g(halbebreite_berechnet, *params), '\n')
+      halbebreite_berechnet, g(halbebreite_berechnet,  m, b), '\n')
 
 print('Auflösungsvermögen nach Formel 20, Energie[keV]',
-      2.35 * unp.sqrt(0.1 * np.abs(g(sigma, *params)) * 2.9))
+      2.35 * unp.sqrt(0.1 * np.abs(g(sigma,  m, b)) * 2.9))
 
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
@@ -150,7 +150,8 @@ print('------------------------------------------------------------------\n\n')
 # --- Bestimmte die Absoprtionswahrcheinlichkeit --- #
 
 # mu aus Abbilung bei einer Energie von  661 kev abgelsen
-mu = ufloat(0.35, 0.05)  # in 1/cm
+mu_compton = ufloat(0.35, 0.05)  # in 1/cm
+mu_photo = ufloat(0.06, 0.005)
 length_of_detector = 3.9  # in cm
 
 print('\n\n------------------------------------------------------------------')
@@ -158,7 +159,11 @@ print('--------- Absorptionswahrcheinlichkeit -----------')
 print('----------------------------------------------------------------------',
       '\n')
 
-print('Wahrscheinlichkeit', (1 - unp.exp(-mu * length_of_detector)) * 100)
+print('Wahrscheinlichkeit Compton:',
+      (1 - unp.exp(-mu_compton * length_of_detector)) * 100)
+
+print('Wahrscheinlichkeit Compton:',
+      (1 - unp.exp(-mu_photo * length_of_detector)) * 100)
 
 
 print('\n--------------------------------------------------------------------')
@@ -203,8 +208,8 @@ index_compton_kante = 1182
 
 # --- Transformiere die obgien Indicies in full_energy_efficiency --- #
 
-energy_peak_rückstreuung = g(index_peak_rückstreu, *params)
-energy_compton_kante = g(index_compton_kante, *params)
+energy_peak_rückstreuung = g(index_peak_rückstreu,  m, b)
+energy_compton_kante = g(index_compton_kante,  m, b)
 
 print('\n\n------------------------------------------------------------------')
 print('----------- Lage Rückstreupeak und Comptonkante ---------------------')
@@ -225,16 +230,13 @@ print('------------------------------------------------------------------\n\n')
 
 
 def compton_edge_energy(E_gamma):
-    m_e = ufloat(const.physical_constants["electron mass"][0],
-                 const.physical_constants["electron mass"][2])
-
-    speed_of_light = ufloat(const.physical_constants["speed of light in vacuum"]
-                                                    [0],
-                            const.physical_constants["speed of light in vacuum"]
-                                                    [2])
-    epsilon = E_gamma / (m_e * speed_of_light**2)
-
-    return E_gamma * (2 * epsilon) / (1 + 2 * epsilon)
+    # Using mass of the electron directly, beaucse this is the transformed
+    # Ruheenergie
+    m_e = ufloat(const.physical_constants["electron mass energy equivalent in MeV"][0],
+                 const.physical_constants["electron mass energy equivalent in MeV"][2])
+    m_e *= 1e3
+    epsilon = E_gamma / (m_e)
+    return E_gamma * ((2 * epsilon) / (1 + 2 * epsilon))
 
 
 print('\n\n------------------------------------------------------------------')
@@ -275,7 +277,7 @@ plt.clf()
 # index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
 
 plt.xlim(0, 1400)
-plt.ylim(0, 300)
+# plt.ylim(0, 400)
 plt.hist(range(0, len(channel_content_ca), 1),
          bins=np.linspace(0, len(channel_content_ca),
          len(channel_content_ca)),
@@ -291,7 +293,7 @@ plt.plot(lower_index_compton, channel_content_ca[lower_index_compton], '.',
 plt.xlabel(r'$\mathrm{Binnummer}$')
 plt.ylabel(r'$\mathrm{Counts}$')
 plt.legend()
-plt.savefig('./plots/caesium/compton_spektrum.pdf')
+plt.savefig('./plots/caesium/compton.pdf')
 
 ###########################################
 ### --- Plotte das gesamte Spektrum --- ###
@@ -303,10 +305,11 @@ plt.xlim(0, 1800)
 # plt.ylim(0, 400)
 plt.hist(range(0, len(channel_content_ca), 1),
          bins=np.linspace(0, len(channel_content_ca),
-         len(channel_content_ca)),
-         weights=channel_content_ca, label='Spektrum')
+         len(channel_content_ca)), label='Spektrum')
 
 plt.xlabel(r'$\mathrm{Binnummer}$')
 plt.ylabel(r'$\mathrm{Counts}$')
 plt.legend()
+plt.show()
+
 plt.savefig('./plots/caesium/caesium_spektrum.pdf')

@@ -101,9 +101,9 @@ radiant_of_detector = 45e-3 / 2
 def winkelverteilung(distance_probe_detektor, radiant_of_detector):
     ''' Function to calculate angle distribution OMEGA '''
 
-    return 1/2 * (1 - (distance_probe_detektor /
+    return 1/2 * (1 - (distance_probe_detektor) /
                   (np.sqrt(distance_probe_detektor**2
-                   + radiant_of_detector**2))))
+                   + radiant_of_detector**2)))
 
 
 angle_distribution = winkelverteilung(distance_probe_detektor,
@@ -140,7 +140,7 @@ def decay_rate(test_time, half_life, start_decay_rate):
     # Dif has to be bigger then zero
     assert past_time >= 0
     # Calculate decay_rate of test_date
-    return start_decay_rate * unp.exp(- past_time / half_life)
+    return start_decay_rate * unp.exp(- (past_time *np.log(2) ) / half_life)
 
 
 decay_rate_29_10_18 = decay_rate('2018.10.29', halbwertszeit, A_0)
