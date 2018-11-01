@@ -1,1 +1,30 @@
 \section{Versuchsaufbau/-durchführung}
+Nachfolgend soll nun genauer die Funktionsweise eines Germaniumdetektors erklärt werden. Hierbei wird insbesondere 
+die elektrische Schaltung vorgestellt. Anschließend werden die durchgeführten Messungen motiviert.
+
+Das Germanium-Modul verfügt über eine zylindrische Geometrie. Von Außen ist eine stark mit Lithium dotierte $n$
+Schicht aufgebracht, von Innen eine mit Gold dotierte $p$ Schicht. An die Schichten sind Elektroden angeschlossen, zwischen denen 
+die notwendige Hochspannung von $\SI{}{\volt}$ angelegt ist. Die Probe wird über dem Zylinder in eine Schraubvorrichtung 
+befestigt. Probe und Detektor befinden sich innerhalb eines Bleikastens, der insbesondere den Einfluss von kosmischer 
+Strahlung minimieren soll. Zudem schützt eine innere dünne Kupferschicht vor $\alpha$-Strahlung, die von der Bleiummantelung ausgehen 
+könnte. 
+
+Der am Halbleiterelement erzeugt Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
+dem Vorverstärker in Abbildung~\ref{}. Mithilfe eines kapazitiv rückgekoppelten Operationsverstärkers wird durch elektrische 
+Integration ein Spannungspegel erzeugt, der proportional zur Photonenenergie seien soll. Um einen zeitlich 
+begrenzten Spannungsimpuls zu erhalten muss der Kondensator $C_K$ nach jedem Nachweis zu entladen, was durch die 
+Anordnung in abbildung~\ref{} erfolgt. Durch eine LED nach jedem Impuls die Gate-Drain-Schicht des 
+Eingangs-Feldeffekttransistors (FET) leitend gemacht und so kann die Ladung von $C_K$ abfließen.
+
+Das vorverstärkte Signal gelangt zu einem Hauptverstärker, der die Spannungsimpulse abschließend verstärkt, sodass 
+sie Vielkanalanalysator in Kanaäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in Abbildung~\ref{}
+dargestellt ist. Die Messung der Impulshöhe basiert hier auf einer Zeitmessung. Der Spannungsimpuls lädt einen 
+Kondensator auf, dessen Abklingszeit bei Entladung von der Amplitude des Pulses abhängt. Ein Und-Gatter, verknüpft 
+das zu untersuchende Signal mit einem Quarzoszillator. Die Zählrate am Binärzähler ist damit ein direktes Maß für 
+die Impulshöhe und somit auch für die Energie der Photonen. 
+Die Zählraten werden abschließend in einem Computer verarbeitet und als Ergebnis wird ein Histogramm erzeugt, auf dessen 
+$x$-Achse Kanalnummern sind und auf der $y$-Achse Zählraten. Ein letzte wichtige Größe zur Charakterisierung des Detektors ist 
+die Effizienz $Q$
+
+Zunächst muss herausgefunden werden, welcher Zusammenhang zwischen Kanalnummer und Energie, sowie zwischen 
+
