@@ -10,21 +10,64 @@ Strahlung minimieren soll. Zudem schützt eine innere dünne Kupferschicht vor $
 könnte. 
 
 Der am Halbleiterelement erzeugt Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
-dem Vorverstärker in Abbildung~\ref{}. Mithilfe eines kapazitiv rückgekoppelten Operationsverstärkers wird durch elektrische 
+dem Vorverstärker in Abbildung~\ref{fig: vorverstaerker}(a). Mithilfe eines kapazitiv rückgekoppelten Operationsverstärkers wird durch elektrische 
 Integration ein Spannungspegel erzeugt, der proportional zur Photonenenergie seien soll. Um einen zeitlich 
 begrenzten Spannungsimpuls zu erhalten muss der Kondensator $C_K$ nach jedem Nachweis zu entladen, was durch die 
-Anordnung in abbildung~\ref{} erfolgt. Durch eine LED nach jedem Impuls die Gate-Drain-Schicht des 
+Anordnung in Abbildung~\ref{fig: vorverstaerker}(b) erfolgt. Durch eine LED nach jedem Impuls die Gate-Drain-Schicht des 
 Eingangs-Feldeffekttransistors (FET) leitend gemacht und so kann die Ladung von $C_K$ abfließen.
+\begin{figure}
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width = \textwidth]{pics/vorverstärker.pdf}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width = \textwidth]{pics/led.pdf}
+\end{subfigure}
+\caption{(a) Schlatplan des Vorverstärkers. (b) Schaltung zum Entladen des integrierenden Kondensators mittels einer LED.
+Beide Abbildungen (bearbeitet) aus \cite{anleitungv18}.}
+\label{fig: vorverstaerker}
+\end{figure}
 
 Das vorverstärkte Signal gelangt zu einem Hauptverstärker, der die Spannungsimpulse abschließend verstärkt, sodass 
-sie Vielkanalanalysator in Kanaäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in Abbildung~\ref{}
+sie Vielkanalanalysator in Kanaäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in 
+Abbildung~\ref{fig: zaehler}
 dargestellt ist. Die Messung der Impulshöhe basiert hier auf einer Zeitmessung. Der Spannungsimpuls lädt einen 
 Kondensator auf, dessen Abklingszeit bei Entladung von der Amplitude des Pulses abhängt. Ein Und-Gatter, verknüpft 
 das zu untersuchende Signal mit einem Quarzoszillator. Die Zählrate am Binärzähler ist damit ein direktes Maß für 
 die Impulshöhe und somit auch für die Energie der Photonen. 
 Die Zählraten werden abschließend in einem Computer verarbeitet und als Ergebnis wird ein Histogramm erzeugt, auf dessen 
-$x$-Achse Kanalnummern sind und auf der $y$-Achse Zählraten. Ein letzte wichtige Größe zur Charakterisierung des Detektors ist 
-die Effizienz $Q$
+$x$-Achse Kanalnummern sind und auf der $y$-Achse die Anzahl der Ereignisse $Z$ für jeden Kanal. 
+Ein letzte wichtige Größe zur Charakterisierung des Detektors ist 
+die Effizienz $Q$. Mit dieser, der Emissionswahrscheinlichkeit $W$, der Aktivität $A$ des Strahlers lässt sich die 
+Zählrate $Z$ berechnen 
+\begin{equation}
+    Z = \frac{\Omega}{4\pi} A \, W \, Q.
+    \label{eq: zählrate}
+\end{equation}
+Der Raumwinkelanteil $\frac{\Omega}{4\pi}$, in dem Strahlung der Quelle in den Detektor gelangt, lässt sich annähernd bestimmen zu 
+\begin{equation}
+    \frac{\Omega}{4\pi} = \frac{1}{2} \left( 1 - \frac{a}{\sqrt{a^2 + r^2}} \right),
+    \label{eq: omega}
+\end{equation}
+mit dem Radius des oben beschriebenen Zylinders $r$ und dem Abstand $a$ zwischen Probe und Zylinderdeckelfläche. 
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{pics/zähler.pdf}
+    \caption{Schaltung zur Einordnung der Spannungspulse in Abhängigkeit ihrer Amplitude. Abbildung aus \cite{anleitungv18}.}
+    \label{fig: zaehler}
+\end{figure}
 
-Zunächst muss herausgefunden werden, welcher Zusammenhang zwischen Kanalnummer und Energie, sowie zwischen 
-
+Für alle Messungen wird für etwa eine Stunde eine Probe in den Detektor gebracht und ein Spektrum aufgenommen. In der 
+Auswertung kann dann auf die Messzeit normiert werden. 
+Zunächst muss herausgefunden werden, welcher Zusammenhang zwischen Kanalnummer und Energie, sowie zwischen Zählrate und 
+Intensität besteht. Hierzu wird zunächst eine \ce{^152Eu} Quelle untersucht. Diese besitzt ein Linienreiches Spektrum, für das 
+die Energien und notwendige Größen in Formel~\eqref{eq: zählrate} bekannt sind. 
+Anschließend wird eine \ce{^137Cs} untersucht. Hiermit sollen insbesondere die Eigenschaften aus 
+Abbildung~\ref{fig: example_spectrum} quantitativ untersucht werden soll. Hierzu zählen z.B. Lage von Compton-Kante und 
+Rückstreupeak. Ebenfalls relevant ist das energetische Auflösungsvermögen des Systems, das aus einer Untersuchung der Breite 
+des Gesamtenergiepeaks hervorgeht.
+Abschließend werden zwei Messungen durchgeführt die von der generischen Situation der Gamma-Spektroskopie ausgehen: 
+Die Quelle ist nicht bekannt und anhand des Spektrums soll heraus gefunden werden, worum es sich handelt. Bei der ersten 
+Probe handelt es sich entweder um \ce{^125 Sb} oder \ce{^133Ba}, die letzte Quelle ist gänzlich unbekannt.
