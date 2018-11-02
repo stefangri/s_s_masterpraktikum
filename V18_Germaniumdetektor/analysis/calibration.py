@@ -53,6 +53,8 @@ def g(x, m, b):
 
 params, cov = curve_fit(g, np.append(index, 0), np.append(energies, 0),
                         bounds=[(-1000, 0), (1000, 1)])
+
+print(cov)
 errors = np.sqrt(np.diag(cov))
 
 index_intervall = np.linspace(min(index)-10, max(index)+10, 10000)
@@ -209,10 +211,19 @@ def exp(x, a, b, c):
     return a * np.exp(-b * x) + c
 
 
+def efficeny_function(E, a, b):
+    return a * E**b
+
+
 'Beachte das ich hier den ersten Wert wie in der Anleitung gefordert wegwerfe!'
 params_exp, cov_exp = curve_fit(exp, energies[1:], noms(efficiency[1:]),
                                 p0=[0.5, 0.01, 0.1])
 errors_exp = np.sqrt(np.diag(cov_exp))
+
+params_eff, cov_eff = curve_fit(f=efficeny_function, xdata=energies[1:],
+                                ydata=noms(efficiency[1:]))
+
+errors_efficency = np.sqrt(np.diag(cov_eff))
 
 print('\n\n------------------------------------------------------------------')
 print('----------- Fit Parameter Effizienzbestimmung -----------------------')
@@ -226,6 +237,14 @@ b = ufloat(params_exp[1], errors_exp[1])
 print('c:', ufloat(params_exp[2], errors_exp[2]))
 c = ufloat(params_exp[2], errors_exp[2])
 
+print('--------------------- Effizienzfunktion -------------------------------')
+
+a_efficency = ufloat(params_eff[0], errors_efficency[0])
+b_efficency = ufloat(params_eff[1], errors_efficency[1])
+
+print('a:', a_efficency)
+print('b:', b_efficency)
+
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
 print('------------------------------------------------------------------\n\n')
@@ -238,6 +257,7 @@ plt.clf()
 plt.errorbar(energies, noms(efficiency), yerr=stds(efficiency), fmt='.',
              label='Datenpunkte')
 plt.plot(e, exp(e, *params_exp), label='Fit')
+plt.plot(e, efficeny_function(e, *params_eff))
 
 plt.xlim(energies[1]-50, energies[-1]+50)
 plt.xlabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')

@@ -27,6 +27,11 @@ m = ufloat(params[0], errors[0])
 b = ufloat(params[1], errors[1])
 
 
+def g(x, m, b):
+    '''Define linear function for Transformation purpose'''
+    return m * x + b
+
+
 # --- Find index of peak
 peak_indexes = find_peaks(channel_content_sb_ba, height=120, distance=15)
 
@@ -72,14 +77,39 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function):
     plt.legend()
     plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
 
+    # --- Return values --- #
+
+    return amplitude, sigma, offset
 
 # ########################################################################### #
 # ########################## Using the function ############################# #
 # ########################################################################### #
 
-for index in peak_indexes[0]:
-    automatic_spectrum_anaysis(channel_content_sb_ba, index, gaus)
 
+amplitude_of_peaks = []
+
+sigma_of_peaks = []
+sigma_of_peaks_energy = []
+
+offset_of_peak = []
+offset_of_peak_in_energy = []
+
+print(type(m), type(b))
+for index in peak_indexes[0]:
+    amplitude, sigma, offset = automatic_spectrum_anaysis(channel_content_sb_ba,
+                                                          index, gaus)
+
+    amplitude_of_peaks.append(amplitude)
+
+    sigma_of_peaks.append(sigma)
+    sigma_of_peaks_energy.append(g(sigma, m, b))
+
+    offset_of_peak.append(offset)
+    offset_of_peak_in_energy.append(g(offset, m, b))
+
+print(offset_of_peak)
+print('\n')
+print(offset_of_peak_in_energy)
 # ########################################################################### #
 # ########################################################################### #
 # ########################################################################### #
