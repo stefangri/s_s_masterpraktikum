@@ -54,7 +54,7 @@ def g(x, m, b):
 params, cov = curve_fit(g, np.append(index, 0), np.append(energies, 0),
                         bounds=[(-1000, 0), (1000, 1)])
 
-print(cov)
+
 errors = np.sqrt(np.diag(cov))
 
 index_intervall = np.linspace(min(index)-10, max(index)+10, 10000)
@@ -122,6 +122,10 @@ print('\n----------------------------------------------------------------------'
 print('----------------------------------------------------------------------')
 print('----------------------------------------------------------------------\n\n')
 
+# --- Save angle_distribution to use it in later projects
+
+np.savetxt('./winkelverteilung.txt',
+           np.column_stack([angle_distribution]), header='Winkelverteilung')
 
 # --- Bestimme die heutige Aktivität --- #
 
@@ -208,7 +212,7 @@ print('----------------------------------------------------------------------\n\
 
 
 def exp(x, a, b, c):
-    return a * np.exp(-b * x) + c
+    return a * np.exp(-b * (x))+c
 
 
 def efficeny_function(E, a, b):
@@ -217,7 +221,8 @@ def efficeny_function(E, a, b):
 
 'Beachte das ich hier den ersten Wert wie in der Anleitung gefordert wegwerfe!'
 params_exp, cov_exp = curve_fit(exp, energies[1:], noms(efficiency[1:]),
-                                p0=[0.5, 0.01, 0.1])
+                                p0=[2, 0.01, 0])
+print(cov_exp)
 errors_exp = np.sqrt(np.diag(cov_exp))
 
 params_eff, cov_eff = curve_fit(f=efficeny_function, xdata=energies[1:],
@@ -249,6 +254,11 @@ print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
 print('------------------------------------------------------------------\n\n')
 
+# Save the exp parameters in file to reuse in a later project
+
+np.savetxt('./params_efficency.txt',
+           np.column_stack([params_exp, errors_exp]), header='param error')
+
 #  Generating some values to plot the fit
 
 e = np.linspace(energies[1]-100, energies[-1]+100, 1000)
@@ -256,7 +266,7 @@ e = np.linspace(energies[1]-100, energies[-1]+100, 1000)
 plt.clf()
 plt.errorbar(energies, noms(efficiency), yerr=stds(efficiency), fmt='.',
              label='Datenpunkte')
-plt.plot(e, exp(e, *params_exp), label='Fit')
+plt.plot(e, exp(e, *params_exp), label='Fit_new')
 plt.plot(e, efficeny_function(e, *params_eff))
 
 plt.xlim(energies[1]-50, energies[-1]+50)
