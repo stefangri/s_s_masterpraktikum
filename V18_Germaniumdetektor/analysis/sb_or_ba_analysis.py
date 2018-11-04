@@ -85,20 +85,20 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
 
     index_fit_plot = np.linspace(index_of_peak-15, index_of_peak+15, 1e4)
 
-    #plt.clf()
-    #plt.xlim(index_of_peak-20, index_of_peak+20)
-    #plt.ylim(0, channel_content[index_of_peak] * 1.2)
-    #plt.hist(range(0, len(channel_content_sb_ba), 1),
-    #         bins=np.linspace(0, len(channel_content_sb_ba),
-    #         len(channel_content_sb_ba)),
-    #         weights=channel_content_sb_ba, label='Spektrum')
+    plt.clf()
+    plt.xlim(index_of_peak-20, index_of_peak+20)
+    plt.ylim(0, channel_content[index_of_peak] * 1.2)
+    plt.hist(range(0, len(channel_content_sb_ba), 1),
+             bins=np.linspace(0, len(channel_content_sb_ba),
+             len(channel_content_sb_ba)),
+             weights=channel_content_sb_ba, label='Spektrum')
 
-    #plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
-    #         label='Fit')
-    #plt.xlabel(r'$\mathrm{Channelnummer}$')
-    #plt.ylabel(r'$\mathrm{Counts}$')
-    #plt.legend()
-    #plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
+    plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
+             label='Fit')
+    plt.xlabel(r'$\mathrm{Channel}$')
+    plt.ylabel(r'$\mathrm{Count}$')
+    plt.legend()
+    plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
 
     # --- Return values --- #
 
@@ -165,7 +165,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
           unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
           unp.uarray(noms(offset_of_peak), stds(offset_of_peak)),
           unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))],
-    header=['Channelnummer / ', r'Amplitude / None ',
+    header=['Channel / ', r'Amplitude / None ',
             r'\sigma / None',r'\mu / None', r'\mu / \kilo\eV'],
     places=[0, (1.2, 1.2), (1.2, 1.2), (4.2, 1.2), (2.2, 1.2)],
     caption='Regressionsparameter der Peak-Anpassung.',
@@ -178,7 +178,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
            prohability,
            area_under_peak,
           unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))],
-    header=['Channelnummer / ', r'\mu / \kilo\eV', r'P\ua{über} / ', r'Fläche / ',
+    header=['Channel / ', r'\mu / \kilo\eV', r'P\ua{über} / ', r'Fläche / ',
             r'Aktivität / \becquerel'],
     places=[0,  (2.2, 1.2), 2, 0, (1.2, 3.2)],
     caption='Bestimmte Aktivität für jeden Peak der $^{133}\ce{Ba}$ Quelle.',
@@ -212,8 +212,8 @@ plt.hist(range(0, len(channel_content_sb_ba), 1),
 
 plt.plot(peak_indexes[0], channel_content_sb_ba[peak_indexes[0]], '.',
          label='Peak')
-plt.xlabel(r'$\mathrm{Channelnummer}$')
-plt.ylabel(r'$\mathrm{Counts}$')
+plt.xlabel(r'$\mathrm{Channel}$')
+plt.ylabel(r'$\mathrm{Count}$')
 plt.legend()
 plt.savefig(f'./plots/sb_or_ba/spectrum.pdf')
 

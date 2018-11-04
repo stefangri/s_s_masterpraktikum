@@ -108,19 +108,19 @@ print('----------- Halbwerts- und zehntelbreite -----------------------')
 print('----------------------------------------------------------------------',
       '\n')
 
-print('Halbwertsbreite gemessen: Channelnummer, Energie[keV]',
+print('Halbwertsbreite gemessen: Channel, Energie[keV]',
       2 * np.abs(offset-index_halb), 2*g(np.abs(offset-index_halb),  m, b))
 
-print('Halbwertsbreite berechnet: Channelnummer, Energie[keV]',
+print('Halbwertsbreite berechnet: Channel, Energie[keV]',
       halbebreite_berechnet, g(halbebreite_berechnet,  m, b), '\n')
 
-print('Zehntelbreite gemessen: Channelnummer, Energie[keV]', 2 * np.abs(offset-index_zehntel),
+print('Zehntelbreite gemessen: Channel, Energie[keV]', 2 * np.abs(offset-index_zehntel),
       2 * g(offset-index_zehntel,  m, b))
 
-print('Zehntelbreite berechnet aus Sigma: Channelnummer, Energie[keV]',
+print('Zehntelbreite berechnet aus Sigma: Channel, Energie[keV]',
       zehntelbreite_berechnet, g(zehntelbreite_berechnet,  m, b), '\n')
 
-print('Zehntelbreite berechnet aus Messwert: Channelnummer, Energie[keV]',
+print('Zehntelbreite berechnet aus Messwert: Channel, Energie[keV]',
       np.abs(offset-index_halb) * 1.823,
       g(np.abs(offset-index_halb) * 1.823,  m, b))
 
@@ -134,14 +134,14 @@ print('--------- Vergleiche Halbwertsbreite mit Delta E Formel 20 -----------')
 print('----------------------------------------------------------------------',
       '\n')
 
-print('Halbwertsbreite gemessen: Channelnummer, Energie[keV]',
+print('Halbwertsbreite gemessen: Channel, Energie[keV]',
       np.abs(offset-index_halb), g(np.abs(offset-index_halb),  m, b))
 
-print('Halbwertsbreite berechnet: Channelnummer, Energie[keV]',
+print('Halbwertsbreite berechnet: Channel, Energie[keV]',
       halbebreite_berechnet, g(halbebreite_berechnet,  m, b), '\n')
 
 print(offset_energy)
-print('Auflösungsvermögen nach Formel 20: Channelnummer, Energie[keV]',
+print('Auflösungsvermögen nach Formel 20: Channel, Energie[keV]',
       2.35 * unp.sqrt(0.1 * offset_energy * 1e3 * 2.9) * 1e-3)
 
 print('\n--------------------------------------------------------------------')
@@ -183,8 +183,8 @@ plt.hist(range(0, len(channel_content_ca), 1),
           weights=channel_content_ca, label='Spektrum')
 plt.plot(index, gaus(index, *params_gaus), label='Fit')
 
-plt.xlabel(r'$\mathrm{Channelnummer}$')
-plt.ylabel(r'$\mathrm{Counts}$')
+plt.xlabel(r'$\mathrm{Channel}$')
+plt.ylabel(r'$\mathrm{Count}$')
 plt.plot(index_halb, channel_content_ca[index_halb], '.',
          label='Abgelesene Höhe\nHalbwertsbreite')
 plt.plot(index_zehntel, channel_content_ca[index_zehntel], '.',
@@ -302,8 +302,8 @@ plt.plot(index_compton_kante, channel_content_ca[index_compton_kante], '.',
 # plt.plot(lower_index_compton, channel_content_ca[lower_index_compton], '.',
 # label='Beginn Compton Spektrum')
 
-plt.xlabel(r'$\mathrm{Channelnummer}$')
-plt.ylabel(r'$\mathrm{Counts}$')
+plt.xlabel(r'$\mathrm{Channel}$')
+plt.ylabel(r'$\mathrm{Count}$')
 plt.legend()
 plt.savefig('./plots/caesium/compton.pdf')
 
@@ -320,7 +320,7 @@ plt.hist(range(0, len(channel_content_ca), 1),
          len(channel_content_ca)), weights=channel_content_ca,
          label='Spektrum')
 
-plt.xlabel(r'$\mathrm{Channelnummer}$')
-plt.ylabel(r'$\mathrm{Counts}$')
+plt.xlabel(r'$\mathrm{Channel}$')
+plt.ylabel(r'$\mathrm{Count}$')
 plt.legend()
 plt.savefig('./plots/caesium/caesium_spektrum.pdf')

@@ -86,8 +86,8 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function):
 
     # plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
              # label='Fit')
-    # plt.xlabel(r'$\mathrm{Channelnummer}$')
-    # plt.ylabel(r'$\mathrm{Counts}$')
+    # plt.xlabel(r'$\mathrm{Channel}$')
+    # plt.ylabel(r'$\mathrm{Count}$')
     # plt.legend()
     # plt.savefig(f'./plots/europium/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
 
@@ -129,7 +129,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
         data=[index, unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
           unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
           unp.uarray(noms(offset_of_peak), stds(offset_of_peak))],
-    header=['Channelnummer / ', r'A / ',
+    header=['Channel / ', r'A / ',
             r'\sigma / ', r'\mu / '],
     places=[0, (2.2, 2.2), (1.2, 1.2), (4.2, 1.2)],
     caption='Bestimmte Eigenschaften der Peaks von $^{152}\ce{Eu}$.',
@@ -185,7 +185,7 @@ plt.plot(np.append(noms(offset_of_peak), 0), np.append(energies, 0), '.',
          label='Fitpunkte')
 plt.plot(index_intervall, g(index_intervall, *params), label='Fit')
 
-plt.xlabel('Channelnummer')
+plt.xlabel('Channel')
 plt.ylabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.legend()
 plt.savefig('./plots/europium/skalen_trafo_fit.pdf')
@@ -198,7 +198,7 @@ offset_of_peak_in_energy = g(unp.uarray(noms(offset_of_peak),
 l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/peak_in_energy_eu.tex').tabular(
         data=[index, energies,
           unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))],
-    header=['Channelnummer / ', r'E_{\gamma,theo} / \kilo\eV ',
+    header=['Channel / ', r'E_{\gamma,theo} / \kilo\eV ',
             r'E_{\gamma} / \kilo\eV '],
     places=[0 , 2, (3.2, 1.2)],
     caption='Energiewerte der Peaks von $^{152}\ce{Eu}$.',
@@ -396,7 +396,7 @@ plt.savefig('./plots/europium/effizienz.pdf')
 
 l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/results_europium.tex').tabular(
     data = [index, energies, unp.uarray(noms(efficiency), stds(efficiency))],
-    header = ['Channelnummer / ', r'Energie \, / \kilo\eV', r'Effizienz /'],
+    header = ['Channel / ', r'Energie \, / \kilo\eV', r'Effizienz /'],
     places = [0, 2, (1.4, 1.4)],
     caption = 'Bestimmten Energie und Effizienzwerte.',
     label = 'results_europium'
@@ -420,8 +420,8 @@ plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], '.',
 # plt.ylim(0, )
 plt.xlim(0, 4000)
 
-plt.ylabel(r'$\mathrm{Counts}$')
-plt.xlabel(r'$\mathrm{Channelnummer}$')
+plt.ylabel(r'$\mathrm{Count}$')
+plt.xlabel(r'$\mathrm{Channel}$')
 plt.legend()
 plt.savefig('./plots/europium/spektrum_index.pdf')
 
@@ -436,7 +436,7 @@ plt.hist(np.linspace(0., max(index_to_energie), len(channel_content_eu)),
          weights=channel_content_eu, label='Spektrum')
 
 plt.xlim(0, max(index_to_energie))
-plt.ylabel(r'$\mathrm{Counts}$')
+plt.ylabel(r'$\mathrm{Count}$')
 plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
 plt.legend()
 plt.savefig('./plots/europium/spektrum_energie.pdf')

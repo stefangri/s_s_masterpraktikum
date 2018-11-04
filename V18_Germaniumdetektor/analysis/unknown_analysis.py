@@ -96,8 +96,8 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function):
 
     # plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
              # label='Fit')
-    # plt.xlabel(r'$\mathrm{Channelnummer}$')
-    # plt.ylabel(r'$\mathrm{Counts}$')
+    # plt.xlabel(r'$\mathrm{Channel}$')
+    # plt.ylabel(r'$\mathrm{Count}$')
     # plt.legend()
     # plt.savefig(f'./plots/unknown/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
 
@@ -155,20 +155,32 @@ decay_rate_calculated = decay_rate(area_under_peak, angle_distribution,
                                    prohability, efficency_calculated,
                                    measurment_time)
 
+print('Gemitelte Aktivität', decay_rate_calculated.mean())
 ### --- Save data --- ###
 
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/unknown/peak_charakteristiken_unknown.tex').tabular(
-        data=[peak_index_unknown[0], prohability, unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
-          unp.uarray(noms(sigma_of_peaks_energy), stds(sigma_of_peaks_energy)),
+
+l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/unknown/peak_fit_parameter.tex').tabular(
+        data=[peak_index_unknown[0], unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
+          unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
+          unp.uarray(noms(offset_of_peak), stds(offset_of_peak)),
+          unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))],
+    header=['Channel / ', r'Amplitude / None ',
+            r'\sigma / None',r'\mu / None', r'\mu / \kilo\eV'],
+    places=[0, (1.2, 1.2), (1.2, 1.2), (4.2, 1.2), (3.2, 1.2)],
+    caption='Regressionsparameter der Peak-Anpassung.',
+    label='results_peaks')
+
+l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/unknown/peak_charakteristiken.tex').tabular(
+        data=[peak_index_unknown[0],
           unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy)),
-          area_under_peak,
+           prohability,
+           area_under_peak,
           unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))],
-    header=['Channelnummer / ', r'Übergangswahrscheinlichkeit / ', r'Amplitude / ',
-            r'\sigma / \kilo\eV', r'\mu / \kilo\eV', r'Fläche / ',
-            r'Aktivität / \Bq'],
-    places=[0, 2, (1.4, 1.4), (1.4, 1.4), (1.4, 1.4), 2, (1.2, 1.2)],
-    caption='Bestimmte Eigenschaften der Peaks von $^{60}\ce{Co}$.',
-    label='results_peaks_unknown'
+    header=['Channel / ', r'\mu / \kilo\eV', r'P\ua{über} / ', r'Fläche / ',
+            r'Aktivität / \becquerel'],
+    places=[0,  (2.2, 1.2), 4, 0, (1.2, 3.2)],
+    caption='Bestimmte Aktivität für jeden Peak der $^{60}\ce{Co}$ Quelle.',
+    label='decay_rate_peak_co'
 )
 
 
@@ -177,24 +189,25 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
               unp.uarray(noms(peak_energy_unknown), stds(peak_energy_unknown)),
               unp.uarray(noms(efficency_calculated),
               stds(efficency_calculated))],
-    header=['Channelnummer / ', r'Energie / \kilo\eV', r'Effizienz / '],
-    places=[0, (1.2, 1.2), (1.2, 1.2)],
+    header=['Channel / ', r'Energie / \kilo\eV', r'Q / '],
+    places=[0, (2.2, 1.2), (1.2, 1.2)],
     caption='Berchente Vollenergienachweiseffizienz von $^{60}\ce{Co}$.',
-    label='effizienz'
+    label='effizienz_co'
 )
 # ########################################################################
 # ########################################################################
-# plt.clf()
-# plt.xlim(0, 4000)
-# plt.hist(range(0, len(channel_content_unknown), 1),
-         # bins=np.linspace(0, len(channel_content_unknown),
-         # len(channel_content_unknown)),
-         # weights=channel_content_unknown, label='Spektrum')
-#
-# plt.plot(peak_index_unknown[0],
-         # channel_content_unknown[peak_index_unknown[0]], '.')
-# plt.xlabel(r'$\mathrm{Channelnummer}$')
-# plt.ylabel(r'$\mathrm{Counts}$')
-# plt.legend()
-# plt.show()
-# plt.savefig(f'./plots/unknown/spectrum.pdf')
+
+plt.clf()
+plt.xlim(0, 4000)
+plt.hist(range(0, len(channel_content_unknown), 1),
+          bins=np.linspace(0, len(channel_content_unknown),
+          len(channel_content_unknown)),
+          weights=channel_content_unknown, label='Spektrum')
+
+plt.plot(peak_index_unknown[0],
+         channel_content_unknown[peak_index_unknown[0]], '.', label='Peak')
+plt.xlabel(r'$\mathrm{Channel}$')
+plt.ylabel(r'$\mathrm{Count}$')
+plt.legend()
+#plt.show()
+plt.savefig(f'./plots/unknown/spectrum_unknown.pdf')

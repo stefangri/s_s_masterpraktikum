@@ -52,7 +52,7 @@ Aufällig ist der Fehler des Parameters $b$.
 In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten dargestllt.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/skalen_trafo_fit.pdf}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/europium/skalen_trafo_fit.pdf}
   \caption{Fitpunkte und Regressionsgerade der Energietransformation.}
   \label{fig:skalen_trafo_fit}
 \end{figure}
@@ -74,7 +74,7 @@ für den Abstand von Probe und Detektor der Wert $a=\SI{881}{\milli\meter}$ und 
 den Radius der Querschnittfläche des Detektors $r=\SI{27.5}{\milli\meter}$
 verwendet. Damit folgt für die Winkelverteilung
 \begin{equation}
-  \eqref{eq:winkelverteilung}
+  \label{eq:winkelverteilung}
   \frac{\Omega}{4\pi}=\num{0.0155}.
 \end{equation}
 Die anfängliche Aktivität der Probie lag nach Angaben der Anleitung \cite{anleitungV18}
@@ -115,7 +115,7 @@ A_2 = \num{0.64\pm0.09}, \quad B_2=\SI{32\pm6 e-4}{\per\kilo\eV}, \quad C = \num
 Dargestellt sind beide Fitfunktion und die Datenpunkte in Abbildung \ref{fig:effizienz}.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/effizienz.pdf}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/europium/effizienz.pdf}
   \caption{Ermittelte Vollenergienachweiseffizienz $Q$ des Detektors.}
   \label{fig:effizienz}
 \end{figure}
@@ -123,11 +123,12 @@ Für die späteren Aktivitätsbestimmung wird die Effizienzfunktion $Q_2$ mit de
 ermittelten Parametern ohne weitere Kommentare verwendet.
 \FloatBarrier
 \subsection{Untersuchung einer $^{137}{Cs}$ Quelle}
+\FloatBarrier
 Das nach einer Messzeit von $t\ua{meauserment}=\SI{3694}{\second}$ gemessene
 Energiespektrum ist in Abbildung \ref{fig:caesium_spektrum} dargestellt.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{../analysis/plots/caesium/caesium_spektrum.pdf}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/caesium/caesium_spektrum.pdf}
   \caption{Gemessene Energiespektrum einer $^{137}{Cs}$ Quelle.}
   \label{fig:caesium_spektrum}
 \end{figure}
@@ -143,7 +144,7 @@ Aufällig ist der große Unischerheitsbereich des Parameters $\sigma$ nach der U
 Der Vollenergiepeak und der bestimmte Fit sind in Abbildung \ref{fig:Vollenergiepeak} eingezeichnet.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{../analysis/plots/caesium/photopeak.pdf}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/caesium/photopeak.pdf}
   \caption{Vollenergiepeak der $^{137}{Cs}$ Quelle.}
   \label{fig:Vollenergiepeak}
 \end{figure}
@@ -188,7 +189,7 @@ Das Comptonspektrum ist vergrößert in Abbildung \ref{fig:comptonspektrum}
 dargetsellt.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{../analysis/plots/caesium/compton_spektrum.pdf}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/caesium/compton_spektrum.pdf}
   \caption{Comptonspektrum der $^{137}{Cs}$ Quelle.}
   \label{fig:comptonspektrum}
 \end{figure}
@@ -235,14 +236,15 @@ Werdeb diese in Gleichung \eqref{} mit einer $d=\SI{3.9}{\centi\meter}$ eingeset
     P\ua{Photo}&= \num{20.9\pm1.5}\, \%
   \end{aligned}
 \end{align}
-
+\FloatBarrier
 \subsection{Untersuchung des ersten unbekannten Quelle}
+\FloatBarrier
 Das nach einer Messzeit von $t\ua{measurment}=\SI{2941}{\second}$ aufgenommene
 Spektrum ist in Abbildung \ref{fig:spektrum_sb_or_ba} dargestellt.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{../analysis/plots/sb_or_ba/spectrum.pdf}
-  \caption{Spektrum des ersten unbekannten Quelle.}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/sb_or_ba/spectrum.pdf}
+  \caption{Spektrum der ersten unbekannten Quelle.}
   \label{fig:spektrum_sb_or_ba}
 \end{figure}
 Mit eingezeichnet sind die mit \textsc{find\_peaks} abgelesenen Peaks.
@@ -250,12 +252,12 @@ Analog zu Kapitel \ref{sec:kalibrierung} werden die Energien der Peaks mit
 einer Regressionsrechnung bestimmt.
 \input{../analysis/tabs/sb_or_ba/peak_fit_parameter_final.tex}
 Durch verlgeich der Spektren von $^{125}\ce{Sb}$ (vgl. Quelle \cite{chartofnuclieds})
-und $^{133}\ce{Ba}$ (vgl. Quelle chartofnucliedss) mit dem
+und $^{133}\ce{Ba}$ (vgl. Quelle \cite{chartofnuclieds}) mit dem
 der Messung wird ersichtlich das es sich bei der unbekannten Quelle um $^{133}\ce{Ba}$
-handelt. Aus der verwendeten Quelle können zusätzlich die Übergangswahrscheinlichkeiten
+handelt. Aus der verwendeten Quelle können zusätzlich die Übergangswahrscheinlichkeiten $P\ua{über}$
 entommen werden.
 
-Die Bestimmung der Aktivität $A$ der Barimum-Quelle erfolgt mit Gleichung \eqref{}.
+Die Bestimmung der Aktivität $A\ua{k}$ der Barimum-Quelle erfolgt mit Gleichung \eqref{}.
 Die Aktivität wird für jeden Peak einzelnt bestimmt und anschlißened
 gemittelt. Zunächst wird dazu die Vollenergienachweiseffizienz des Detektors $Q$ an jedem
 Peak berechnet. Aufgelistet sind die Resultate in Tabelle \ref{tab: effizienz}.
@@ -265,5 +267,35 @@ Die Ergebnisse für jeden Peak befinden sich in Tabelle \ref{tab: decay_rate_pea
 Gemittelt ergibt sich somit eine Aktivität von
 \begin{equation}
   \label{eq:aktivität_Ba}
-  \overline{A}=\SI{1.10\pm0.23 e3}{\becquerel}.
+  \overline{A\ua{k}}=\SI{1.10\pm0.23 e3}{\becquerel}.
 \end{equation}
+\FloatBarrier
+\subsection{Untersuchung des zweiten unbekannten Quelle}
+Das nach einer Messzeit von $t\ua{measurment}=\SI{3412}{\second}$ aufgenommene
+Spektrum ist in Abbildung \ref{fig:spektrum_sb_or_ba} dargestellt.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/unknown/spectrum_unknown.pdf}
+  \caption{Spektrum der zweiten unbekannten Quelle.}
+  \label{fig:spektrum_sb_or_ba}
+\end{figure}
+Mit eingezeichnet sind die mit \textsc{find\_peaks} abgelesenen Peaks.
+Analog zu Kapitel \ref{sec:kalibrierung} werden die Energien der Peaks mit
+einer Regressionsrechnung bestimmt.
+\input{../analysis/tabs/unknown/peak_fit_parameter_final.tex}
+Druch den Vergleich des resultierende Spektrums mit der Quelle
+\cite{chartofnuclieds}, zeigt sich das es sich bei dem Strahler um $^{60}\ce{Co}$
+handelt. Aus der Quelle \cite{chartofnuclieds} können auch die Übergangswahrscheinlichkeiten $P\ua{über}$
+abgelesenen werden. Die berechnete Vollenergienachweiseffizienz $Q$ an
+dem jeweiligen Peak befindet sich in Tabelle \ref{tab: effizienz_co}.
+\input{../analysis/tabs/unknown/calculated_efficencies_final.tex}
+Damit ist es möglich die Aktivität $A\ua{r}$ für jeden Peak zu bestimmen.
+Der Inhalt eines Peaks wird durch Summierung der Channeninhalte berechnet.
+Gelistet sind die Aktivitäten $A\ua{r}$ in Tabelle \ref{tab: decay_rate_peak_co}.
+\input{../analysis/tabs/unknown/peak_charakteristiken_final.tex}
+Als gemittelte Aktivität ergibt sich:
+\begin{equation}
+  \label{eq:gemittelt_aktivität_co}
+  \ov{A}=\SI{450\pm200}{\becquerel}
+\end{equation}
+Aufällig ist der große Unsicherheitsbereich in Gleichung \eqref{eq:gemittelt_aktivität_co}.
