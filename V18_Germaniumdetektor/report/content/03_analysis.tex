@@ -13,7 +13,7 @@ der unbekannten Probe berechnet werden.
 Für die folgenden Anaylsen wird aus dem \textsc{python} Paktet \textsc{scipy.optimize}~\cite{scipy}
 die Funktion \textsc{curve\_{fit}} für Regressionsberechnung verwendet.
 
-\subsection{Kalibrierung des Germaniumdetektors}
+\subsection{Kalibrierung des Germaniumdetektors}\label{sec:kalibrierung}
 \FloatBarrier
 Die Kalibrierung wird mit Hilfe einer Europium $^{152}\ce{Eu}$ Probe
 durchgeführt. Das nach einer Messzeit von $t\ua{measurment}=\SI{3380}{\second}$
@@ -245,4 +245,25 @@ Spektrum ist in Abbildung \ref{fig:spektrum_sb_or_ba} dargestellt.
   \caption{Spektrum des ersten unbekannten Quelle.}
   \label{fig:spektrum_sb_or_ba}
 \end{figure}
-Mit eingezeichnet sind die mit \textsc{find_peaks} abgelsenen Peaks.
+Mit eingezeichnet sind die mit \textsc{find\_peaks} abgelesenen Peaks.
+Analog zu Kapitel \ref{sec:kalibrierung} werden die Energien der Peaks mit
+einer Regressionsrechnung bestimmt.
+\input{../analysis/tabs/sb_or_ba/peak_fit_parameter_final.tex}
+Durch verlgeich der Spektren von $^{125}\ce{Sb}$ (vgl. Quelle \cite{chartofnuclieds})
+und $^{133}\ce{Ba}$ (vgl. Quelle chartofnucliedss) mit dem
+der Messung wird ersichtlich das es sich bei der unbekannten Quelle um $^{133}\ce{Ba}$
+handelt. Aus der verwendeten Quelle können zusätzlich die Übergangswahrscheinlichkeiten
+entommen werden.
+
+Die Bestimmung der Aktivität $A$ der Barimum-Quelle erfolgt mit Gleichung \eqref{}.
+Die Aktivität wird für jeden Peak einzelnt bestimmt und anschlißened
+gemittelt. Zunächst wird dazu die Vollenergienachweiseffizienz des Detektors $Q$ an jedem
+Peak berechnet. Aufgelistet sind die Resultate in Tabelle \ref{tab: effizienz}.
+\input{../analysis/tabs/sb_or_ba/calculated_efficencies_final.tex}
+Die Ergebnisse für jeden Peak befinden sich in Tabelle \ref{tab: decay_rate_peak}.
+\input{../analysis/tabs/sb_or_ba/peak_charakteristiken_final.tex}
+Gemittelt ergibt sich somit eine Aktivität von
+\begin{equation}
+  \label{eq:aktivität_Ba}
+  \overline{A}=\SI{1.10\pm0.23 e3}{\becquerel}.
+\end{equation}

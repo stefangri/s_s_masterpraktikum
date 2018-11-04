@@ -131,7 +131,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
           unp.uarray(noms(offset_of_peak), stds(offset_of_peak))],
     header=['Channelnummer / ', r'A / ',
             r'\sigma / ', r'\mu / '],
-    places=[0, (2.2, 2.2), (1.2, 1.2), (5.2, 1.2)],
+    places=[0, (2.2, 2.2), (1.2, 1.2), (4.2, 1.2)],
     caption='Bestimmte Eigenschaften der Peaks von $^{152}\ce{Eu}$.',
     label='results_peaks_eu'
 )
