@@ -62,7 +62,7 @@ def gaus(x, amplitude, sigma, offset):
     return amplitude * np.exp(-1/2 * (x - offset)**2/sigma**2)
 
 
-def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
+def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function):
 
     # use as fit_intervall \pm 15, create for fit numpy array with index values
     index = np.arange(index_of_peak-15, index_of_peak+15, 1)
@@ -96,7 +96,7 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
 
     # plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
              # label='Fit')
-    # plt.xlabel(r'$\mathrm{Binnummer}$')
+    # plt.xlabel(r'$\mathrm{Channelnummer}$')
     # plt.ylabel(r'$\mathrm{Counts}$')
     # plt.legend()
     # plt.savefig(f'./plots/unknown/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
@@ -163,7 +163,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
           unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy)),
           area_under_peak,
           unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))],
-    header=['Binnummer / ', r'Übergangswahrscheinlichkeit / ', r'Amplitude / ',
+    header=['Channelnummer / ', r'Übergangswahrscheinlichkeit / ', r'Amplitude / ',
             r'\sigma / \kilo\eV', r'\mu / \kilo\eV', r'Fläche / ',
             r'Aktivität / \Bq'],
     places=[0, 2, (1.4, 1.4), (1.4, 1.4), (1.4, 1.4), 2, (1.2, 1.2)],
@@ -177,7 +177,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
               unp.uarray(noms(peak_energy_unknown), stds(peak_energy_unknown)),
               unp.uarray(noms(efficency_calculated),
               stds(efficency_calculated))],
-    header=['Binnummer / ', r'Energie / \kilo\eV', r'Effizienz / '],
+    header=['Channelnummer / ', r'Energie / \kilo\eV', r'Effizienz / '],
     places=[0, (1.2, 1.2), (1.2, 1.2)],
     caption='Berchente Vollenergienachweiseffizienz von $^{60}\ce{Co}$.',
     label='effizienz'
@@ -193,7 +193,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
 #
 # plt.plot(peak_index_unknown[0],
          # channel_content_unknown[peak_index_unknown[0]], '.')
-# plt.xlabel(r'$\mathrm{Binnummer}$')
+# plt.xlabel(r'$\mathrm{Channelnummer}$')
 # plt.ylabel(r'$\mathrm{Counts}$')
 # plt.legend()
 # plt.show()

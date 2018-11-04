@@ -1,1 +1,119 @@
 \section{Auswertung}
+Im folgenden wird das $\gamma$-Spektrum vier verschiedner Proben untersucht.
+Die erste Probe, \emph{Europium} $^{152}\ce{Eu}$, wird verwendet um den Detektor
+zu kalibirieren. Hierzu werden die Channelskala in eine Energieskala transformiert.
+Außerdem soll die energieabhängig Effizienz $Q$ des Detektor ermittelt werden.
+Mit der zweiten Probe, \emph{Caesium} $^{137}\ce{Cs}$, sollen neben den
+Detektoreigenschaften, der Vollenergiepeak und das Comptonspektrum untersucht werden.
+Darüberhinaus soll die Aktivität $A$ der Caesium-Probe bestimmt werden.
+Die Identität der letzten beiden Proben ist nicht bekannt und soll mit Hilfe
+des Germaniumdetektors festgestellt werden. Zusätzlich soll die Aktivität
+der unbekannten Probe berechnet werden.
+
+Für die folgenden Anaylsen wird aus dem \textsc{python} Paktet \textsc{scipy.optimize}~\cite{scipy}
+die Funktion \textsc{curve\_{fit}} für Regressionsberechnung verwendet.
+
+\subsection{Kalibrierung des Germaniumdetektors}
+Die Kalibrierung wird mit Hilfe einer Europium $^{152}\ce{Eu}$ Probe
+durchgeführt. Das nach einer Messzeit von $t\ua{measurment}=\SI{3380}{\second}$
+aufgenommene Energiespektrum ist in Abbildung \ref{fig:spectrum_europ} dargestellt.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/spektrum_index.pdf}
+  \caption{Gemessene Spektrum von Europium $^{152}\ce{Eu}$.}
+  \label{fig:spectrum_europ}
+\end{figure}
+In der Abbildung \ref{fig:spectrum_europ} sind zusätzlich die mit
+\textsc{scipy.signal.find\_{peaks}} ermittelten Peaks eingezeichnet.
+An jeden Peak wird eine Gaußfuntkion
+\begin{equation*}
+  G(x)=A\exp{\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right)}
+\end{equation*}
+angepasst, um den Hochpunkt des Peaks gegeben durch den Parameter $\mu$ zu
+bestimmen. Die Parameter befinden sich in Tabelle \ref{tab: results_peaks_eu}.
+\input{../analysis/tabs/europium/peak_charakteristiken_eu_final.tex}
+Die zu den Peaks gehörige Channelnummer wird mit der, aus der Anleitung \cite{anleitungV18}
+bekannten, charakteristischen Energie zugeordnet.
+Damit die gesamte Channelskala in eine Energieskala transformiert werden kann,
+wird eine lineare Regression an die Funktion
+\begin{equation*}
+  g(x)=mx+b
+\end{equation*}
+durchgeführt. Zusätzlich wurde für die Regressionsrechnung der Datentuple\newline
+$(Channelnummer~=~0,E_\gamma~=~0)$ hinzugefügt.
+ Aus der Regressionsrechnung ergeben sich die folgenden Parameter
+\begin{equation}
+  \label{eq:channel_energie_trafo}
+  m=\num{0.4009\pm0.0015}\,\frac{\si{\kilo\eV}}{\map{Channelnummer}}, \quad b=\SI{0.0\pm2.8}{\kilo\eV}.
+\end{equation}
+Aufällig ist der Fehler des Parameters $b$.
+In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten dargestllt.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/skalen_trafo_fit.pdf}
+  \caption{Fitpunkte und Regressionsgerade der Energietransformation.}
+  \label{fig:skalen_trafo_fit}
+\end{figure}
+Die aus der Transformation resusltierenden Energien sind in der Tabelle \ref{tabs: energy__peaks_eu'}
+aufgelistet.
+\input{../analysis/tabs/europium/peak_in_energy_eu_final.tex}
+Die in diesem Abschnitt bestimmten Parameter werden in späteren Teilen der Auswertung
+ohne weitere Anmerkung verwendet.
+
+Der Detektor kann nicht jede Energie mit der selben Vollenergienachweiseffizienz
+nachweisen, deshalb wird diese im Folgenden untersucht. Hierzu wird die Formel
+\eqref{} nach $Q$ umgestellt. Die Größe $Z$ wird durch Summation der Channelinhalte
+um ein Peak bestimmt. Dabei ist zu beachten, dass $Z$ durch die Messzeit $t_measurment$
+dividiert wird. Die Übergangswahrscheinlichkeiten werden der Anleitung \cite{anleitungV18}
+entnommen. Die Winkelverteilung wird mit Gleichung \eqref{} berechnet. Hierbei wurde
+für den Abstand von Probe und Detektor der Wert $a=\SI{881}{\milli\meter}$ und für den
+den Radius der Querschnittfläche des Detektors $r=\SI{27.5}{\milli\meter}$
+verwendet. Damit folgt für die Winkelverteilung
+\begin{equation}
+  \eqref{eq:winkelverteilung}
+  \frac{\Omega}{4\pi}=\num{0.0155}.
+\end{equation}
+Die anfängliche Aktivität der Probie lag nach Angaben der Anleitung \cite{anleitungV18}
+am 01.10.2000 bei $A_0=\SI{4130\pm60}{\becquerel}$. Mit dem Zerfallsgesetzt kann die
+Aktivität der Quelle am 29.10.2018 bestimmt werden:
+\begin{equation}
+  A(t\ua{29.10.2018})=A_0\exp\left(-\frac{t\ua{29.10.2018}\log(2)}{\tau\ua{1/2}}\right) = \SI{1636\pm24}{\becquerel}.
+\end{equation}
+Bei der Berechnung wurde die in der Anleitung \cite{anleitungV18} angegebene
+Halbwertszeit von $^{152}\ce{Eu}$, $\tau\ua{1/2}=\SI{4943 \pm 5 }{\day}$ genutzt.
+Eingetragen sind die berechneten Effizienzen der Probe in Tabelle \ref{tab: results_europium}.
+\input{../analysis/tabs/europium/results_europium_final.tex}
+Die nachfolgenden Regressionsrechnungen werden an Energien $E_\gamma>\SI{150}{\kilo\eV}$
+durchgeführt.
+An die bestimmten Vollenergienachweiseffizienzen wird eine Funtkion der Form
+\begin{equation*}
+  Q_1(E)=A_1*E^{B_1}
+\end{equation*}
+angepasst. Die Parameter folgen aus der Regressionsrechnung als:
+\begin{equation}
+\label{eq:effizienz_Q_1}
+A_1 = \SI{2.1\pm1.1 e2}{\per\kilo\eV}, \quad B_2=\num{-1.17\pm 0.09}.
+\end{equation}
+Beim Vergleich der Parameter mit der Abschätzung für den Wirkungsquerschnitt
+des Photoeffekts \eqref{} fällt auf das der Parmeter $B$ im Intervall im angegebenen
+Intervall für $\delta$ liegt und $A_1/z_{\ce{Eu}}=\num{3.5\pm1.7}$ zumindest im
+Fehlerbereich im Intervall des Parameters $\alpha$ liegt.
+Außerdem wird an die Datenpunkte der Tabelle \ref{tab: results_europium}
+eine Funktion der Form
+\begin{equation*}
+  Q_2(E)=A_2\exp\left(-B_2 E\right)+C
+\end{equation*}
+angepasst. Aus der Regressionsrechnung ergeben sich die folgenden Parameter
+\begin{equation}
+\label{eq:effizienz_Q_2}
+A_2 = \num{0.64\pm0.09}, \quad B_2=\SI{32\pm6 e-4}{\per\kilo\eV}, \quad C = \num{0.030\pm0.016}.
+\end{equation}
+Dargestellt sind beide Fitfunktion und die Datenpunkte in Abbildung \ref{fig:effizienz}.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/effizienz.pdf}
+  \caption{Ermittelte Vollenergienachweiseffizienz $Q$ des Detektors.}
+  \label{fig:effizienz}
+\end{figure}
+Für die späteren Aktivitätsbestimmung wird die Effizienzfunktion $Q_2$ mit den
+ermittelten Parametern ohne weitere Kommentare verwendet.

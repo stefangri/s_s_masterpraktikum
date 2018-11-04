@@ -43,6 +43,102 @@ index = np.append(indexes_lower[0], index_upper_shiftet)
 energies = [121.78, 244.70, 344.3, 411.96, 443.96, 778.90, 867.37, 946.08,
             1085.90, 1112.10, 1408.00]
 
+# ########################################################################### #
+# ## --- Use Automatic automatic_spectrum_anaysis to get peak_index--- ## #
+# ########################################################################### #
+
+
+def gaus(x, amplitude, sigma, offset):
+    return amplitude * np.exp(-1/2 * (x - offset)**2/sigma**2)
+
+
+def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function):
+
+    # use as fit_intervall \pm 15, create for fit numpy array with index values
+    index = np.arange(index_of_peak-15, index_of_peak+15, 1)
+
+    params_gaus, cov_gaus = curve_fit(fit_function, index,
+                                      channel_content[index],
+                                      p0=[channel_content[index_of_peak], 1,
+                                          index_of_peak])
+
+    error_gaus = np.sqrt(np.diag(cov_gaus))
+
+    amplitude = ufloat(params_gaus[0], error_gaus[0])
+    sigma = ufloat(params_gaus[1], error_gaus[1])
+    offset = ufloat(params_gaus[2], error_gaus[2])
+
+    # --- Calculate area under peak --- #
+
+    area_under_peak = sum(channel_content[index_of_peak-5:index_of_peak+5])
+
+    # --- Plot function ---  #
+
+    index_fit_plot = np.linspace(index_of_peak-15, index_of_peak+15, 1e4)
+
+    # plt.clf()
+    # plt.xlim(index_of_peak-20, index_of_peak+20)
+    # plt.ylim(0, channel_content[index_of_peak] * 1.2)
+    # plt.hist(range(0, len(channel_content), 1),
+             # bins=np.linspace(0, len(channel_content),
+             # len(channel_content)),
+             # weights=channel_content, label='Spektrum')
+
+    # plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
+             # label='Fit')
+    # plt.xlabel(r'$\mathrm{Channelnummer}$')
+    # plt.ylabel(r'$\mathrm{Counts}$')
+    # plt.legend()
+    # plt.savefig(f'./plots/europium/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
+
+    # --- Return values --- #
+
+    return amplitude, sigma, offset, area_under_peak
+
+
+# ########################################################################
+# ################# Make all the necessary anaylisies ###################
+
+
+amplitude_of_peaks = []
+
+sigma_of_peaks = []
+sigma_of_peaks_energy = []
+
+offset_of_peak = []
+offset_of_peak_in_energy = []
+
+area_under_peak = []
+
+for i in index:
+    amplitude, sigma, offset, area = automatic_spectrum_anaysis(channel_content_eu,
+                                                                i, gaus)
+
+    amplitude_of_peaks.append(amplitude)
+
+    sigma_of_peaks.append(sigma)
+
+    offset_of_peak.append(offset)
+
+    area_under_peak.append(area)
+
+
+# Save data in table
+print(index)
+l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/peak_charakteristiken_eu.tex').tabular(
+        data=[index, unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
+          unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
+          unp.uarray(noms(offset_of_peak), stds(offset_of_peak))],
+    header=['Channelnummer / ', r'A / ',
+            r'\sigma / ', r'\mu / '],
+    places=[0, (2.2, 2.2), (1.2, 1.2), (5.2, 1.2)],
+    caption='Bestimmte Eigenschaften der Peaks von $^{152}\ce{Eu}$.',
+    label='results_peaks_eu'
+)
+# ########################################################################### #
+# ## --- Linear Regression to get transformations parameters--- ## #
+# ########################################################################### #
+
 
 def g(x, m, b):
     '''Define linear function for Transformation purpose'''
@@ -51,13 +147,16 @@ def g(x, m, b):
 
 # Get Regressionparameters with curve_fit
 
-params, cov = curve_fit(g, np.append(index, 0), np.append(energies, 0),
+params, cov = curve_fit(g, np.append(noms(offset_of_peak), 0),
+                        np.append(energies, 0),
                         bounds=[(-1000, 0), (1000, 1)])
 
 
 errors = np.sqrt(np.diag(cov))
 
-index_intervall = np.linspace(min(index)-10, max(index)+10, 10000)
+index_intervall = np.linspace(-20, 3650, 10000)
+
+
 
 # Print FitParameters
 print('\n\n------------------------------------------------------------------')
@@ -81,14 +180,30 @@ np.savetxt('./umrechnungen_bins_to_energy.txt',
            np.column_stack([params, errors]), header='param error')
 
 # Plotte Fit and values
-plt.plot(index, energies, '.', label='Datenpunkte')
+plt.xlim(-10, 3600)
+plt.plot(np.append(noms(offset_of_peak), 0), np.append(energies, 0), '.',
+         label='Fitpunkte')
 plt.plot(index_intervall, g(index_intervall, *params), label='Fit')
 
-plt.xlabel('Binnummer')
+plt.xlabel('Channelnummer')
 plt.ylabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.legend()
 plt.savefig('./plots/europium/skalen_trafo_fit.pdf')
 
+# Save the  transformend channelnumbers into a table
+
+offset_of_peak_in_energy = g(unp.uarray(noms(offset_of_peak),
+                             stds(offset_of_peak)), m, b)
+
+l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/peak_in_energy_eu.tex').tabular(
+        data=[index, energies,
+          unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))],
+    header=['Channelnummer / ', r'E_{\gamma,theo} / \kilo\eV ',
+            r'E_{\gamma} / \kilo\eV '],
+    places=[0 , 2, (3.2, 1.2)],
+    caption='Energiewerte der Peaks von $^{152}\ce{Eu}$.',
+    label='energy__peaks_eu'
+)
 
 # ########################################################################### #
 # ################# --- Bestimmung des Effizienz --- ######################## #
@@ -222,7 +337,6 @@ def efficeny_function(E, a, b):
 'Beachte das ich hier den ersten Wert wie in der Anleitung gefordert wegwerfe!'
 params_exp, cov_exp = curve_fit(exp, energies[1:], noms(efficiency[1:]),
                                 p0=[2, 0.01, 0])
-print(cov_exp)
 errors_exp = np.sqrt(np.diag(cov_exp))
 
 params_eff, cov_eff = curve_fit(f=efficeny_function, xdata=energies[1:],
@@ -247,7 +361,7 @@ print('--------------------- Effizienzfunktion -------------------------------')
 a_efficency = ufloat(params_eff[0], errors_efficency[0])
 b_efficency = ufloat(params_eff[1], errors_efficency[1])
 
-print('a:', a_efficency)
+print('a:', a_efficency, a_efficency/62)
 print('b:', b_efficency)
 
 print('\n--------------------------------------------------------------------')
@@ -266,9 +380,8 @@ e = np.linspace(energies[1]-100, energies[-1]+100, 1000)
 plt.clf()
 plt.errorbar(energies, noms(efficiency), yerr=stds(efficiency), fmt='.',
              label='Datenpunkte')
-plt.plot(e, exp(e, *params_exp), label='Fit_new')
-plt.plot(e, efficeny_function(e, *params_eff))
-
+plt.plot(e, exp(e, *params_exp), label=r'$Q_2(E)$')
+plt.plot(e, efficeny_function(e, *params_eff), label=r'$Q_1(E)$')
 plt.xlim(energies[1]-50, energies[-1]+50)
 plt.xlabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.ylabel(r'$\mathrm{Effizienz}$')
@@ -283,7 +396,7 @@ plt.savefig('./plots/europium/effizienz.pdf')
 
 l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/results_europium.tex').tabular(
     data = [index, energies, unp.uarray(noms(efficiency), stds(efficiency))],
-    header = ['Binnummer / ', r'Energie \, / \kilo\eV', r'Effizienz /'],
+    header = ['Channelnummer / ', r'Energie \, / \kilo\eV', r'Effizienz /'],
     places = [0, 2, (1.4, 1.4)],
     caption = 'Bestimmten Energie und Effizienzwerte.',
     label = 'results_europium'
@@ -294,37 +407,37 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
 # ############ --- Plotte das Spektrum mit Peak-Detection --- ############### #
 # ########################################################################### #
 
-# Plot with Binnumbers as x axis
-# plt.clf()
-# plt.hist(range(0, len(channel_content_eu), 1),
-#          bins=np.linspace(0, len(channel_content_eu), len(channel_content_eu)),
-#          weights=channel_content_eu, label='Spektrum')
-#
-# plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], 'x',
-#          markersize=1, label='Peaks', color='C1', alpha=0.6)
-# plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], 'x',
-#          markersize=1, color='C1', alpha=0.6)
-# # plt.ylim(0, )
-# plt.xlim(0, 4000)
-#
-# plt.ylabel(r'$\mathrm{Counts}$')
-# plt.xlabel(r'$\mathrm{Binnummer}$')
-# plt.legend()
-# plt.savefig('./plots/europium/spektrum_index.pdf')
+#Plot with Binnumbers as x axis
+plt.clf()
+plt.hist(range(0, len(channel_content_eu), 1),
+         bins=np.linspace(0, len(channel_content_eu), len(channel_content_eu)),
+         weights=channel_content_eu, label='Spektrum')
+
+plt.plot(indexes_lower[0], channel_content_eu[indexes_lower[0]], '.',
+         markersize=2, label='Peaks', color='C1', alpha=0.8)
+plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], '.',
+         markersize=2, color='C1', alpha=0.8)
+# plt.ylim(0, )
+plt.xlim(0, 4000)
+
+plt.ylabel(r'$\mathrm{Counts}$')
+plt.xlabel(r'$\mathrm{Channelnummer}$')
+plt.legend()
+plt.savefig('./plots/europium/spektrum_index.pdf')
 
 # Plot with Energies as x axis
 
-# plt.clf()
-#
-# index_to_energie = g(range(0, len(channel_content_eu), 1), *params)
-#
-# plt.hist(np.linspace(0., max(index_to_energie), len(channel_content_eu)),
-#          bins=np.linspace(0., max(index_to_energie), len(channel_content_eu)),
-#          weights=channel_content_eu, label='Spektrum')
-#
-# plt.xlim(0, max(index_to_energie))
-# plt.ylabel(r'$\mathrm{Counts}$')
-# plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
-# plt.legend()
-# plt.savefig('./plots/europium/spektrum_energie.pdf')
-# ült.show()
+plt.clf()
+
+index_to_energie = g(range(0, len(channel_content_eu), 1), *params)
+
+plt.hist(np.linspace(0., max(index_to_energie), len(channel_content_eu)),
+         bins=np.linspace(0., max(index_to_energie), len(channel_content_eu)),
+         weights=channel_content_eu, label='Spektrum')
+
+plt.xlim(0, max(index_to_energie))
+plt.ylabel(r'$\mathrm{Counts}$')
+plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
+plt.legend()
+plt.savefig('./plots/europium/spektrum_energie.pdf')
+# plt.show()
