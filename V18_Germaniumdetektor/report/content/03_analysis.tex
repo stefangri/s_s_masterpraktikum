@@ -14,6 +14,7 @@ Für die folgenden Anaylsen wird aus dem \textsc{python} Paktet \textsc{scipy.op
 die Funktion \textsc{curve\_{fit}} für Regressionsberechnung verwendet.
 
 \subsection{Kalibrierung des Germaniumdetektors}
+\FloatBarrier
 Die Kalibrierung wird mit Hilfe einer Europium $^{152}\ce{Eu}$ Probe
 durchgeführt. Das nach einer Messzeit von $t\ua{measurment}=\SI{3380}{\second}$
 aufgenommene Energiespektrum ist in Abbildung \ref{fig:spectrum_europ} dargestellt.
@@ -25,10 +26,11 @@ aufgenommene Energiespektrum ist in Abbildung \ref{fig:spectrum_europ} dargestel
 \end{figure}
 In der Abbildung \ref{fig:spectrum_europ} sind zusätzlich die mit
 \textsc{scipy.signal.find\_{peaks}} ermittelten Peaks eingezeichnet.
-An jeden Peak wird eine Gaußfuntkion
-\begin{equation*}
+An jeden Peak wird eine Gausfuntkion
+\begin{equation}
+  \label{eq:gaus}
   G(x)=A\exp{\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right)}
-\end{equation*}
+\end{equation}
 angepasst, um den Hochpunkt des Peaks gegeben durch den Parameter $\mu$ zu
 bestimmen. Die Parameter befinden sich in Tabelle \ref{tab: results_peaks_eu}.
 \input{../analysis/tabs/europium/peak_charakteristiken_eu_final.tex}
@@ -59,7 +61,9 @@ aufgelistet.
 \input{../analysis/tabs/europium/peak_in_energy_eu_final.tex}
 Die in diesem Abschnitt bestimmten Parameter werden in späteren Teilen der Auswertung
 ohne weitere Anmerkung verwendet.
+\FloatBarrier
 
+\FloatBarrier
 Der Detektor kann nicht jede Energie mit der selben Vollenergienachweiseffizienz
 nachweisen, deshalb wird diese im Folgenden untersucht. Hierzu wird die Formel
 \eqref{} nach $Q$ umgestellt. Die Größe $Z$ wird durch Summation der Channelinhalte
@@ -117,3 +121,128 @@ Dargestellt sind beide Fitfunktion und die Datenpunkte in Abbildung \ref{fig:eff
 \end{figure}
 Für die späteren Aktivitätsbestimmung wird die Effizienzfunktion $Q_2$ mit den
 ermittelten Parametern ohne weitere Kommentare verwendet.
+\FloatBarrier
+\subsection{Untersuchung einer $^{137}{Cs}$ Quelle}
+Das nach einer Messzeit von $t\ua{meauserment}=\SI{3694}{\second}$ gemessene
+Energiespektrum ist in Abbildung \ref{fig:caesium_spektrum} dargestellt.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/caesium/caesium_spektrum.pdf}
+  \caption{Gemessene Energiespektrum einer $^{137}{Cs}$ Quelle.}
+  \label{fig:caesium_spektrum}
+\end{figure}
+Deutlich im Spektrum zu erkennen ist der Vollenergiepeak und das Comptonpeak.
+Zunächst wird die Energie des Vollenergiepeak bestimmt. Hierzu wird an den Peak
+eine Gausfunktion \eqref{eq:gaus} angepasst. Aus der Regressionsrechnung ergeben
+sich die folgenden Parameter:
+\begin{align*}
+  a\ua{vp}&=\num{2407\pm29}\,\map{Counts}\\
+  \mu\ua{vp}&=\num{1648.191\pm0.030}\,\map{Channel}=\SI{661\pm4}{\kilo\eV} \\ \sigma\ua{vp}&=\num{2.175\pm0.030}\,\map{Channel}=\SI{0.9\pm2.8}{\kilo\eV}
+\end{align*}
+Aufällig ist der große Unischerheitsbereich des Parameters $\sigma$ nach der Umrechnung in $\si{\kilo\eV}$.
+Der Vollenergiepeak und der bestimmte Fit sind in Abbildung \ref{fig:Vollenergiepeak} eingezeichnet.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/caesium/photopeak.pdf}
+  \caption{Vollenergiepeak der $^{137}{Cs}$ Quelle.}
+  \label{fig:Vollenergiepeak}
+\end{figure}
+Zusätzlich sind in der Abbildung \ref{fig:Vollenergiepeak} die abgelesenen
+Halbwerts- und Zehntelbreiten eingezeichnet:
+\begin{align}
+  \label{eq:halbwerts_zehntel_breite_gemessen}
+  x\ua{1/2}&=\num{5.62\pm0.06}\,\map{Channel} = \SI{2.3\pm5.7}{\kilo\eV}\\
+  x\ua{1/10}&=\num{10.38\pm0.06}\,\map{Channel} = \SI{4.2\pm5.7}{\kilo\eV}.
+\end{align}
+Hier bewirkt die Energietransformation eine signifikante Vergrößerung des Unsicherheitsbereichs.
+Mit Hilfe des Parameters $\sigma$ des Vollenergiepeaks ist es möglich die
+Breiten in Gleichung \eqref{eq:halbwerts_zehntel_breite_gemessen} gegen zu prüfen.
+Hierfür wird die aus Quelle \cite{halbwertsbreite} und \cite{anleitungV18}
+entnommene Formel verwendet:
+\begin{equation}
+  \label{eq:formel_umrechnung}
+  x\ua{1/2,\sigma}=2\log(2)\sigma, \quad x\ua{1/10,\sigma}=1.823 x\ua{1/2}=3.646\log(2)\sigma
+\end{equation}
+Mit der Gleichung \eqref{eq:formel_umrechnung} folgt somit:
+\begin{align}
+  \label{eq:halbwerts_zehntel_breite_berechnet}
+  x\ua{1/2,\sigma}&=\num{5.12\pm0.07}\,\map{Channel} = \SI{2.1\pm2.8}{\kilo\eV}\\
+  x\ua{1/10}&=\num{9.34\pm0.13}\,\map{Channel} = \SI{3.7\pm2.8}{\kilo\eV}.
+\end{align}
+Die Gleichung \eqref{eq:formel_umrechnung} gilt jedoch nur unter der Annahme das
+die Peaks Gausverteilt sind.
+Deutlich ist zu erkennen das abgelesener und berechneter Wert in der selben Größenordnung
+liegt. Somit ist die Annahme eines gausverteilten Peak berechtigt.
+Zusätlich kann die Halbwertsbreite mit Gleichung \eqref{} berechnet werden. %In der Anleitung Formel 20
+Hierzu wird der Fitparameter $\mu$ verwendet:
+\begin{equation}
+   \label{eq:halbwertsbreite_formel_20}
+    x\ua{1/2,f}= \SI{1.03\pm0.01}{\kilo\eV}
+\end{equation}
+Die in \eqref{eq:halbwertsbreite_formel_20} aufgeführte
+Halbwertsbreite gibt das bestmögliche Auflösungsvermögen
+des Detetkors an. Der Vergleich mit den oben berechneten Werten
+zeigt, dass das Auflösungsvermögen nicht optimal ist.
+
+Das Comptonspektrum ist vergrößert in Abbildung \ref{fig:comptonspektrum}
+dargetsellt.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/caesium/compton_spektrum.pdf}
+  \caption{Comptonspektrum der $^{137}{Cs}$ Quelle.}
+  \label{fig:comptonspektrum}
+\end{figure}
+Mit eingezeichnet ist in der Abbildung der abgelesene Ort für den Rückstreupeak
+und der Comptonkante:
+\begin{align}
+  \label{eq:rückstreu_kante_abgelesen}
+  \begin{aligned}
+    E\ua{rück}&=\num{480}\,\map{Channel} = \SI{192.4\pm2.9}{\kilo\eV}\\
+    E\ua{kante}&=\num{1182}\,\map{Channel} = \SI{473.8\pm3.3}{\kilo\eV}
+  \end{aligned}
+\end{align}
+Überprüft werden können die abgelesenen Werte mit Gleichung \eqref{}.
+Hierbei wird für den Rückstreupeak $\theta=\frac{\pi}{2}$ und für
+die Comptonkante $\theta=\pi$ eingesetzt.
+\begin{align}
+  \label{eq:rückstreu_kante_abgelesen}
+  \begin{aligned}
+    E\ua{rück, calc}&= \SI{184.3\pm0.3}{\kilo\eV}\\
+    E\ua{kante, calc}&= \SI{476.4\pm3.4}{\kilo\eV}
+  \end{aligned}
+\end{align}
+Die abgelesene und berechnete Energie der Comptonkante und des Rückstreupeaks besitzen
+eine zur Nullmenge verschiedene Schnittmenge.
+
+Als Nächstes soll der Inhalt des Comptonkontinums und des Vollenergiepeaks
+verglichen werden. Hierzu wird jeweils über den Binhalt des jeweiligen Spektrums
+summiert:
+\begin{equation}
+  \label{eq:flacehe}
+  I\ua{compton} = 62467 \, \map{Count}\cdot\map{Channel}, \quad I\ua{peak}=13332\, \map{Count}\cdot\map{Channel}
+\end{equation}
+\textbf{Nochmal mit Stefan darüber sprechen}
+
+Abschließend soll die Absoprtionswahrcheinlichkeit für den
+Compton- und Photoeffekt bestimmt werden. Hierzu werden die
+oben ermittelten Energien verwendet. Mit den Energien und Abbildung
+\ref{} ist es möglich den Extinktionskoeffizienten abzulesen.
+Werdeb diese in Gleichung \eqref{} mit einer $d=\SI{3.9}{\centi\meter}$ eingesetzt ergibt sich:
+\begin{align}
+  \label{eq:absorptioswahrscheinlichkeit}
+  \begin{aligned}
+    P\ua{compton}&= \num{74\pm5}\,\% \\
+    P\ua{Photo}&= \num{20.9\pm1.5}\, \%
+  \end{aligned}
+\end{align}
+
+\subsection{Untersuchung des ersten unbekannten Quelle}
+Das nach einer Messzeit von $t\ua{measurment}=\SI{2941}{\second}$ aufgenommene
+Spektrum ist in Abbildung \ref{fig:spektrum_sb_or_ba} dargestellt.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/sb_or_ba/spectrum.pdf}
+  \caption{Spektrum des ersten unbekannten Quelle.}
+  \label{fig:spektrum_sb_or_ba}
+\end{figure}
+Mit eingezeichnet sind die mit \textsc{find_peaks} abgelsenen Peaks.

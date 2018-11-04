@@ -95,7 +95,7 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
 
     plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
              label='Fit')
-    plt.xlabel(r'$\mathrm{Binnummer}$')
+    plt.xlabel(r'$\mathrm{Channelnummer}$')
     plt.ylabel(r'$\mathrm{Counts}$')
     plt.legend()
     plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
@@ -167,7 +167,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
           unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy)),
           area_under_peak,
           unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))],
-    header=['Binnummer / ', r'Übergangswahrscheinlichkeit / ', r'Amplitude / ',
+    header=['Channelnummer / ', r'Übergangswahrscheinlichkeit / ', r'Amplitude / ',
             r'\sigma / \kilo\eV', r'\mu / \kilo\eV', r'Fläche / ',
             r'Aktivität / \Bq'],
     places=[0, 2, (1.4, 1.4), (1.4, 1.4), (1.4, 1.4), 2, (1.2, 1.2)],
@@ -181,7 +181,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
               unp.uarray(noms(peak_index_energies), stds(peak_index_energies)),
               unp.uarray(noms(efficency_calculated),
               stds(efficency_calculated))],
-    header=['Binnummer / ', r'Energie / \kilo\eV', r'Effizienz / '],
+    header=['Channelnummer / ', r'Energie / \kilo\eV', r'Effizienz / '],
     places=[0, (1.2, 1.2), (1.2, 1.2)],
     caption='Berchente Vollenergienachweiseffizienz $^{133}\ce{Ba}$.',
     label='effizienz'
@@ -199,8 +199,9 @@ plt.hist(range(0, len(channel_content_sb_ba), 1),
          len(channel_content_sb_ba)),
          weights=channel_content_sb_ba, label='Spektrum')
 
-plt.plot(peak_indexes[0], channel_content_sb_ba[peak_indexes[0]], '.')
-plt.xlabel(r'$\mathrm{Binnummer}$')
+plt.plot(peak_indexes[0], channel_content_sb_ba[peak_indexes[0]], '.',
+         label='Peak')
+plt.xlabel(r'$\mathrm{Channelnummer}$')
 plt.ylabel(r'$\mathrm{Counts}$')
 plt.legend()
 plt.savefig(f'./plots/sb_or_ba/spectrum.pdf')
