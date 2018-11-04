@@ -53,6 +53,7 @@ def decay_rate(area, angle_distribution, prohability, efficiency, time):
 # --- Find index of peak
 peak_indexes = find_peaks(channel_content_sb_ba, height=120, distance=15)
 
+peak_index_energies = g(peak_indexes[0], m, b)
 # Wirte a fuction for automatic peak analysis
 
 
@@ -84,20 +85,20 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
 
     index_fit_plot = np.linspace(index_of_peak-15, index_of_peak+15, 1e4)
 
-    #plt.clf()
-    #plt.xlim(index_of_peak-20, index_of_peak+20)
-    #plt.ylim(0, channel_content[index_of_peak] * 1.2)
-    #plt.hist(range(0, len(channel_content_sb_ba), 1),
-    #         bins=np.linspace(0, len(channel_content_sb_ba),
-    #         len(channel_content_sb_ba)),
-    #         weights=channel_content_sb_ba, label='Spektrum')
+    plt.clf()
+    plt.xlim(index_of_peak-20, index_of_peak+20)
+    plt.ylim(0, channel_content[index_of_peak] * 1.2)
+    plt.hist(range(0, len(channel_content_sb_ba), 1),
+             bins=np.linspace(0, len(channel_content_sb_ba),
+             len(channel_content_sb_ba)),
+             weights=channel_content_sb_ba, label='Spektrum')
 
-    #plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
-    #         label='Fit')
-    #plt.xlabel(r'$\mathrm{Binnummer}$')
-    #plt.ylabel(r'$\mathrm{Counts}$')
-    #plt.legend()
-    #plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
+    plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
+             label='Fit')
+    plt.xlabel(r'$\mathrm{Binnummer}$')
+    plt.ylabel(r'$\mathrm{Counts}$')
+    plt.legend()
+    plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
 
     # --- Return values --- #
 
@@ -133,10 +134,6 @@ for index in peak_indexes[0]:
     area_under_peak.append(area)
 
 
-print(offset_of_peak_in_energy)
-print(area)
-
-
 # --- Calculate the normal_acitvity for all --- #
 
 measurment_time = 2941  # in seconds
@@ -149,11 +146,11 @@ angle_distribution = np.genfromtxt('winkelverteilung.txt', unpack=True)
 prohability = [0.33, 0.07, 0.18, 0.62, 0.09]
 
 
-efficency_calculatet = exp_efficency(np.array(offset_of_peak_in_energy),
+efficency_calculated = exp_efficency(np.array(offset_of_peak_in_energy),
                                      a, b, c)
 
 decay_rate_calculated = decay_rate(area_under_peak, angle_distribution,
-                                   prohability, efficency_calculatet,
+                                   prohability, efficency_calculated,
                                    measurment_time)
 
 
@@ -162,13 +159,6 @@ decay_rate_calculated = decay_rate(area_under_peak, angle_distribution,
 # ########################################################################### #
 # #### --- Speicherergebnisse Peak Eigenschaften in eine Tabelle --- ######## #
 # ########################################################################### #
-
-
-
-#print(len(unp.uarray(noms(sigma_of_peaks_energy), stds(sigma_of_peaks_energy))), type(unp.uarray(noms(sigma_of_peaks_energy), stds(sigma_of_peaks_energy))))
-#print(len(unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))), type(unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))))
-#print(len(area_under_peak), type(area_under_peak))
-#print(len(unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))), type(unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))))
 
 
 l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/peak_charakteristiken.tex').tabular(
@@ -181,10 +171,21 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
             r'\sigma / \kilo\eV', r'\mu / \kilo\eV', r'Fläche / ',
             r'Aktivität / \Bq'],
     places=[0, 2, (1.4, 1.4), (1.4, 1.4), (1.4, 1.4), 2, (1.2, 1.2)],
-    caption='Bestimmte Eigenschaften der Peaks.',
+    caption='Bestimmte Eigenschaften der Peaks von $^{133}\ce{Ba}$.',
     label='results_peaks'
 )
 
+
+l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/calculated_efficencies.tex').tabular(
+        data=[peak_indexes[0],
+              unp.uarray(noms(peak_index_energies), stds(peak_index_energies)),
+              unp.uarray(noms(efficency_calculated),
+              stds(efficency_calculated))],
+    header=['Binnummer / ', r'Energie / \kilo\eV', r'Effizienz / '],
+    places=[0, (1.2, 1.2), (1.2, 1.2)],
+    caption='Berchente Vollenergienachweiseffizienz $^{133}\ce{Ba}$.',
+    label='effizienz'
+)
 
 # ########################################################################### #
 # ########################################################################### #
