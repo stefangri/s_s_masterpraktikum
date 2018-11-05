@@ -34,7 +34,7 @@ An jeden Peak wird eine Gausfunktion
 angepasst, um den Hochpunkt des Peaks gegeben durch den Parameter $\mu$ zu
 bestimmen. Die Parameter befinden sich in Tabelle \ref{tab: results_peaks_eu}.
 \input{../analysis/tabs/europium/peak_charakteristiken_eu_final.tex}
-Die zu den Peaks gehörige Channelnummer wird mit der, aus der Anleitung \cite{anleitungV18}
+Die zu den Peaks gehörige Channelnummer wird mit der, aus der Anleitung \cite{anleitungv18}
 bekannten, charakteristischen Energie zugeordnet.
 Damit die gesamte Channelskala in eine Energieskala transformiert werden kann,
 wird eine lineare Regression an die Funktion
@@ -56,7 +56,7 @@ In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten darge
   \caption{Fitpunkte und Regressionsgerade der Energietransformation.}
   \label{fig:skalen_trafo_fit}
 \end{figure}
-Die aus der Transformation resultierenden Energien sind in der Tabelle \ref{tabs: energy__peaks_eu'}
+Die aus der Transformation resultierenden Energien sind in der Tabelle 2
 aufgelistet.
 \input{../analysis/tabs/europium/peak_in_energy_eu_final.tex}
 Die in diesem Abschnitt bestimmten Parameter werden in späteren Teilen der Auswertung
@@ -66,10 +66,10 @@ ohne weitere Anmerkung verwendet.
 \FloatBarrier
 Der Detektor kann nicht jede Energie mit derselben Vollenergienachweiseffizienz
 nachweisen, deshalb wird diese im Folgenden untersucht. Hierzu wird die Formel
-\eqref{} nach $Q$ umgestellt. Die Größe $Z$ wird durch Summation der Channelinhalte
+\eqref{eq: zählrate} nach $Q$ umgestellt. Die Größe $Z$ wird durch Summation der Channelinhalte
 um ein Peak bestimmt. Dabei ist zu beachten, dass $Z$ durch die Messzeit $t_measurment$
-dividiert wird. Die Übergangswahrscheinlichkeiten werden der Anleitung \cite{anleitungV18}
-entnommen. Die Winkelverteilung wird mit Gleichung \eqref{} berechnet. Hierbei wurde
+dividiert wird. Die Übergangswahrscheinlichkeiten werden der Anleitung \cite{anleitungv18}
+entnommen. Die Winkelverteilung wird mit Gleichung \eqref{eq: omega} berechnet. Hierbei wurde
 für den Abstand von Probe und Detektor der Wert $a=\SI{881}{\milli\meter}$ und für
 den Radius der Querschnittfläche des Detektors $r=\SI{27.5}{\milli\meter}$
 verwendet. Damit folgt für die Winkelverteilung
@@ -77,13 +77,13 @@ verwendet. Damit folgt für die Winkelverteilung
   \label{eq:winkelverteilung}
   \frac{\Omega}{4\pi}=\num{0.0155}.
 \end{equation}
-Die anfängliche Aktivität der Probe lag nach Angaben der Anleitung \cite{anleitungV18}
+Die anfängliche Aktivität der Probe lag nach Angaben der Anleitung \cite{anleitungv18}
 am 01.10.2000 bei $A_0=\SI{4130\pm60}{\becquerel}$. Mit dem Zerfallsgesetz kann die
 Aktivität der Quelle am 29.10.2018 bestimmt werden:
 \begin{equation}
   A(t\ua{29.10.2018})=A_0\exp\left(-\frac{t\ua{29.10.2018}\log(2)}{\tau\ua{1/2}}\right) = \SI{1636\pm24}{\becquerel}.
 \end{equation}
-Bei der Berechnung wurde die in der Anleitung \cite{anleitungV18} angegebene
+Bei der Berechnung wurde die in der Anleitung \cite{anleitungv18} angegebene
 Halbwertszeit von $^{152}\ce{Eu}$, $\tau\ua{1/2}=\SI{4943 \pm 5 }{\day}$ genutzt.
 Eingetragen sind die berechneten Effizienzen der Probe in Tabelle \ref{tab: results_europium}.
 \input{../analysis/tabs/europium/results_europium_final.tex}
@@ -96,10 +96,10 @@ An die bestimmten Vollenergienachweiseffizienzen wird eine Funktion der Form
 angepasst. Die Parameter folgen aus der Regressionsrechnung als:
 \begin{equation}
 \label{eq:effizienz_Q_1}
-A_1 = \SI{2.1\pm1.1 e2}{\per\kilo\eV}, \quad B_2=\num{-1.17\pm 0.09}.
+A_1 = \SI{2.1\pm1.1 e2}{\per\kilo\eV}, \quad B_1=\num{-1.17\pm 0.09}.
 \end{equation}
 Beim Vergleich der Parameter mit der Abschätzung für den Wirkungsquerschnitt
-des Photoeffekts \eqref{} fällt auf das der Parameter $B$ im Intervall im angegebenen
+des Photoeffekts \eqref{eq:wirkungsquerschnitt_photo} fällt auf das der Parameter $B$ im Intervall im angegebenen
 Intervall für $\delta$ liegt und $A_1/z_{\ce{Eu}}=\num{3.5\pm1.7}$ zumindest im
 Fehlerbereich im Intervall des Parameters $\alpha$ liegt.
 Außerdem wird an die Datenpunkte der Tabelle \ref{tab: results_europium}
@@ -158,7 +158,7 @@ Halbwerts- und Zehntelbreiten eingezeichnet:
 Hier bewirkt die Energietransformation eine signifikante Vergrößerung des Unsicherheitsbereichs.
 Mit Hilfe des Parameters $\sigma$ des Vollenergiepeaks ist es möglich die
 Breiten in Gleichung \eqref{eq:halbwerts_zehntel_breite_gemessen} gegenzuprüfen.
-Hierfür wird die aus Quelle \cite{halbwertsbreite} und \cite{anleitungV18}
+Hierfür wird die aus Quelle \cite{halbwertsbreite} und \cite{anleitungv18}
 entnommene Formel verwendet:
 \begin{equation}
   \label{eq:formel_umrechnung}
@@ -202,9 +202,9 @@ und der Comptonkante:
     E\ua{kante}&=\num{1182}\,\map{Channel} = \SI{473.8\pm3.3}{\kilo\eV}
   \end{aligned}
 \end{align}
-Überprüft werden können die abgelesenen Werte mit Gleichung \eqref{}.
-Hierbei wird für den Rückstreupeak $\theta=\frac{\pi}{2}$ und für
-die Comptonkante $\theta=\pi$ eingesetzt.
+Überprüft werden können die abgelesenen Wert $E\ua{rück}$ mit Gleichung \eqref{eq:rückstreu}.
+Hierbei wird für den Rückstreupeak $\theta=\frac{\pi}{2}$ eingesetzt.
+Der Wert für $E\ua{kante}$ kann mit Formel \eqref{eq: comptonkante_energie} geprüft werden.
 \begin{align}
   \label{eq:rückstreu_kante_abgelesen}
   \begin{aligned}
@@ -257,7 +257,7 @@ der Messung wird ersichtlich, dass es sich bei der unbekannten Quelle um $^{133}
 handelt. Aus der verwendeten Quelle können zusätzlich die Übergangswahrscheinlichkeiten $P\ua{über}$
 entnommen werden.
 
-Die Bestimmung der Aktivität $A\ua{k}$ der Barimum-Quelle erfolgt mit Gleichung \eqref{}.
+Die Bestimmung der Aktivität $A\ua{k}$ der Barimum-Quelle erfolgt mit Gleichung \eqref{eq: zählrate}.
 Die Aktivität wird für jeden Peak einzelent bestimmt und anschließend
 gemittelt. Zunächst wird dazu die Vollenergienachweiseffizienz des Detektors $Q$ an jedem
 Peak berechnet. Aufgelistet sind die Resultate in Tabelle \ref{tab: effizienz}.
