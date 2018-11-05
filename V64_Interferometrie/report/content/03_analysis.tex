@@ -1,26 +1,26 @@
 \newpage
 \section{Auswertung}
-Im Folgenden werden die gewonnenen Messergebnisse vorgestellt. Die notwendigen Ausgleichsrechungen werden 
+Im Folgenden werden die gewonnenen Messergebnisse vorgestellt. Die notwendigen Ausgleichsrechungen werden
 mit Hilfe der \emph{python} Bibliothek \emph{scipy.optimize} durchgeführt.
 
 \subsection{Kontrastmessung}
-Die gemessenen maximalen und minimalen Diodenspannungen unter variablem Winkel des Polarisationsfilters sind in 
+Die gemessenen maximalen und minimalen Diodenspannungen unter variablem Winkel des Polarisationsfilters sind in
 Tabelle~\ref{tab: messwerte_kontrast} eingetragen.
 Die Daten werden, wie in der Abschnitt \ref{sec: procedure} motiviert, an eine Funktion der Gestalt
 \begin{equation}
-    K(\vartheta) = A \left|\sin \left(2 \vartheta + \vartheta_0 \right)\right| + B 
+    K(\vartheta) = A \left|\sin \left(2 \vartheta + \vartheta_0 \right)\right| + B
     \label{eq: model_contrast}
 \end{equation}
 angepasst. Für die Fitparameter ergeben sich die folgenden Werte:
 \begin{align}
     \begin{aligned}
-    A &= \input{../analysis/results/result_A.tex} \quad  & \vartheta_0 &= \input{../analysis/results/result_vartheta_0.tex} = \SI{-0.092(21)}{\radian} \\ 
+    A &= \input{../analysis/results/result_A.tex} \quad  & \vartheta_0 &= \input{../analysis/results/result_vartheta_0.tex} = \SI{-0.092(21)}{\radian} \\
     C &= \input{../analysis/results/result_C.tex}.
     \end{aligned}
 \end{align}
 Eine Darstellung des Fits und der Messwerte ist in Abbildung~\ref{fig: kontrast_fit} einzusehen.
-Die nachfolgenden Messungen sind mit der Einstellung $\vartheta = \SI{55}{\degree}$ durchgeführt worden, da hier der maximale 
-Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde. Der Fit wurde erst nach der Messung bestimmt und dient hier nur 
+Die nachfolgenden Messungen sind mit der Einstellung $\vartheta = \SI{55}{\degree}$ durchgeführt worden, da hier der maximale
+Kontrast von ca. $\SI{96}{\percent}$ gemessen wurde. Der Fit wurde erst nach der Messung bestimmt und dient hier nur
 zur Verdeutlichung des theoretischen Zusammenhangs~\eqref{eq: model_contrast}.
 
 \input{tabs/kontrast_tabelle.tex}
@@ -34,10 +34,10 @@ zur Verdeutlichung des theoretischen Zusammenhangs~\eqref{eq: model_contrast}.
 
 
 \subsection{Messung des Brechungsindex von Glas}
-In Tabelle~\ref{tab: counts_glas} sin die Messwerte für die Anzahl der $2\pi$-Phasenverschiebungen unter Drehung der Glasplatten um $\SI{10}{\degree}$
-eingetragen. Aus diesen können mittels Gleichung~\eqref{tab: counts_glas} 
-(mit $\Delta\vartheta = \vartheta_0 = \SI{10}{\degree}$) jeweils die Brechungsindices berechnet werden. Diese sind ebenfalls in Tabelle~\ref{tab: counts_glas}  
-aufgeführt. Als Mittelwert ergibt sich 
+In Tabelle~\ref{tab: counts_glas} sind die Messwerte für die Anzahl der $2\pi$-Phasenverschiebungen unter Drehung der Glasplatten um $\SI{10}{\degree}$
+eingetragen. Aus diesen können mittels Gleichung~\eqref{eq:entwicklung_interferenzmaxima}
+(mit $\Delta\vartheta = \vartheta_0 = \SI{10}{\degree}$) jeweils die Brechungsindices berechnet werden. Diese sind ebenfalls in Tabelle~\ref{tab: counts_glas}
+aufgeführt. Als Mittelwert ergibt sich
 \begin{equation}
     n_{\text{Glas}} = \input{../analysis/results/result_n_glas.tex}.
 \end{equation}
@@ -45,27 +45,27 @@ aufgeführt. Als Mittelwert ergibt sich
 \input{tabs/counts_glas.tex}
 
 \subsection{Druckabhängigkeit des Brechungsindex von Luft}
-Die Ergebnisse der drei Messungen zur Untersuchung des Zusammenhangs zwischen dem Brechungsindex von Luft und dem Druck sind in 
+Die Ergebnisse der drei Messungen zur Untersuchung des Zusammenhangs zwischen dem Brechungsindex von Luft und dem Druck sind in
 Tabelle~\ref{tab: messwerte_n_gas} eingetragen. Es ist ersichtlich, dass die Messwerte der drei Reihen fast übereinstimmen, weswegen eine grafische
-Darstellung nur exemplarisch für eine Messreihe in Abbildung~\ref{fig: fit_druck} erfolgt. Für alle Messreihen analog werden aus 
-den $2\pi$-Phasenverschiebungen gemäß~\eqref{eq:phase_shit_gases} die Brechungsindices bestimmt und die Daten $(n^2, p)$ für eine Regression an 
+Darstellung nur exemplarisch für eine Messreihe in Abbildung~\ref{fig: fit_druck} erfolgt. Für alle Messreihen analog werden aus
+den $2\pi$-Phasenverschiebungen gemäß~\eqref{eq:phase_shit_gases} die Brechungsindices bestimmt und die Daten $(n^2, p)$ für eine Regression an
 das lineare Modell
 \begin{equation}
     n^2 = A p + B
 \end{equation}
-verwendet. Für die Parameter $A$ und $B$ ergeben sich die in Tabelle~\ref{tab: fitparams_druck} aufgeführten Werte. Hier ist ebenfalls eine 
+verwendet. Für die Parameter $A$ und $B$ ergeben sich die in Tabelle~\ref{tab: fitparams_druck} aufgeführten Werte. Hier ist ebenfalls eine
 Berechnung für den Brechungsindex bei $\SI{1}{\bar}$ angegeben. Als ungewichteter Mittelwert ergibt sich
 \begin{equation}
     \overline{n}\left(\SI{1}{\bar} \right) = \input{../analysis/results/result_n.tex},
 \end{equation}
 welcher im folgenden Abschnitt durch den Vergleich mit einem Literaturwert
-diskutiert werden kann. 
+diskutiert werden kann.
 
 \begin{figure}
     \centering
     \includegraphics[scale = 1]{../analysis/results/druck_fit_1.pdf}
-    \caption{Grafische Darstellung der Messwerte der ersten Messreihe zur Bestimmung des Zusammenhangs zwischen 
-    Druck $p$ und Brechungsindex $n$. Zusätzlich ist eine Regressionsgerade eingezeichnet, deren Parameter in 
+    \caption{Grafische Darstellung der Messwerte der ersten Messreihe zur Bestimmung des Zusammenhangs zwischen
+    Druck $p$ und Brechungsindex $n$. Zusätzlich ist eine Regressionsgerade eingezeichnet, deren Parameter in
     Tabelle~\ref{tab: fitparams_druck} eingetragen sind.}
     \label{fig: fit_druck}
 \end{figure}
@@ -75,8 +75,3 @@ diskutiert werden kann.
 \input{tabs/n_gas_tabelle.tex}
 
 \input{tabs/fitparams_druck.tex}
-
-
-
-
-
