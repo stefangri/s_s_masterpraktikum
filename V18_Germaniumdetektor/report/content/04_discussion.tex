@@ -1,1 +1,25 @@
 \section{Diskussion}
+In diesem Kapitel sollen die Messergebnisse diskutiert werden.
+
+Trotz linearer Zusammenhang zwischen Energie und Channel zeigt der Fitparameter
+$b$ einen auffällig großen Fehler. Eventuell wird der Fehler durch
+die Fitfunktion \textsc{curve\_fit} verursacht und sollte mit einer anderen
+Regressionsfunktion geprüft werden. Der große Fehlbereich hat insbesondere auf
+spätere Umrechnung in kleine Energien signifikante Auswirkungen bezüglich der Genauigkeit.
+Aus diesem Grund kann die Qualität aller nachfolgenden Regressionen an den
+untransformierten Größen festgestellt werden.
+
+Die bestimmte Energie des Vollenergiepeaks von $^{137}\ce{Cs}$ stimmt mit dem
+Literaturwert $\mu\ua{vp, theo}=\SI{661}{\kilo\eV}$ \cite{chartofnuclieds}
+überein und veranschaulicht deutlich die Präzision des verwendeten Detektors.
+Jedoch ist das Auflösungsvermögen des Germaniumdetektors nicht maximal, was sich
+insbesondere bei Untersuchung der Halbwertsbreiten zeigt. Verursacht wird
+die Halbwertsbreite eventuelle durch thermisches Rauschen im Detetektor oder
+Verstärker oder durch rückstreuende Teilchen die eine Energie besitzen bei der
+der Photoeffekt wieder wharscheinlicher wird. Weiterhin ist der signifikante Unterschied
+zwischen $E\ua{rück}$ und $E\ua{rück, calc}$ aufällig. Vermutlich wird der
+Unterschied durch einen nicht genaues ablesen des Rückstreupeaks verursacht.
+Das Ablesen könnte durch eine Regression verbessert werden.
+
+Die beiden unbekannten Quellen konnte mit einer hohen Genauigkeit bestimmt werden.
+Dies spricht abermals für die Präzision eines Germaniumdetektors.
