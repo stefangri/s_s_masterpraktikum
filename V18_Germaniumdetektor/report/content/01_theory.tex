@@ -1,11 +1,11 @@
 \setcounter{page}{1}
 \section*{Zielsetzung}
 Im Versuch 18 \textit{Der Reinst-Germanium-Detektor als
-Instrument der Gamma-Spektroskopie} sollen die theoretischen und experiementellen Grundlagen eines
+Instrument der Gamma-Spektroskopie} sollen die theoretischen und experimentellen Grundlagen eines
 Germaniumdetektors erarbeitet werden. Neben einer Einführung in die physikalischen Mechanismen der
-Strahlungsabsorption in Festkörpern wird im Folgenden die elektrische Beschaltung des Detektors beschrieben. 
+Strahlungsabsorption in Festkörpern, wird im Folgenden die elektrische Beschaltung des Detektors beschrieben. 
 Die durchgeführten Messungen dienen der Eichung des Detektors, sowie der Identifikation von unbekannten 
-Materialien anhand aufgenommener Energiespektren. 
+Strahlungsquellen anhand aufgenommener Energiespektren. 
 
 \section{Theorie}
 Die Detektion von Gamma-Strahlung in einem Germanium-Detektor basiert grundlegend auf der Tatsache, dass diese in dem 
@@ -16,8 +16,8 @@ Materie vorgestellt werden. Die eigentlichen Detektionsmechanismen lassen sich d
 Bändermodell für Festkörper beschreiben.
 
 \subsection{Absorptionsmechanismen}
-Als \textbf{Photoeffekt} bzeichnet man die Ionisierung eines Atoms durch ein einfallendes Photon. Im Fall der 
-hochenergetischen ($E_\gamma >= $) Gamma-Strahlung wird ein Elektron aus einer der stark gebundenen Schalen 
+Als \textbf{Photoeffekt} bezeichnet man die Ionisierung eines Atoms durch ein einfallendes Photon. Im Fall der 
+hochenergetischen ($E_\gamma \geq  \SI{200}{\kilo\electronvolt}$) Gamma-Strahlung wird ein Elektron aus einer der stark gebundenen Schalen 
 ausgelöst. Hierbei verliert das Photon seine ganze Energie und die zurück bleibende Elektronenfehlstelle wird durch 
 höher liegende Elektronen unter Aussendung von charakteristischer Röntgenstrahlung aufgefüllt. Eine wichtige physikalische 
 Größe zum Verständnis von Wechselwirkungsprozessen ist der Wirkungsquerschnitt $\sigma$ und sein Verhalten unter 
@@ -29,20 +29,20 @@ Strecke $D$ im Festkörper formulieren zu
 \end{equation}
 Hierin ist $n$ die Zahl der Elektronen pro Volumen. Das Produkt $\mu = n \sigma$ wird als Extinktionskoeffizient 
 bezeichnet und entspricht dem Kehrwert der mittleren Reichweite der Strahlung.
-Für den Photoeffekt lässt sich zeigen, dass der Wirkungsquerschnitt $\sigma_{Ph}$ in Abhängigkeit der Energie und 
+Für den Photoeffekt lässt sich zeigen, dass der Wirkungsquerschnitt $\sigma_{\text{Ph}}$ in Abhängigkeit der Energie und 
 Kernladungszahl $Z$ der beteiligten Atome annähernd zu beschreiben ist durch 
 \begin{equation}
-    \sigma_{Ph} \sim Z^{\alpha} E^{\delta}, \quad 4 < \alpha < 5, \, \delta \approx -\num{3.5}.
+    \sigma_{\text{Ph}} \sim Z^{\alpha} E^{\delta}, \quad 4 < \alpha < 5, \, \delta \approx -\num{3.5}.
 \end{equation}
 Der Wirkungsquerschnitt des Photoeffekts nimmt also mit steigender Energie ab. 
 
-Eine zweite in diesem Versuch zu beobachtende Erscheinung ist der \textbf{Compton-Effekt}. Diese lässt sich rein 
-klassisch als inelastischer Stoß eines Photons mit einem ruhenden Elektron der äußeren Schalen verstehen. Das Photon besitzt nach 
-dem Stoß im Gegensatz zum Photoeffekt eine geringere Energie $E'_\gamma \neq 0$: 
+Eine zweite in diesem Versuch zu beobachtende Erscheinung ist der \textbf{Compton-Effekt}. Dieser lässt sich rein 
+klassisch als inelastischer Stoß eines Photons mit einem ruhenden, punktförmigen Elektron der äußeren Schalen verstehen. 
+Das Photon besitzt nach dem Stoß im Gegensatz zum Photoeffekt eine geringere Energie $E'_\gamma \neq 0$: 
 \begin{equation}
     {E'}_{\!\gamma} = \frac{E_\gamma}{1 + \frac{E_\gamma}{m_e c^2} \left(1 - \cos\vartheta \right)},
 \end{equation}
-mit dem Streuwinkel des Photons $\gamma$. Der Maximale Energieübertrag an das beteiligte Elektron findet für eine 
+mit dem Streuwinkel des Photons $\vartheta$. Der maximale Energieübertrag an das beteiligte Elektron findet für eine 
 Rückwärtsstreuung ($\vartheta = \pi$) statt. Der differentielle Wirkungsquerschnitt $\frac{\mathup{d}\sigma}{\mathup{d}E}$
 (in Bezug auf die Elektronenenergie, die letztlich gemessen wird) verfügt also über einen kontinuierlichen Verlauf, der 
 bei einer maximalen Energie $E_{max} < E_\gamma$ (Compton-Kante) abbricht. Diese Elektronenenergie ist gegeben durch
@@ -50,7 +50,6 @@ bei einer maximalen Energie $E_{max} < E_\gamma$ (Compton-Kante) abbricht. Diese
     E_{max} = E_\gamma \frac{2\frac{E_\gamma}{m_ec^2}}{1 + 2\frac{E_\gamma}{m_ec^2}}
     \label{eq: comptonkante_energie}
 \end{equation}
-
 Ziel der Gamma-Spektroskopie ist es natürlich die 
 gesamte Energie des einfallenden Photons zu vermessen, da diese Rückschlüsse auf die atomare Struktur der Quelle 
 erlaubt. Der Compton-Effekt ist im Gegensatz zum Photo-Effekt daher eine eher störende Nebenerscheinung.
@@ -70,13 +69,13 @@ eine Anordnung aus einer $n$- und einer $p$-dotierten Germanium Schicht. An der 
 und Löcher rekombinieren, bildet sich eine sogenannte Verarmungszone aus. Dieser Bereich ist zur Detektion von Strahlung 
 geeignet, da erzeugte Elektron-Loch-Paare durch das wirkende elektrische Feld voneinander getrennt werden können und somit ein 
 endlicher Stromfluss erzeugt wird. Durch das Anlegen einer Spannung kann die Verarmungszone vergrößert werden. Hierbei ist jedoch 
-zu beachten, dass für von $0$ verschiedene Temperaturen immer thermisch angeregte Ladungsträger im Leitungsband existieren, die 
+zu beachten, dass für von $\SI{0}{\kelvin}$ verschiedene Temperaturen immer thermisch angeregte Ladungsträger im Leitungsband existieren, die 
 zu einem ständigen Stromfluss führen. Eine Erhöhung der Spannung muss daher immer mit einer Kühlung des 
 Halbleiterelements einher gehen.
 
-Aufgabe der Schaltung, die im nächsten Abschnitt besprochen wird, ist nun die am Germaniumelement erzeugten Spannungspuls der 
+Aufgabe der Schaltung, die im nächsten Abschnitt besprochen wird, ist nun die am Germaniumelement erzeugten Spannungspulse der 
 Größe nach geordnet in Bins einzuordnen. Ein exemplarisches, so erzeugtes Energiespektrum befindet sich in 
-Abbildung~\ref{fig: example_spectrum}. Hier sind nocheinmal die Eingans besprochenen Effekte zu erkennen. Zunächst besitzt jeder 
+Abbildung~\ref{fig: example_spectrum}. Hier sind noch einmal die eingans besprochenen Effekte zu erkennen. Zunächst besitzt jeder 
 Detektor eine untere Nachweisgrenze, die mindestens um die Bandlückenenergie vom Nullpunkt abweicht. Meist begrenzen jedoch 
 andere Gegebenheiten die Auflösung des Detektors, z.\,B. die Verkleidung des Detektors, die nur Gammas ab einer bestimmten Energie 
 durchdringen können. Weiter ist die kontinuierliche energetische Verteilung der Elektronen zu erkennen, die am Compton-Effekt 
@@ -87,7 +86,11 @@ Photoeffekt ihre Energie an Elektronen im Detektor abgeben.
 Die für die Spektroskopie eigentlich relevante Eigenschaft des Spektrums ist der Gesamtenergiepeak (oder die Gesamtenergiepeaks, falls 
 das Spektrum der Quelle mehrere Linien besitzt). An dieser Stelle werden Pulse gezählt, die durch Elektronen enstehen, welchen 
 die Gesamtenergie der Photonen übertragen wurde.
-Seine Höhe und Position sind Merkmale, die quantitative Aussagen über die Strahlungsquelle ermöglichen.   
+Seine Höhe und Position sind Merkmale, die quantitative Aussagen über die Strahlungsquelle ermöglichen. Es ist abschließend noch zu 
+erwähnen, dass der Wirkungsquerschnitt des Photoeffekts für die hier betrachteten Energieskalen 
+($E \sim \SI{1}{\mega\electronvolt}$) eigentlich kleiner ist als derjenige des Compton-Effekts. Dennoch ist der Gesamtenergiepeak 
+höher als das Compton-Kontiunuum. Dies liegt daran, dass der Photowirkungsquerschnitt mit fallender Energie ansteigt 
+und so Prozesse, bei denen vor dem Photoeffekt zunächst andere Streuungen stattfinden, ebenfalls in den Peak fallen können. 
 \begin{figure}
 \centering
 \includegraphics[width = 0.8\textwidth]{pics/example_spectrum.pdf}

@@ -1,10 +1,12 @@
 \section{Versuchsaufbau/-durchführung}
 Nachfolgend soll nun genauer die Funktionsweise eines Germaniumdetektors erklärt werden. Hierbei wird insbesondere 
-die elektrische Schaltung vorgestellt. Anschließend werden die durchgeführten Messungen motiviert.
+die elektrische Schaltung vorgestellt. Hierbei wird weniger auf elektrotechnische Details 
+als auf die messtechnische Motivation der einzelnen Bauteile eingegangen.
+Anschließend werden die durchgeführten Messungen vorgestellt.
 
 Das Germanium-Modul verfügt über eine zylindrische Geometrie. Von Außen ist eine stark mit Lithium dotierte $n$
 Schicht aufgebracht, von Innen eine mit Gold dotierte $p$ Schicht. An die Schichten sind Elektroden angeschlossen, zwischen denen 
-die notwendige Hochspannung von $\SI{}{\volt}$ angelegt ist. Die Probe wird über dem Zylinder in eine Schraubvorrichtung 
+die notwendige Hochspannung von $\SI{5}{\kilo\volt}$ angelegt ist. Die Probe wird über dem Zylinder in eine Schraubvorrichtung 
 befestigt. Probe und Detektor befinden sich innerhalb eines Bleikastens, der insbesondere den Einfluss von kosmischer 
 Strahlung minimieren soll. Zudem schützt eine innere dünne Kupferschicht vor $\alpha$-Strahlung, die von der Bleiummantelung ausgehen 
 könnte. 
@@ -12,8 +14,8 @@ könnte.
 Der am Halbleiterelement erzeugt Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
 dem Vorverstärker in Abbildung~\ref{fig: vorverstaerker}(a). Mithilfe eines kapazitiv rückgekoppelten Operationsverstärkers wird durch elektrische 
 Integration ein Spannungspegel erzeugt, der proportional zur Photonenenergie seien soll. Um einen zeitlich 
-begrenzten Spannungsimpuls zu erhalten muss der Kondensator $C_K$ nach jedem Nachweis zu entladen, was durch die 
-Anordnung in Abbildung~\ref{fig: vorverstaerker}(b) erfolgt. Durch eine LED nach jedem Impuls die Gate-Drain-Schicht des 
+begrenzten Spannungsimpuls zu erhalten, ist der Kondensator $C_K$ nach jedem Nachweis zu entladen, was durch die 
+Anordnung in Abbildung~\ref{fig: vorverstaerker}(b) erfolgt. Durch eine LED wird nach jedem Impuls die Gate-Drain-Schicht des 
 Eingangs-Feldeffekttransistors (FET) leitend gemacht und so kann die Ladung von $C_K$ abfließen.
 \begin{figure}
 \centering
@@ -31,7 +33,7 @@ Beide Abbildungen (bearbeitet) aus \cite{anleitungv18}.}
 \end{figure}
 
 Das vorverstärkte Signal gelangt zu einem Hauptverstärker, der die Spannungsimpulse abschließend verstärkt, sodass 
-sie Vielkanalanalysator in Kanaäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in 
+sie Vielkanalanalysator in Kanäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in 
 Abbildung~\ref{fig: zaehler}
 dargestellt ist. Die Messung der Impulshöhe basiert hier auf einer Zeitmessung. Der Spannungsimpuls lädt einen 
 Kondensator auf, dessen Abklingszeit bei Entladung von der Amplitude des Pulses abhängt. Ein Und-Gatter, verknüpft 
@@ -62,10 +64,10 @@ mit dem Radius des oben beschriebenen Zylinders $r$ und dem Abstand $a$ zwischen
 Für alle Messungen wird für etwa eine Stunde eine Probe in den Detektor gebracht und ein Spektrum aufgenommen. In der 
 Auswertung kann dann auf die Messzeit normiert werden. 
 Zunächst muss herausgefunden werden, welcher Zusammenhang zwischen Kanalnummer und Energie, sowie zwischen Zählrate und 
-Intensität besteht. Hierzu wird zunächst eine \ce{^152Eu} Quelle untersucht. Diese besitzt ein Linienreiches Spektrum, für das 
+Intensität besteht. Hierzu wird zunächst eine \ce{^152Eu} Quelle untersucht. Diese besitzt ein Linien-reiches Spektrum, für das 
 die Energien und notwendige Größen in Formel~\eqref{eq: zählrate} bekannt sind. 
 Anschließend wird eine \ce{^137Cs} untersucht. Hiermit sollen insbesondere die Eigenschaften aus 
-Abbildung~\ref{fig: example_spectrum} quantitativ untersucht werden soll. Hierzu zählen z.B. Lage von Compton-Kante und 
+Abbildung~\ref{fig: example_spectrum} quantitativ untersucht werden. Hierzu zählen z.B. Lage von Compton-Kante und 
 Rückstreupeak. Ebenfalls relevant ist das energetische Auflösungsvermögen des Systems, das aus einer Untersuchung der Breite 
 des Gesamtenergiepeaks hervorgeht.
 Abschließend werden zwei Messungen durchgeführt die von der generischen Situation der Gamma-Spektroskopie ausgehen: 
