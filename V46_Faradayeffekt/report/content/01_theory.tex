@@ -9,7 +9,7 @@ Zu Beginn wird die Verwendung einer effektiven Masse motiviert.
 Bevor der Faraday-Effekt beschrieben wird, wird das Phänomen der zirkularen
 Doppelbrechung erläutert.
 
-\subsection{Effektive Masse}
+\subsection{Effektive Masse}\label{sec:effektive_masse}
  Bänder eines kristalls sind meist in einer komplexen Bandstruktur angeordnet.
 Hierdurch ist eine exakte mathemaische Beschreibung meist schwierig und bedarf
 Approximationen. Vorteilhafterweise beschreiben die verwendeten Näherung oftmals
@@ -109,3 +109,27 @@ dass die Drehung der Polarisationsebene $\vartheta$ gegeben ist durch:
 Bei der Herleitung der Gleichung \eqref{eq:drehung_mit_chi} wurde unter anderem Angenommen,
 dass sich die Welle in $z$-Richtung ausbreitet, $\vec{k}=k\vec{z}_0$.
 \subsection{Faraday-Effekt}
+Der Faraday-Effekt beschreibt die Eigenschaft, dass ein optisch
+Medium durch ein externes Magnetfeld Nebendiagnonalen im ielektrische Suszeptbilitättensor
+erhält. Hierdurch wird die Polarisationsebene eines, zum Magnetfeld parallel
+einfallenden, Lichtfeldes $\vec{E}$ gedreht. Das Phänomen kann präziser erfasst werden,
+durch die Betrachtung von gebunden Elektronen im Magnetfeld $\vec{B}$, welche
+zusätzlich durch ein elektrisches Feld (verursacht durch die Lichtwelle) gestört wird.
+\begin{equation}
+  \label{eq:klassische_Bewegungsgleichung}
+  m\ddot{\vec{r}}+K\vec{r}=-\map{e}\vec{E}(\vec{r})_0-\map{e}\dot{\vec{r}}\times\vec{B}
+\end{equation}
+Der Vektor $\vec{r}$ bezeichnet die Auslenkung des Elektrons aus der Gleichgewichtslage,
+die Konstante $K$ repärsentiert die Bindung des Elektrons an seine Umgebung, die Elementarladung
+ist gegeben durch $\map{e_0}$ und die Feldstärke der einfallenden Lichtwelle
+wird durch $\vec{E}$ widergespiegelt.
+Unter der Annahme der von quasifreien Ladungsträger kann
+aus der Differntialgleichung \eqref{eq:klassische_Bewegungsgleichung} ein Ausdruck
+für Drehwinkel der Polarisationsebene $\vartheta$ generiert weren (siehe hierzu Quelle \cite{anleitungv46}):
+\begin{equation}
+  \label{eq:drehwinkel}
+  \varthea\approx \frac{\map{e}^3\lambda^2 NBL}{8\pi^2\epsilon_0\map{c_0}^3}\frac{1}{m^2} = \frac{\map{e}^3\lambda^2 NBL}{8\pi^2\epsilon_0\map{c_0}^3}\frac{1}{m^{*}^2}
+\end{equation}
+Die Ersetzung von $m$ durch $m^*$ ist durch die in Abschnitt \ref{sec:effektive_masse}
+besprochene Eigenschaft der effektiven Masse gerechtfertigt. Der Drehwinkel $\vartheta$ hängt somit
+mit der Ladungsträgerzahl $N$ und dem Magnetfeldstärke $B$ zusammen.
