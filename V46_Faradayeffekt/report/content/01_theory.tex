@@ -1,4 +1,75 @@
 \setcounter{page}{1}
 \section*{Zielsetzung}
+Der Versuch $V46$ verwendet den \emph{Faraday-Effekt}, um die \emph{effektive Masse} von
+Galliumarsenid zu bestimmen. Hierzu werden eine undotierte und zwei n-dotierte
+Formen des Halbleiters verwendet.
 
 \section{Theorie}
+Zu Beginn wird die Verwendung einer effektiven Masse motiviert.
+Bevor der Faraday-Effekt beschrieben wird, wird das Phänomen der zirkularen
+Doppelbrechung erläutert.
+
+\subsection{Effektive Masse}
+ Bänder eines kristalls sind meist in einer komplexen Bandstruktur angeordnet.
+Hierdurch ist eine exakte mathemaische Beschreibung meist schwierig und bedarf
+Approximationen. Vorteilhafterweise beschreiben die verwendeten Näherung oftmals
+die auftretenden physikalischen Phänomene sehr gut. Bei Halbleitern ist eine
+dieser Approximationen, die Betrachtung des Leitungsbandes um das Minium herum.
+In der Umgebung um das Minimum kann die Energie des Bandes $\epsilon$
+in Abhängigkeit mit dem Wellenzahlvektor $\vec{k}$ genährt werden als:
+\begin{equation}
+  \label{eq:gleichung_energie}
+  \epsilon(\vec{k})=\epsilon(0) + \frac{1}{2}\sum_{i=1}^3 \left.\frac{\partial^2 \epsilon}{\partial k_i^2}\right|_{k=0}k_i^2 + \mathcal{O}(k^3).
+\end{equation}
+Dieser Term eröffnet die Einführung der effektiven Masse
+\begin{equation}
+  \label{eq:effetive_masse}
+  m*_i := \frac{\hbar^2}{\left.\frac{\partial^2 \epsilon}{\partial k_i^2}\right|_{k=0}}.
+\end{equation}
+Der Vorteil in der Verwendung der effektiven Massse liegt in der Tatsache das
+die Definition \eqref{eq:effetive_masse} die Periodiztät des  Kristallpotentials
+$V(\vec{r})$ mitberücksichtigt. Somit kann der Hamilton Operator für ein Kristallelektron,
+mit Hilfe der effektiven Masse, in einen Hamilton Operator für ein freies
+Teilchen überführt werden:
+\begin{equation*}
+  \hat{H}:\quad \frac{\hbar^2}{2\map{m_e}}\nabla^2 + V(\vec{r}) \quad \rightarrow \quad   \frac{\hbar^2}{2m^*}\nabla^2
+\end{equation*}
+Ein weiterer Vorteil in der Beschreibung Dynamik mit der effektiven Massse ist,
+dass bei anlegen eines externen elektrischen und magnetischen Feldes,
+vorrausgesetzt es ist klein, das eine klassiche Newtonsche Betrachtung möglich ist.
+Diese Beschaffenheit wird insbesondere im übernächsten Kapitel von nutzen sein.
+\subsection{Zirkulare Doppelbrechung}
+Wird die Polarisationsebene von linear polarisiertes Licht $E(z)$ bei der Propegation
+durch einen Kristall (der Länge $L$) gedreht, wird von zirkularer Doppelbrechung gesprochen.
+Phänomenologisch erklären lässt sich der Effekt unter der Annahme das sich im
+Kristall die Phasengeschwindigkeit für links- und rechtszirkular polarisiertes
+Licht $E\ua{L}, E\ua{R}$ unterscheiden. Diese Eigenschaft wirkt sich auf die Polarisationsebene
+von linear polarisierten Licht aus, weil solches durch eine Linearkombination
+von links- und rechtszirkularen Anteilen dargestellt werden kann:
+\begin{equation}
+  \label{eq:superpos_linear}
+\vec{E}(z) = \frac{1}{2}( \vec{E}\ua{R}(z) + \vec{E}\ua{L}(z)), \quad k\ua{R}\neq k\ua{L}
+\end{equation}
+Wobei die links- und rechtszirkularen definiert sind als
+\begin{align}
+  \label{eq:def_rechts_links}
+  \begin{aligned}
+  \vec{E}\ua{R}(z) &= \left(E_0 \vec{x}_0 - \map{i}E_0\vec{y}_0\right)\exp\left(\map{i}{k}\ua{R}z\right)\\
+  \vec{E}\ua{L}(z) &= \left(E_0 \vec{x}_0 + \map{i}E_0\vec{y}_0\right)\exp\left(\map{i}{k}\ua{L}z\right)
+\end{aligned}
+\end{align}
+Die Defintionen \eqref{eq:def_rechts_links} werden in die Gleichung \eqref{eq:superpos_linear}
+eingesetzt. Zusätzlich werden die Winkel
+\begin{align}
+  \label{eq:winkel}
+  \begin{aligned}
+    \Psi&:=\frac{L}{2}(k\ua{R}+k\ua{L}) \\
+    \vartheta &:= \frac{L}{2}(k\ua{R}-k\ua{L}) \overset{k_i=\frac{n_i\omega}{\map{c_0}}}{=} \frac{L\omega}{2\map{c_0}}\left(n\ua{R}-n\ua{L}\right)
+\end{aligned}
+\end{align}
+eingeführt, wobei $n$ der jeweilige Brechungsindex ist.
+Nach ein wenig Rechnung (nachlesbar in Quelle \cite{anleitungv46}) ergibt sich ein
+Ausdruck für das aus dem Kristall austredene Licht:
+\begin{equation*}
+  \vec{E}(L)=E_0 \exp(\map{i}\Psi)\left(\cos(\vartheta) \vec{x}_0 + \sin(\vartheta)\vec{y}_0\right)
+\end{equation*}
