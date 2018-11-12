@@ -73,3 +73,39 @@ Ausdruck für das aus dem Kristall austredene Licht:
 \begin{equation*}
   \vec{E}(L)=E_0 \exp(\map{i}\Psi)\left(\cos(\vartheta) \vec{x}_0 + \sin(\vartheta)\vec{y}_0\right)
 \end{equation*}
+
+Präziser beschrieben werden kann die zirkulare Doppelbrechung durch induzierte
+Dipole im Kristall. Die Dipole erzeugen eine Polarisation $\vec{P}$ des Krirtalls,
+die für kleine elektrische Felder geschrieben werden kann als
+\begin{equation*}
+\vec{P}=\epsilon_0\chi\vec{E}.
+\end{equation*}
+Hierbei repärsentiert $\epsilon_0$ die Influenzkonstante und $\chi$ die
+\emph{dielektrische Suszeptbilität}, welche in anistropen Kristallen als
+Tensor $\tens{\chi}$ geschrieben wird. Doppelbrechung entsteht genau dann, wenn
+ein Kristall anistrope Eigenschaften besitzt. Der Beweis dieser Behauptung wird
+im folgenden skiziert. Hierzu wird die folgenden dielektrische Suszeptbilität
+ $\tens{\chi}$ betrachtet:
+\begin{equation}
+  \label{eq:chi_tens_example}
+  \tens{\chi}=\begin{pmatrix} \chi\ua{xx} & \map{i}\chi\ua{xy} & 0 \\ -\map{i}\chi\ua{yx} & \chi\ua{xx} & 0 \\ 0 & 0 & \chi\ua{zz} \end{pmatrix}.
+\end{equation}
+Propagiert ein elektrisches Feld durch Matrie so ändert sich das Feld gemäß:
+\begin{equation}
+  \label{eq:e_feld_in_materie}
+  \vec{D}=\epsilon_0\left(1+\tens{\chi}\right)\vec{E}.
+\end{equation}
+Wird nun die Gleichung \eqref{eq:e_feld_in_materie} mit \eqref{eq:chi_tens_example}
+in die homogene Wellengleichung
+\begin{equation*}
+  \Box \vec{D} = 0
+\end{equation*}
+eingesetzt, ergbit sich nach einer etwas längeren Rechnung (vgl. Quelle \cite{anleitungv46}),
+dass die Drehung der Polarisationsebene $\vartheta$ gegeben ist durch:
+\begin{equation}
+  \label{eq:drehung_mit_chi}
+  \vartheta \approx \frac{L\omega}{2\map{c_0}}\frac{1}{\sqrt{1+\chi\ua{xx}}}\chi{xy}\approx\frac{L\omega}{2\map{c_0}n}\chi\ua{xy}.
+\end{equation}
+Bei der Herleitung der Gleichung \eqref{eq:drehung_mit_chi} wurde unter anderem Angenommen,
+dass sich die Welle in $z$-Richtung ausbreitet, $\vec{k}=k\vec{z}_0$.
+\subsection{Faraday-Effekt}
