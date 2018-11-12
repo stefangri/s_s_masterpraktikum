@@ -44,6 +44,9 @@ def gauss(x, x0, A, sig):
 def spulenfunc(x, x0, A, R):
     return A * R**2 / (R**2 + (x - x0)**2)**(3 / 2)
 
+def bogenminute_to_grad(theta):
+    return theta / 60    
+
 
 
 
@@ -66,3 +69,18 @@ ax.set_xlabel(r'$z / \si{\milli\meter}$')
 ax.set_ylabel(r'$B / \si{\milli\tesla}$')
 ax.legend()
 fig.savefig(abs_path('results/magnetfeld.pdf'), bbox_inches='tight', pad_inches = 0)
+
+
+
+# GaAs n dotiert, N = 2.8e18/cm^^3, L = 1.296mm
+lam = np.genfromtxt(abs_path('data/wellenlängen.txt'), unpack = True)
+lam = Q_(lam, 'micrometer')
+
+theta_pB1, theta_pB2, theta_nB1, theta_nB2 = np.genfromtxt(abs_path('data/ga_as_dotiert_duenn.txt'), unpack = True)
+
+theta_pB = theta_pB1 + bogenminute_to_grad(theta_pB2)
+theta_nB = theta_nB1 + bogenminute_to_grad(theta_nB2)
+
+
+
+
