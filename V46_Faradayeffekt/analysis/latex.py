@@ -86,26 +86,28 @@ class Latexdocument(object):
     def add_result(self, name, value):
             if (type(value.magnitude) == uncertainties.core.Variable or type(value.magnitude) == uncertainties.core.AffineScalarFunc):
                 s = '{:Lx}'.format(Q_(2, value.units)) + '~'
+                value1 = value
                 value = value.magnitude
-                df = DataFrame({'var': pd.Series(value, index = [name] ),
+                df = DataFrame({'var': pd.Series(value1, index = [name]),
                 'tex': f' \SI{{{best_value(value)}({sign_digits(value)})}}{{' + s[s.index('}{') + 2:s.index('~')]})
 
             else:
                 s = '{:Lx}'.format(Q_(2, value.units)) + '~'
+                value1 = value
                 value = value.magnitude
-                df = DataFrame({'var': pd.Series(value, index = [name] ),
+                df = DataFrame({'var': pd.Series(value1, index = [name] ),
                 'tex': f' \SI{{{value}}}{{' + s[s.index('}{') + 2:s.index('~')]})
 
             self.data = self.data.append(df, sort = True)
-            with open(abs_path('results/result_' + name.replace('\\', '') + '.tex'), 'w') as f:
-                #f.write('\\begin{equation} \n')
-                f.write(self.data['tex'][name] + '\n')
-                #f.write('\label{eq: result_' +  name +  '}\n')
-                #f.write(r'\end{equation}')
+            #with open(abs_path('results/result_' + name.replace('\\', '') + '.tex'), 'w') as f:
+            #    #f.write('\\begin{equation} \n')
+            #    f.write(self.data['tex'][name] + '\n')
+            #    #f.write('\label{eq: result_' +  name +  '}\n')
+            #    #f.write(r'\end{equation}')
 
 
     def makeresults(self):
         print(self.data['var'])
-        with open(abs_path(f'results/{self.name}'), 'w') as f:
-            for i in self.data['tex']:
-                f.write(i + '\n')
+        #with open(abs_path(f'results/{self.name}'), 'w') as f:
+        #    for i in self.data['tex']:
+        #        f.write(i + '\n')
