@@ -52,7 +52,7 @@ Auffällig ist der Fehler des Parameters $b$.
 In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten dargestellt.
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{../analysis/plots/europium/skalen_trafo_fit.pdf}
+  \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/skalen_trafo_fit.pdf}
   \caption{Fitpunkte und Regressionsgerade der Energietransformation.}
   \label{fig:skalen_trafo_fit}
 \end{figure}
@@ -174,7 +174,14 @@ Die Gleichung \eqref{eq:formel_umrechnung} gilt jedoch nur unter der Annahme, da
 die Peaks Gausverteilt sind.
 Deutlich ist zu erkennen das abgelesener und berechneter Wert in derselben Größenordnung
 liegt. Somit ist die Annahme eines gausverteilten Peak berechtigt.
-Zusätzlich kann die Halbwertsbreite mit Gleichung \eqref{} berechnet werden. %In der Anleitung Formel 20
+Zusätzlich kann die Halbwertsbreite mit Gleichung
+\begin{equation}
+  \label{eq: energie_halbwertsbreiten}
+  x\ua{1/2,f}=\Delta E_{1/2}=2.35\sqrt{0.1 E\ua{\gamma} E\ua{EL}}
+\end{equation}
+über die Vollenergiepeakenergie $E\ua{\gamma}$ berechnet werden.
+Die Energie $E\ua{EL}=\SI{2.9}{\eV}$ bezeichnet die Anregungsenergie
+eines Elektrons in Germanium.
 Hierzu wird der Fitparameter $\mu$ verwendet:
 \begin{equation}
    \label{eq:halbwertsbreite_formel_20}
@@ -222,13 +229,17 @@ summiert:
   \label{eq:flacehe}
   I\ua{compton} = 62467 \, \map{Count}\cdot\map{Channel}, \quad I\ua{peak}=13332\, \map{Count}\cdot\map{Channel}
 \end{equation}
-\textbf{Nochmal mit Stefan darüber sprechen}
 
 Abschließend soll die Absoprtionswahrscheinlichkeit für den
 Compton- und Photoeffekt bestimmt werden. Hierzu werden die
 oben ermittelten Energien verwendet. Mit den Energien und Abbildung
-\ref{} ist es möglich den Extinktionskoeffizienten abzulesen.
-Werden diese in Gleichung \eqref{} mit einer $d=\SI{3.9}{\centi\meter}$ eingesetzt ergibt sich:
+\ref{fig:extinktionskoeffizient} ist es möglich den Extinktionskoeffizienten abzulesen.
+Werden diese in Gleichung
+\begin{equation}
+  \label{eq:Absorptionswahrscheinlichkeit}
+  P\ua{i}=\left(1- \exp(-\mu_i d)\right) \cdot 100
+\end{equation}
+mit einer $d=\SI{3.9}{\centi\meter}$ eingesetzt ergibt sich:
 \begin{align}
   \label{eq:absorptioswahrscheinlichkeit}
   \begin{aligned}
