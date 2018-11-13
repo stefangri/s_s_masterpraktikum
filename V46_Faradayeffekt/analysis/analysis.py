@@ -74,7 +74,9 @@ def lin_model(x, a, b):
 
 z, B = np.genfromtxt(abs_path('data/magnetfeld.txt'), unpack = True)
 
-max_B = Q_(max(B), 'millitesla')
+max_B = Q_(round(max(B), 0), 'millitesla')
+
+r.add_result(name = 'max_B', value = max_B)
 
 params_poly, cov_poly = np.polyfit(z, B, deg = 4, cov = True)
 poly = np.poly1d(params_poly)
@@ -88,7 +90,6 @@ z_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
 
 ax.plot(z_plot, gauss(z_plot, *params), 'r-')
 ax.plot(z_plot, poly(z_plot), 'r-')
-#ax.plot(z_plot, spulenfunc(z_plot, *params), 'r-')
 ax.set_xlabel(r'$z / \si{\milli\meter}$')
 ax.set_ylabel(r'$B / \si{\milli\tesla}$')
 ax.legend()
@@ -109,6 +110,13 @@ theta_nB = Q_(theta_nB1 + bogenminuten_to_grad(theta_nB2), 'degree')
 dif_theta_undot = 0.5 * (theta_nB - theta_pB)
 dif_theta_undot_normed = (dif_theta_undot / L_undot).to('radian / millimeter')
 
+l.Latexdocument(filename = abs_path('tabs/ga_as_rein.tex')).tabular(
+    data = [lam.magnitude, theta_pB.magnitude, theta_nB.magnitude, dif_theta_undot.magnitude, dif_theta_undot_normed.magnitude], 
+    header = [r'\lambda / \micro\meter', r'\vartheta(+B) / \degree', r'\vartheta(-B) / \degree', r'\vartheta_F / \degree', r'\vartheta_{\text{norm}} / \radian \per \milli\meter'],
+    places = [2, 2, 2, 2, 3],
+    caption = r'Messwerte der reinen GaAs Probe. Die eingestellten Winkel am Gorniometer $\vartheta(\pm B)$ in Abhängigkeit der Wellenlänge $\lambda$, daraus berechnete Faradayrotation $\vartheta_F$ und auf die Länge der Probe normierte Faradayrotation $\vartheta_{\text{norm}}.$',
+    label = 'messwerte_ga_as_rein'
+)   
 
 fig, ax = plt.subplots(1, 1)
 ax.plot(lam**2, dif_theta_undot_normed, 'o', label = 'Messwerte')
@@ -116,7 +124,7 @@ ax.set_xlim(ax.get_xlim())
 lam_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
 
 ax.set_xlabel(r'$\lambda^2 / \si{\micro\meter^2}$')
-ax.set_ylabel(r'Normierter Winkel $\theta / \si{\radian / \milli\meter}$')
+ax.set_ylabel(r'$\vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
 ax.legend()
 fig.savefig(abs_path('results/fit_undot.pdf'), bbox_inches='tight', pad_inches = 0)
 
@@ -159,13 +167,9 @@ lam_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
 ax.plot(lam_plot, lin_model(lam_plot, *noms(params)), 'r-', label = 'Fit')
 
 ax.set_xlabel(r'$\lambda^2 / \si{\micro\meter^2}$')
-ax.set_ylabel(r'Normierter Winkel $\theta / \si{\radian / \milli\meter}$')
+ax.set_ylabel(r'$\vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
 ax.legend()
 fig.savefig(abs_path('results/fit_dot_duenn.pdf'), bbox_inches='tight', pad_inches = 0)
-
-
-
-
 
 
 
@@ -210,12 +214,12 @@ lam_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
 ax.plot(lam_plot, lin_model(lam_plot, *noms(params)), 'r-', label = 'Fit')
 
 ax.set_xlabel(r'$\lambda^2 / \si{\micro\meter^2}$')
-ax.set_ylabel(r'Normierter Winkel $\theta / \si{\radian / \milli\meter}$')
+ax.set_ylabel(r'\vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
 ax.legend()
 fig.savefig(abs_path('results/fit_dot_dick.pdf'), bbox_inches='tight', pad_inches = 0)
 
 
-r.makeresults()
+#r.makeresults()
 
 
 
