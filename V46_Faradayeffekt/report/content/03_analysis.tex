@@ -1,5 +1,27 @@
 \section{Auswertung}
 
+\subsection{Magnetfeldmessung}
+Die aufgenommenen Daten zur Bestimmung des maximalen Magnetfeldes innerhalb des Elektromagneten 
+sind in Tabelle~\ref{tab: messwerte_magnetfeld} aufgeführt. Eine grafische Darstellung der Abhängigkeit zwischen Verschiebung 
+$z$ auf der Symmetrieachse der Anordnung und Magnetfeldstärke $B$ ist in Abbildung~\ref{fig: magnetfeld} einzusehen. 
+Für die nachfolgenden Rechnungen wird der maximal gemessene Wert 
+\begin{equation}
+    B\ua{max} = \input{../analysis/results/result_max_B.tex}
+\end{equation}
+als vorherrschendes Magnetfeld in der Probe angenommen. 
+
+\begin{figure}
+\centering
+\includegraphics[scale = 1]{../analysis/results/magnetfeld.pdf}
+\caption{Darstellung der Messwerte aus Tabelle~\ref{tab: messwerte_magnetfeld} zur Bestimmung des Zusammenhangs zwischen 
+Magnetfeld $B$ und Position $z$. Die $z$-Achse ist dabei vollkommen willkürlich gewählt.}
+\label{fig: magnetfeld}
+\end{figure}
+
+\input{../analysis/tabs/magnetfeld.tex}
+
+
+
 
 \subsection{Messung mit undotierter \ce{GaAs}-Probe}
 

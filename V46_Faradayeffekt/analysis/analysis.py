@@ -12,6 +12,7 @@ r = l.Latexdocument('results.tex')
 u = UnitRegistry()
 Q_ = u.Quantity
 import os
+from tab2tex import make_table
 
 def abs_path(filename):
     return os.path.join(os.path.dirname(__file__), filename)
@@ -88,12 +89,20 @@ fig, ax = plt.subplots(1, 1)
 ax.plot(z, B, 'o', color = (128/255, 186/255, 38/255), label = 'Messwerte')
 z_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
 
-ax.plot(z_plot, gauss(z_plot, *params), 'r-')
-ax.plot(z_plot, poly(z_plot), 'r-')
+#ax.plot(z_plot, gauss(z_plot, *params), 'r-')
+#ax.plot(z_plot, poly(z_plot), 'r-')
 ax.set_xlabel(r'$z / \si{\milli\meter}$')
 ax.set_ylabel(r'$B / \si{\milli\tesla}$')
 ax.legend()
 fig.savefig(abs_path('results/magnetfeld.pdf'), bbox_inches='tight', pad_inches = 0)
+
+make_table(filename = abs_path('tabs/magnetfeld.tex'),
+    data = [z[:20], B[:20], z[20:], B[20:]], 
+    header = [r'$z$ / \milli\meter', r'$B$ / \milli\tesla', r'$z$ / \milli\meter', r'$B$ / \milli\tesla'],
+    places = [3.0, 3.0, 3.0, 3.0],
+    caption = r'Messwerte der Magnetfeldmessung zur Bestimmung des maximalen Wertes für $B$. Hierbei bezeichnet $z$ die Verschiebung entlang der Symmetrieachse des Elektromagneten.',
+    label = 'messwerte_magnetfeld'
+) 
 
 
 #GaAs rein, L = 5.11mm
