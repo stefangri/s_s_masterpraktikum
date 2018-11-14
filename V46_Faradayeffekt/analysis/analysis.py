@@ -118,6 +118,8 @@ l.Latexdocument(filename = abs_path('tabs/ga_as_rein.tex')).tabular(
     label = 'messwerte_ga_as_rein'
 )   
 
+
+
 fig, ax = plt.subplots(1, 1)
 ax.plot(lam**2, dif_theta_undot_normed, 'o', label = 'Messwerte')
 ax.set_xlim(ax.get_xlim())
@@ -159,17 +161,29 @@ r.add_result(name = 'mass_duenn', value = mass_duenn)
 r.add_result(name = 'mass_ratio_duenn', value = mass_duenn / me)
 
 
+l.Latexdocument(filename = abs_path('tabs/ga_as_dot_duenn.tex')).tabular(
+    data = [lam.magnitude, theta_pB.magnitude, theta_nB.magnitude, dif_theta_dot_duenn.magnitude, theta_duenn.magnitude], 
+    header = [r'\lambda / \micro\meter', r'\vartheta(+B) / \degree', r'\vartheta(-B) / \degree', r'\vartheta_F / \degree', r'\Delta \vartheta_{\text{norm}} / \radian \per \milli\meter'],
+    places = [2, 2, 2, 2, 3],
+    caption = r'Messwerte der dotierten GaAs Probe mit $N = \SI{2.8e18}{\per\centi\meter^3}$ ' + 
+    r'und $L = \SI{1.296}{\milli\meter}$. Die eingestellten Winkel am Gorniometer $\vartheta(\pm B)$ ' +  
+    r'in Abhängigkeit der Wellenlänge $\lambda$, daraus berechnete Faradayrotation $\vartheta_F$ und ' +
+    r'auf die Länge der Probe normierte Faradayrotation $\Delta \vartheta_{\text{norm}}$ (abzüglich der Faradayrotation der reinen GaAs Probe).',
+    label = 'messwerte_ga_as_dot_duenn'
+) 
+
+rcParams['figure.figsize'] = 5.906, 4.5
 
 fig, ax = plt.subplots(1, 1)
-ax.plot(lam**2, theta_duenn, 'o', color = (128/255, 186/255, 38/255), label = 'Messwerte')
+ax.plot(lam**2, theta_duenn, 'o', label = 'Messwerte, $L = \SI{1.296}{\milli\meter}$')
 ax.set_xlim(ax.get_xlim())
 lam_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
-ax.plot(lam_plot, lin_model(lam_plot, *noms(params)), 'r-', label = 'Fit')
+ax.plot(lam_plot, lin_model(lam_plot, *noms(params)), '-', label = 'Fit, $L = \SI{1.296}{\milli\meter}$')
 
 ax.set_xlabel(r'$\lambda^2 / \si{\micro\meter^2}$')
-ax.set_ylabel(r'$\vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
+ax.set_ylabel(r'$\Delta \vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
 ax.legend()
-fig.savefig(abs_path('results/fit_dot_duenn.pdf'), bbox_inches='tight', pad_inches = 0)
+#fig.savefig(abs_path('results/fit_dot_duenn.pdf'), bbox_inches='tight', pad_inches = 0)
 
 
 
@@ -206,17 +220,29 @@ r.add_result(name = 'mass_dick', value = mass_dick)
 r.add_result(name = 'mass_ratio_dick', value = mass_dick / me)
 
 
-fig, ax = plt.subplots(1, 1)
-ax.plot(lam**2, theta_dick, 'o', color = (128/255, 186/255, 38/255), label = 'Messwerte')
-ax.plot(lam[mask == False]**2, theta_dick[mask == False], 'o', label = 'Ignorierter Datenpunkt')
+l.Latexdocument(filename = abs_path('tabs/ga_as_dot_dick.tex')).tabular(
+    data = [lam.magnitude, theta_pB.magnitude, theta_nB.magnitude, dif_theta_dot_dick.magnitude, theta_dick.magnitude], 
+    header = [r'\lambda / \micro\meter', r'\vartheta(+B) / \degree', r'\vartheta(-B) / \degree', r'\vartheta_F / \degree', r'\Delta \vartheta_{\text{norm}} / \radian \per \milli\meter'],
+    places = [2, 2, 2, 2, 3],
+    caption = r'Messwerte der dotierten GaAs Probe mit $N = \SI{1.2e18}{\per\centi\meter^3}$ ' + 
+    r'und $L = \SI{1.36}{\milli\meter}$. Die eingestellten Winkel am Gorniometer $\vartheta(\pm B)$ ' +  
+    r'in Abhängigkeit der Wellenlänge $\lambda$, daraus berechnete Faradayrotation $\vartheta_F$ und ' +
+    r'auf die Länge der Probe normierte Faradayrotation $\Delta \vartheta_{\text{norm}}$ (abzüglich der Faradayrotation der reinen GaAs Probe).',
+    label = 'messwerte_ga_as_dot_dick'
+)
+
+
+#fig, ax = plt.subplots(1, 1)
+ax.plot(lam**2, theta_dick, 'o', label = 'Messwerte, $L = \SI{1.36}{\milli\meter}$')
+ax.plot(lam[mask == False]**2, theta_dick[mask == False], 'o', label = 'Ignorierter Datenpunkt \n für $L = \SI{1.36}{\milli\meter}$')
 ax.set_xlim(ax.get_xlim())
 lam_plot = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 1000)
-ax.plot(lam_plot, lin_model(lam_plot, *noms(params)), 'r-', label = 'Fit')
+ax.plot(lam_plot, lin_model(lam_plot, *noms(params)), '-', label = 'Fit, $L = \SI{1.36}{\milli\meter}$')
 
 ax.set_xlabel(r'$\lambda^2 / \si{\micro\meter^2}$')
-ax.set_ylabel(r'\vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
+ax.set_ylabel(r'\Delta $\vartheta_{\text{Norm}} / \si{\radian / \milli\meter}$')
 ax.legend()
-fig.savefig(abs_path('results/fit_dot_dick.pdf'), bbox_inches='tight', pad_inches = 0)
+fig.savefig(abs_path('results/fit_dot.pdf'), bbox_inches='tight', pad_inches = 0)
 
 
 #r.makeresults()
