@@ -15,16 +15,16 @@ Hierdurch ist eine exakte mathemaische Beschreibung meist schwierig und bedarf
 Approximationen. Vorteilhafterweise beschreiben die verwendeten Näherung oftmals
 die auftretenden physikalischen Phänomene sehr gut. Bei Halbleitern ist eine
 dieser Approximationen, die Betrachtung des Leitungsbandes um das Minium herum.
-In der Umgebung um das Minimum kann die Energie des Bandes $\epsilon$
+In der Umgebung um das Minimum kann die Energie des Bandes $\varepsilon$
 in Abhängigkeit mit dem Wellenzahlvektor $\vec{k}$ genährt werden als:
 \begin{equation}
   \label{eq:gleichung_energie}
-  \epsilon(\vec{k})=\epsilon(0) + \frac{1}{2}\sum_{i=1}^3 \left.\frac{\partial^2 \epsilon}{\partial k_i^2}\right|_{k=0}k_i^2 + \mathcal{O}(k^3).
+  \varepsilon(\vec{k})=\varepsilon(0) + \frac{1}{2}\sum_{i=1}^3 \left.\frac{\partial^2 \varepsilon}{\partial k_i^2}\right|_{k=0}k_i^2 + \mathcal{O}(k^3).
 \end{equation}
 Dieser Term eröffnet die Einführung der effektiven Masse
 \begin{equation}
   \label{eq:effetive_masse}
-  m*_i := \frac{\hbar^2}{\left.\frac{\partial^2 \epsilon}{\partial k_i^2}\right|_{k=0}}.
+  m^{*}_i := \frac{\hbar^2}{\left.\frac{\partial^2 \varepsilon}{\partial k_i^2}\right|_{k=0}}.
 \end{equation}
 Der Vorteil in der Verwendung der effektiven Massse liegt in der Tatsache das
 die Definition \eqref{eq:effetive_masse} die Periodiztät des  Kristallpotentials
@@ -84,9 +84,9 @@ Präziser beschrieben werden kann die zirkulare Doppelbrechung durch induzierte
 Dipole im Kristall. Die Dipole erzeugen eine Polarisation $\vec{P}$ des Krirtalls,
 die für kleine elektrische Felder geschrieben werden kann als
 \begin{equation*}
-\vec{P}=\epsilon_0\chi\vec{E}.
+\vec{P}=\varepsilon_0\chi\vec{E}.
 \end{equation*}
-Hierbei repärsentiert $\epsilon_0$ die Influenzkonstante und $\chi$ die
+Hierbei repärsentiert $\varepsilon_0$ die Influenzkonstante und $\chi$ die
 \emph{dielektrische Suszeptbilität}, welche in anistropen Kristallen als
 Tensor $\tens{\chi}$ geschrieben wird. Doppelbrechung entsteht genau dann, wenn
 ein Kristall anistrope Eigenschaften besitzt. Der Beweis dieser Behauptung wird
@@ -99,7 +99,7 @@ im folgenden skiziert. Hierzu wird die folgenden dielektrische Suszeptbilität
 Propagiert ein elektrisches Feld durch Matrie so ändert sich das Feld gemäß:
 \begin{equation}
   \label{eq:e_feld_in_materie}
-  \vec{D}=\epsilon_0\left(1+\tens{\chi}\right)\vec{E}.
+  \vec{D}=\varepsilon_0\left(1+\tens{\chi}\right)\vec{E}.
 \end{equation}
 Wird nun die Gleichung \eqref{eq:e_feld_in_materie} mit \eqref{eq:chi_tens_example}
 in die homogene Wellengleichung
@@ -134,7 +134,7 @@ aus der Differntialgleichung \eqref{eq:klassische_Bewegungsgleichung} ein Ausdru
 für Drehwinkel der Polarisationsebene $\vartheta$ generiert weren (siehe hierzu Quelle \cite{anleitungv46}):
 \begin{equation}
   \label{eq:drehwinkel}
-  \vartheta\approx \frac{\map{e}^3\lambda^2 NBL}{8\pi^2\epsilon_0\map{c_0}^3}\frac{1}{m^2} = \frac{\map{e}^3\lambda^2 NBL}{8\pi^2\epsilon_0\map{c_0}^3}\frac{1}{m^{*2}}
+  \frac{\vartheta}{L}\approx \frac{\map{e}^3\lambda^2 NB}{8\pi^2\varepsilon_0\map{c_0}^3}\frac{1}{m^2} = \frac{\map{e}^3\lambda^2 NB}{8\pi^2\varepsilon_0\map{c_0}^3}\frac{1}{m^{*2}}
 \end{equation}
 Die Ersetzung von $m$ durch $m^*$ ist durch die in Abschnitt \ref{sec:effektive_masse}
 besprochene Eigenschaft der effektiven Masse gerechtfertigt. Der Drehwinkel $\vartheta$ hängt somit
