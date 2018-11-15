@@ -8,7 +8,8 @@ Für die nachfolgenden Rechnungen wird der maximal gemessene Wert
 \begin{equation}
     B\ua{max} = \input{../analysis/results/result_max_B.tex}
 \end{equation}
-als vorherrschendes Magnetfeld in der Probe angenommen. 
+als vorherrschendes Magnetfeld in der Probe angenommen. Auf einen Fit der Daten wird verzichtet, 
+da sehr feinschrittig gemessen wurde.
 
 \begin{figure}
 \centering
@@ -24,13 +25,19 @@ Magnetfeld $B$ und Position $z$. Die $z$-Achse ist dabei vollkommen willkürlich
 
 
 \subsection{Messung mit undotierter \ce{GaAs}-Probe}
+Die Messungen mit der undotierten \ce{GaAs}-Probe als Referenzsystem für die dotierten Proben liefert die 
+in Tabelle~\ref{tab: messwerte_ga_as_rein} eingetragenen Ergebnisse. Mit der Dicke der Probe $L = \SI{5.11}{\milli\meter}$ kann für jede 
+Wellenlänge ein normierter Wert der Faradayrotation bestimmt werden. Die Messpunkte sind in Abbildung~\ref{fig: ga_as_rein}
+dargestellt. Es zeigt sich ein abfallender Trend der Faradayrotation mit der Wellenlänge. Ein Datenpunkt weicht deutlich 
+hiervon ab, was später weiter diskutiert wird.  
 
 \input{../analysis/tabs/ga_as_rein.tex}
 
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{../analysis/results/fit_undot.pdf}
-\caption{Grafische Darstellung der Messwerte aus Tabelle~\ref{tab: messwerte_ga_as_rein}. Auf Länge der Probe normierte 
+\caption{Grafische Darstellung der Messwerte aus Tabelle~\ref{tab: messwerte_ga_as_rein} zur Analyse der 
+Faradayrotation der undotierten Probe. Auf Länge der Probe normierte 
 Faradayrotation $\vartheta_{\text{Norm}}$ in Abhängigkeit des Wellenlängenquadrats $\lambda^2$. }
 \label{fig: ga_as_rein}
 \end{figure}
@@ -38,32 +45,47 @@ Faradayrotation $\vartheta_{\text{Norm}}$ in Abhängigkeit des Wellenlängenquad
 
 \subsection{Messung mit dotierten \ce{GaAs}-Proben}
 
+Die Messwerte der dicken ($L = \SI{1.36}{\milli\meter}$, $N = \SI{1.2e18}{1/cm^3}$) und dünnen 
+($L = \SI{1.296}{\milli\meter}$, $N = \SI{2.8e18}{1/cm^3}$) $n$-dotierten Probe sind in den 
+Tabellen~\ref{tab: ga_as_dot_dick} und~\ref{tab: ga_as_dot_duenn} aufgeführt. Die Faradayrotation $\vartheta_F$ wird jeweils normiert und von diesem 
+Wert für alle Wellenlängen die normierte Faradayrotaion der undotierten Probe abgezogen. So kann 
+die Faradayrotation $\Delta \vartheta\ua{norm}$, die durch die Leitungselektronen bedingt ist, untersucht werden. Die berechneten Werte 
+sind in Abbildung~\ref{fig: ga_as_dot} grafisch dargestellt. Es zeigt sich in beiden Fällen eine lineare Abhängigkeit zwischen $\lambda^2$
+und $\Delta \vartheta$, wie aus Gleichung~\eqref{} hervorgeht. Im Fall der dicken Probe weicht ein Datenpunkt deutlich 
+von dem linearen Trend ab. Dieser wird für die lineare Ausgleichsrechnung nicht berücksichtigt. Ein Fit der Daten an 
+ein lineares Modell der Gestalt 
+\begin{equation}
+    \Delta\vartheta\ua{norm} = A \lambda^2 + B
+\end{equation}
+liefert für die dicke Probe 
+\begin{equation}
+    A\ua{dick} = \input{../analysis/results/result_slope_dick.tex}, 
+    \quad B\ua{dick} = \input{../analysis/results/result_offset_dick.tex}
+\end{equation}
+und für die dünne Probe 
+\begin{equation}
+        A\ua{dick} = \input{../analysis/results/result_slope_duenn.tex}, 
+    \quad B\ua{dick} = \input{../analysis/results/result_offset_duenn.tex}
+\end{equation}
+Aus der Steigung $A$ lässt sich gemäß Formel~\eqref{} die Effektive Masse bestimmen. Für die dicke Probe ergibt sich 
+\begin{align}
+\begin{aligned}
+m^*\ua{dick} &= \input{../analysis/results/result_mass_dick.tex} \\
+\frac{m^*\ua{dick}}{m\ua{e}} &= \input{../analysis/results/result_mass_ratio_dick.tex}.
+\end{aligned}
+\end{align}
+Und analog für die dünne Probe 
+\begin{align}
+\begin{aligned}
+m^*\ua{dünn} &= \input{../analysis/results/result_mass_duenn.tex} \\
+\frac{m^*\ua{dünn}}{m\ua{e}} &= \input{../analysis/results/result_mass_ratio_duenn.tex}.
+\end{aligned}
+\end{align}
+
+
 \input{../analysis/tabs/ga_as_dot_duenn.tex}
 
-
-%\begin{figure}
-%\centering
-%\includegraphics[scale = 1]{../analysis/results/fit_dot_duenn.pdf}
-%\caption{Grafische Darstellung der Messwerte aus Tabelle~\ref{tab: messwerte_ga_as_dot_duenn} zur Untersuchung der 
-%Wellenlängenabhängigkeit der Faradayrotaion der dünnen, dotierten \ce{GaAs}-Probe. Auf Länge der Probe normierte 
-%Faradayrotation $\Delta \vartheta_{\text{Norm}}$ in Abhängigkeit des Wellenlängenquadrats $\lambda^2$.}
-%\label{fig: ga_as_dot_duenn}
-%\end{figure}
-
-
-
 \input{../analysis/tabs/ga_as_dot_dick.tex}
-
-
-%\begin{figure}
-%\centering
-%\includegraphics[scale = 1]{../analysis/results/fit_dot_dick.pdf}
-%\caption{Grafische Darstellung der Messwerte aus Tabelle~\ref{tab: messwerte_ga_as_dot_duenn} zur Untersuchung der 
-%Wellenlängenabhängigkeit der Faradayrotaion der dünnen, dotierten \ce{GaAs}-Probe. Auf Länge der Probe normierte 
-%Faradayrotation $\Delta \vartheta_{\text{Norm}}$ in Abhängigkeit des Wellenlängenquadrats $\lambda^2$. Der Datenpunkt, der 
-%für den Fit igoriert wurde, ist farblich anders markiert.}
-%\label{fig: ga_as_dot_dick}
-%\end{figure}
 
 \begin{figure}
 \centering

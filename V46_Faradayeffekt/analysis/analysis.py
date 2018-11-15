@@ -54,6 +54,9 @@ n = 3.4 #Brechungsindex
 
 def mass_from_slope(slope, N, B):
     return ((e0**3 * N * B / (8 * np.pi**2  * epsilon0 * c**3 * slope * n)).to('kilogram**2'))**0.5
+
+def B_from_slope(slope, N, m = 0.067*me):
+    return ((e0**3 * N  / (m**2 * 8 * np.pi**2  * epsilon0 * c**3 * slope * n))**(-1)).to('millitesla')
  
 
 
@@ -75,7 +78,7 @@ def lin_model(x, a, b):
 
 z, B = np.genfromtxt(abs_path('data/magnetfeld.txt'), unpack = True)
 
-max_B = Q_(round(max(B), 0), 'millitesla')
+max_B =  Q_(round(max(B), 0), 'millitesla')
 
 r.add_result(name = 'max_B', value = max_B)
 
@@ -101,7 +104,7 @@ make_table(filename = abs_path('tabs/magnetfeld.tex'),
     header = [r'$z$ / \milli\meter', r'$B$ / \milli\tesla', r'$z$ / \milli\meter', r'$B$ / \milli\tesla'],
     places = [3.0, 3.0, 3.0, 3.0],
     caption = r'Messwerte der Magnetfeldmessung zur Bestimmung des maximalen Wertes für $B$. Hierbei bezeichnet $z$ die Verschiebung entlang der Symmetrieachse des Elektromagneten.',
-    label = 'messwerte_magnetfeld'
+    label = 'tab: messwerte_magnetfeld'
 ) 
 
 
@@ -116,7 +119,7 @@ theta_pB1, theta_pB2, theta_nB1, theta_nB2 = np.genfromtxt(abs_path('data/ga_as_
 theta_pB = Q_(theta_pB1 + bogenminuten_to_grad(theta_pB2), 'degree')
 theta_nB = Q_(theta_nB1 + bogenminuten_to_grad(theta_nB2), 'degree')
 
-dif_theta_undot = 0.5 * (theta_nB - theta_pB)
+dif_theta_undot =  (theta_nB - theta_pB)
 dif_theta_undot_normed = (dif_theta_undot / L_undot).to('radian / millimeter')
 
 l.Latexdocument(filename = abs_path('tabs/ga_as_rein.tex')).tabular(
@@ -152,7 +155,7 @@ theta_pB1, theta_pB2, theta_nB1, theta_nB2 = np.genfromtxt(abs_path('data/ga_as_
 theta_pB = Q_(theta_pB1 + bogenminuten_to_grad(theta_pB2), 'degree')
 theta_nB = Q_(theta_nB1 + bogenminuten_to_grad(theta_nB2), 'degree')
 
-dif_theta_dot_duenn = 0.5 * (theta_nB - theta_pB)
+dif_theta_dot_duenn =  (theta_nB - theta_pB)
 dif_theta_dot_duenn_normed = (dif_theta_dot_duenn / L_dot_duenn).to('radian / millimeter')
 
 theta_duenn = dif_theta_dot_duenn_normed - dif_theta_undot_normed 
@@ -207,7 +210,7 @@ theta_pB1, theta_pB2, theta_nB1, theta_nB2 = np.genfromtxt(abs_path('data/ga_as_
 theta_pB = Q_(theta_pB1 + bogenminuten_to_grad(theta_pB2), 'degree')
 theta_nB = Q_(theta_nB1 + bogenminuten_to_grad(theta_nB2), 'degree')
 
-dif_theta_dot_dick = 0.5 * (theta_nB - theta_pB)
+dif_theta_dot_dick =  (theta_nB - theta_pB)
 dif_theta_dot_dick_normed = (dif_theta_dot_dick / L_dot_dick).to('radian / millimeter')
 
 theta_dick = dif_theta_dot_dick_normed - dif_theta_undot_normed 
@@ -227,6 +230,9 @@ r.add_result(name = 'offset_dick', value = offset_dick)
 mass_dick = mass_from_slope(slope_dick, N_dick, max_B)
 r.add_result(name = 'mass_dick', value = mass_dick)
 r.add_result(name = 'mass_ratio_dick', value = mass_dick / me)
+
+B_dick = B_from_slope(slope = slope_dick, N = N_dick)
+print(B_dick)
 
 
 l.Latexdocument(filename = abs_path('tabs/ga_as_dot_dick.tex')).tabular(
