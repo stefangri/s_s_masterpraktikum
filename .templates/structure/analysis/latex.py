@@ -85,16 +85,17 @@ class Latexdocument(object):
 
     def add_result(self, name, value):
             if (type(value.magnitude) == uncertainties.core.Variable or type(value.magnitude) == uncertainties.core.AffineScalarFunc):
-                s = '{:Lx}'.format(Q_(2, value.units)) + '~'
+                latex_value = f'{value.magnitude:+.2uS}'
+                latex_unit = (f'{value:Lx}'.split('}{'))[1].split('}')[0]
                 value = value.magnitude
-                df = DataFrame({'var': pd.Series(value, index = [name] ),
-                'tex': f' \SI{{{best_value(value)}({sign_digits(value)})}}{{' + s[s.index('}{') + 2:s.index('~')]})
+                df = DataFrame({'var': pd.Series(value, index = [name]),
+                'tex': '\SI{' + latex_value + '}{' + latex_unit + '}'})
 
             else:
-                s = '{:Lx}'.format(Q_(2, value.units)) + '~'
-                value = value.magnitude
+                latex_unit = (f'{value:Lx}'.split('}{'))[1].split('}')[0]
+                latex_value = str(value.magnitude)
                 df = DataFrame({'var': pd.Series(value, index = [name] ),
-                'tex': f' \SI{{{value}}}{{' + s[s.index('}{') + 2:s.index('~')]})
+                'tex': '\SI{' + latex_value + '}{' + latex_unit + '}'})
 
             self.data = self.data.append(df, sort = True)
             with open(abs_path('results/result_' + name.replace('\\', '') + '.tex'), 'w') as f:
@@ -104,8 +105,4 @@ class Latexdocument(object):
                 #f.write(r'\end{equation}')
 
 
-    def makeresults(self):
-        print(self.data['var'])
-        with open(abs_path(f'results/{self.name}'), 'w') as f:
-            for i in self.data['tex']:
-                f.write(i + '\n')
+    
