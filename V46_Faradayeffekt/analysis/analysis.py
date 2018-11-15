@@ -184,7 +184,7 @@ l.Latexdocument(filename = abs_path('tabs/ga_as_dot_duenn.tex')).tabular(
     label = 'messwerte_ga_as_dot_duenn'
 ) 
 
-rcParams['figure.figsize'] = 5.906, 4.5
+rcParams['figure.figsize'] = 5.906, 6.3
 
 fig, ax = plt.subplots(1, 1)
 ax.plot(lam**2, theta_duenn, 'o', label = 'Messwerte, $L = \SI{1.296}{\milli\meter}$')
@@ -232,7 +232,6 @@ r.add_result(name = 'mass_dick', value = mass_dick)
 r.add_result(name = 'mass_ratio_dick', value = mass_dick / me)
 
 B_dick = B_from_slope(slope = slope_dick, N = N_dick)
-print(B_dick)
 
 
 l.Latexdocument(filename = abs_path('tabs/ga_as_dot_dick.tex')).tabular(
