@@ -78,7 +78,7 @@ def lin_model(x, a, b):
 
 z, B = np.genfromtxt(abs_path('data/magnetfeld.txt'), unpack = True)
 
-max_B =  Q_(round(max(B), 0), 'millitesla')
+max_B =   Q_(round(max(B), 0), 'millitesla')
 
 r.add_result(name = 'max_B', value = max_B)
 
@@ -155,7 +155,7 @@ theta_pB1, theta_pB2, theta_nB1, theta_nB2 = np.genfromtxt(abs_path('data/ga_as_
 theta_pB = Q_(theta_pB1 + bogenminuten_to_grad(theta_pB2), 'degree')
 theta_nB = Q_(theta_nB1 + bogenminuten_to_grad(theta_nB2), 'degree')
 
-dif_theta_dot_duenn =  (theta_nB - theta_pB)
+dif_theta_dot_duenn =   (theta_nB - theta_pB)
 dif_theta_dot_duenn_normed = (dif_theta_dot_duenn / L_dot_duenn).to('radian / millimeter')
 
 theta_duenn = dif_theta_dot_duenn_normed - dif_theta_undot_normed 
