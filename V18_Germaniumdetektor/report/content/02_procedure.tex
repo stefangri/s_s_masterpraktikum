@@ -18,7 +18,7 @@ könnte.
 \label{fig: geometrie}
 \end{figure}
 
-Der am Halbleiterelement erzeugt Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
+Der am Halbleiterelement erzeugte Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
 dem Vorverstärker in Abbildung~\ref{fig: vorverstaerker}(a). Mithilfe eines kapazitiv rückgekoppelten Operationsverstärkers wird durch elektrische 
 Integration ein Spannungspegel erzeugt, der proportional zur Photonenenergie seien soll. Um einen zeitlich 
 begrenzten Spannungsimpuls zu erhalten, ist der Kondensator $C_K$ nach jedem Nachweis zu entladen, was durch die 
@@ -40,7 +40,16 @@ Beide Abbildungen (bearbeitet) aus \cite{anleitungv18}.}
 \end{figure}
 
 Das vorverstärkte Signal gelangt zu einem Hauptverstärker, der die Spannungsimpulse abschließend verstärkt, sodass 
-sie Vielkanalanalysator in Kanäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in 
+sie vom Vielkanalanalysator in Kanäle eingeordnet werden können. Vor- und Hauptverstärker sind über ein RC-Glied (dient hier als Hochpass)
+miteinander gekoppelt, um Offsetspannungen nicht ebenfalls zu verstärken. Da die Zeitkonstante $RC$ im Allgemeinen ungleich 
+$C_K R_K$ (siehe Abbildung\ref{}) ist, kann es hierdurch jedoch zu Unterschwingungen $U < 0$ des Signals kommmen. Ein gleicher Effekt kann 
+am Ausgang des Hauptverstärkers entstehen. Der Detektor wird in dieser Zeit unempfindlicher auf ein neues Signal. Der Aufbau enthält 
+elektrotechnische Lösungen (Pole-Zero-Kompensation und Base-Line-Restorer), die hier nur benannte werden sollen. Ein weiteres Problem tritt auf, wenn 
+zu viele Impulse in zu kurzer Zeit eingehen, die dann als einzelner Verstärkter Impuls regestriert werden (Pile-Up). Auch solche Signale 
+können erkannt und blockiert werden, was jedoch zu einer Totzeit, bzw. einer Verminderung der Gesamtzählrate führt.
+
+
+Die eigentliche Zählung der Spannungsimpulse geschieht über eine Schaltung, wie sie in 
 Abbildung~\ref{fig: zaehler}
 dargestellt ist. Die Messung der Impulshöhe basiert hier auf einer Zeitmessung. Der Spannungsimpuls lädt einen 
 Kondensator auf, dessen Abklingszeit bei Entladung von der Amplitude des Pulses abhängt. Ein Und-Gatter, verknüpft 
