@@ -16,6 +16,11 @@ import pandas as pd
 from pandas import Series, DataFrame
 from scipy.signal import find_peaks
 
+
+
+def abs_path(filename):
+    return os.path.join(os.path.dirname(__file__), filename)
+
 # Import measurment datas
 channel_content_ca = np.genfromtxt('./2018-10-29_becker_grisard/caesium.txt',
                                    unpack=True)

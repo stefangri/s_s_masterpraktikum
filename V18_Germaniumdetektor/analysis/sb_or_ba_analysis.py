@@ -15,6 +15,12 @@ Q_ = u.Quantity
 import pandas as pd
 from pandas import Series, DataFrame
 from scipy.signal import find_peaks
+import os
+
+
+def abs_path(filename):
+    return os.path.join(os.path.dirname(__file__), filename)
+
 
 # Import measurment datas
 channel_content_sb_ba = np.genfromtxt('./2018-10-29_becker_grisard/sb_or_ba.txt',
@@ -54,6 +60,7 @@ def decay_rate(area, angle_distribution, prohability, efficiency, time):
 peak_indexes = find_peaks(channel_content_sb_ba, height=120, distance=15)
 
 peak_index_energies = noms(g(peak_indexes[0], m, b))
+print('peak engerie', peak_index_energies)
 # Wirte a fuction for automatic peak analysis
 
 
@@ -152,8 +159,9 @@ angle_distribution = np.genfromtxt('winkelverteilung.txt', unpack=True)
 prohability = [0.33, 0.07, 0.18, 0.62, 0.09]
 
 
-efficency_calculated = exp_efficency(np.array(offset_of_peak_in_energy),
+efficency_calculated = exp_efficency(np.array(offset_of_peak),
                                      a, b, c)
+
 
 decay_rate_calculated = decay_rate(area_under_peak, angle_distribution,
                                    prohability, efficency_calculated,
@@ -166,7 +174,7 @@ print('Gemittelte Aktivität', decay_rate_calculated.mean())
 # #### --- Speicherergebnisse Peak Eigenschaften in eine Tabelle --- ######## #
 # ########################################################################### #
 
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/peak_fit_parameter.tex').tabular(
+l.Latexdocument(filename =abs_path('tabs/sb_or_ba/peak_fit_parameter.tex')).tabular(
         data=[peak_indexes[0], unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
           unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
           unp.uarray(noms(offset_of_peak), stds(offset_of_peak))],
@@ -177,7 +185,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
     label='results_peaks'
 )
 
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/peak_charakteristiken.tex').tabular(
+l.Latexdocument(filename =abs_path('tabs/sb_or_ba/peak_charakteristiken.tex')).tabular(
         data=[peak_indexes[0],
           unp.uarray(noms(offset_of_peak), stds(offset_of_peak)),
            prohability,
@@ -190,14 +198,17 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
     label='decay_rate_peak'
 )
 
+peak_index_energies = g(peak_indexes[0], m, b)
+E_lit = [81.00, 276.40, 302.85, 356.01, 383.85]
 
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/calculated_efficencies.tex').tabular(
+l.Latexdocument(filename =abs_path('tabs/sb_or_ba/calculated_efficencies.tex')).tabular(
         data=[peak_indexes[0],
               unp.uarray(noms(peak_index_energies), stds(peak_index_energies)),
+              E_lit,
               unp.uarray(noms(efficency_calculated),
               stds(efficency_calculated))],
-    header=['Kanal / ', r'Energie / \kilo\eV', r'Q / '],
-    places=[0, (2.2, 1.2), (1.2, 1.2)],
+    header=['Kanal / ', r'Energie / \kilo\eV',  r'E\ua{\gamma,lit}/ \kilo\eV', r'Q / '],
+    places=[0, (2.2, 1.2),2, (1.2, 1.2)],
     caption='Berchente Vollenergienachweiseffizienz $^{133}\ce{Ba}$.',
     label='effizienz'
 )
