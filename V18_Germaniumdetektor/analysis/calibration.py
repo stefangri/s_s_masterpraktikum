@@ -16,6 +16,12 @@ Q_ = u.Quantity
 import pandas as pd
 from pandas import Series, DataFrame
 from scipy.signal import find_peaks
+import os
+
+
+def abs_path(filename):
+    return os.path.join(os.path.dirname(__file__), filename)
+
 
 # ########################################################################### #
 # ###################### --- Bestimmung der Peaks --- ####################### #
@@ -125,11 +131,12 @@ for i in index:
 
 # Save data in table
 print(index)
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/peak_charakteristiken_eu.tex').tabular(
+
+l.Latexdocument(filename = abs_path('tabs/europium/peak_charakteristiken_eu.tex')).tabular(
         data=[index, unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
           unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
           unp.uarray(noms(offset_of_peak), stds(offset_of_peak))],
-    header=['Channel / ', r'A / ',
+    header=['Kanal / ', r'A / ',
             r'\sigma / ', r'\mu / '],
     places=[0, (2.2, 2.2), (1.2, 1.2), (4.2, 1.2)],
     caption='Bestimmte Eigenschaften der Peaks von $^{152}\ce{Eu}$.',
@@ -147,9 +154,7 @@ def g(x, m, b):
 
 # Get Regressionparameters with curve_fit
 
-params, cov = curve_fit(g, np.append(noms(offset_of_peak), 0),
-                        np.append(energies, 0),
-                        bounds=[(-1000, 0), (1000, 1)])
+params, cov = curve_fit(g, noms(offset_of_peak), energies)
 
 
 errors = np.sqrt(np.diag(cov))
@@ -185,7 +190,7 @@ plt.plot(np.append(noms(offset_of_peak), 0), np.append(energies, 0), '.',
          label='Fitpunkte')
 plt.plot(index_intervall, g(index_intervall, *params), label='Fit')
 
-plt.xlabel('Channel')
+plt.xlabel('Kanal')
 plt.ylabel(r'$\mathrm{Energie} \, / \, \mathrm{keV}$')
 plt.legend()
 plt.savefig('./plots/europium/skalen_trafo_fit.pdf')
@@ -195,10 +200,10 @@ plt.savefig('./plots/europium/skalen_trafo_fit.pdf')
 offset_of_peak_in_energy = g(unp.uarray(noms(offset_of_peak),
                              stds(offset_of_peak)), m, b)
 
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/peak_in_energy_eu.tex').tabular(
+l.Latexdocument(filename =abs_path('tabs/europium/peak_in_energy_eu.tex')).tabular(
         data=[index, energies,
           unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))],
-    header=['Channel / ', r'E_{\gamma,theo} / \kilo\eV ',
+    header=['Kanal / ', r'E_{\gamma,theo} / \kilo\eV ',
             r'E_{\gamma} / \kilo\eV '],
     places=[0 , 2, (3.2, 1.2)],
     caption='Energiewerte der Peaks von $^{152}\ce{Eu}$.',
@@ -297,11 +302,14 @@ transition_probaility = [0.286, 0.076, 0.265, 0.022, 0.031, 0.129, 0.042,
                          0.146, 0.102, 0.136, 0.210]
 
 efficiency = []
+summierte_akti = []
 measurment_time = 3380
 for i in range(len(index)):
     summierte_aktivität = sum(channel_content_eu[index[i]-4:index[i]+4])
     print(i, summierte_aktivität)
 
+    summierte_akti.append(summierte_aktivität)
+    print(type(angle_distribution), angle_distribution)
     efficiency.append(full_energy_efficiency(summierte_aktivität,
                                              angle_distribution,
                                              decay_rate_29_10_18,
@@ -393,15 +401,25 @@ plt.savefig('./plots/europium/effizienz.pdf')
 # ############ --- Speicherergebnisse in eine Tabelle --- ################### #
 # ########################################################################### #
 
+#print(summierte_akti, transition_probaility)
+#l.Latexdocument(filename =abs_path('tabs/europium/results_europium.tex')).tabular(
+#    data = [index, energies, summierte_akti, transition_probaility, unp.uarray(noms(efficiency), stds(efficiency))],
+#    header = ['Kanal / ', r'Energie \, / \kilo\eV', r'Z / \becquerel', r'W /',
+#              r'Effizienz /'],
+#    places = [0, 2, 4, 1.3, (1.4, 1.4)],
+#    caption = 'Bestimmten Energie und Effizienzwerte.',
+#    label = 'results_europium'
+#)
 
-l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/europium/results_europium.tex').tabular(
-    data = [index, energies, unp.uarray(noms(efficiency), stds(efficiency))],
-    header = ['Channel / ', r'Energie \, / \kilo\eV', r'Effizienz /'],
-    places = [0, 2, (1.4, 1.4)],
+l.Latexdocument(filename =abs_path('tabs/europium/results_europium.tex')).tabular(
+    data = [index, energies, summierte_akti,  transition_probaility,
+            unp.uarray(noms(efficiency), stds(efficiency))],
+    header = ['Kanal / ', r'Energie \, / \kilo\eV', r'Z / \becquerel', r'W /',
+              r'Effizienz /'],
+    places = [0, 2, 4, 3,  (1.4, 1.4)],
     caption = 'Bestimmten Energie und Effizienzwerte.',
     label = 'results_europium'
 )
-
 
 # ########################################################################### #
 # ############ --- Plotte das Spektrum mit Peak-Detection --- ############### #
@@ -420,9 +438,10 @@ plt.plot(index_upper_shiftet, channel_content_eu[index_upper_shiftet], '.',
 # plt.ylim(0, )
 plt.xlim(0, 4000)
 
-plt.ylabel(r'$\mathrm{Count}$')
-plt.xlabel(r'$\mathrm{Channel}$')
+plt.ylabel(r'$\mathrm{Zählungen}$')
+plt.xlabel(r'$\mathrm{Kanal}$')
 plt.legend()
+plt.yscale('log')
 plt.savefig('./plots/europium/spektrum_index.pdf')
 
 # Plot with Energies as x axis
@@ -436,7 +455,7 @@ plt.hist(np.linspace(0., max(index_to_energie), len(channel_content_eu)),
          weights=channel_content_eu, label='Spektrum')
 
 plt.xlim(0, max(index_to_energie))
-plt.ylabel(r'$\mathrm{Count}$')
+plt.ylabel(r'$\mathrm{Zählungen}$')
 plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
 plt.legend()
 plt.savefig('./plots/europium/spektrum_energie.pdf')

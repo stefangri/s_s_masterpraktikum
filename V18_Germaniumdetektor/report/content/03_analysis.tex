@@ -1,23 +1,14 @@
 \section{Auswertung}
-Im Folgenden wird das $\gamma$-Spektrum vier verschiedener Proben untersucht.
-Die erste Probe, \emph{Europium} $^{152}\ce{Eu}$, wird verwendet um den Detektor
-zu kalibrieren. Hierzu wird die Channelskala in eine Energieskala transformiert.
-Außerdem soll die energieabhängig Effizienz $Q$ des Detektors ermittelt werden.
-Mit der zweiten Probe, \emph{Caesium} $^{137}\ce{Cs}$, sollen neben den
-Detektoreigenschaften, der Vollenergiepeak und das Comptonspektrum untersucht werden.
-Darüber hinaus soll die Aktivität $A$ der Caesium-Probe bestimmt werden.
-Die Identität der letzten beiden Proben ist nicht bekannt und soll mit Hilfe
-des Germaniumdetektors festgestellt werden. Zusätzlich soll die Aktivität
-der unbekannten Probe berechnet werden.
-
 Für die folgenden Analysen wird aus dem \textsc{python} Paktet \textsc{scipy.optimize}~\cite{scipy}
 die Funktion \textsc{curve\_{fit}} für Regressionsberechnung verwendet.
 
-\subsection{Kalibrierung des Germaniumdetektors}\label{sec:kalibrierung}
+\subsection{Energiekalibrierung des Germaniumdetektors}\label{sec:kalibrierung}
 \FloatBarrier
 Die Kalibrierung wird mit Hilfe einer Europium $^{152}\ce{Eu}$ Probe
 durchgeführt. Das nach einer Messzeit von $t\ua{measurment}=\SI{3380}{\second}$
 aufgenommene Energiespektrum ist in Abbildung \ref{fig:spectrum_europ} dargestellt.
+Der Breich größer $4000$ wurde in der Abbildung abgeschnitten, da sich in diesem
+Bereich kein zusätzlicher Peak befindet.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{../analysis/plots/europium/spektrum_index.pdf}
@@ -34,21 +25,23 @@ An jeden Peak wird eine Gausfunktion
 angepasst, um den Hochpunkt des Peaks gegeben durch den Parameter $\mu$ zu
 bestimmen. Die Parameter befinden sich in Tabelle \ref{tab: results_peaks_eu}.
 \input{../analysis/tabs/europium/peak_charakteristiken_eu_final.tex}
-Die zu den Peaks gehörige Channelnummer wird mit der, aus der Anleitung \cite{anleitungv18}
+Die zu den Peaks gehörige Kanalnummer wird mit der, aus der Anleitung \cite{anleitungv18}
 bekannten, charakteristischen Energie zugeordnet.
-Damit die gesamte Channelskala in eine Energieskala transformiert werden kann,
+Damit die gesamte $x$-Achse auf Einheiten der Energie transformiert werden kann,
 wird eine lineare Regression an die Funktion
 \begin{equation*}
   g(x)=mx+b
 \end{equation*}
-durchgeführt. Zusätzlich wurde für die Regressionsrechnung der Datentuple\newline
-$(Channelnummer~=~0,E_\gamma~=~0)$ hinzugefügt.
- Aus der Regressionsrechnung ergeben sich die folgenden Parameter
+durchgeführt.
+Aus der Regressionsrechnung ergeben sich die folgenden Parameter
 \begin{equation}
-  \label{eq:channel_energie_trafo}
-  m=\num{0.4009\pm0.0015}\,\frac{\si{\kilo\eV}}{\map{Channelnummer}}, \quad b=\SI{0.0\pm2.8}{\kilo\eV}.
+  \label{eq:Kanal_energie_trafo}
+  m=\num{0.4018\pm0.0017}\,\frac{\si{\kilo\eV}}{\map{Kanalnummer}}, \quad b=\SI{-2.2\pm3.4}{\kilo\eV}.
 \end{equation}
-Auffällig ist der Fehler des Parameters $b$.
+Verwendet wurde für die Regressions die in \cite{anleitungv18} angebenen Energien,
+der jeweiligen Peaks. Die dazugehörigen Werte befinden sich in Tabelle 2 %Irgendwie hat die Ref nicht funktioniert.
+unter $E\ua{\gamma,theo}$.
+Auffällig ist die Unsicherheit des Parameters $b$.
 In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten dargestellt.
 \begin{figure}
   \centering
@@ -56,7 +49,7 @@ In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten darge
   \caption{Fitpunkte und Regressionsgerade der Energietransformation.}
   \label{fig:skalen_trafo_fit}
 \end{figure}
-Die aus der Transformation resultierenden Energien sind in der Tabelle 2
+Die aus der Transformation resultierenden Energien sind in der Tabelle 2 %Irgendwie hat die Ref nicht funktioniert.
 aufgelistet.
 \input{../analysis/tabs/europium/peak_in_energy_eu_final.tex}
 Die in diesem Abschnitt bestimmten Parameter werden in späteren Teilen der Auswertung
@@ -66,17 +59,21 @@ ohne weitere Anmerkung verwendet.
 \FloatBarrier
 Der Detektor kann nicht jede Energie mit derselben Vollenergienachweiseffizienz
 nachweisen, deshalb wird diese im Folgenden untersucht. Hierzu wird die Formel
-\eqref{eq: zählrate} nach $Q$ umgestellt. Die Größe $Z$ wird durch Summation der Channelinhalte
-um ein Peak bestimmt. Dabei ist zu beachten, dass $Z$ durch die Messzeit $t_measurment$
+\eqref{eq: zählrate} nach $Q$ umgestellt. Die Größe $Z$ wird durch Summation der Kanalinhalte
+um ein Peak bestimmt. Dabei ist zu beachten, dass $Z$ durch die Messzeit $t\ua{measurment}$
 dividiert wird. Die Übergangswahrscheinlichkeiten werden der Anleitung \cite{anleitungv18}
-entnommen. Die Winkelverteilung wird mit Gleichung \eqref{eq: omega} berechnet. Hierbei wurde
-für den Abstand von Probe und Detektor der Wert $a=\SI{881}{\milli\meter}$ und für
+entnommen. Der Raumwinkel wird mit Gleichung \eqref{eq: omega} berechnet. Hierbei wurde
+für den Abstand von Probe und Detektor der Wert $a=\SI{730}{\milli\meter}+\SI{150}{\milli\meter}=\SI{881}{\milli\meter}$ und für
 den Radius der Querschnittfläche des Detektors $r=\SI{27.5}{\milli\meter}$
-verwendet. Damit folgt für die Winkelverteilung
+verwendet. Der Abstand ergibt sich hierbei aus der Distanz der Probe zur
+Schutzhaube des Detekotrs (1. Summand) und aus der Dicke der Haube (2. Summand).
+Damit folgt für den Raumwinkel
 \begin{equation}
   \label{eq:winkelverteilung}
   \frac{\Omega}{4\pi}=\num{0.0155}.
 \end{equation}
+Der Raumwinkel wird ohne Unischerheit berücksichtigt, weil es sich bei der Formel
+\eqref{eq: omega} um eine Näherung handelt.
 Die anfängliche Aktivität der Probe lag nach Angaben der Anleitung \cite{anleitungv18}
 am 01.10.2000 bei $A_0=\SI{4130\pm60}{\becquerel}$. Mit dem Zerfallsgesetz kann die
 Aktivität der Quelle am 29.10.2018 bestimmt werden:
@@ -91,23 +88,22 @@ Die nachfolgenden Regressionsrechnungen werden an Energien $E_\gamma>\SI{150}{\k
 durchgeführt.
 An die bestimmten Vollenergienachweiseffizienzen wird eine Funktion der Form
 \begin{equation*}
-  Q_1(E)=A_1*E^{B_1}
+  Q_1(E)=A_1\cdot E^{B_1}
 \end{equation*}
 angepasst. Die Parameter folgen aus der Regressionsrechnung als:
 \begin{equation}
 \label{eq:effizienz_Q_1}
 A_1 = \SI{2.1\pm1.1 e2}{\per\kilo\eV}, \quad B_1=\num{-1.17\pm 0.09}.
 \end{equation}
-Beim Vergleich der Parameter mit der Abschätzung für den Wirkungsquerschnitt
-des Photoeffekts \eqref{eq:wirkungsquerschnitt_photo} fällt auf das der Parameter $B$ im Intervall im angegebenen
-Intervall für $\delta$ liegt und $A_1/z_{\ce{Eu}}=\num{3.5\pm1.7}$ zumindest im
-Fehlerbereich im Intervall des Parameters $\alpha$ liegt.
-Außerdem wird an die Datenpunkte der Tabelle \ref{tab: results_europium}
+.Außerdem wird an die Datenpunkte der Tabelle \ref{tab: results_europium}
 eine Funktion der Form
 \begin{equation*}
   Q_2(E)=A_2\exp\left(-B_2 E\right)+C
 \end{equation*}
-angepasst. Aus der Regressionsrechnung ergeben sich die folgenden Parameter
+angepasst. Motviert werden kann die Verwendung einer zweiten Regressionsfunktion, durch
+die signifikante Unsicherheit der Parameter $A_1$ und $B_1$.
+
+Aus der Regressionsrechnung ergeben sich die folgenden Parameter
 \begin{equation}
 \label{eq:effizienz_Q_2}
 A_2 = \num{0.64\pm0.09}, \quad B_2=\SI{32\pm6 e-4}{\per\kilo\eV}, \quad C = \num{0.030\pm0.016}.
@@ -120,11 +116,12 @@ Dargestellt sind beide Fitfunktion und die Datenpunkte in Abbildung \ref{fig:eff
   \label{fig:effizienz}
 \end{figure}
 Für die späteren Aktivitätsbestimmungen wird die Effizienzfunktion $Q_2$ mit den
-ermittelten Parametern ohne weitere Kommentare verwendet.
+ermittelten Parametern ohne weitere Kommentare verwendet, weil diese einen kleinere
+Unsicherheit aufweisen.
 \FloatBarrier
 \subsection{Untersuchung einer $^{137}{Cs}$ Quelle}
 \FloatBarrier
-Das nach einer Messzeit von $t\ua{meauserment}=\SI{3694}{\second}$ gemessene
+Das nach einer Messzeit von $t\ua{measurement}=\SI{3694}{\second}$ gemessene
 Energiespektrum ist in Abbildung \ref{fig:caesium_spektrum} dargestellt.
 \begin{figure}
   \centering
@@ -132,15 +129,15 @@ Energiespektrum ist in Abbildung \ref{fig:caesium_spektrum} dargestellt.
   \caption{Gemessene Energiespektrum einer $^{137}{Cs}$ Quelle.}
   \label{fig:caesium_spektrum}
 \end{figure}
-Deutlich im Spektrum zu erkennen ist der Vollenergiepeak und das Comptonpeak.
+Deutlich im Spektrum zu erkennen ist der Vollenergiepeak und die Comptokante.
 Zunächst wird die Energie des Vollenergiepeak bestimmt. Hierzu wird an den Peak
 eine Gausfunktion \eqref{eq:gaus} angepasst. Aus der Regressionsrechnung ergeben
 sich die folgenden Parameter:
 \begin{align*}
   a\ua{vp}&=\num{2407\pm29}\,\map{Counts}\\
-  \mu\ua{vp}&=\num{1648.191\pm0.030}\,\map{Channel}=\SI{661\pm4}{\kilo\eV} \\ \sigma\ua{vp}&=\num{2.175\pm0.030}\,\map{Channel}=\SI{0.9\pm2.8}{\kilo\eV}
+  \mu\ua{vp}&=\SI{660\pm0.012}{\kilo\eV} \\
+  \sigma\ua{vp}&=\SI{0.874\pm0.012}{\kilo\eV}
 \end{align*}
-Auffällig ist der große Unsicherheitsbereich des Parameters $\sigma$ nach der Umrechnung in $\si{\kilo\eV}$.
 Der Vollenergiepeak und der bestimmte Fit sind in Abbildung \ref{fig:Vollenergiepeak} eingezeichnet.
 \begin{figure}
   \centering
@@ -152,8 +149,9 @@ Zusätzlich sind in der Abbildung \ref{fig:Vollenergiepeak} die abgelesenen
 Halbwerts- und Zehntelbreiten eingezeichnet:
 \begin{align}
   \label{eq:halbwerts_zehntel_breite_gemessen}
-  x\ua{1/2}&=\num{5.62\pm0.06}\,\map{Channel} = \SI{2.3\pm5.7}{\kilo\eV}\\
-  x\ua{1/10}&=\num{10.38\pm0.06}\,\map{Channel} = \SI{4.2\pm5.7}{\kilo\eV}.
+  x\ua{1/2}&= \SI{2.27\pm 8.89}{\kilo\eV}\\
+  x\ua{1/10}&=\SI{4.17\pm8.87}{\kilo\eV} \\
+  \frac{x\ua{1/10}}{x\ua{1/2}} &=\num{1.85\pm 11.21}.
 \end{align}
 Hier bewirkt die Energietransformation eine signifikante Vergrößerung des Unsicherheitsbereichs.
 Mit Hilfe des Parameters $\sigma$ des Vollenergiepeaks ist es möglich die
@@ -167,13 +165,13 @@ entnommene Formel verwendet:
 Mit der Gleichung \eqref{eq:formel_umrechnung} folgt somit:
 \begin{align}
   \label{eq:halbwerts_zehntel_breite_berechnet}
-  x\ua{1/2,\sigma}&=\num{5.12\pm0.07}\,\map{Channel} = \SI{2.1\pm2.8}{\kilo\eV}\\
-  x\ua{1/10}&=\num{9.34\pm0.13}\,\map{Channel} = \SI{3.7\pm2.8}{\kilo\eV}.
+  x\ua{1/2}&= \SI{2.06\pm0.03}{\kilo\eV}\\
+  x\ua{1/10}& = \SI{3.75\pm 0.05}{\kilo\eV}
+  \frac{x\ua{1/10}}{x\ua{1/2}} &=\num{1.82\pm 0.01}
 \end{align}
 Die Gleichung \eqref{eq:formel_umrechnung} gilt jedoch nur unter der Annahme, dass
-die Peaks Gausverteilt sind.
-Deutlich ist zu erkennen das abgelesener und berechneter Wert in derselben Größenordnung
-liegt. Somit ist die Annahme eines gausverteilten Peak berechtigt.
+die Peaks Gausverteilt sind. Eine Annahme die sich mit den bestimmten Verhältnissen
+$ \frac{x\ua{1/10}}{x\ua{1/2}}$ berechtigt ist.
 Zusätzlich kann die Halbwertsbreite mit Gleichung
 \begin{equation}
   \label{eq: energie_halbwertsbreiten}
@@ -185,12 +183,11 @@ eines Elektrons in Germanium.
 Hierzu wird der Fitparameter $\mu$ verwendet:
 \begin{equation}
    \label{eq:halbwertsbreite_formel_20}
-    x\ua{1/2,f}= \SI{1.03\pm0.01}{\kilo\eV}
+    x\ua{1/2,f}= \SI{1.03\pm 0.01}{\kilo\eV}
 \end{equation}
 Die in \eqref{eq:halbwertsbreite_formel_20} aufgeführte
 Halbwertsbreite gibt das bestmögliche Auflösungsvermögen
-des Detektors an. Der Vergleich mit den oben berechneten Werten
-zeigt, dass das Auflösungsvermögen nicht optimal ist.
+des Detektors an.
 
 Das Comptonspektrum ist vergrößert in Abbildung \ref{fig:comptonspektrum}
 dargestellt.
@@ -205,35 +202,42 @@ und der Comptonkante:
 \begin{align}
   \label{eq:rückstreu_kante_abgelesen}
   \begin{aligned}
-    E\ua{rück}&=\num{480}\,\map{Channel} = \SI{192.4\pm2.9}{\kilo\eV}\\
-    E\ua{kante}&=\num{1182}\,\map{Channel} = \SI{473.8\pm3.3}{\kilo\eV}
+    E\ua{rück}&=\num{480\pm 5}\,\map{Kanal} = \SI{191\pm4}{\kilo\eV}\\
+    E\ua{kante}&=\num{1182 \pm 5}\,\map{Kanal} = \SI{473\pm4}{\kilo\eV}.
   \end{aligned}
 \end{align}
+Hierbei wurde eine Ableseungenauigkeit von $\pm\, 5\,\map{Kanal}$ angenommen.
 Überprüft werden können die abgelesenen Wert $E\ua{rück}$ mit Gleichung \eqref{eq:rückstreu}.
 Hierbei wird für den Rückstreupeak $\theta=\frac{\pi}{2}$ eingesetzt.
 Der Wert für $E\ua{kante}$ kann mit Formel \eqref{eq: comptonkante_energie} geprüft werden.
 \begin{align}
   \label{eq:rückstreu_kante_abgelesen}
   \begin{aligned}
-    E\ua{rück, calc}&= \SI{184.3\pm0.3}{\kilo\eV}\\
-    E\ua{kante, calc}&= \SI{476.4\pm3.4}{\kilo\eV}
+    E\ua{rück, calc}&= \SI{184.2\pm0.1}{\kilo\eV}\\
+    E\ua{kante, calc}&= \SI{475.9\pm0.1}{\kilo\eV}
   \end{aligned}
 \end{align}
 Die abgelesene und berechnete Energie der Comptonkante und des Rückstreupeaks besitzen
 eine zur Nullmenge verschiedene Schnittmenge.
 
 Als Nächstes soll der Inhalt des Comptonkontinums und des Vollenergiepeaks
-verglichen werden. Hierzu wird jeweils über den Channelinhalt des jeweiligen Spektrums
+verglichen werden. Hierzu wird jeweils über den Kanalinhalt des jeweiligen Spektrums
 summiert:
 \begin{equation}
   \label{eq:flacehe}
-  I\ua{compton} = 62467 \, \map{Count}\cdot\map{Channel}, \quad I\ua{peak}=13332\, \map{Count}\cdot\map{Channel}
+  I\ua{compton} = 62467 \, \map{Count}\cdot\map{Kanal}, \quad I\ua{peak}=13332\, \map{Count}\cdot\map{Kanal}
 \end{equation}
-
+Wird aus dem beiden der Quotient gebildet ist es möglich daraus eine Aussage über
+die Wechselwirkungswahrscheinlichkeit zutreffen:
+\begin{equation}
+  \label{eq:qotient}
+  \frac{I\ua{compton}}{I\ua{peak}} = 4.69
+\end{equation}
 Abschließend soll die Absoprtionswahrscheinlichkeit für den
 Compton- und Photoeffekt bestimmt werden. Hierzu werden die
 oben ermittelten Energien verwendet. Mit den Energien und Abbildung
-\ref{fig:extinktionskoeffizient} ist es möglich den Extinktionskoeffizienten abzulesen.
+\ref{fig:extinktionskoeffizient} ist es möglich den Extinktionskoeffizienten abzulesen
+($\mu\ua{compton}=\num{0.35\pm0.05}$ und $\mu\ua{photo}=\num{0.06\pm{0.005}}$).
 Werden diese in Gleichung
 \begin{equation}
   \label{eq:Absorptionswahrscheinlichkeit}
@@ -245,8 +249,11 @@ mit einer $d=\SI{3.9}{\centi\meter}$ eingesetzt ergibt sich:
   \begin{aligned}
     P\ua{compton}&= \num{74\pm5}\,\% \\
     P\ua{Photo}&= \num{20.9\pm1.5}\, \%
+    \frac{P\ua{compton}}{P\ua{Photo}}&=4.69
   \end{aligned}
 \end{align}
+Die berechnete Wechselwirkungswahrscheinlichkeit stimmt somit mit dem
+Verhältnis der Flächen überein.
 \FloatBarrier
 \subsection{Untersuchung des ersten unbekannten Quelle}
 \FloatBarrier
@@ -301,7 +308,7 @@ abgelesenen werden. Die berechnete Vollenergienachweiseffizienz $Q$ an
 dem jeweiligen Peak befindet sich in Tabelle \ref{tab: effizienz_co}.
 \input{../analysis/tabs/unknown/calculated_efficencies_final.tex}
 Damit ist es möglich die Aktivität $A\ua{r}$ für jeden Peak zu bestimmen.
-Der Inhalt eines Peaks wird durch Summierung der Channelinhalte berechnet.
+Der Inhalt eines Peaks wird durch Summierung der Kanalinhalte berechnet.
 Gelistet sind die Aktivitäten $A\ua{r}$ in Tabelle \ref{tab: decay_rate_peak_co}.
 \input{../analysis/tabs/unknown/peak_charakteristiken_final.tex}
 Als gemittelte Aktivität ergibt sich:

@@ -53,7 +53,7 @@ def decay_rate(area, angle_distribution, prohability, efficiency, time):
 # --- Find index of peak
 peak_indexes = find_peaks(channel_content_sb_ba, height=120, distance=15)
 
-peak_index_energies = g(peak_indexes[0], m, b)
+peak_index_energies = noms(g(peak_indexes[0], m, b))
 # Wirte a fuction for automatic peak analysis
 
 
@@ -61,15 +61,17 @@ def gaus(x, amplitude, sigma, offset):
     return amplitude * np.exp(-1/2 * (x - offset)**2/sigma**2)
 
 
-def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
+def automatic_spectrum_anaysis(channel_content, index_of_peak,
+                               fit_function,):
 
     # use as fit_intervall \pm 15, create for fit numpy array with index values
-    index = np.arange(index_of_peak-15, index_of_peak+15, 1)
+    index_channel = np.arange(index_of_peak-15, index_of_peak+15, 1)
+    index = noms(g(index_channel, m, b))
 
     params_gaus, cov_gaus = curve_fit(fit_function, index,
-                                      channel_content[index],
+                                      channel_content[index_channel],
                                       p0=[channel_content[index_of_peak], 1,
-                                          index_of_peak])
+                                          noms(g(index_of_peak, m, b))])
 
     error_gaus = np.sqrt(np.diag(cov_gaus))
 
@@ -85,20 +87,20 @@ def automatic_spectrum_anaysis(channel_content, index_of_peak, fit_function,):
 
     index_fit_plot = np.linspace(index_of_peak-15, index_of_peak+15, 1e4)
 
-    plt.clf()
-    plt.xlim(index_of_peak-20, index_of_peak+20)
-    plt.ylim(0, channel_content[index_of_peak] * 1.2)
-    plt.hist(range(0, len(channel_content_sb_ba), 1),
-             bins=np.linspace(0, len(channel_content_sb_ba),
-             len(channel_content_sb_ba)),
-             weights=channel_content_sb_ba, label='Spektrum')
+    #plt.clf()
+    #plt.xlim(noms(g(index_of_peak, m, b))-1, noms(g(index_of_peak, m, b))+1)
+    #plt.ylim(0, channel_content[index_of_peak] * 1.2)
+    #plt.hist(noms(g(np.arange(0, len(channel_content_sb_ba), 1), m, b)),
+    #         bins=noms(g(np.linspace(0, len(channel_content_sb_ba),
+    #         len(channel_content_sb_ba)), m, b)),
+    #         weights=channel_content_sb_ba, label='Spektrum')
 
-    plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
-             label='Fit')
-    plt.xlabel(r'$\mathrm{Channel}$')
-    plt.ylabel(r'$\mathrm{Count}$')
-    plt.legend()
-    plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
+    #plt.plot(index_fit_plot, fit_function(index_fit_plot, *params_gaus),
+    #         label='Fit')
+    #plt.xlabel(r'$\mathrm{Channel}$')
+    #plt.ylabel(r'$\mathrm{Count}$')
+    #plt.legend()
+    #plt.savefig(f'./plots/sb_or_ba/spectrum_fit_at_index_{str(index_of_peak)}.pdf')
 
     # --- Return values --- #
 
@@ -121,7 +123,7 @@ area_under_peak = []
 
 for index in peak_indexes[0]:
     amplitude, sigma, offset, area = automatic_spectrum_anaysis(channel_content_sb_ba,
-                                                          index, gaus)
+                                                            index, gaus)
 
     amplitude_of_peaks.append(amplitude)
 
@@ -133,6 +135,10 @@ for index in peak_indexes[0]:
 
     area_under_peak.append(area)
 
+
+print(amplitude_of_peaks)
+print(sigma_of_peaks)
+print(offset_of_peak)
 
 # --- Calculate the normal_acitvity for all --- #
 
@@ -163,23 +169,22 @@ print('Gemittelte Aktivität', decay_rate_calculated.mean())
 l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/peak_fit_parameter.tex').tabular(
         data=[peak_indexes[0], unp.uarray(noms(amplitude_of_peaks), stds(amplitude_of_peaks)),
           unp.uarray(noms(sigma_of_peaks), stds(sigma_of_peaks)),
-          unp.uarray(noms(offset_of_peak), stds(offset_of_peak)),
-          unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy))],
-    header=['Channel / ', r'Amplitude / None ',
-            r'\sigma / None',r'\mu / None', r'\mu / \kilo\eV'],
-    places=[0, (1.2, 1.2), (1.2, 1.2), (4.2, 1.2), (2.2, 1.2)],
+          unp.uarray(noms(offset_of_peak), stds(offset_of_peak))],
+    header=['Kanal / ', r'Amplitude / None ',
+            r'\sigma /\kilo\eV', r'\mu / \kilo\eV'],
+    places=[0, (1.2, 1.2), (1.2, 1.2), (2.2, 1.2)],
     caption='Regressionsparameter der Peak-Anpassung.',
     label='results_peaks'
 )
 
 l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germaniumdetektor/analysis/tabs/sb_or_ba/peak_charakteristiken.tex').tabular(
         data=[peak_indexes[0],
-          unp.uarray(noms(offset_of_peak_in_energy), stds(offset_of_peak_in_energy)),
+          unp.uarray(noms(offset_of_peak), stds(offset_of_peak)),
            prohability,
            area_under_peak,
           unp.uarray(noms(decay_rate_calculated), stds(decay_rate_calculated))],
-    header=['Channel / ', r'\mu / \kilo\eV', r'P\ua{über} / ', r'Fläche / ',
-            r'Aktivität / \becquerel'],
+    header=['Kanal / ', r'\mu / \kilo\eV', r'P\ua{über} / ', r'Fläche / ',
+            r'A\ua{k} / \becquerel'],
     places=[0,  (2.2, 1.2), 2, 0, (1.2, 3.2)],
     caption='Bestimmte Aktivität für jeden Peak der $^{133}\ce{Ba}$ Quelle.',
     label='decay_rate_peak'
@@ -191,7 +196,7 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
               unp.uarray(noms(peak_index_energies), stds(peak_index_energies)),
               unp.uarray(noms(efficency_calculated),
               stds(efficency_calculated))],
-    header=['Channel / ', r'Energie / \kilo\eV', r'Q / '],
+    header=['Kanal / ', r'Energie / \kilo\eV', r'Q / '],
     places=[0, (2.2, 1.2), (1.2, 1.2)],
     caption='Berchente Vollenergienachweiseffizienz $^{133}\ce{Ba}$.',
     label='effizienz'
@@ -204,16 +209,18 @@ l.Latexdocument(filename ='/home/beckstev/Documents/s_s_masterpraktikum/V18_Germ
 
 
 plt.clf()
-plt.xlim(0, 1200)
-plt.hist(range(0, len(channel_content_sb_ba), 1),
-         bins=np.linspace(0, len(channel_content_sb_ba),
-         len(channel_content_sb_ba)),
+plt.xlim(0, noms(g(1200, m, b)))
+plt.yscale('log')
+plt.hist(noms(g(np.arange(0, len(channel_content_sb_ba), 1), m, b)),
+         bins=noms(g(np.linspace(0, len(channel_content_sb_ba),
+                                 len(channel_content_sb_ba)), m, b)),
          weights=channel_content_sb_ba, label='Spektrum')
 
-plt.plot(peak_indexes[0], channel_content_sb_ba[peak_indexes[0]], '.',
-         label='Peak')
-plt.xlabel(r'$\mathrm{Channel}$')
-plt.ylabel(r'$\mathrm{Count}$')
+plt.plot(noms(g(peak_indexes[0],m ,b)), channel_content_sb_ba[peak_indexes[0]],
+         '.', label='Peak')
+
+plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
+plt.ylabel(r'$\mathrm{Zählung}$')
 plt.legend()
 plt.savefig(f'./plots/sb_or_ba/spectrum.pdf')
 

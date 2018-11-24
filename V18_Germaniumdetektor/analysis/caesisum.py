@@ -34,6 +34,7 @@ def g(x, m, b):
 # --- Find index of peak
 peak_indexes = find_peaks(channel_content_ca, height=200, distance=10)
 
+#peak_energy = g(peak_indexes, m, b)
 # ########################################################################### #
 # ###################### --- Untersuche den Photopeak --- ################### #
 # ########################################################################### #
@@ -47,11 +48,15 @@ def gaus(x, amplitude, sigma, offset):
 
 index = np.arange(peak_indexes[0]-15, peak_indexes[0]+15)
 
-params_gaus, cov_gaus = curve_fit(gaus, index,
+
+photo_peak_energy = g(index, m, b)
+
+print()
+params_gaus, cov_gaus = curve_fit(gaus, noms(photo_peak_energy),
                                   channel_content_ca[peak_indexes[0][0] - 15:
                                                      peak_indexes[0][0] + 15],
                                   p0=[channel_content_ca[peak_indexes[0]][0],
-                                      10, 1648])
+                                      0.9, 661])
 
 errors_gaus = np.sqrt(np.diag(cov_gaus))
 
@@ -64,12 +69,10 @@ print('Amplitude/E_gamma:', ufloat(params_gaus[0], errors_gaus[0]))
 amplitude = ufloat(params_gaus[0], errors_gaus[0])
 
 sigma = ufloat(params_gaus[1], errors_gaus[1])
-print('Halbertsbreite:', ufloat(params_gaus[1], errors_gaus[1]), g(sigma, m, b))
+print('Halbertsbreite:', ufloat(params_gaus[1], errors_gaus[1]))
 
 print('Offset/bins:', ufloat(params_gaus[2], errors_gaus[2]))
 offset = ufloat(params_gaus[2], errors_gaus[2])
-offset_energy = g(offset, m, b)
-print('Offset/energy [keV]:', offset_energy)
 
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
@@ -96,8 +99,10 @@ print('------------------------------------------------------------------\n\n')
 index = np.arange(0, len(channel_content_ca), 1)
 index_zehntel = index[np.abs(channel_content_ca - 1 / 10 * params_gaus[0])
                       < 100]
+index_zehntel = g(index_zehntel, m, b)
 
 index_halb = index[np.abs(channel_content_ca - 1 / 2 * params_gaus[0]) < 200]
+index_halb = g(index_halb, m, b)
 
 halbebreite_berechnet = 2 * np.sqrt(2 * np.log(2)) * sigma
 zehntelbreite_berechnet = 1.823 * halbebreite_berechnet
@@ -108,22 +113,26 @@ print('----------- Halbwerts- und zehntelbreite -----------------------')
 print('----------------------------------------------------------------------',
       '\n')
 
-print('Halbwertsbreite gemessen: Channel, Energie[keV]',
-      2 * np.abs(offset-index_halb), 2*g(np.abs(offset-index_halb),  m, b))
+print('Halbwertsbreite gemessen: Energie[keV]',
+      2 * np.abs(offset-index_halb), '\n')
 
 print('Halbwertsbreite berechnet: Channel, Energie[keV]',
-      halbebreite_berechnet, g(halbebreite_berechnet,  m, b), '\n')
+      halbebreite_berechnet, '\n')
 
-print('Zehntelbreite gemessen: Channel, Energie[keV]', 2 * np.abs(offset-index_zehntel),
-      2 * g(offset-index_zehntel,  m, b))
+print('Zehntelbreite gemessen: Channel, Energie[keV]',
+      2 * np.abs(offset-index_zehntel), '\n')
 
 print('Zehntelbreite berechnet aus Sigma: Channel, Energie[keV]',
-      zehntelbreite_berechnet, g(zehntelbreite_berechnet,  m, b), '\n')
+      zehntelbreite_berechnet, '\n')
 
 print('Zehntelbreite berechnet aus Messwert: Channel, Energie[keV]',
-      np.abs(offset-index_halb) * 1.823,
-      g(np.abs(offset-index_halb) * 1.823,  m, b))
+     2* np.abs(offset-index_halb) * 1.823)
 
+print('Verhältnis Halbwerts- zu Zehntelbreite gemessen:',
+       np.abs(offset-index_zehntel) / np.abs(offset-index_halb) , '\n')
+
+print('Verhältnis Halbwerts- zu Zehntelbreite berechnet:',
+        zehntelbreite_berechnet / halbebreite_berechnet, '\n')
 
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
@@ -140,9 +149,8 @@ print('Halbwertsbreite gemessen: Channel, Energie[keV]',
 print('Halbwertsbreite berechnet: Channel, Energie[keV]',
       halbebreite_berechnet, g(halbebreite_berechnet,  m, b), '\n')
 
-print(offset_energy)
 print('Auflösungsvermögen nach Formel 20: Channel, Energie[keV]',
-      2.35 * unp.sqrt(0.1 * offset_energy * 1e3 * 2.9) * 1e-3)
+      2.35 * unp.sqrt(0.1 * offset * 1e3 * 2.9) * 1e-3)
 
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
@@ -166,6 +174,9 @@ print('Wahrscheinlichkeit Compton:',
 print('Wahrscheinlichkeit Photo:',
       (1 - unp.exp(-mu_photo * length_of_detector)) * 100)
 
+print('Verhältnis Compton/Photo',
+     (1 - unp.exp(-mu_compton * length_of_detector) * 100)/(1 - unp.exp(-mu_photo * length_of_detector) * 100))
+
 
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
@@ -173,22 +184,25 @@ print('------------------------------------------------------------------\n\n')
 
 
 
-index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
+index = np.linspace(noms(photo_peak_energy[0]), noms(photo_peak_energy[-1])+5,
+                    1e3)
 
-plt.xlim( peak_indexes[0]-30, peak_indexes[0]+30)
+plt.xlim(noms(photo_peak_energy[0])-5, noms(photo_peak_energy[-1])+5)
 
-plt.hist(range(0, len(channel_content_ca), 1),
-          bins=np.linspace(0, len(channel_content_ca),
-          len(channel_content_ca)),
-          weights=channel_content_ca, label='Spektrum')
-plt.plot(index, gaus(index, *params_gaus), label='Fit')
+plt.hist(noms(g(np.arange(0, len(channel_content_ca), 1), m, b)),
+         bins=noms(g(np.linspace(0, len(channel_content_ca),
+          len(channel_content_ca)), m, b)),
+         weights=channel_content_ca, label='Spektrum')
 
-plt.xlabel(r'$\mathrm{Channel}$')
-plt.ylabel(r'$\mathrm{Count}$')
-plt.plot(index_halb, channel_content_ca[index_halb], '.',
-         label='Abgelesene Höhe\nHalbwertsbreite')
-plt.plot(index_zehntel, channel_content_ca[index_zehntel], '.',
-         label='Abgelesene Höhe\nZehntelbreite')
+plt.plot(index, gaus(index, *params_gaus),
+         label='Fit')
+
+plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
+plt.ylabel(r'$\mathrm{Zählung}$')
+# plt.plot(index_halb, channel_content_ca[index_halb], '.',
+         # label='Abgelesene Höhe\nHalbwertsbreite')
+# plt.plot(index_zehntel, channel_content_ca[index_zehntel], '.',
+         # label='Abgelesene Höhe\nZehntelbreite')
 
 plt.legend()
 plt.savefig('./plots/caesium/photopeak.pdf')
@@ -209,8 +223,8 @@ index_compton_kante = 1182
 
 # --- Transformiere die obgien Indicies in full_energy_efficiency --- #
 
-energy_peak_rückstreuung = g(index_peak_rückstreu,  m, b)
-energy_compton_kante = g(index_compton_kante,  m, b)
+energy_peak_rückstreuung = g(ufloat(index_peak_rückstreu, 5),  m, b)
+energy_compton_kante = g(ufloat(index_compton_kante, 5),  m, b)
 
 print('\n\n------------------------------------------------------------------')
 print('----------- Lage Rückstreupeak und Comptonkante ---------------------')
@@ -254,10 +268,10 @@ print('----------------------------------------------------------------------',
       '\n')
 
 print('Compton_edge berechnet: Energie[keV]:',
-      compton_edge_energy(offset_energy))
+      compton_edge_energy(offset))
 
 print('Rückstreupeak berechnet: Energie[keV]:',
-      rueckstreu_energy(offset_energy))
+      rueckstreu_energy(offset))
 
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
@@ -280,6 +294,7 @@ print('----------------------------------------------------------------------',
 
 print('Inhalt Compton Spektrum:', inhalt_compton_spektrum)
 
+print('Verhältnis Photo/Compton', inhalt_compton_spektrum/area_photo_peak)
 print('\n--------------------------------------------------------------------')
 print('----------------------------------------------------------------------')
 print('------------------------------------------------------------------\n\n')
@@ -288,22 +303,22 @@ print('------------------------------------------------------------------\n\n')
 plt.clf()
 # index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
 
-plt.xlim(0, 1400)
+plt.xlim(0, noms(g(1400, m, b)))
 # plt.ylim(0, 400)
-plt.hist(range(0, len(channel_content_ca), 1),
-         bins=np.linspace(0, len(channel_content_ca),
-         len(channel_content_ca)),
+plt.hist(noms(g(np.arange(0, len(channel_content_ca), 1), m, b)),
+         bins=noms(g(np.linspace(0, len(channel_content_ca),
+                                 len(channel_content_ca)), m, b)),
          weights=channel_content_ca, label='Spektrum')
 
-plt.plot(index_peak_rückstreu, channel_content_ca[index_peak_rückstreu], '.',
+plt.plot(noms(g(index_peak_rückstreu, m, b)), channel_content_ca[index_peak_rückstreu], '.',
          label='Rückstreupeak')
-plt.plot(index_compton_kante, channel_content_ca[index_compton_kante], '.',
+plt.plot(noms(g(index_compton_kante, m, b)), channel_content_ca[index_compton_kante], '.',
          label='Compton Kante')
 # plt.plot(lower_index_compton, channel_content_ca[lower_index_compton], '.',
 # label='Beginn Compton Spektrum')
 
-plt.xlabel(r'$\mathrm{Channel}$')
-plt.ylabel(r'$\mathrm{Count}$')
+plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
+plt.ylabel(r'$\mathrm{Zählung}$')
 plt.legend()
 plt.savefig('./plots/caesium/compton.pdf')
 
@@ -313,14 +328,16 @@ plt.savefig('./plots/caesium/compton.pdf')
 plt.clf()
 # index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
 
-plt.xlim(0, 1800)
+plt.yscale('log')
+plt.xlim(0, noms(g(1800, m, b)))
 # plt.ylim(0, 400)
-plt.hist(range(0, len(channel_content_ca), 1),
-         bins=np.linspace(0, len(channel_content_ca),
-         len(channel_content_ca)), weights=channel_content_ca,
+plt.hist(noms(g(np.arange(0, len(channel_content_ca), 1), m, b)),
+         bins=noms(g(np.linspace(0, len(channel_content_ca),
+                                 len(channel_content_ca)), m, b)),
+         weights=channel_content_ca,
          label='Spektrum')
 
-plt.xlabel(r'$\mathrm{Channel}$')
-plt.ylabel(r'$\mathrm{Count}$')
+plt.xlabel(r'$\mathrm{Energie}\, / \, keV$')
+plt.ylabel(r'$\mathrm{Zählung}$')
 plt.legend()
 plt.savefig('./plots/caesium/caesium_spektrum.pdf')
