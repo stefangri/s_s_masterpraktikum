@@ -16,11 +16,6 @@ import pandas as pd
 from pandas import Series, DataFrame
 from scipy.signal import find_peaks
 
-
-
-def abs_path(filename):
-    return os.path.join(os.path.dirname(__file__), filename)
-
 # Import measurment datas
 channel_content_ca = np.genfromtxt('./2018-10-29_becker_grisard/caesium.txt',
                                    unpack=True)
@@ -165,7 +160,7 @@ print('------------------------------------------------------------------\n\n')
 
 # mu aus Abbilung bei einer Energie von  661 kev abgelsen
 mu_compton = ufloat(0.35, 0.05)  # in 1/cm
-mu_photo = ufloat(0.06, 0.005)
+mu_photo = ufloat(0.005, 0.0001)
 length_of_detector = 3.9  # in cm
 
 print('\n\n------------------------------------------------------------------')
