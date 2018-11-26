@@ -160,7 +160,7 @@ print('------------------------------------------------------------------\n\n')
 
 # mu aus Abbilung bei einer Energie von  661 kev abgelsen
 mu_compton = ufloat(0.35, 0.05)  # in 1/cm
-mu_photo = ufloat(0.005, 0.0001)
+mu_photo = ufloat(0.0045, 0.0001)
 length_of_detector = 3.9  # in cm
 
 print('\n\n------------------------------------------------------------------')

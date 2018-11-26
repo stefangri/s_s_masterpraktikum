@@ -156,7 +156,7 @@ def g(x, m, b):
 
 params, cov = curve_fit(g, noms(offset_of_peak), energies)
 
-
+print('Kovarianzmatrix Energiefit', cov)
 errors = np.sqrt(np.diag(cov))
 
 index_intervall = np.linspace(-20, 3650, 10000)

@@ -2,24 +2,40 @@
 In diesem Kapitel sollen die Messergebnisse diskutiert werden.
 
 Trotz linearer Zusammenhang zwischen Energie und Channel zeigt der Fitparameter
-$b$ einen auffällig großen Fehler. Eventuell wird der Fehler durch
-die Fitfunktion \textsc{curve\_fit} verursacht und sollte mit einer anderen
-Regressionsfunktion geprüft werden. Der große Fehlbereich hat insbesondere auf
-spätere Umrechnung in kleine Energien signifikante Auswirkungen bezüglich der Genauigkeit.
-Aus diesem Grund kann die Qualität aller nachfolgenden Regressionen an den
-untransformierten Größen festgestellt werden.
+$b$ einen auffällig große Unsicherheit. Eventuell wird die Unsicherheit durch
+die Fitfunktion \textsc{curve\_fit} verursacht. Insbesondere zeigt sich bei der
+Betrachtung der Kovarianzmatrix $\tens\sigma$ keine signifikante Korrelation
+der beiden Fitparameter:
+\begin{equation*}
+  \tens{\sigma} = \begin{pmatrix} \num{2.9e-6} & \num{-5.1e-3} \\ \num{-5.1e-3} & \num{11.8} \end{pmatrix}
+\end{equation*}
+Die Unsicherheit sollte mit einer anderen Regressionsfunktion geprüft werden.
+Weiterhin stellen die bestimmten Effizienzen $Q$ lediglich eine Näherung da,
+weil der in die Berechnung einfließende Parameter $\frac{\Omega}{4\pi}$ mittels
+einer Approximation ermittelt wird.
 
 Die bestimmte Energie des Vollenergiepeaks von $^{137}\ce{Cs}$ stimmt mit dem
-Literaturwert $\mu\ua{vp, theo}=\SI{661}{\kilo\eV}$ \cite{chartofnuclieds}
-überein und veranschaulicht deutlich die Präzision des verwendeten Detektors.
-Jedoch ist das Auflösungsvermögen des Germaniumdetektors nicht maximal, was sich
-insbesondere bei Untersuchung der Halbwertsbreiten zeigt. Verursacht wird
-die Halbwertsbreite eventuelle durch thermisches Rauschen im Detetektor oder
-Verstärker oder durch rückstreuende Teilchen die eine Energie besitzen bei der
-der Photoeffekt wieder wharscheinlicher wird. Weiterhin ist der signifikante Unterschied
+Literaturwert annähernd $\mu\ua{vp, theo}=\SI{661}{\kilo\eV}$ \cite{chartofnuclieds}
+überein (Abweichung: $0.15\%$) und veranschaulicht deutlich die Präzision des verwendeten Detektors.
+Beim Vergleich der gemmessen Peakenergien der anderen Isotope zeigt sich, dass
+die Präzision insbesondere bei höheren Energien konstant ist. Lediglich bei kleineren
+Energien, wie etwa bei $^{133}\ce{Ba}$ bei der Energie $E_\gamma=\SI{83.58}{\kilo\eV}$, zeigt sich eine
+Abweichung zum Literaturwert von $\approx 3\%$.
+Weiterhin ist der Unterschied
 zwischen $E\ua{rück}$ und $E\ua{rück, calc}$ aufällig. Vermutlich wird der
-Unterschied durch einen nicht genaues ablesen des Rückstreupeaks verursacht.
+Differenz durch ein nicht genaues ablesen des Rückstreupeaks verursacht.
 Das Ablesen könnte durch eine Regression verbessert werden.
+Außerdem unterscheidt sich das Flächenverhältnis $\frac{I\ua{compton}}{I\ua{peak}}$
+signifikant von dem Verhältnis $\frac{P\ua{compton}}{P\ua{Photo}}$, obwohl beide
+ein Wahrscheinlichkeitsmaß für die Wechselwirkungsprozesse darstellen.
+Erklärt werden kann die Diskrepanz dadurch, dass $\frac{P\ua{compton}}{P\ua{Photo}}$
+lediglich $1$-fache Photoeffekte berücksichtigt. In der Realität
+tritt der Photoeffekt, trotz hoher Energien, jedoch mehrfach auf. Diese Tatsache lässt sich anhand
+Abbildung \ref{fig:extinktionskoeffizient} erläutern. Wechselwirkt ein hochenergetisches
+Photon im Material verliert dieses Energie. Der Energieverlust führt wiederum,
+zu einer höheren Wahrscheinlichkeit, dass das Photon über den Photoeffekt wechselwirkt.
+Somit ist es zum Beispiel auch möglich, dass ein Photon mehrfach über den Photoeffekt
+wechselwirkt. Aus diesem Grund ist die Fläche $I\ua{peak}$ deutlich vergrößert.
 
 Die beiden unbekannten Quellen konnte mit einer hohen Genauigkeit bestimmt werden.
 Dies spricht abermals für die Präzision eines Germaniumdetektors.
