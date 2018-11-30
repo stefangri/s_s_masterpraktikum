@@ -304,7 +304,7 @@ plt.clf()
 # index = np.linspace(peak_indexes[0]-20, peak_indexes[0]+20, 1e3)
 
 plt.xlim(0, noms(g(1400, m, b)))
-# plt.ylim(0, 400)
+plt.ylim(0, 160)
 plt.hist(noms(g(np.arange(0, len(channel_content_ca), 1), m, b)),
          bins=noms(g(np.linspace(0, len(channel_content_ca),
                                  len(channel_content_ca)), m, b)),
@@ -314,6 +314,11 @@ plt.plot(noms(g(index_peak_rückstreu, m, b)), channel_content_ca[index_peak_rü
          label='Rückstreupeak')
 plt.plot(noms(g(index_compton_kante, m, b)), channel_content_ca[index_compton_kante], '.',
          label='Compton Kante')
+
+plt.plot(noms(g(51, m, b)), channel_content_ca[51], '.',
+         label='Beginn Compton Spektrum')
+
+
 # plt.plot(lower_index_compton, channel_content_ca[lower_index_compton], '.',
 # label='Beginn Compton Spektrum')
 

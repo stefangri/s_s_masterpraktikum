@@ -40,7 +40,7 @@ Aus der Regressionsrechnung ergeben sich die folgenden Parameter
 \end{equation}
 Verwendet wurde für die Regressions die in \cite{anleitungv18} angebenen Energien,
 der jeweiligen Peaks. Die dazugehörigen Werte befinden sich in Tabelle 2 %Irgendwie hat die Ref nicht funktioniert.
-unter $E\ua{\gamma,theo}$.
+unter $E_{\gamma,\map{lit}}$.
 Auffällig ist die Unsicherheit des Parameters $b$.
 In der Abbildung \ref{fig:skalen_trafo_fit} ist der Fit mit den Fitpunkten dargestellt.
 \begin{figure}
@@ -172,12 +172,8 @@ Mit der Gleichung \eqref{eq:formel_umrechnung} folgt somit:
 Die Gleichung \eqref{eq:formel_umrechnung} gilt jedoch nur unter der Annahme, dass
 die Peaks Gausverteilt sind. Eine Annahme die sich mit den bestimmten Verhältnissen
 $ \frac{x\ua{1/10}}{x\ua{1/2}}$ berechtigt ist.
-Zusätzlich kann die Halbwertsbreite mit Gleichung
-\begin{equation}
-  \label{eq: energie_halbwertsbreiten}
-  x\ua{1/2,f}=\Delta E_{1/2}=2.35\sqrt{0.1 E\ua{\gamma} E\ua{EL}}
-\end{equation}
-über die Vollenergiepeakenergie $E\ua{\gamma}$ berechnet werden.
+Zusätzlich kann die Halbwertsbreite mit Gleichung \eqref{eq: E_fwhm}
+mittels der Vollenergiepeakenergie $E\ua{\gamma}$ berechnet werden.
 Die Energie $E\ua{EL}=\SI{2.9}{\eV}$ bezeichnet die Anregungsenergie
 eines Elektrons in Germanium.
 Hierzu wird der Fitparameter $\mu$ verwendet:
@@ -193,7 +189,7 @@ Das Comptonspektrum ist vergrößert in Abbildung \ref{fig:comptonspektrum}
 dargestellt.
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{../analysis/plots/caesium/compton_spektrum.pdf}
+  \includegraphics[width=0.7\textwidth]{../analysis/plots/caesium/compton.pdf}
   \caption{Comptonspektrum der $^{137}{Cs}$ Quelle.}
   \label{fig:comptonspektrum}
 \end{figure}
