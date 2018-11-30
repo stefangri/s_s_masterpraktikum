@@ -1,17 +1,24 @@
 \section{Versuchsaufbau/-durchführung}
-Nachfolgend soll nun genauer die Funktionsweise eines Germaniumdetektors erklärt werden. Hierbei wird insbesondere 
-die elektrische Schaltung vorgestellt. Hierbei wird weniger auf elektrotechnische Details 
+Nachfolgend soll nun genauer die Funktionsweise eines Germaniumdetektors erklärt werden. 
+Hierbei wird weniger auf elektrotechnische Details 
 als auf die messtechnische Motivation der einzelnen Bauteile eingegangen.
 Anschließend werden die durchgeführten Messungen vorgestellt.
 
-Das Germanium-Modul verfügt über eine zylindrische Geometrie. Von Außen ist eine stark mit Lithium dotierte $n$
+Der Germanium-Detektor verfügt über eine zylindrische Geometrie, die in Abbildung~\ref{fig: geometrie} dargestellt ist. 
+Von Außen ist eine stark mit Lithium dotierte $n$
 Schicht aufgebracht, von Innen eine mit Gold dotierte $p$ Schicht. An die Schichten sind Elektroden angeschlossen, zwischen denen 
 die notwendige Hochspannung von $\SI{5}{\kilo\volt}$ angelegt ist. Die Probe wird über dem Zylinder in eine Schraubvorrichtung 
-befestigt. Probe und Detektor befinden sich innerhalb eines Bleikastens, der insbesondere den Einfluss von kosmischer 
-Strahlung minimieren soll. Zudem schützt eine innere dünne Kupferschicht vor $\alpha$-Strahlung, die von der Bleiummantelung ausgehen 
+befestigt. Probe und Detektor befinden sich innerhalb einer sogenannten Bleiburg, die z.\,B. den Einfluss von kosmischer 
+Strahlung minimieren soll. Zudem schützt eine innere dünne Kupferschicht vor Strahlung, die von der Bleiummantelung ausgehen 
 könnte. 
+\begin{figure}
+\centering
+\includegraphics[width = 0.8\textwidth]{pics/geometrie.png}
+\caption{Querschnitt durch den Koaxialen Germanium-Detektor zur Veranschaulichung der verwendeten Geometrie~\cite{anleitungv18}.}
+\label{fig: geometrie}
+\end{figure}
 
-Der am Halbleiterelement erzeugt Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
+Der am Halbleiterelement erzeugte Stromimpuls muss zunächst in einen Spannungsimpuls umgewandelt werden. Dies geschieht mit 
 dem Vorverstärker in Abbildung~\ref{fig: vorverstaerker}(a). Mithilfe eines kapazitiv rückgekoppelten Operationsverstärkers wird durch elektrische 
 Integration ein Spannungspegel erzeugt, der proportional zur Photonenenergie seien soll. Um einen zeitlich 
 begrenzten Spannungsimpuls zu erhalten, ist der Kondensator $C_K$ nach jedem Nachweis zu entladen, was durch die 
@@ -33,7 +40,16 @@ Beide Abbildungen (bearbeitet) aus \cite{anleitungv18}.}
 \end{figure}
 
 Das vorverstärkte Signal gelangt zu einem Hauptverstärker, der die Spannungsimpulse abschließend verstärkt, sodass 
-sie Vielkanalanalysator in Kanäle eingeordnet werden können. Dies geschieht über eine Schaltung, wie sie in 
+sie vom Vielkanalanalysator in Kanäle eingeordnet werden können. Vor- und Hauptverstärker sind über ein RC-Glied (dient hier als Hochpass)
+miteinander gekoppelt, um Offsetspannungen nicht ebenfalls zu verstärken. Da die Zeitkonstante $RC$ im Allgemeinen ungleich 
+$C_K R_K$ (siehe Abbildung\ref{}) ist, kann es hierdurch jedoch zu Unterschwingungen $U < 0$ des Signals kommmen. Ein gleicher Effekt kann 
+am Ausgang des Hauptverstärkers entstehen. Der Detektor wird in dieser Zeit unempfindlicher auf ein neues Signal. Der Aufbau enthält 
+elektrotechnische Lösungen (Pole-Zero-Kompensation und Base-Line-Restorer), die hier nur benannte werden sollen. Ein weiteres Problem tritt auf, wenn 
+zu viele Impulse in zu kurzer Zeit eingehen, die dann als einzelner Verstärkter Impuls regestriert werden (Pile-Up). Auch solche Signale 
+können erkannt und blockiert werden, was jedoch zu einer Totzeit, bzw. einer Verminderung der Gesamtzählrate führt.
+
+
+Die eigentliche Zählung der Spannungsimpulse geschieht über eine Schaltung, wie sie in 
 Abbildung~\ref{fig: zaehler}
 dargestellt ist. Die Messung der Impulshöhe basiert hier auf einer Zeitmessung. Der Spannungsimpuls lädt einen 
 Kondensator auf, dessen Abklingszeit bei Entladung von der Amplitude des Pulses abhängt. Ein Und-Gatter, verknüpft 
@@ -48,7 +64,8 @@ Zählrate $Z$ berechnen
     Z = \frac{\Omega}{4\pi} A \, W \, Q.
     \label{eq: zählrate}
 \end{equation}
-Der Raumwinkelanteil $\frac{\Omega}{4\pi}$, in dem Strahlung der Quelle in den Detektor gelangt, lässt sich annähernd bestimmen zu 
+Der Raumwinkelanteil $\frac{\Omega}{4\pi}$, in dem Strahlung der Quelle in den Detektor gelangt, lässt sich annähernd (Abstand zwischen 
+Detektor und Probe groß im Vergleich zur Abmessung der Probe) bestimmen zu 
 \begin{equation}
     \frac{\Omega}{4\pi} = \frac{1}{2} \left( 1 - \frac{a}{\sqrt{a^2 + r^2}} \right),
     \label{eq: omega}
@@ -69,7 +86,14 @@ die Energien und notwendige Größen in Formel~\eqref{eq: zählrate} bekannt sin
 Anschließend wird eine \ce{^137Cs} untersucht. Hiermit sollen insbesondere die Eigenschaften aus 
 Abbildung~\ref{fig: example_spectrum} quantitativ untersucht werden. Hierzu zählen z.B. Lage von Compton-Kante und 
 Rückstreupeak. Ebenfalls relevant ist das energetische Auflösungsvermögen des Systems, das aus einer Untersuchung der Breite 
-des Gesamtenergiepeaks hervorgeht.
-Abschließend werden zwei Messungen durchgeführt die von der generischen Situation der Gamma-Spektroskopie ausgehen: 
+des Gesamtenergiepeaks hervorgeht. Das Auflösungsvermögen bestimmt die Unterscheidbarkeit zweier Linien im Spektrum und kann durch 
+die Halbwertbreite $\Delta E_{\sfrac{1}{2}}$ eines Peaks quantifiziert werden. Hierfür lässt sich zeigen, dass diese 
+näherungsweise bestimmt ist durch die Photonenenergie $E_\gamma$ und die Anregungsenergie $E_{el}$ eines Elektrons im Germanium 
+\begin{equation}
+    \Delta E_{\sfrac{1}{2}} = \num{2.35}\sqrt{\num{0.1}E_\gamma E_{el}}
+    \label{eq: E_fwhm}
+\end{equation}
+
+Abschließend werden zwei Messungen durchgeführt die von der generischen Situation der Gamma-Spektrometrie ausgehen: 
 Die Quelle ist nicht bekannt und anhand des Spektrums soll heraus gefunden werden, worum es sich handelt. Bei der ersten 
 Probe handelt es sich entweder um \ce{^125 Sb} oder \ce{^133Ba}, die letzte Quelle ist gänzlich unbekannt.
