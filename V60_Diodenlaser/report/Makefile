@@ -3,7 +3,7 @@ all: build/main.pdf
 build/main.pdf: content/* lit.bib | build
 			lualatex --output-directory=build main.tex
 
-full: content/* ../analysis/results/* lit.bib | build
+full: content/* lit.bib | build
 		lualatex --output-directory=build main.tex
 		biber build/main.bcf
 		lualatex --output-directory=build main.tex
