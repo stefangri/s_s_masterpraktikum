@@ -1,23 +1,23 @@
 \setcounter{page}{1}
 \section*{Introduction}
 Because of their small dimensions, high efficiency, tunability and compatibility with electronic components
-diode lasers are of great economical and scientifical interest. This experiment (\emph{V60 Diodenlaser}) aims to get familiar
-with the calibration and frequency modulation of a diode laser. After the prepration the given setup enables us to measure
+diode lasers are of great economical and scientifical interest. This experiment (\emph{V60 Diode Laser Physics}) aims to get familiar
+with the calibration and frequency modulation of a diode laser. After a preparation the given setup enables us to measure
 the absorption spectrum of gaseous rubidium.
 
 \section{Theory}
-In the following we will present the necessary theoretical background to understand how the experiment works.
+In the following we will present the theoretical background to understand how the experiment works.
 
 
 
 \section{Functionality of lasers}
 Lasers are sources of monochromatic, intensive and especially \textbf{coherent} light.
-To understand how a laser works it is firstly necessary to discuss the most fundamntal interactions between light and
+To understand how a laser works it is firstly necessary to discuss the most fundamental interactions between light and
 a quantum mechanical system like an atom. Figure~\ref{fig: two_level} shows a two level energy scheme. An electron in the
-lowest state can be stimulated into the highest state by absorbing an incoming photon. The relaxtion back in the
-ground state can be radiative or nonradiative. Next to a spontanious emission of a photon (Figure~\ref{fig: two_level})
-an incoming photon can induce the emission. After that the two photons have the same direction, energy and phase.
-That is why the so called \textbf{induced emission} is the crucial process for lasers. To increase the propybility of the induced emission in
+lowest state can be stimulated into the highest state by absorbing an incoming photon (Figure~\ref{fig: two_level} a). The relaxtion back in the
+ground state can be radiative or nonradiative. Next to a \textbf{spontanious emission} of a photon (Figure~\ref{fig: two_level} b)
+an incoming photon can induce the emission (Figure~\ref{fig: two_level} c). After that the two photons have the same direction, energy and phase.
+That is why the so called \textbf{induced emission} is the crucial process for lasers. To increase the propability of the induced emission in
 comparison to the absorption, the population of the second state has to be higher than the ground state. This is called
 \textbf{inversion of population}.
 
@@ -39,9 +39,9 @@ regarding the population propability $p_2$ of the state $|2\rangle$
     \quad \underset{T \rightarrow \infty}{\longrightarrow}\quad  \frac{1}{2},
 \end{equation}
 with the temperature $T$ and the Boltzmann constant $k_B$. We see that one can achieve at most an equal population. The easiest
-realistic system is a three level energy scheme. Here it is important that the lifetime of the highest state $\tau_2$ is much shorter
+realistic system is a three level energy scheme (Figure~\ref{fig: two_level} d). Here it is important that the lifetime of the highest state $\tau_2$ is much shorter
 than the lifetime $\tau_1$ of the first state above the ground state ($\tau_2 \ll \tau_1$). By exciting electrons from the ground state into the highest
-state a inversion of population between the first state and the ground state can be realised.
+state an inversion of population between the first state and the ground state can be realised.
 
 In general lasers consist of a laser medium, a optical cavity and a pump source (see figure~\ref{fig: principle_laser}).
 The laser medium could be a gas (prominent example is a mixture of helium and neon) with electronic states like discussed above. The pump source
@@ -59,15 +59,15 @@ cavity length allows to select different laser wavelengths.
 \section{Functionality of diode lasers}
 We now explain how the general concepts of a laser are realised in a diode laser. Here a semiconductor serves as medium and a current as pump source.
 Often there are two cavities: the \textbf{internal cavity} is given by the reflecting interfaces od the medium, an external cavity consist of
-one side seminconductor interface at one side and a grating at the other. The three parts of the laser will be discussed more closely in the following.
+a semiconductor interface at one side and a grating at the other. The three parts of the laser will be discussed more closely in the following.
 
-In general a semiconductor is a solid with a finite bandgap $E_g$ between valence and conduction band. A hetero structure of \ce{AlGaAs} ($p$-doped),
+In general a semiconductor is a solid with a finite bandgap $E_g$ between valence and conduction band. A heteroe structure of \ce{AlGaAs} ($p$-doped),
 \ce{GaAs} ($n$-doped)
 and \ce{AlGaAs} ($p$-doped) leads to a band scheme like shown in figure\ref{fig: bandstructure}. The electrons and holes see a potential well
-in the \ce{GaAs} layer, which is the active zone of the laser. The current induced by an applyed voltage increases the number of electrons
-and holes in the cunduction and valence band respectively. Due to the fact that \ce{GaAs} is a direct semiconductor, electrons and holes can
+in the \ce{GaAs} layer, which is the active zone of the laser. The current induced by an applied voltage increases the number of electrons
+and holes in the conduction and valence band respectively. Due to the fact that \ce{GaAs} is a direct semiconductor, electrons and holes can
 recombine efficiently by emmiting a photon with energy $E_g$. A typical plot of laser intensity versus current is shown in figure~\ref{}. For low
-currents the laser acts similar to a light emmiting diode and the intensity is small. Above a threshold $I_{th}$ the intensity rises rapidly.
+currents the laser acts similar to a light emmiting diode (LED) and the intensity is small. Above a threshold $I_{th}$ the intensity rises rapidly.
 From this point losses inside the cavity are compensated and induced emission begins. Nevertheless the intensity is limited by joule heating
 of the diode (see figure~\ref{}). Since the bandgap $E_g = E_g(T)$ increases with temperature, varying the current affects
 the wavelength of the laser because of heating as well.
@@ -77,5 +77,6 @@ Like mentioned before the external cavity has an optical grating on one side. Th
 diode. Because of the disperive effect of the grating, the wavelength can be selected by rotating the grating around an axis perpenducular
 to the image surface. Regarding equation~\eqref{eq: standing_waves} the longitudanal modes of the external cavity are much
 more closely to each other than the ones of the internal cavity ($\Delta \lambda \sim 1 / L$).
-To modulate the laser frequency either the length of the extrenal cavity or the current can be varied. By a simultaneous variation
-mode hops can be avoided.
+To modulate the laser frequency either the length of the extrenal cavity or the current can be varied.
+Changing only the external cavity length or the angle of the grating can lead to \textbf{mode hops}, when the overall gain becomes higher
+in a diffrent internal mode. By a simultaneous variation of the laser current and the external cavity length mode hops can be avoided.
