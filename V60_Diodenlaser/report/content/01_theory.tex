@@ -5,7 +5,7 @@ diode lasers are of great economical and scientifical interest. This experiment 
 with the calibration and frequency modulation of a diode laser. After a preparation the given setup enables us to measure
 the absorption spectrum of gaseous rubidium.
 
-\section{Theory}
+\subsection{Theory}
 In the following we will present the theoretical background to understand how the experiment works.
 
 
@@ -47,16 +47,26 @@ In general lasers consist of a laser medium, a optical cavity and a pump source 
 The laser medium could be a gas (prominent example is a mixture of helium and neon) with electronic states like discussed above. The pump source
 creates an inversion of population in the medium. The cavity consists of two mirrors that make the light pass several times threw the medium, before
 it leaves the system. For that one of the mirrors has to be partial transparent (reflectivity slightly under \SI{100}{\percent}). In the
-cavity only discrete \textbf{longitudinal modes}, which are given by the length of the cavity $L$ are allowed. In terms of wavelength these are
+cavity only discrete \textbf{longitudinal modes}, which are given by the length of the cavity $L$ are allowed (perfectly analogous 
+to the wavelength of standing waves of a rope that is fixed on both sides). In terms of wavelength these are
 given by
 \begin{equation}
   \lambda_m = \frac{m c}{2 L n}
   \label{eq: standing_waves}
 \end{equation}
 where $c$ is the speed of light and $n$ the refractive index of the medium. Equation~\eqref{eq: standing_waves} shows that a manipulation of the
-cavity length allows to select different laser wavelengths.
+cavity length allows to select different laser wavelengths. The wavelength distribution defined by the optical transitions in the medium 
+are typically much broader than the distance $\Delta \lambda$ between to longitudinal modes. 
 
-\section{Functionality of diode lasers}
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.7\textwidth]{pics/prinzip_laser.png}
+  \caption{Principle of a laser consisting of a medium, a pump source and a cavity. The cavity is here realised by two mirrors.
+  Picture from \cite{anleitung61}, text translated.}
+  \label{fig: principle_laser}
+\end{figure}
+
+\subsection{Functionality of diode lasers}
 We now explain how the general concepts of a laser are realised in a diode laser. Here a semiconductor serves as medium and a current as pump source.
 Often there are two cavities: the \textbf{internal cavity} is given by the reflecting interfaces od the medium, an external cavity consist of
 a semiconductor interface at one side and a grating at the other. The three parts of the laser will be discussed more closely in the following.
@@ -66,13 +76,23 @@ In general a semiconductor is a solid with a finite bandgap $E_g$ between valenc
 and \ce{AlGaAs} ($p$-doped) leads to a band scheme like shown in figure\ref{fig: bandstructure}. The electrons and holes see a potential well
 in the \ce{GaAs} layer, which is the active zone of the laser. The current induced by an applied voltage increases the number of electrons
 and holes in the conduction and valence band respectively. Due to the fact that \ce{GaAs} is a direct semiconductor, electrons and holes can
-recombine efficiently by emmiting a photon with energy $E_g$. A typical plot of laser intensity versus current is shown in figure~\ref{}. For low
+recombine efficiently by emmiting a photon with energy $E_g$. A typical plot of laser intensity versus current is shown in figure~\ref{fig: threshold}. For low
 currents the laser acts similar to a light emmiting diode (LED) and the intensity is small. Above a threshold $I_{th}$ the intensity rises rapidly.
 From this point losses inside the cavity are compensated and induced emission begins. Nevertheless the intensity is limited by joule heating
-of the diode (see figure~\ref{}). Since the bandgap $E_g = E_g(T)$ increases with temperature, varying the current affects
+of the diode (see figure~\ref{fig: threshold}). Since the bandgap $E_g = E_g(T)$ increases with temperature, varying the current affects
 the wavelength of the laser because of heating as well.
 
-The photons pass the active zone several times because of the cavities and induce further emissions. A typical alignment is displayed in figure~\ref{}.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.7\textwidth]{pics/threshold.png}
+  \caption{Typical realtion between laser current and output intensity of a diode laser. From a threshold current 
+  $I_{th}$ the system begins to lase. Picture from \cite{eichler}, text edited.}
+  \label{fig: threshold}
+\end{figure}
+
+The photons pass the active zone several times because of the cavities and induce further emissions. A typical alignment is displayed in figure~\ref{fig: cavity}.
+A collimating lens behind the medium is necessary because the light from the thin active zone is strongly diverging (most 
+fundamental reason for that is Heisenbergs uncertainty principle).
 Like mentioned before the external cavity has an optical grating on one side. The grating is set so that the first diffrection maximum is send back into the
 diode. Because of the disperive effect of the grating, the wavelength can be selected by rotating the grating around an axis perpenducular
 to the image surface. Regarding equation~\eqref{eq: standing_waves} the longitudanal modes of the external cavity are much
@@ -80,3 +100,11 @@ more closely to each other than the ones of the internal cavity ($\Delta \lambda
 To modulate the laser frequency either the length of the extrenal cavity or the current can be varied.
 Changing only the external cavity length or the angle of the grating can lead to \textbf{mode hops}, when the overall gain becomes higher
 in a diffrent internal mode. By a simultaneous variation of the laser current and the external cavity length mode hops can be avoided.
+
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.5\textwidth]{pics/cavity.pdf}
+  \caption{Typical alignment of diode laser including a external cavity. 
+  Picture from \cite{eichler}, text edited.}
+  \label{fig: cavity}
+\end{figure}
