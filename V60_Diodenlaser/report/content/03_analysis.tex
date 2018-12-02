@@ -4,11 +4,11 @@ absorption spectrum of Rubidium. Therefore, the setup shown in figure \ref{fig: 
 is used. Before an examination of the spectrum is possible, the laser system has to be
 adjust correctly.
 
-To operate the laser properly, the diode must be heated
+To operate the setup properly, the Rubidium gas cell must be heated
 continuously to $\SI{50}{\degreeCelsius}$. During the heating process, a infrared display
-card is inserted in the path of the later laser beam. After the diode reached
-the target temperature, the diode current ist increased slowly until a
-light spot is visible on the display card. Depending on the current are
+card is inserted in the path of the later laser beam. The diode current is increased slowly until a
+light spot is visible on the display card. Therefore, a camera is used.
+Depending on the current are
 two emission modes of the laser observerable as presented in figure \ref{fig: emission_modes}.
 \begin{figure}
   \centering
@@ -36,3 +36,26 @@ diplay card is now equal to image \ref{fig:not_lasering}. By moving the knobs
 on the diffraction grating carefully, the diode starts to emit coherent light
 as shown in image \ref{fig:lasering}. The knobs slightly changes the length of
 the external cavity and how the light reflected from the grating hits the diode.
+The process is repeated as long as it is possible to get coherent light. The minimal
+current is determine with a voltage measurement. With the resistance
+of the current source ($\SI{100}{\ohm}$) and Ohm's law the current can be calculated
+to $I\ua{min}=\SI{0.33}{\ampere}$. As next step, the dipslay card has to be removed
+and a Rubidium gas cell is mounted into the laser path. As shown in figure \ref{fig: positioning_cell_camera},
+the camera film the center of the cell.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.8\textwidth]{./content/images/cell_camera_heater.png}
+  \caption{Positioning of cell and camera.}
+  \label{fig: positioning_cell_camera}
+\end{figure}
+To decrease the intensty of the laser beam before entering the cell, ND filters can be used.
+The diode current is increased slowly until the camera observe the fluorescence
+of Rubidium. Rubidium is only stimulated within the laser beam. Hence,
+the characteristic fluorescence shape should be a line respective a cylinder
+as demonstrated in figure \ref{fig: fluro_rubidium}.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.5\textwidth]{./content/images/emission_of_Ga.jpg}
+  \caption{Fluorescence of Rubidium (line).}
+  \label{fig: fluro_rubidium}
+\end{figure}
