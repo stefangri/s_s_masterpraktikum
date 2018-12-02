@@ -59,3 +59,47 @@ as demonstrated in figure \ref{fig: fluro_rubidium}.
   \caption{Fluorescence of Rubidium (line).}
   \label{fig: fluro_rubidium}
 \end{figure}
+
+For an detailed investigation, the ramp generator is connected to the oscilloscope
+and piezo controller. Hence, it is possible to vary the energy of the beam slightly.
+Instead of the beam blocker a photodiode is placed on the
+optical table. The photodiode transforms the intensty of the beam into an
+electrical signal. Whenever the energy of the beam is equal to one of Rubidium
+absorption energies, the beam intensty drops and can be detected as peak.
+In graph \ref{fig: spectrum} is a such a spectrum shown exemplary.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.8\textwidth]{../analysis/plots/modeshift.pdf}
+  \caption{Example of the spectrum measured with the photodiode. This kind of spectrum also
+          shows modeshift.}
+  \label{fig: spectrum}
+\end{figure}
+The plot also shows mode shifts of the lasers, which decrease the accuaracy of the
+measurement. An Reduction of mode shifts can be achived, when the ramp generator,
+also controll the diode current. Because this shifts external and internal cavity
+simultaneously. As result of the improved experiemntell method, the absorption
+spectrum of Rubidium can be detected as shown in figure \ref{fig: spectrum_measured}.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.8\textwidth]{../analysis/plots/spectrum_angled.pdf}
+  \caption{Measured absorption spectrum of Rubidium with one photodiode.}
+  \label{fig: spectrum_measured}
+\end{figure}
+To identify the peaks, figure \ref{fig: spectrum_manual} was used.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.8\textwidth]{./content/images/absorption_spectrum_rubidium.png}
+  \caption{Absorption spectrum of Rubidium given by the manual \cite{anleitung60}.}
+  \label{fig: spectrum_manual}
+\end{figure}
+Finally, a second photodiode and a 50:50 beam splitter as shown in figure \ref{fig: setup}
+are used to remove the angle in the plot \ref{fig: spectrum_measured}. The two signals of
+the photodiode are substracted. Hence, the oscilloscope only shows only the
+absorption spectrum of Rubidium, instead of the spectrum and the intensty created by the
+ramp generator. The measured spectrum is shown in figure \ref{fig: spectrum_measured_straight}.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.8\textwidth]{../analysis/plots/spectrum_straight.pdf}
+  \caption{Measured absorption spectrum of Rubidium with two photodiodes.}
+  \label{fig: spectrum_measured_straight}
+\end{figure}

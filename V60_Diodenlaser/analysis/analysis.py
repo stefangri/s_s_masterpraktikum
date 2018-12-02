@@ -86,7 +86,7 @@ peak_indexes = find_peaks(-1*df_spectrum_straight['2'].values[1:].astype('float'
 plt.clf()
 plt.plot(df_spectrum_straight['x-axis'].values[1:].astype('float'),
          df_spectrum_straight['2'].values[1:].astype('float'),
-         label=r'$\Delta U_{piezo}$')
+         label=r'$\Delta U_{pd}$')
 
 #plt.plot(df_spectrum_straight['x-axis'].values[1:].astype('float')[peak_indexes[0]],
 #         df_spectrum_straight['2'].values[1:].astype('float')[peak_indexes[0]],'.' ,
@@ -101,3 +101,36 @@ plt.xlabel(r'$t \, / \, \mathrm{s}$')
 plt.ylabel(r'$U \, / \, \mathrm{V}$')
 plt.legend()
 plt.savefig('./plots/spectrum_straight.pdf')
+
+
+# #############################################################################
+# ## Getting the data of the straight spectrum  #######
+# #############################################################################
+
+plt.clf()
+
+df_full = pd.read_csv('./data/spectrum_with_mode_shift.csv')
+
+peak_indexes = find_peaks(df_full['2'].values[1:].astype('float'),
+                          height=(-5.1, -3), distance=30)
+
+
+plt.plot(df_full['x-axis'].values[1:].astype('float'),
+         df_full['2'].values[1:].astype('float'),
+         label=r'$U_{pd}$')
+
+plt.plot(df_full['x-axis'].values[1:].astype('float'),
+         df_full['1'].values[1:].astype('float'),
+         label=r'$U_{piezo}$')
+
+plt.vlines(df_full['x-axis'].values[1:].astype('float')[peak_indexes[0]][1:],
+           ymin=-6,
+           ymax=df_full['2'].values[1:].astype('float')[peak_indexes[0]][1:]+0.2,
+           color='C3',
+           linestyle='dashed',
+           label='Mode shift')
+plt.xlabel(r'$t \, / \, \mathrm{s}$')
+plt.ylabel(r'$U \, / \, \mathrm{V}$')
+plt.legend()
+
+plt.savefig('./plots/modeshift.pdf')
