@@ -5,12 +5,11 @@ diode lasers are of great economical and scientifical interest. This experiment 
 with the calibration and frequency modulation of a diode laser. After a preparation the given setup enables us to measure
 the absorption spectrum of gaseous rubidium.
 
-\subsection{Theory}
-In the following we will present the theoretical background to understand how the experiment works.
+\section{Theory}
+In the following we will present the theoretical background to understand how the experiment works. 
+For this we follow the manual~\cite{anleitung60} and source~\cite{eichler}.
 
-
-
-\section{Functionality of lasers}
+\subsection{Functionality of lasers}
 Lasers are sources of monochromatic, intensive and especially \textbf{coherent} light.
 To understand how a laser works it is firstly necessary to discuss the most fundamental interactions between light and
 a quantum mechanical system like an atom. Figure~\ref{fig: two_level} shows a two level energy scheme. An electron in the
@@ -71,16 +70,25 @@ We now explain how the general concepts of a laser are realised in a diode laser
 Often there are two cavities: the \textbf{internal cavity} is given by the reflecting interfaces od the medium, an external cavity consist of
 a semiconductor interface at one side and a grating at the other. The three parts of the laser will be discussed more closely in the following.
 
-In general a semiconductor is a solid with a finite bandgap $E_g$ between valence and conduction band. A heteroe structure of \ce{AlGaAs} ($p$-doped),
+In general a semiconductor is a solid with a finite bandgap $E_g$ between valence and conduction band. A hetero structure of \ce{AlGaAs} ($p$-doped),
 \ce{GaAs} ($n$-doped)
-and \ce{AlGaAs} ($p$-doped) leads to a band scheme like shown in figure\ref{fig: bandstructure}. The electrons and holes see a potential well
+and \ce{AlGaAs} ($p$-doped) leads to a band scheme like shown in figure~\ref{fig: bandstructure}. 
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.7\textwidth]{pics/hetero_structure.pdf}
+  \caption{Energy scheme of an \ce{AlGaAs}-\ce{GaAs} hetero structure. Picture from \cite{eichler}, text edited.}
+  \label{fig: bandstructure}
+\end{figure}
+The electrons and holes see a potential well
 in the \ce{GaAs} layer, which is the active zone of the laser. The current induced by an applied voltage increases the number of electrons
 and holes in the conduction and valence band respectively. Due to the fact that \ce{GaAs} is a direct semiconductor, electrons and holes can
-recombine efficiently by emmiting a photon with energy $E_g$. A typical plot of laser intensity versus current is shown in figure~\ref{fig: threshold}. For low
+recombine efficiently by emmiting a photon with energy $E_g$ ($E_g = hf$ in figure~\ref{fig: bandstructure}). A typical plot of laser intensity versus current is shown in figure~\ref{fig: threshold}. For low
 currents the laser acts similar to a light emmiting diode (LED) and the intensity is small. Above a threshold $I_{th}$ the intensity rises rapidly.
 From this point losses inside the cavity are compensated and induced emission begins. Nevertheless the intensity is limited by joule heating
-of the diode (see figure~\ref{fig: threshold}). Since the bandgap $E_g = E_g(T)$ increases with temperature, varying the current affects
+of the diode (see figure~\ref{fig: threshold}). Since the bandgap $E_g = E_g(T)$ decreases with temperature, varying the current affects
 the wavelength of the laser because of heating as well.
+
+
 
 \begin{figure}
   \centering
