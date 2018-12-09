@@ -1,1 +1,22 @@
 \section{Auswertung}
+
+
+
+\subsection{Vorbereitende Berechnungen}
+\begin{figure}
+\centering
+\includegraphics[scale = 1]{../analysis/results/alpha_T_R.pdf}
+\caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur $T$ und Widerstand $R$.
+        (b) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur und Ausdehnungskoeffizient $\alpha$.}
+\label{fig: alpha_T_R}
+\end{figure}
+
+Aus einer Anpassung der Daten an eine quadratische Funktion ergibt sich: 
+\begin{align}
+\begin{aligned}
+    T(R) &= \input{../analysis/results/result_param_T0.tex} R^2 \\
+            &+ \input{../analysis/results/result_param_T1.tex} R \\
+            &+ \input{../analysis/results/result_param_T2.tex} 
+\end{aligned}             
+\end{align}
+Der Fit ist ebenfalls in Abbildung~\ref{fig: alpha_T_R}(a) einzusehen.
