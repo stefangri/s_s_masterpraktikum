@@ -96,3 +96,26 @@ Nach einigen Umformungsschritten - nachlesbar in Quelle \cite[S. 220]{marx} folg
 Hierbei ist $\frac{1}{\exp\left(\hbar\omega\beta\right) -1}$ die \emph{Bose-Einstein Statistik}.
 
 \subsubsection{Einstein-Modell}
+Das von Albert Einstein im Jahre 1907 formulierte Modell nimmt eine konstante
+Dispersionrelation für alle $3N$ Eigenschwingung an:
+\begin{equation}
+  \label{eq:dispersion_einstein}
+  \omega=\omega\ua{E}=\map{const}.
+\end{equation}
+Für die Wärmekapazität folgt somit mit Gleichung \eqref{eq:innere_Energie_Quantenmechanik_diskrete}:
+\begin{equation}
+  \label{eq:CV_einstein}
+  C\ua{V}^{\map{E}}= 3N\map{k_B}\left(\frac{\Theta\ua{E}}{T}\right)^2\frac{\exp\left(\frac{\Theta\ua{E}}{T}\right)}{\left(\frac{\Theta\ua{E}}{T}-1\right)^2}, \quad \text{mit} \quad \Theta\ua{E} = \frac{\hbar\omega\ua{E}}{\map{k_B}}
+\end{equation}
+Wird die Approximation \eqref{eq:CV_einstein} für hohe und niedrige Temperatruen
+betrachtet, folgt:
+\begin{equation}
+  C\ua{V}^{\map{E}}=
+  \begin{cases}
+     3N\map{k_B}\left(\frac{\Theta\ua{E}}{T}\right)^2 \exp\left(-\frac{\Theta\ua{E}}{T}\right), &\text{für} T\ll\Theta\ua{E}  \\
+     3N\map{k_B}, & \text{für} T \gg \Theta\ua{E}
+  \end{cases}
+\end{equation}
+Bei der Betrachtung der Anzahl der Atome pro $\si{mol}$ kann $N$ durch $\map{N_A}$
+ersetzt werden und es ergibt sich das in \eqref{eq:dulong_petit} definierte
+Dulong-Petische Gesetz.
