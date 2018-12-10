@@ -1,4 +1,39 @@
 \setcounter{page}{1}
 \section*{Zielsetzung}
+In dem Versuch V47 wird die Molwärme von Kupfer $\ce{Cu}$ bestimt werden.
+Molwärme wird hierbei als Synonym für die \emph{molare Wärmekapazität} verwendet.
+Diese gibt die Menge an Wärme an, die benötigt ist um $\SI{1}{\mol}$ eines Stoffes
+bzw. Elements um einen $\SI{1}{\kelvin}$ zu erwärmen.
 
 \section{Theorie}
+Im Folgenden werden drei Methodiken zur Bestimmung der Molwärme erläutert.
+Zunächst wird die Molwärme klassisch hergeleitet. Anschließend werden zwei
+quantenmechanische Modelle von \emph{Einstein} und \emph{Debye}
+vorgestellt. Hierfür werden die Quellen \cite{} und \cite{}[S.215] verwendet.
+
+Weiterhin kann die Molwärme bei unterschiedlichen Bedingungen betrachtet werden.
+Wird der äußere Druck $p$ festgehalten, wird von der Wärmekapazität bei konstantem
+Druck gesprochen. Aus der Thermodynamik folgt für diesen Fall der Zusammenhang:
+\begin{equation}
+  \label{eq:C_P}
+  C\ua{p} = \left.\frac{\partial Q}{\partial T}\right|_{\map{p}}.
+\end{equation}
+Anstatt des Druckes $p$ kann auch das Volumen des Festkörpers $V$ festgehalten
+werden. Dies definiert die Wärmekapazität bei konstantem Volumen:
+\begin{equation}
+  \label{eq:C_V}
+  C\ua{V} = \left.\frac{\partial Q}{\partial T}\right|_{\map{V}} = \left. \frac{\partial U}{\partial T}\right|_{\map{V}}.
+\end{equation}
+Auf Grund der Tatsache das sich $C\ua{V}$ aus der inneren Energie $U$ ableiten
+lässt, ist die Beschreibung über ein theoretisches Modell leichter zu realisieren.
+Jedoch kann in einem Experiment kaum sichergestellt werden, dass das Volumen einer
+Probe konstant bleibt. Aus diesem Grund wird meist $C_p$ gemssen und mit Hilfe
+der folgenden Formel
+\begin{equation}
+  \label{eq:Umrechnung_CP_CV}
+  C\ua{p} - C\ua{V} = 9\alpha^2 \kappa V_0 T
+\end{equation}
+umgerechnet werden. Die in der Gleichun \eqref{eq:Umrechnung_CP_CV} auftretenden
+Größen sind - der lineare Ausdehungskoeffizient $\alpha$, das Kompressionsmodul
+$\kappa$ und das Molvolumen $V_0$.
+\subsection{Klassische Betrachtung}
