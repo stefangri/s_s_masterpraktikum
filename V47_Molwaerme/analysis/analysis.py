@@ -13,6 +13,7 @@ u = UnitRegistry()
 Q_ = u.Quantity
 import os
 from scipy.integrate import quad
+x = 2
 
 def abs_path(filename):
     return os.path.join(os.path.dirname(__file__), filename)
