@@ -112,10 +112,32 @@ betrachtet, folgt:
 \begin{equation}
   C\ua{V}^{\map{E}}=
   \begin{cases}
-     3N\map{k_B}\left(\frac{\Theta\ua{E}}{T}\right)^2 \exp\left(-\frac{\Theta\ua{E}}{T}\right), &\text{für} T\ll\Theta\ua{E}  \\
-     3N\map{k_B}, & \text{für} T \gg \Theta\ua{E}
+     3N\map{k_B}\left(\frac{\Theta\ua{E}}{T}\right)^2 \exp\left(-\frac{\Theta\ua{E}}{T}\right), &\text{für } T\ll\Theta\ua{E}  \\
+     3N\map{k_B}, & \text{für } T \gg \Theta\ua{E}
   \end{cases}
 \end{equation}
 Bei der Betrachtung der Anzahl der Atome pro $\si{mol}$ kann $N$ durch $\map{N_A}$
 ersetzt werden und es ergibt sich das in \eqref{eq:dulong_petit} definierte
-Dulong-Petische Gesetz.
+Dulong-Petische Gesetz. In der Abbildung \ref{fig: einstein_modell_plot} ist zu erkennen, wie das Einstein-Modell
+experimentelle Daten beschreibt.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.65\textwidth]{./content/images/einstein.PNG}
+  \caption{Die experimentell Bestimmte molare Wärmekapazität von Diamant. Zusätzlich ist die durch das Einstein-Modell
+  gegebene theoretische Beschreibung mit eigezeichnet \cite[S. 225]{marx}.}
+  \label{fig: einstein_modell_plot}
+\end{figure}
+Das Einstein-Modell eignet sich sich gut, wenn optische Phononen dominieren oder eine
+flache Dispersionsrelation vorligen (vgl. Abbildung \ref{fig: dispersions_relation}).
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.65\textwidth]{./content/images/optische_akustische.PNG}
+  \caption{Schematische Darstellung von optischen und akustischen Dispersionszweigen \cite[S. 223]{marx}.}
+  \label{fig: dispersions_relation}
+\end{figure}
+Zusätzlich ist in der Abbildung \ref{fig: dispersions_relation} deutlich zu erkennen,
+das akustische Phonen um $0$ eine annähernd lineare Dispersionsrealtion aufweist.
+Dies ist die Motivation für das zweite quantenmechanische Modell, das
+Debye-Modell.
+
+\subsubsection{Debye-Modell}
