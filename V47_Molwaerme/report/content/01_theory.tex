@@ -9,7 +9,7 @@ bzw. Elements um einen $\SI{1}{\kelvin}$ zu erwärmen.
 Im Folgenden werden drei Methodiken zur Bestimmung der Molwärme erläutert.
 Zunächst wird die Molwärme klassisch hergeleitet. Anschließend werden zwei
 quantenmechanische Modelle von \emph{Einstein} und \emph{Debye}
-vorgestellt. Hierfür werden die Quellen \cite{} und \cite{}[S.215] verwendet.
+vorgestellt. Hierfür werden die Quellen \cite{anleitungV47} und \cite[S. 215]{marx} verwendet.
 
 Weiterhin kann die Molwärme bei unterschiedlichen Bedingungen betrachtet werden.
 Wird der äußere Druck $p$ festgehalten, wird von der Wärmekapazität bei konstantem
@@ -22,7 +22,7 @@ Anstatt des Druckes $p$ kann auch das Volumen des Festkörpers $V$ festgehalten
 werden. Dies definiert die Wärmekapazität bei konstantem Volumen:
 \begin{equation}
   \label{eq:C_V}
-  C\ua{V} = \left.\frac{\partial Q}{\partial T}\right|_{\map{V}} = \left. \frac{\partial U}{\partial T}\right|_{\map{V}}.
+  C\ua{V} = \left.\frac{\partial Q}{\partial T}\right|_{V} = \left. \frac{\partial U}{\partial T}\right|_{V}.
 \end{equation}
 Auf Grund der Tatsache das sich $C\ua{V}$ aus der inneren Energie $U$ ableiten
 lässt, ist die Beschreibung über ein theoretisches Modell leichter zu realisieren.
@@ -37,3 +37,62 @@ umgerechnet werden. Die in der Gleichun \eqref{eq:Umrechnung_CP_CV} auftretenden
 Größen sind - der lineare Ausdehungskoeffizient $\alpha$, das Kompressionsmodul
 $\kappa$ und das Molvolumen $V_0$.
 \subsection{Klassische Betrachtung}
+Klassisch lässt sich die mittlere freie innere Energie $\left<U\right>$ aus dem
+\emph{Äquipartitionstheorem} ableiten. Dieses besagt, dass auf jeden quadratischen
+Freiheitsgrad eine mittlere Energie von $\frac{1}{2}\map{k_B}T$ entfällt.
+Für ein einzelnes Atom ergibt sich somit aus der kinetischen Energie $\frac{1}{2}mv_i^2$ und
+dem quadratischen Potential der Gittschwingung $\frac{1}{2}kx_i^2$:
+\begin{equation}
+  \label{eq:innere_Energie}
+  \left<U\,\right> = \underbrace{3}_{\map{Raumrichtungen}}\map{k_B}T.
+\end{equation}
+Für die innere Energie pro $\si{mol}$ ergibt sich mit der Avogradokonstante
+$\map{N_A}$ folglich:
+\begin{equation}
+  \label{eq:klassische_innere_Energie}
+  \left<U\,\right> = 3\underbrace{\map{N_A} \map{k_B}}_{=\map{R}} T.
+\end{equation}
+Aus der Gleichung \eqref{eq:klassische_innere_Energie} lässt sich das
+\emph{Dulong-Petische Gesetz} ableiten:
+\begin{equation}
+  \label{eq:dulong_petit}
+  C\ua{V}=\left. \frac{\partial U}{\partial T}\right|_{V}=3R
+\end{equation}
+Nach dem Dulong-Petischen Gesetz ist die Wärmekapazität, jedoch Material und
+Temperaturunabhängig. Im späteren Verlauf werden wir zeigen, dass das Dulong-Petische Gesetz
+im Grenzfall aus den quantenmechanischen Theorien folgt.
+
+\subsection{Quantenmechanische Betrachtung}
+Die bisherige klassiche Betrachtungsweise der inneren Energie, hat die
+Quantisierung der Gitterschwingung noch nicht berücksichtigt.
+Gitterschwinugngen lassen sich als Oszillatoren vereinfacht darstellen. Für diese
+sind die zugehörigen Eigenenergien gegebn durch
+\begin{equation}
+  \label{eq:energie_quanten_oszi}
+  E_n = \hbar \omega \left(n + \frac{1}{2}\right).
+\end{equation}
+Über die Zustandssumme des quantenmechanischen Systems lässt sich die innere Energie
+für $3N$ harmonische Oszillatoren wie folgt berechnen:
+\begin{equation}
+  \label{eq:innere_energie}
+  \left<U\right> = -3N\frac{1}{Z}\partial_\beta Z, \quad \text{mit} \quad \beta = \frac{1}{\map{k_B}T}
+\end{equation}
+Hierbei ist die Zustandsumme für die obige Energie (vgl. Gleichung \eqref{eq:energie_quanten_oszi})
+gegeben als
+\begin{equation}
+  \label{eq:Zustandsumme}
+  Z = \sum_n^\infty \exp\left(-\beta\hbar\omega\left(n+\frac{1}{2}\right)\right).
+\end{equation}
+Wird die Zustandsumme \eqref{eq:Zustandsumme} in die Gleichung \eqref{eq:innere_energie}
+eingesetzt folgt:
+\begin{equation*}
+  \left<U\right>= 3N  \frac{ \sum_n^\infty \hbar\omega\left( n+ \frac{1}{2} \right)\exp\left(-\beta\hbar\omega\left( n+\frac{1}{2} \right) \right) }{ \sum_n^\infty \exp\left( -\beta\hbar\omega\left( n+\frac{1}{2} \right) \right)}.
+\end{equation*}
+Nach einigen Umformungsschritten - nachlesbar in Quelle \cite[S. 220]{marx} folgt für die innere Energie:
+\begin{equation}
+  \label{eq:innere_Energie_Quantenmechanik_diskrete}
+  \left<U\right> = 3N\hbar\omega\left(\frac{1}{2} + \frac{1}{\exp\left(\hbar\omega\beta\right) -1}\right).
+\end{equation}
+Hierbei ist $\frac{1}{\exp\left(\hbar\omega\beta\right) -1}$ die \emph{Bose-Einstein Statistik}.
+
+\subsubsection{Einstein-Modell}
