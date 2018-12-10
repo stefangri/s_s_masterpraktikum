@@ -128,7 +128,7 @@ plt.vlines(df_full['x-axis'].values[1:].astype('float')[peak_indexes[0]][1:],
            ymax=df_full['2'].values[1:].astype('float')[peak_indexes[0]][1:]+0.2,
            color='C3',
            linestyle='dashed',
-           label='Mode shift')
+           label='Mode hope')
 plt.xlabel(r'$t \, / \, \mathrm{s}$')
 plt.ylabel(r'$U \, / \, \mathrm{V}$')
 plt.legend()
