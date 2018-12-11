@@ -14,6 +14,7 @@ Q_ = u.Quantity
 import os
 from scipy.integrate import quad
 from pandas import DataFrame
+from scipy.interpolate import interp1d
 
 def abs_path(filename):
     return os.path.join(os.path.dirname(__file__), filename)
@@ -55,7 +56,19 @@ kappa = Q_(14e10, 'pascal') #gross
 V_0 = Q_(7.0922e-6, 'm**3 / mol') #http://periodictable.com/Elements/029/data.html
 
 #theoriewert
-T_debye_theorie = Q_(343, 'kelvin')
+#T_debye_lit = Q_(343, 'kelvin')
+
+N_L = m_probe / M_cu * const.N_A * u('1 / mol')
+V = V_0 * m_probe / M_cu
+v_long = Q_(4.7, 'km / s').to('m / s')
+v_trans = Q_(2.26, 'km / s').to('m / s')
+
+omega_debye = (18 * np.pi**2 * N_L / V / (1 / v_long**3 + 2 / v_trans**3))**(1 / 3)
+
+r.add_result(name = 'omega_debye', value = omega_debye)
+
+T_debye_theorie = Q_(const.hbar, 'J * s') * omega_debye / Q_(const.k, 'J / kelvin')
+r.add_result(name = 'T_debye_theorie', value = T_debye_theorie)
 
 
 #Gaskonstanstante 
@@ -70,35 +83,34 @@ def C_v(C_p, alpha, T):
 
 #Fits für Ausdehnungskoeffizient und T-R-Charakteristik
 T, alpha = np.genfromtxt(abs_path('data/alpha.txt'), unpack = True)
+model_alpha = interp1d(T, alpha  * 1e-6)
 
+#def model_alpha(Temp):
+#    T, alpha = np.genfromtxt(abs_path('data/alpha.txt'), unpack = True)
+#    return np.interp(Temp, T, alpha)
 
-def func_alpha(T, a, b, c, d):
-    return a * T**3 + b * T**2 + c * T + d
-
-params_alpha, cov_alpha = curve_fit(func_alpha, T, alpha)
-
-correlated_params = correlated_values(params_alpha, cov_alpha)
-
-params_alpha_units = []
-for i in range(len(correlated_params)):
-    params_alpha_units.append(Q_(correlated_params[i].n, f'1 / kelvin**{4 - i}'))
-    r.add_result(f'param_alpha{i}', params_alpha_units[i])
-
-
-def model_alpha(T):
-    return func_alpha(T, *params_alpha_units) * 1e-6
-
+#def func_alpha(T, a, b, c, d):
+#    return a * T**3 + b * T**2 + c * T + d
+#
+#params_alpha, cov_alpha = curve_fit(func_alpha, T, alpha)
+#
+#correlated_params = correlated_values(params_alpha, cov_alpha)
+#
+#params_alpha_units = []
+#for i in range(len(correlated_params)):
+#    params_alpha_units.append(Q_(correlated_params[i], f'1 / kelvin**{4 - i}'))
+#    r.add_result(f'param_alpha{i}', params_alpha_units[i])
 
 
 rcParams['figure.figsize'] = 5.906, 3
 fig, ax = plt.subplots(1, 2)
 
-T_plot = np.linspace(60, 310, 1000)
+T_plot = np.linspace(T[0], T[-1], 1000)
 ax[1].plot(T, alpha, '.', label = 'Daten')
-ax[1].plot(T_plot, func_alpha(T_plot, *params_alpha), 'r-', label = 'Fit')
+ax[1].plot(T_plot, model_alpha(T_plot) * 1e6, 'r-', label = 'Interpolation')
 ax[1].set_xlabel('$T / \si{\kelvin}$')
 ax[1].set_ylabel(r'$\alpha / \si{10^{-6} \kelvin}^{-1}$')
-ax[1].set_xlim(T_plot[0], T_plot[-1])
+ax[1].set_xlim(T_plot[0] - 10, T_plot[-1] + 10)
 ax[1].legend(loc = 'lower right')
 ax[1].text(0.01 , 0.96, r'(b)', horizontalalignment='left', verticalalignment='top', transform = ax[1].transAxes)
 
@@ -151,10 +163,11 @@ t = Q_(unp.uarray([300 * i for i in range(9900 // 300)], np.repeat(1, 9900 // 30
 
 
 T_zyl = model_T(R_zyl).to('kelvin')
+
 T_prob = model_T(R_prob).to('kelvin')
 
-#mean_diff = np.mean(T_prob - T_zyl)
-#r.add_result('mean_T_diff', mean_diff)
+T_mean = (T_prob[1:] + T_prob[:-1]) / 2
+
 
 fig, ax = plt.subplots(1, 2)
 
@@ -180,20 +193,20 @@ fig.savefig(abs_path('results/temperaturen.pdf'), bbox_inches='tight', pad_inche
 
 
 
-
-
 #Bestimmung der Debye-Temperatur
 
 C_p = C_p(U[:-1], I[:-1], Q_(np.diff(t), 'second'), Q_(np.diff(T_prob), 'kelvin'))
-C_v = C_v(C_p, model_alpha((T_prob[1:] + T_prob[:-1]) / 2), (T_prob[1:] + T_prob[:-1]) / 2).to('joule / kelvin / mol')
+alpha = Q_(model_alpha(noms(T_mean[:-1])), '1 / kelvin')
 
-print(DataFrame({'C_V': C_v}))
+C_v = C_v(C_p[:-1], alpha, T_mean[:-1]).to('joule / kelvin / mol')
+
 
 
 
 rcParams['figure.figsize'] = 5.906, 4.5
 fig, ax = plt.subplots(1, 1)
-ax.plot(noms((T_prob[1:] + T_prob[:-1]) / 2), noms(C_v), 'o', label = 'Daten')
+ax.errorbar(x = noms(T_mean[:-1]), y = noms(C_v), xerr = stds(T_mean[:-1]), yerr = stds(C_v), fmt = '.', label = 'Daten', linestyle = None)
+ax.errorbar(x = noms(T_mean[1]), y = noms(C_v)[1], xerr = stds(T_mean[1]), yerr = stds(C_v)[1], fmt = '.', label = 'Ausreißer', linestyle = None, color = 'r')
 
 
 
@@ -201,22 +214,62 @@ ax.plot(noms((T_prob[1:] + T_prob[:-1]) / 2), noms(C_v), 'o', label = 'Daten')
 def c_v_debye(T, T_D):
     return [9 * R_gas.magnitude * (T / T_D)**3 * (quad(lambda x: x**4 * np.exp(x) / (np.exp(x) - 1)**2, 0, T_D / T))[0] for T in T]
 
-params, cov = curve_fit(c_v_debye, noms((T_prob[1:] + T_prob[:-1]) / 2), noms(C_v), p0 = [300])
-print(correlated_values(params, cov))
+#params, cov = curve_fit(c_v_debye, noms((T_prob[1:] + T_prob[:-1]) / 2), noms(C_v), p0 = [300])
+#print(correlated_values(params, cov))
 T_plot = np.linspace(60, 350, 1000)
 
 ax.set_xlim(T_plot[0], T_plot[-1])
-ax.plot(T_plot, c_v_debye(T_plot, *params), 'r-', label = 'Fit')
+#ax.plot(T_plot, c_v_debye(T_plot, *params), 'r-', label = 'Fit')
 ax.axhline(y = 3 * R_gas.magnitude, color = 'k', linestyle = '--', label = '$3 R$')
-ax.plot(T_plot, c_v_debye(T_plot, T_debye_theorie.magnitude), 'g-', label = 'Literatur')
+ax.plot(T_plot, c_v_debye(T_plot, T_debye_theorie.magnitude), 'g-', label = 'Theorie')
 ax.set_xlabel(r'$\overline{T} / \si{\kelvin}$')
 ax.set_ylabel(r'$C_V / \si{\joule  \per \kelvin \per \mol}$')
+
+
+
+def weight_mean(X):
+    n = noms(X)
+    s = stds(X)
+    mean = sum(n * 1 / s**2) / sum(1 / s**2)
+    std = np.sqrt(1 / sum(1 / s**2))
+    return ufloat(mean, std)
+
+# Nochmal mit anderer Methode
+
+data = np.genfromtxt(abs_path('data/tab.txt'), unpack = True) 
+data = data.T
+best_theta_D = []
+best_theta_std = []
+mask_25 = noms(C_v) < 40
+for C_v_i in C_v[mask_25].magnitude:
+    index = np.unravel_index((abs(data - C_v_i.n)).argmin(), data.shape)
+    theta = index[0] + 0.1 * index[1]
+    best_theta_D.append(theta)
+    index_upper = np.unravel_index((abs(data - C_v_i.n - C_v_i.s)).argmin(), data.shape)
+    index_lower = np.unravel_index((abs(data - C_v_i.n + C_v_i.s)).argmin(), data.shape)
+    theta_upper = index_upper[0] + 0.1 * index_upper[1]
+    theta_lower = index_lower[0] + 0.1 * index_lower[1]
+    best_theta_std.append(max(abs(theta - theta_lower), abs(theta - theta_upper)))
+
+best_theta_D = unp.uarray(best_theta_D, best_theta_std)
+theta_D = best_theta_D * (T_mean[:-1])[mask_25]
+
+theta_D_mean = weight_mean(theta_D)   
+r.add_result(name = 'T_debye_exp', value = Q_(theta_D_mean, 'kelvin'))  
+
+ax.plot(T_plot, c_v_debye(T_plot, theta_D_mean.n), 'r-', label = 'Experiment')
+ax.fill_between(T_plot, c_v_debye(T_plot, theta_D_mean.n + theta_D_mean.s), c_v_debye(T_plot, theta_D_mean.n - theta_D_mean.s), color='r', alpha=0.3)
+from matplotlib.patches import Rectangle
+rect = Rectangle((0,0), 0,0, color='r', alpha=0.3, label = '$1\sigma$')
+ax.add_patch(rect)
+
 ax.legend()
+
 
 fig.tight_layout()
 fig.savefig(abs_path('results/C_V.pdf'), bbox_inches='tight', pad_inches = 0)
 
 
-# Nochmal mit anderer Methode
+
 
 

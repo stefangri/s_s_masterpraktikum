@@ -3,20 +3,33 @@
 
 
 \subsection{Vorbereitende Berechnungen}
+Für spätere Berechnungen ist zunächst der Zusammenhang zwischen dem Widerstand der \ce{Pt}-Elemente und der Temperatur 
+zu herzustellen. Hierzu sind im Skript~\cite{anleitung47} die Daten aus Tabelle~\ref{} gegeben, die durch die quadratische 
+Funktion
+\begin{equation}
+    T(R) = \SI{0.00134}{\kelvin \per \ohm\squared} R^2 + \SI{2.296}{\kelvin \per \ohm} R + \SI{30.13}{\kelvin}
+    \label{eq: T_R}
+\end{equation}
+beschrieben werden. Zudem ist für die Umrechnung zwischen $C_p$ und $C_V$ mit Gleichung~\eqref{} der Temperaturverlauf 
+$\alpha(T)$ des Extinktionskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{} entnommen 
+worden und in Tabelle~\ref{} eingetragen. Die Daten werden linear interpoliert und somit später Werte für $\alpha$ für 
+beliebige Temperaturen zwischen $\SI{80}{\kelvin}$ und $\SI{300}{\kelvin}$ bestimmt. Von einer Betrachtung von Fehlern 
+des Modells wird wie in~\eqref{eq: T_R} abgesehen. Einer graphische Darstellung der Messpunkte und angenommenen 
+Modelle befindet sich in Abbildung~\ref{fig: alpha_T_R}.
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{../analysis/results/alpha_T_R.pdf}
-\caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur $T$ und Widerstand $R$.
+\caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Beschreibung des Zusammenhangs zwischen Temperatur 
+        $T$ und Widerstand $R$.
         (b) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur und Ausdehnungskoeffizient $\alpha$.}
 \label{fig: alpha_T_R}
 \end{figure}
 
-Aus einer Anpassung der Daten an eine quadratische Funktion ergibt sich: 
-\begin{align}
-\begin{aligned}
-    T(R) &= \input{../analysis/results/result_param_T0.tex} R^2 \\
-            &+ \input{../analysis/results/result_param_T1.tex} R \\
-            &+ \input{../analysis/results/result_param_T2.tex} 
-\end{aligned}             
-\end{align}
-Der Fit ist ebenfalls in Abbildung~\ref{fig: alpha_T_R}(a) einzusehen.
+
+\subsection{Bestimmung der Debye-Temperatur von Kupfer}
+
+
+Als Mittelwert ergibt sich: 
+\begin{equation}
+        \Theta\ua{D, exp} = \input{../analysis/results/result_T_debye_exp.tex}
+\end{equation}
