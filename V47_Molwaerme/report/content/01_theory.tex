@@ -141,3 +141,80 @@ Dies ist die Motivation für das zweite quantenmechanische Modell, das
 Debye-Modell.
 
 \subsubsection{Debye-Modell}
+Im Debye-Modell wird eine lineare Dispersionrelation angenommen:
+\begin{equation*}
+   \omega = \hbar \be{\vec{k}}.
+\end{equation*}
+Hierdurch muss die Summation in Gleichung \eqref{eq:Zustandsumme} durch eine
+Integration ersetzt werden. Die Integrationsgrenzen wird so gewählt, dass über die
+erste Brillouin-Zone integriert wird. Hierbei wird die erste Brillouin-Zone
+weiter als Kugel mit dem Radius $k\ua{D}$ genährt. Der Betrag des Debye-Wellenvektors
+$k\ua{D}$ kann über die Zustandsdichte bestimmt weden. Ein Zustand besitzt im $k$-Raum
+ein Volumen $V$ von $V=\frac{8\pi^3}{L^3}$. Ingesamt betrachten wir $N$ Zustände pro
+Dispersionszweig, daraus ergibt sich:
+\begin{align*}
+  N\left(\frac{2\pi}{L}\right)^3 &= \frac{4}{3}\pi k^3\ua{D} \\
+  \Leftrightarrow \quad k\ua{D}&=\left(6\pi^2 \frac{N}{V}\right)^{\frac{1}{3}}, \quad \text{mit} \quad L^3 = \left(\frac{2\pi}{V}\right)
+\end{align*}
+Für eine lineare Dispersion folgt für die Zustandsdichte:
+\begin{equation}
+  \label{eq:Zustandsichte_debye}
+D(\omega_i) = \frac{V}{\left(2\pi\right)^3} \int_{\omega=\map{const}} \frac{\map{d}S\ua{k}}{\be{\nabla_k \omega(\vec{k})}}= \frac{V}{2\pi^2}\frac{\omega^2}{\nu_i^3}
+\end{equation}
+Hierbei ist das in Gleichung \eqref{eq:Zustandsichte_debye} auftretende Integral
+über der Kugel mit dem Radius $\omega=\map{const}$ und $\nu_i$ die Schallgeschwindigkeit
+des $i$-ten Dispersionszweig. In diesem Fall werden zwei transversale und ein optischer
+Ast betrachtet:
+\begin{equation}
+  \label{eq:Zustandsdichte_all_togther}
+  D(\omega) = \frac{V \omega^2}{2\pi^2} \left(\frac{1}{\nu^3\ua{L}} + \frac{2}{\nu^3\ua{T}}\right)
+\end{equation}
+Nun wird ausgehend von dem Debye-Wellenvektor die Debye-Frequenz $\omega\ua{D}$ eingeführt:
+\begin{equation}
+  \label{eq:Debye_freuqenz}
+  \omega\ua{D}^3 = \frac{18 \pi^2 N}{V}\left(\frac{1}{\nu^3\ua{L}} + \frac{2}{\nu^3\ua{T}}\right)^{-1}=\frac{6\pi^2\nu^3N}{V}.
+\end{equation}
+Hierbei wurde eine Mittelung über alle Schallgeschwindigkeiten $\nu^3$ durchgeführt:
+\begin{equation*}
+  \nu^3= \frac{1}{3}\left(\frac{1}{\nu^3\ua{L}} + \frac{2}{\nu^3\ua{T}}\right)^{-1}.
+\end{equation*}
+Wird Gleichung \eqref{eq:Debye_freuqenz} in Gleichung \eqref{eq:Zustandsdichte_all_togther}
+eingesetzt ergibt sich:
+\begin{equation}
+  \label{eq:Zustandsdichte_Debye}
+  D(\omega)= \frac{9N\omega^2}{\omega\ua{D}^3}.
+\end{equation}
+Damit können wir die Wärmekapazität definieren als:
+\begin{equation}
+  \label{eq:CVD_ohne_x}
+  C^{\map{D}}\ua{V}=\frac{9N\hbar}{\omega_D}\frac{\partial}{\partial T}\int^{\omega_D}{0}\frac{\omega^3}{\exp\left(\hbar\omega\beta\right)-1} \map{d}\omega.
+\end{equation}
+Nach der Durchführung der Ableitung und Substitution mit $x=\hbar\omega\beta$
+folgt für die spezifische Wärmekapazität:
+\begin{equation}
+  \label{eq:CV_debye}
+  C^{\map{D}}\ua{V}=9N\map{k_B}\left(\frac{T}{\Theta_D}\right)^3\int^{\Theta_D/T}_{0} \frac{x^4\exp(x)}{(\exp(x)-1)^2}\map{d}x.
+\end{equation}
+Hierbei wurde zusätzlich die \emph{Debye-Temperatur} eingeführt als
+\begin{equation}
+  \label{eq:Debye_Temp}
+  \Theta_D = \frac{\hbar\omega_D}{\map{k_B}}.
+\end{equation}
+In Abbildung \ref{fig: CVD_plot} ist Formel \eqref{eq:CV_debye} grafisch dargestellt.
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.65\textwidth]{./content/images/debye.PNG}
+  \caption{Schematische Darstellung der Debye-Wärmekapazität $C^{\map{D}}\ua{V}$ (vgl. Gleichung \eqref{eq:CV_debye})  \cite[S. 228]{marx}.}
+  \label{fig: CVD_plot}
+\end{figure}
+Für hohe und tiefe Temperaturen ergibt sich approximativ:
+\begin{equation}
+  C\ua{V}^{D}=
+  \begin{cases}
+    \frac{12\pi^4}{5}N\map{k_B}\left(\frac{T^3}{\Theta_D}\right)^3, &\text{für } T\ll\Theta\ua{D}  \\
+     3N\map{k_B}, & \text{für } T \gg \Theta\ua{D}.
+  \end{cases}
+\end{equation}
+Damit folgt aus dem Debye-Modell der selbe hochtemperatur Limes, wie beim Einstein-Modell.
+Die Debye-Temperatur kann somit als Maß dafür verwendet werden, ob eine klassiche
+oder quantenmechanische Beschreibung der Wärmekapazität einer Probe benötigt wird.
