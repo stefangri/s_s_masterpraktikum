@@ -11,25 +11,60 @@ Funktion
     \label{eq: T_R}
 \end{equation}
 beschrieben werden. Zudem ist für die Umrechnung zwischen $C_p$ und $C_V$ mit Gleichung~\eqref{} der Temperaturverlauf 
-$\alpha(T)$ des Extinktionskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{} entnommen 
-worden und in Tabelle~\ref{} eingetragen. Die Daten werden linear interpoliert und somit später Werte für $\alpha$ für 
-beliebige Temperaturen zwischen $\SI{80}{\kelvin}$ und $\SI{300}{\kelvin}$ bestimmt. Von einer Betrachtung von Fehlern 
-des Modells wird wie in~\eqref{eq: T_R} abgesehen. Einer graphische Darstellung der Messpunkte und angenommenen 
+$\alpha(T)$ des Ausdehnungskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{} entnommen 
+worden und in Tabelle~\ref{} eingetragen. Die Daten werden linear interpoliert und somit Werte von $\alpha$ für 
+beliebige Temperaturen zwischen $\SI{80}{\kelvin}$ und $\SI{300}{\kelvin}$ bestimmt. Von einer Betrachtung der Ungenauigkeit 
+dieses Modells wird wie in~\eqref{eq: T_R} abgesehen. Eine graphische Darstellung der Messpunkte und angenommenen 
 Modelle befindet sich in Abbildung~\ref{fig: alpha_T_R}.
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{../analysis/results/alpha_T_R.pdf}
 \caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Beschreibung des Zusammenhangs zwischen Temperatur 
         $T$ und Widerstand $R$.
-        (b) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur und Ausdehnungskoeffizient $\alpha$.}
+        (b) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur und
+         Ausdehnungskoeffizient $\alpha$.}
 \label{fig: alpha_T_R}
 \end{figure}
 
 
 \subsection{Bestimmung der Debye-Temperatur von Kupfer}
+Die gewonnen Messdaten für den Widerstand der Probe und des Zylinders, sowie der Spannung und des Stroms
+als Funktion der Zeit sind in Tabelle~\ref{} aufgeführt. Für alle Daten wird eine $1$ auf der letzten
+Nachkommastelle der Messwerte als Fehler angenommen. 
+Mit dem Modell dem Modell~\eqref{} ergeben sich aus den Widerständen die Temperaturen von Probe und Zylinder.
+Die Temperaturverläufe sind zudem in Abbildung~\ref{}(a) gezeigt. Wie im vorherigen Abschnitt beschrieben, ist es 
+wichtig, dass die Temperaturen von Zylinder und Probe stets gleich sind. Da in Abbildung~\ref{} Abweichungen nicht 
+deutlich zu erkennen sind, ist in Abbildung~\ref{}(b) ebenfalls die Differnez der beiden Temperaturen 
+aufgetragen. Hier wird ersichtlich, dass die Temperaturabweichungen im Mittel sehr klein gehalten werden konnte, es
+jedoch vereinzelt zu Temperaturdifferenzen bis zu $\sim\!\SI{4}{\kelvin}$ gekommen ist.
 
+Aus den Daten kann nun zunächst die Wärmekapazität unter konstantem Druck $C_p$ bestimmt werden. Hierzu werden 
+die Temperaturdifferenzen und Zeitdifferenzen aus den Daten in Tabelle~\ref{} gebildet und zusammen mit den 
+zugehörigen Spannungen und Strömen in Formel~\eqref{} eingesetzt. Zur Berechnung der Wärmeleitfähigkeit 
+bei konstantem Volumen wird Gleichung~\eqref{} verwendet. Die hierhin auftretende Temperatur wird als Mittel 
+der beiden Temperaturen, aus denen die Temperaturdifferenz für Gleichung~\eqref{} bestimmt wurde, angenommen. 
+Der letzte Wert übersteigt den Wert $\SI{300}{\kelvin}$ und ist damit nicht mehr mit dem Modell für $\alpha(T)$
+zu beschreiben. Er wird daher nicht berücksichtigt.
 
-Als Mittelwert ergibt sich: 
+In Tabelle~\ref{} sind die Ergebnisse für $C_V$ eingetragen und in Abbildung~\ref{} graphisch dargestellt. 
+Der rot eingefärbte Wert weicht deutlich von dem zu erwartenden Verlauf ab. Dies lässt sich durch Betrachtung der 
+zugehörigen Temperaturwerte in Tabelle~\ref{} bzw. deren Darstellung in Abbildung~\ref{} diskutieren. In Abbildung~\ref{}(b)
+sind die Differenzen zwischen $T\ua{prob}$ und $T\ua{Zyl}$ für die jenigen Temperaturwerte, die in die Berechnung des 
+ausreißenden Datenpunktes in Abbildung~\ref{} eingehen, ebenfalls in rot markiert. Beide sind relativ hoch im Vergleich zu den 
+sonstigen auftretenden Abweichungen, was eine mögliche Erklärung für den fehlerhaften Datenpunkt darstellt.  
+
+Nun soll eine gute Schätzung für die Debye-Temperatur gefunden werden. Hierzu werden die gefundenen Daten mit der 
+Wertetabelle~\ref{} aus~\cite{} verglichen. Einem Bestwert $C_V$ wird derjenige Quotient $\Theta / T$ zugeordnet, dessen 
+zugehöriger Wert in der Tabelle die geringste Abweichung hat. Um die Fehler $\Delta C_V$ sinnvoll bei diesem 
+Vorgehen zu berücksichtigen werden analog die Werte $\Theta / T$ für $C_V + \Delta C_V$ und $C_V - \Delta C_V$ bestimmt. 
+Als Fehler für $\theta / T$ wird dann die maximale Abweichung dieser beiden Werte vom dem für den Bestwert bestimmten 
+Wert angenommen. Durch Multiplikation mit der Temperatur kann jeweils eine Debye-Temperatur berechnet werden. 
+Als mit den inversen Varianzen gewichteter Mittelwert ergibt sich: 
 \begin{equation}
-        \Theta\ua{D, exp} = \input{../analysis/results/result_T_debye_exp.tex}
+        \Theta\ua{D, exp} = \input{../analysis/results/result_T_debye_exp.tex}.
 \end{equation}
+
+\begin{figure}
+\centering
+\includegraphics[scale = 1]{../analysis/results/C_V.pdf}
+\end{figure}
