@@ -164,7 +164,7 @@ t = Q_(unp.uarray([300 * i for i in range(9900 // 300)], np.repeat(1, 9900 // 30
 
 
 T_zyl = model_T(R_zyl).to('kelvin')
-print(T_zyl)
+
 
 T_prob = model_T(R_prob).to('kelvin')
 
@@ -216,7 +216,7 @@ C_v = C_v(C_p[:-1], alpha, T_mean[:-1]).to('joule / kelvin / mol')
 
 
 
-rcParams['figure.figsize'] = 5.906, 5.906
+rcParams['figure.figsize'] = 5.906, 6.2
 fig, ax = plt.subplots(1, 1)
 ax.errorbar(x = noms(T_mean[:-1]), y = noms(C_v), xerr = stds(T_mean[:-1]), yerr = stds(C_v), fmt = '.', label = 'Daten', linestyle = None)
 ax.errorbar(x = noms(T_mean[1]), y = noms(C_v)[1], xerr = stds(T_mean[1]), yerr = stds(C_v)[1], fmt = '.', label = 'Ausreißer', linestyle = None, color = 'r')
