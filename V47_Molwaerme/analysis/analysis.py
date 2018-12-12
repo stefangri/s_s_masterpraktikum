@@ -47,6 +47,7 @@ import scipy.constants as const
 
 #Molmasse
 M_cu = Q_(63.546 * const.N_A, 'dalton / mol').to('kg / mol') #https://www.webqc.org/molecular-weight-of-Cu.html
+print(M_cu)
 # Probenmasse Versuchsanleitung
 m_probe = Q_(342, 'g')
 
@@ -86,6 +87,16 @@ def C_v(C_p, alpha, T):
 T, alpha = np.genfromtxt(abs_path('data/alpha.txt'), unpack = True)
 model_alpha = interp1d(T, alpha  * 1e-6)
 
+make_table(filename = abs_path('tabs/alpha.tex'),
+    data = [np.split(T, 2)[0], np.split(alpha, 2)[0], np.split(T, 2)[1], np.split(alpha, 2)[1]], 
+    header = [r'$T$ / \kelvin', r'$\alpha$ / 10^{-6}\per \kelvin', r'$T$ / \kelvin', r'$\alpha$ / 10^{-6}\per \kelvin'],
+    places = [3.0, 2.1, 3.0, 2.1],
+    caption = r'Aus der Anleitung~\cite{anleitung47} entnommene Wertepaare für $T$ und $\alpha$.',
+    label = 'tab: alpha'
+)
+
+
+
 #def model_alpha(Temp):
 #    T, alpha = np.genfromtxt(abs_path('data/alpha.txt'), unpack = True)
 #    return np.interp(Temp, T, alpha)
@@ -119,6 +130,15 @@ ax[1].text(0.01 , 0.96, r'(b)', horizontalalignment='left', verticalalignment='t
 
 T, R = np.genfromtxt(abs_path('data/T_R.txt'), unpack = True)
 T += 273.15 # to kelvin
+
+l = int(len(R) / 2 + 1)
+make_table(filename = abs_path('tabs/T_R.tex'),
+    data = [R[:l], T[:l], R[l:], T[l:]], 
+    header = [r'$R$ / \ohm', r'$T$ / \kelvin', r'$R$ / \ohm', r'$T$ / \kelvin'],
+    places = [3.2, 3.2, 3.2, 3.2],
+    caption = r'Aus der Anleitung~\cite{anleitung47} entnommene Wertepaare für $R$ und $T$.',
+    label = 'tab: T_R'
+)
 
 def T_R(R, a, b, c):
     return a * R**2 + b * R + c
@@ -173,7 +193,8 @@ make_table(filename = abs_path('tabs/data.tex'),
     header = [r'$t$ / \second', r'$U$ / \volt', r'$I$ / \milli\ampere', r'$R_{\text{zyl}}$ / \kilo\ohm', r'$T_{\text{zyl}}$ / \kelvin', r'$R_{\text{prob}}$ / \kilo\ohm', r'$T_{\text{prob}}$ / \kelvin'],
     places = [(4.0, 1.0), (2.2, 1.2), (3.1, 1.1), (1.4, 1.4), (3.2, 1.2), (1.4, 1.4), (3.2, 1.2)],
     caption = r'Aufgenommene Messdaten zur Bestimmung der Debye Temperatur von Kupfer. Teit $t$, anliegende Spannung $U$ an der Probe, Strom $I$ durch die Probe, Widerstand $R_{\text{zyl}}$ des Zylinder-Pt-Elements und Widerstand $R_{\text{probe}}$ des Proben-Pt-Elements. Aus den Widerständen werden die Temperaturen $T_{\text{zyl}}$ und $T_{\text{probe}}$ berechnet.',
-    label = 'tab: data'
+    label = 'tab: data',
+    big = True
 ) 
 
 T_mean = (T_prob[1:] + T_prob[:-1]) / 2
@@ -251,6 +272,16 @@ def weight_mean(X):
 
 data = np.genfromtxt(abs_path('data/tab.txt'), unpack = True) 
 data = data.T
+#print( [np.arange(10)] + [np.arange(10)])
+make_table(filename = abs_path('tabs/wertetabelle.tex'),
+    data = [range(16)] + [ data[:, i] for i in range(np.shape(data)[1]) ],
+    header = [r'$\frac{\Theta_D}{T}$'] + [f'${i}$' for i in range(10)],
+    places = [1.0] + [2.4 for i in range(10)],
+    caption = r'Wertetabelle für die Debyefunktion aus~\cite{anleitung47}.',
+    label = 'tab: wertetabelle',
+    big = True
+) 
+
 best_theta_D = []
 best_theta_std = []
 mask_25 = noms(C_v) < 40
@@ -273,7 +304,8 @@ make_table(filename = abs_path('tabs/results.tex'),
     header = [r'$\Delta t$ / \second', r'$\Delta T$ / \kelvin', r'$C_p$ / \joule\per\kelvin\per\mol', r'$\overline{T}$ / \kelvin', r'$\alpha(\overline{T})$ / 10^{-6}\per\kelvin', r'$C_V$ / \joule\per\kelvin\per\mol', r'$\frac{\Theta}{\overline{T}}$', r'$\Theta_D$ / \kelvin'],
     places = [(3.1, 1.1), (1.2, 1.2), (2.1, 1.1), (3.2, 1.2), 2.2, (2.1, 1.1), (1.1, 1.1), (3.0, 3.0)],
     caption = r'Ergebnisse für die spezifische Wärmekapazität bei konstantem Druck und konstantem Volumen, sowie der Debye-Temperatur.',
-    label = 'tab: results'
+    label = 'tab: results',
+    big = True
 ) 
 
 theta_D_mean = weight_mean(theta_D)   

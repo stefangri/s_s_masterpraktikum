@@ -5,27 +5,30 @@ Korrelation der gemessenen Größen wird nicht beachtet.
 
 \subsection{Vorbereitende Berechnungen}
 Für spätere Berechnungen ist zunächst der Zusammenhang zwischen dem Widerstand der \ce{Pt}-Elemente und der Temperatur 
-zu herzustellen. Hierzu sind im Skript~\cite{anleitung47} die Daten aus Tabelle~\ref{} gegeben, die durch die quadratische 
+herzustellen. Hierzu sind im Skript~\cite{anleitung47} die Daten aus Tabelle~\ref{tab: T_R} gegeben, die durch die quadratische 
 Funktion
 \begin{equation}
     T(R) = \SI{0.00134}{\kelvin \per \ohm\squared} R^2 + \SI{2.296}{\kelvin \per \ohm} R + \SI{30.13}{\kelvin}
     \label{eq: T_R}
 \end{equation}
 beschrieben werden. Zudem ist für die Umrechnung zwischen $C_p$ und $C_V$ mit Gleichung~\eqref{} der Temperaturverlauf 
-$\alpha(T)$ des Ausdehnungskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{} entnommen 
-worden und in Tabelle~\ref{} eingetragen. Die Daten werden linear interpoliert und somit Werte von $\alpha$ für 
+$\alpha(T)$ des Ausdehnungskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{anleitung47} entnommen 
+worden und in Tabelle~\ref{tab: alpha} eingetragen. Die Daten werden linear interpoliert und somit Werte von $\alpha$ für 
 beliebige Temperaturen zwischen $\SI{80}{\kelvin}$ und $\SI{300}{\kelvin}$ bestimmt. Von einer Betrachtung der Ungenauigkeit 
 dieses Modells wird wie in~\eqref{eq: T_R} abgesehen. Eine graphische Darstellung der Messpunkte und angenommenen 
 Modelle befindet sich in Abbildung~\ref{fig: alpha_T_R}.
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{../analysis/results/alpha_T_R.pdf}
-\caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Beschreibung des Zusammenhangs zwischen Temperatur 
+\caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: T_R} zur Beschreibung des Zusammenhangs zwischen Temperatur 
         $T$ und Widerstand $R$.
         (b) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur und
          Ausdehnungskoeffizient $\alpha$.}
 \label{fig: alpha_T_R}
 \end{figure}
+
+\input{../analysis/tabs/alpha.tex}
+\input{../analysis/tabs/T_R.tex}
 
 
 \subsection{Bestimmung der Debye-Temperatur von Kupfer}
@@ -38,10 +41,6 @@ wichtig, dass die Temperaturen von Zylinder und Probe stets gleich sind. Da in A
 deutlich zu erkennen sind, ist in Abbildung~\ref{fig: temp}(b) ebenfalls die Differnez der beiden Temperaturen 
 aufgetragen. Hier wird ersichtlich, dass die Temperaturabweichungen im Mittel sehr klein gehalten werden konnten, es
 jedoch vereinzelt zu Temperaturdifferenzen bis zu $\sim\!\SI{4}{\kelvin}$ gekommen ist.
-
-
-\input{../analysis/tabs/data.tex}
-
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{../analysis/results/temperaturen.pdf}
@@ -50,12 +49,16 @@ jedoch vereinzelt zu Temperaturdifferenzen bis zu $\sim\!\SI{4}{\kelvin}$ gekomm
 \label{fig: temp}
 \end{figure}
 
+\input{../analysis/tabs/data.tex}
+
 Aus den Daten kann nun zunächst die Wärmekapazität unter konstantem Druck $C_p$ bestimmt werden. Hierzu werden 
 die Temperaturdifferenzen und Zeitdifferenzen aus den Daten in Tabelle~\ref{tab: data} gebildet und zusammen mit den 
-zugehörigen Spannungen und Strömen in Formel~\eqref{} eingesetzt. 
+zugehörigen Spannungen und Strömen in Formel~\eqref{} eingesetzt. Für die Molare Masse von Kupfer 
+wird $\SI{63.5}{\gram / \mol}$ \cite{molarmass} angenommen, die Probe hat eine Masse von $\SI{342}{\gram}$ \cite{anleitung47}. 
 Zur Berechnung der Wärmekapazität
 bei konstantem Volumen wird Gleichung~\eqref{} verwendet. Die hierhin auftretende Temperatur wird als Mittel 
 der beiden Temperaturen, aus denen die Temperaturdifferenz für Gleichung~\eqref{} bestimmt wurde, angenommen. 
+Für die Materialgrößen werden die folgenden Werte verwendet: $\kappa = \SI{14e10}{\pascal}$ \cite{gross}, $V_0 = \SI{7.0922e-6}{\meter^3 / \mol}$ \cite{volume}.
 Der letzte Wert übersteigt den Wert $\SI{300}{\kelvin}$ und ist damit nicht mehr mit dem Modell für $\alpha(T)$
 zu beschreiben. Er wird daher nicht berücksichtigt.
 
@@ -69,11 +72,17 @@ ausreißenden Datenpunktes in Abbildung~\ref{fig: C_V} eingehen, ebenfalls in ro
 sonstigen auftretenden Abweichungen, was eine mögliche Erklärung für den fehlerhaften Datenpunkt darstellt.  
 
 Nun soll eine gute Schätzung für die Debye-Temperatur gefunden werden. Hierzu werden die gefundenen Daten mit der 
-Wertetabelle~\ref{} aus~\cite{anleitungV47} verglichen. Einem Bestwert $C_V$ wird derjenige Quotient $\Theta / T$ zugeordnet, dessen 
+Wertetabelle~\ref{tab: wertetabelle} aus~\cite{anleitungV47} verglichen. Einem Bestwert $C_V$ wird derjenige Quotient $\Theta / T$ zugeordnet, dessen 
 zugehöriger Wert in der Tabelle die geringste Abweichung hat. Um die Fehler $\Delta C_V$ sinnvoll bei diesem 
 Vorgehen zu berücksichtigen werden analog die Werte $\Theta / T$ für $C_V + \Delta C_V$ und $C_V - \Delta C_V$ bestimmt. 
 Als Fehler für $\theta / T$ wird dann die maximale Abweichung dieser beiden Werte vom dem für den Bestwert bestimmten 
-Wert angenommen. Durch Multiplikation mit der Temperatur kann jeweils eine Debye-Temperatur berechnet werden. 
+Wert angenommen\footnote{Konkretes Beispiel $C_V = \SI{14.3(5)}{\joule\per\kelvin\per\mol}$:
+Der Bestwert liegt am nächsten an dem Wert $\num{14.4840}$ aus der Tabelle, was den Wert $\Theta_D / T = \num{3.5}$ liefert. 
+$(\num{14.3} + \num{0.5})\si{\joule\per\kelvin\per\mol} = \SI{14.8}{\joule\per\kelvin\per\mol}$ ergibt $\Theta_D / T = \num{3.4}$ und
+$(\num{14.3} - \num{0.5})\si{\joule\per\kelvin\per\mol} = \SI{13.8}{\joule\per\kelvin\per\mol}$ ergibt $\Theta_D / T = \num{3.7}$. Der maximale 
+Abstand ist also $\Theta_D / T = \num{0.2}$. Also wird angegeben: $\Theta_D / T = \num{3.5(2)}$.
+
+}. Durch Multiplikation mit der Temperatur kann jeweils eine Debye-Temperatur berechnet werden. 
 Als mit den inversen Varianzen gewichteter Mittelwert ergibt sich
 \begin{equation}
         \Theta\ua{D, exp} = \input{../analysis/results/result_T_debye_exp.tex}.
@@ -99,3 +108,5 @@ Die Debye-Funktion mit dem Theoriewert $\Theta\ua{D, theo}$ ist ebenfalls in Abb
 Debye-Funktioen mit den experimentellen und theoretischen Debye-Funktionen und das Dulong-Petit-Gesetz eingezeichnet.}
 \label{fig: C_V}
 \end{figure}
+
+\input{../analysis/tabs/wertetabelle.tex}

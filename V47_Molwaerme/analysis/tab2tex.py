@@ -4,7 +4,8 @@ def make_table(
         data,
         caption = 'tab2tex-generated.',
         label = 'tab:tab2tex-generated',
-        filename = 'tab2tex-generated.tex'):
+        filename = 'tab2tex-generated.tex',
+        big = False):
     '''Method to generate table in build folder'''
     # review input
     if not type(caption) == str:
@@ -38,7 +39,8 @@ def make_table(
     file.write('\t' + '\\centering' + '\n')
     file.write('\t' + '\\caption{' + caption + '}' + '\n')
     file.write('\t' + '\\label{' + label + '}' + '\n')
-    file.write(r'\resizebox{\textwidth}{!}{' + '\n') 
+    if big:
+        file.write(r'\resizebox{\textwidth}{!}{' + '\n') 
     file.write('\t' + '\\begin{tabular}{' + '\n')
     # recognize columns with text an uncertainty arrays
     for param in range(0, len(places)):
@@ -90,7 +92,10 @@ def make_table(
 
     # Bottomrule
     file.write('\t' + '\\bottomrule' + '\n')
-    file.write('\t' + '\\end{tabular}}' + '\n')
+    if big:
+        file.write('\t' + '\\end{tabular}}' + '\n')
+    else: 
+        file.write('\t' + '\\end{tabular}' + '\n')
     file.write('\\end{table}')
 
     file.close()
