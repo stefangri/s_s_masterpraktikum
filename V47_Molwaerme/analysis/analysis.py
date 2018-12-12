@@ -15,6 +15,7 @@ import os
 from scipy.integrate import quad
 from pandas import DataFrame
 from scipy.interpolate import interp1d
+from tab2tex import make_table
 
 def abs_path(filename):
     return os.path.join(os.path.dirname(__file__), filename)
@@ -163,8 +164,17 @@ t = Q_(unp.uarray([300 * i for i in range(9900 // 300)], np.repeat(1, 9900 // 30
 
 
 T_zyl = model_T(R_zyl).to('kelvin')
+print(T_zyl)
 
 T_prob = model_T(R_prob).to('kelvin')
+
+make_table(filename = abs_path('tabs/data.tex'),
+    data = [t.magnitude, U.magnitude, I.magnitude, R_zyl.magnitude, T_zyl.magnitude, R_prob.magnitude, T_prob.magnitude], 
+    header = [r'$t$ / \second', r'$U$ / \volt', r'$I$ / \milli\ampere', r'$R_{\text{zyl}}$ / \kilo\ohm', r'$T_{\text{zyl}}$ / \kelvin', r'$R_{\text{prob}}$ / \kilo\ohm', r'$T_{\text{prob}}$ / \kelvin'],
+    places = [(4.0, 1.0), (2.2, 1.2), (3.1, 1.1), (1.4, 1.4), (3.2, 1.2), (1.4, 1.4), (3.2, 1.2)],
+    caption = r'Aufgenommene Messdaten zur Bestimmung der Debye Temperatur von Kupfer. Teit $t$, anliegende Spannung $U$ an der Probe, Strom $I$ durch die Probe, Widerstand $R_{\text{zyl}}$ des Zylinder-Pt-Elements und Widerstand $R_{\text{probe}}$ des Proben-Pt-Elements. Aus den Widerständen werden die Temperaturen $T_{\text{zyl}}$ und $T_{\text{probe}}$ berechnet.',
+    label = 'tab: data'
+) 
 
 T_mean = (T_prob[1:] + T_prob[:-1]) / 2
 
@@ -204,7 +214,9 @@ C_v = C_v(C_p[:-1], alpha, T_mean[:-1]).to('joule / kelvin / mol')
 
 
 
-rcParams['figure.figsize'] = 5.906, 4.5
+
+
+rcParams['figure.figsize'] = 5.906, 5.906
 fig, ax = plt.subplots(1, 1)
 ax.errorbar(x = noms(T_mean[:-1]), y = noms(C_v), xerr = stds(T_mean[:-1]), yerr = stds(C_v), fmt = '.', label = 'Daten', linestyle = None)
 ax.errorbar(x = noms(T_mean[1]), y = noms(C_v)[1], xerr = stds(T_mean[1]), yerr = stds(C_v)[1], fmt = '.', label = 'Ausreißer', linestyle = None, color = 'r')
@@ -254,6 +266,15 @@ for C_v_i in C_v[mask_25].magnitude:
 
 best_theta_D = unp.uarray(best_theta_D, best_theta_std)
 theta_D = best_theta_D * (T_mean[:-1])[mask_25]
+
+
+make_table(filename = abs_path('tabs/results.tex'),
+    data = [np.diff(t)[:-1], np.diff(T_prob)[:-1], C_p.magnitude[:-1], T_mean.magnitude[:-1], alpha.magnitude * 1e6, C_v.magnitude, best_theta_D, theta_D.magnitude], 
+    header = [r'$\Delta t$ / \second', r'$\Delta T$ / \kelvin', r'$C_p$ / \joule\per\kelvin\per\mol', r'$\overline{T}$ / \kelvin', r'$\alpha(\overline{T})$ / 10^{-6}\per\kelvin', r'$C_V$ / \joule\per\kelvin\per\mol', r'$\frac{\Theta}{\overline{T}}$', r'$\Theta_D$ / \kelvin'],
+    places = [(3.1, 1.1), (1.2, 1.2), (2.1, 1.1), (3.2, 1.2), 2.2, (2.1, 1.1), (1.1, 1.1), (3.0, 3.0)],
+    caption = r'Ergebnisse für die spezifische Wärmekapazität bei konstantem Druck und konstantem Volumen, sowie der Debye-Temperatur.',
+    label = 'tab: results'
+) 
 
 theta_D_mean = weight_mean(theta_D)   
 r.add_result(name = 'T_debye_exp', value = Q_(theta_D_mean, 'kelvin'))  
