@@ -1,9 +1,9 @@
 \setcounter{page}{1}
 \section*{Zielsetzung}
-In dem Versuch V47 wird die Molwärme von Kupfer $\ce{Cu}$ bestimt werden.
-Molwärme wird hierbei als Synonym für die \emph{molare Wärmekapazität} verwendet.
-Diese gibt die Menge an Wärme an, die benötigt ist um $\SI{1}{\mol}$ eines Stoffes
-bzw. Elements um einen $\SI{1}{\kelvin}$ zu erwärmen.
+In dem Versuch V47 wird die Molwärme von Kupfer $\ce{Cu}$ bestimt.
+Der Begriff Molwärme wird hierbei als Synonym für die \emph{molare Wärmekapazität} verwendet.
+Diese gibt die Wärmemenge an, die benötigt wird um $\SI{1}{\mol}$ eines Stoffes
+bzw. Elementes um einen $\SI{1}{\kelvin}$ zu erwärmen.
 
 \section{Theorie}\label{sec:theorie}
 Im Folgenden werden drei Methodiken zur Bestimmung der Molwärme erläutert.
@@ -24,16 +24,16 @@ werden. Dies definiert die Wärmekapazität bei konstantem Volumen:
   \label{eq:C_V}
   C\ua{V} = \left.\frac{\partial Q}{\partial T}\right|_{V} = \left. \frac{\partial U}{\partial T}\right|_{V}.
 \end{equation}
-Auf Grund der Tatsache das sich $C\ua{V}$ aus der inneren Energie $U$ ableiten
+Auf Grund der Tatsache, dass sich $C\ua{V}$ aus der inneren Energie $U$ ableiten
 lässt, ist die Beschreibung über ein theoretisches Modell leichter zu realisieren.
 Jedoch kann in einem Experiment kaum sichergestellt werden, dass das Volumen einer
-Probe konstant bleibt. Aus diesem Grund wird meist $C_p$ gemssen und mit Hilfe
-der folgenden Formel
+Probe konstant bleibt. Deshalb wird meist $C_p$ gemssen und mit Hilfe
+der Formel
 \begin{equation}
-  \label{eq:Umrechnung_CP_CV}
+  \label{eq: C_V}
   C\ua{p} - C\ua{V} = 9\alpha^2 \kappa V_0 T
 \end{equation}
-umgerechnet werden. Die in der Gleichun \eqref{eq:Umrechnung_CP_CV} auftretenden
+in $C_V$ umgerechnet. Die in der Gleichun \eqref{eq:Umrechnung_CP_CV} auftretenden
 Größen sind - der lineare Ausdehungskoeffizient $\alpha$, das Kompressionsmodul
 $\kappa$ und das Molvolumen $V_0$.
 \subsection{Klassische Betrachtung}
@@ -58,14 +58,14 @@ Aus der Gleichung \eqref{eq:klassische_innere_Energie} lässt sich das
   \label{eq:dulong_petit}
   C\ua{V}=\left. \frac{\partial U}{\partial T}\right|_{V}=3R
 \end{equation}
-Nach dem Dulong-Petischen Gesetz ist die Wärmekapazität, jedoch Material und
+Nach dem Dulong-Petischen Gesetz ist die Wärmekapazität jedoch Material und
 Temperaturunabhängig. Im späteren Verlauf werden wir zeigen, dass das Dulong-Petische Gesetz
 im Grenzfall aus den quantenmechanischen Theorien folgt.
 
 \subsection{Quantenmechanische Betrachtung}
 Die bisherige klassiche Betrachtungsweise der inneren Energie, hat die
-Quantisierung der Gitterschwingung noch nicht berücksichtigt.
-Gitterschwinugngen lassen sich als Oszillatoren vereinfacht darstellen. Für diese
+Quantisierung der Gitterschwingung nicht berücksichtigt.
+Gitterschwinugngen lassen sich als quantenmechanische Oszillatoren vereinfacht darstellen. Für diese
 sind die zugehörigen Eigenenergien gegebn durch
 \begin{equation}
   \label{eq:energie_quanten_oszi}
@@ -88,7 +88,7 @@ eingesetzt folgt:
 \begin{equation*}
   \left<U\right>= 3N  \frac{ \sum_n^\infty \hbar\omega\left( n+ \frac{1}{2} \right)\exp\left(-\beta\hbar\omega\left( n+\frac{1}{2} \right) \right) }{ \sum_n^\infty \exp\left( -\beta\hbar\omega\left( n+\frac{1}{2} \right) \right)}.
 \end{equation*}
-Nach einigen Umformungsschritten - nachlesbar in Quelle \cite[S. 220]{marx} folgt für die innere Energie:
+Nach einigen Umformungsschritten - nachlesbar in Quelle \cite[S. 220]{marx} - folgt für die innere Energie:
 \begin{equation}
   \label{eq:innere_Energie_Quantenmechanik_diskrete}
   \left<U\right> = 3N\hbar\omega\left(\frac{1}{2} + \frac{1}{\exp\left(\hbar\omega\beta\right) -1}\right).
@@ -96,13 +96,13 @@ Nach einigen Umformungsschritten - nachlesbar in Quelle \cite[S. 220]{marx} folg
 Hierbei ist $\frac{1}{\exp\left(\hbar\omega\beta\right) -1}$ die \emph{Bose-Einstein Statistik}.
 
 \subsubsection{Einstein-Modell}
-Das von Albert Einstein im Jahre 1907 formulierte Modell nimmt eine konstante
+Das von Albert Einstein im Jahre 1907 formulierte Modell, nimmt eine konstante
 Dispersionrelation für alle $3N$ Eigenschwingung an:
 \begin{equation}
   \label{eq:dispersion_einstein}
   \omega=\omega\ua{E}=\map{const}.
 \end{equation}
-Für die Wärmekapazität folgt somit mit Gleichung \eqref{eq:innere_Energie_Quantenmechanik_diskrete}:
+Für die Wärmekapazität folgt, unter Verwendung von Gleichung \eqref{eq:innere_Energie_Quantenmechanik_diskrete}, somit:
 \begin{equation}
   \label{eq:CV_einstein}
   C\ua{V}^{\map{E}}= 3N\map{k_B}\left(\frac{\Theta\ua{E}}{T}\right)^2\frac{\exp\left(\frac{\Theta\ua{E}}{T}\right)}{\left(\frac{\Theta\ua{E}}{T}-1\right)^2}, \quad \text{mit} \quad \Theta\ua{E} = \frac{\hbar\omega\ua{E}}{\map{k_B}}
@@ -136,7 +136,7 @@ flache Dispersionsrelation vorligen (vgl. Abbildung \ref{fig: dispersions_relati
   \label{fig: dispersions_relation}
 \end{figure}
 Zusätzlich ist in der Abbildung \ref{fig: dispersions_relation} deutlich zu erkennen,
-das akustische Phonen um $0$ eine annähernd lineare Dispersionsrealtion aufweist.
+das akustische Phonen um Null eine annähernd lineare Dispersionsrealtion aufweist.
 Dies ist die Motivation für das zweite quantenmechanische Modell, das
 Debye-Modell.
 
@@ -149,8 +149,8 @@ Hierdurch muss die Summation in Gleichung \eqref{eq:Zustandsumme} durch eine
 Integration ersetzt werden. Die Integrationsgrenzen wird so gewählt, dass über die
 erste Brillouin-Zone integriert wird. Hierbei wird die erste Brillouin-Zone
 weiter als Kugel mit dem Radius $k\ua{D}$ genährt. Der Betrag des Debye-Wellenvektors
-$k\ua{D}$ kann über die Zustandsdichte bestimmt weden. Ein Zustand besitzt im $k$-Raum
-ein Volumen $V$ von $V=\frac{8\pi^3}{L^3}$. Ingesamt betrachten wir $N$ Zustände pro
+$k\ua{D}$ kann über die Zustandsvolumen bestimmt weden. Ein Zustand besitzt im $k$-Raum
+ein Volumen von $V=\frac{8\pi^3}{L^3}$. Ingesamt betrachten wir $N$ Zustände pro
 Dispersionszweig, daraus ergibt sich:
 \begin{align*}
   N\left(\frac{2\pi}{L}\right)^3 &= \frac{4}{3}\pi k^3\ua{D} \\
@@ -159,7 +159,7 @@ Dispersionszweig, daraus ergibt sich:
 Für eine lineare Dispersion folgt für die Zustandsdichte:
 \begin{equation}
   \label{eq:Zustandsichte_debye}
-D(\omega_i) = \frac{V}{\left(2\pi\right)^3} \int_{\omega=\map{const}} \frac{\map{d}S\ua{k}}{\be{\nabla_k \omega(\vec{k})}}= \frac{V}{2\pi^2}\frac{\omega^2}{\nu_i^3}
+D(\omega)_i = \frac{V}{\left(2\pi\right)^3} \int_{\omega=\map{const}} \frac{\map{d}S\ua{k}}{\be{\nabla_k \omega(\vec{k})}}= \frac{V}{2\pi^2}\frac{\omega^2}{\nu_i^3}
 \end{equation}
 Hierbei ist das in Gleichung \eqref{eq:Zustandsichte_debye} auftretende Integral
 über der Kugel mit dem Radius $\omega=\map{const}$ und $\nu_i$ die Schallgeschwindigkeit
