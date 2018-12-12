@@ -86,6 +86,10 @@ class Latexdocument(object):
     def add_result(self, name, value):
             if (type(value.magnitude) == uncertainties.core.Variable or type(value.magnitude) == uncertainties.core.AffineScalarFunc):
                 latex_value = f'{value.magnitude:+.2uS}'
+                uncert = latex_value.split('(')[1]
+                uncert = uncert.split(')')[0]
+                uncert = uncert.replace('.', '')
+                latex_value = latex_value.split('(')[0] + f'({uncert})' + latex_value.split(')')[-1]
                 latex_unit = (f'{value:Lx}'.split('}{'))[1].split('}')[0]
                 value = value.magnitude
                 df = DataFrame({'var': pd.Series(value, index = [name]),
