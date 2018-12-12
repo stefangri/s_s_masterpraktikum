@@ -5,14 +5,14 @@ Korrelation der gemessenen Größen wird nicht beachtet.
 
 \subsection{Vorbereitende Berechnungen}
 Für spätere Berechnungen ist zunächst der Zusammenhang zwischen dem Widerstand der \ce{Pt}-Elemente und der Temperatur 
-herzustellen. Hierzu sind im Skript~\cite{anleitung47} die Daten aus Tabelle~\ref{tab: T_R} gegeben, die durch die quadratische 
+herzustellen. Hierzu sind im Skript~\cite{anleitungV47} die Daten aus Tabelle~\ref{tab: T_R} gegeben, die durch die quadratische 
 Funktion
 \begin{equation}
     T(R) = \SI{0.00134}{\kelvin \per \ohm\squared} R^2 + \SI{2.296}{\kelvin \per \ohm} R + \SI{30.13}{\kelvin}
     \label{eq: T_R}
 \end{equation}
-beschrieben werden. Zudem ist für die Umrechnung zwischen $C_p$ und $C_V$ mit Gleichung~\eqref{} der Temperaturverlauf 
-$\alpha(T)$ des Ausdehnungskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{anleitung47} entnommen 
+beschrieben werden. Zudem ist für die Umrechnung zwischen $C_p$ und $C_V$ mit Gleichung~\eqref{eq: C_V} der Temperaturverlauf 
+$\alpha(T)$ des Ausdehnungskoeffizienten von Interesse. Auch hierfür sind vorgegebene Datenpunkte aus~\cite{anleitungV47} entnommen 
 worden und in Tabelle~\ref{tab: alpha} eingetragen. Die Daten werden linear interpoliert und somit Werte von $\alpha$ für 
 beliebige Temperaturen zwischen $\SI{80}{\kelvin}$ und $\SI{300}{\kelvin}$ bestimmt. Von einer Betrachtung der Ungenauigkeit 
 dieses Modells wird wie in~\eqref{eq: T_R} abgesehen. Eine graphische Darstellung der Messpunkte und angenommenen 
@@ -22,7 +22,7 @@ Modelle befindet sich in Abbildung~\ref{fig: alpha_T_R}.
 \includegraphics[scale = 1]{../analysis/results/alpha_T_R.pdf}
 \caption{(a) Darstellung der Messwerte aus Tabelle~\ref{tab: T_R} zur Beschreibung des Zusammenhangs zwischen Temperatur 
         $T$ und Widerstand $R$.
-        (b) Darstellung der Messwerte aus Tabelle~\ref{tab: } zur Bestimmung des Zusammenhangs zwischen Temperatur und
+        (b) Darstellung der Messwerte aus Tabelle~\ref{tab: alpha} zur Bestimmung des Zusammenhangs zwischen Temperatur und
          Ausdehnungskoeffizient $\alpha$.}
 \label{fig: alpha_T_R}
 \end{figure}
@@ -53,11 +53,11 @@ jedoch vereinzelt zu Temperaturdifferenzen bis zu $\sim\!\SI{4}{\kelvin}$ gekomm
 
 Aus den Daten kann nun zunächst die Wärmekapazität unter konstantem Druck $C_p$ bestimmt werden. Hierzu werden 
 die Temperaturdifferenzen und Zeitdifferenzen aus den Daten in Tabelle~\ref{tab: data} gebildet und zusammen mit den 
-zugehörigen Spannungen und Strömen in Formel~\eqref{} eingesetzt. Für die Molare Masse von Kupfer 
-wird $\SI{63.5}{\gram / \mol}$ \cite{molarmass} angenommen, die Probe hat eine Masse von $\SI{342}{\gram}$ \cite{anleitung47}. 
+zugehörigen Spannungen und Strömen in Formel~\eqref{eq: C_p} eingesetzt. Für die Molare Masse von Kupfer 
+wird $\SI{63.5}{\gram / \mol}$ \cite{molarmass} angenommen, die Probe hat eine Masse von $\SI{342}{\gram}$ \cite{anleitungV47}. 
 Zur Berechnung der Wärmekapazität
-bei konstantem Volumen wird Gleichung~\eqref{} verwendet. Die hierhin auftretende Temperatur wird als Mittel 
-der beiden Temperaturen, aus denen die Temperaturdifferenz für Gleichung~\eqref{} bestimmt wurde, angenommen. 
+bei konstantem Volumen wird Gleichung~\eqref{eq: C_V} verwendet. Die hierhin auftretende Temperatur wird als Mittel 
+der beiden Temperaturen, aus denen die Temperaturdifferenz für Gleichung~\eqref{eq: C_p} bestimmt wurde, angenommen. 
 Für die Materialgrößen werden die folgenden Werte verwendet: $\kappa = \SI{14e10}{\pascal}$ \cite{gross}, $V_0 = \SI{7.0922e-6}{\meter^3 / \mol}$ \cite{volume}.
 Der letzte Wert übersteigt den Wert $\SI{300}{\kelvin}$ und ist damit nicht mehr mit dem Modell für $\alpha(T)$
 zu beschreiben. Er wird daher nicht berücksichtigt.
@@ -94,7 +94,7 @@ Die Debye-Funktion mit der bestimmten Debye-Temperatur ist in Abbildung~\ref{fig
 auftretenden Fehler zu geben, ist ebenfalls die $1\sigma$-Umgebung eingezeichnet (also $f(\Theta \pm \Delta\Theta_D)$).
 
 Abschließend sollen die theoretischen Werte für die Debye-Temperatur und die Debye-Frequenz berechnet werden.
-Gemäß der Gleichungen~\eqref{} und~\eqref{} ergeben sich mit $v_T = \SI{2.26}{\kilo\meter\per\second}$
+Gemäß der Gleichungen~\eqref{eq:Debye_freuqenz} und~\eqref{eq:Debye_Temp} ergeben sich mit $v_T = \SI{2.26}{\kilo\meter\per\second}$
 und $v_L = \SI{4.7}{\kilo\meter\per\second}$ zu 
 \begin{equation}
         \omega_D \approx \SI{43.5}{\per\second} \, \text{und} \quad \Theta\ua{D, theo} \approx \SI{332.5}{\kelvin}.
