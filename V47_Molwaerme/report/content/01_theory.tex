@@ -1,6 +1,6 @@
 \setcounter{page}{1}
 \section*{Zielsetzung}
-In dem Versuch V47 wird die Molwärme von Kupfer $\ce{Cu}$ bestimt.
+In dem Versuch V47 wird die Molwärme von Kupfer $\ce{Cu}$ bestimmt.
 Der Begriff Molwärme wird hierbei als Synonym für die \emph{molare Wärmekapazität} verwendet.
 Diese gibt die Wärmemenge an, die benötigt wird um $\SI{1}{\mol}$ eines Stoffes
 bzw. Elementes um einen $\SI{1}{\kelvin}$ zu erwärmen.
@@ -27,13 +27,13 @@ werden. Dies definiert die Wärmekapazität bei konstantem Volumen:
 Auf Grund der Tatsache, dass sich $C\ua{V}$ aus der inneren Energie $U$ ableiten
 lässt, ist die Beschreibung über ein theoretisches Modell leichter zu realisieren.
 Jedoch kann in einem Experiment kaum sichergestellt werden, dass das Volumen einer
-Probe konstant bleibt. Deshalb wird meist $C_p$ gemssen und mit Hilfe
+Probe konstant bleibt. Deshalb wird meist $C_p$ gemessen und mit Hilfe
 der Formel
 \begin{equation}
   \label{eq: C_V}
   C\ua{p} - C\ua{V} = 9\alpha^2 \kappa V_0 T
 \end{equation}
-in $C_V$ umgerechnet. Die in der Gleichun \eqref{eq:Umrechnung_CP_CV} auftretenden
+in $C_V$ umgerechnet. Die in der Gleichun \eqref{eq: C_V} auftretenden
 Größen sind - der lineare Ausdehungskoeffizient $\alpha$, das Kompressionsmodul
 $\kappa$ und das Molvolumen $V_0$.
 \subsection{Klassische Betrachtung}
@@ -41,12 +41,12 @@ Klassisch lässt sich die mittlere freie innere Energie $\left<U\right>$ aus dem
 \emph{Äquipartitionstheorem} ableiten. Dieses besagt, dass auf jeden quadratischen
 Freiheitsgrad eine mittlere Energie von $\frac{1}{2}\map{k_B}T$ entfällt.
 Für ein einzelnes Atom ergibt sich somit aus der kinetischen Energie $\frac{1}{2}mv_i^2$ und
-dem quadratischen Potential der Gittschwingung $\frac{1}{2}kx_i^2$:
+dem quadratischen Potential der Gitterschwingung $\frac{1}{2}kx_i^2$:
 \begin{equation}
   \label{eq:innere_Energie}
   \left<U\,\right> = \underbrace{3}_{\map{Raumrichtungen}}\map{k_B}T.
 \end{equation}
-Für die innere Energie pro $\si{mol}$ ergibt sich mit der Avogradokonstante
+Für die innere Energie pro $\si{mol}$ ergibt sich mit der Avogardokonstante
 $\map{N_A}$ folglich:
 \begin{equation}
   \label{eq:klassische_innere_Energie}
@@ -59,14 +59,14 @@ Aus der Gleichung \eqref{eq:klassische_innere_Energie} lässt sich das
   C\ua{V}=\left. \frac{\partial U}{\partial T}\right|_{V}=3R
 \end{equation}
 Nach dem Dulong-Petischen Gesetz ist die Wärmekapazität jedoch Material und
-Temperaturunabhängig. Im späteren Verlauf werden wir zeigen, dass das Dulong-Petische Gesetz
+temperaturunabhängig. Im späteren Verlauf werden wir zeigen, dass das Dulong-Petische Gesetz
 im Grenzfall aus den quantenmechanischen Theorien folgt.
 
 \subsection{Quantenmechanische Betrachtung}
-Die bisherige klassiche Betrachtungsweise der inneren Energie, hat die
+Die bisherige klassische Betrachtungsweise der inneren Energie hat die
 Quantisierung der Gitterschwingung nicht berücksichtigt.
-Gitterschwinugngen lassen sich als quantenmechanische Oszillatoren vereinfacht darstellen. Für diese
-sind die zugehörigen Eigenenergien gegebn durch
+Gitterschwinungen lassen sich als quantenmechanische Oszillatoren vereinfacht darstellen. Für diese
+sind die zugehörigen Eigenenergien gegeben durch
 \begin{equation}
   \label{eq:energie_quanten_oszi}
   E_n = \hbar \omega \left(n + \frac{1}{2}\right).
@@ -77,13 +77,13 @@ für $3N$ harmonische Oszillatoren wie folgt berechnen:
   \label{eq:innere_energie}
   \left<U\right> = -3N\frac{1}{Z}\partial_\beta Z, \quad \text{mit} \quad \beta = \frac{1}{\map{k_B}T}
 \end{equation}
-Hierbei ist die Zustandsumme für die obige Energie (vgl. Gleichung \eqref{eq:energie_quanten_oszi})
+Hierbei ist die Zustandssumme für die obige Energie (vgl. Gleichung \eqref{eq:energie_quanten_oszi})
 gegeben als
 \begin{equation}
   \label{eq:Zustandsumme}
   Z = \sum_n^\infty \exp\left(-\beta\hbar\omega\left(n+\frac{1}{2}\right)\right).
 \end{equation}
-Wird die Zustandsumme \eqref{eq:Zustandsumme} in die Gleichung \eqref{eq:innere_energie}
+Wird die Zustandssumme \eqref{eq:Zustandsumme} in die Gleichung \eqref{eq:innere_energie}
 eingesetzt folgt:
 \begin{equation*}
   \left<U\right>= 3N  \frac{ \sum_n^\infty \hbar\omega\left( n+ \frac{1}{2} \right)\exp\left(-\beta\hbar\omega\left( n+\frac{1}{2} \right) \right) }{ \sum_n^\infty \exp\left( -\beta\hbar\omega\left( n+\frac{1}{2} \right) \right)}.
@@ -96,8 +96,8 @@ Nach einigen Umformungsschritten - nachlesbar in Quelle \cite[S. 220]{marx} - fo
 Hierbei ist $\frac{1}{\exp\left(\hbar\omega\beta\right) -1}$ die \emph{Bose-Einstein Statistik}.
 
 \subsubsection{Einstein-Modell}
-Das von Albert Einstein im Jahre 1907 formulierte Modell, nimmt eine konstante
-Dispersionrelation für alle $3N$ Eigenschwingung an:
+Das von Albert Einstein im Jahre 1907 formulierte Modell nimmt eine konstante
+Dispersionsrelation für alle $3N$ Eigenschwingung an:
 \begin{equation}
   \label{eq:dispersion_einstein}
   \omega=\omega\ua{E}=\map{const}.
@@ -107,7 +107,7 @@ Für die Wärmekapazität folgt, unter Verwendung von Gleichung \eqref{eq:innere
   \label{eq:CV_einstein}
   C\ua{V}^{\map{E}}= 3N\map{k_B}\left(\frac{\Theta\ua{E}}{T}\right)^2\frac{\exp\left(\frac{\Theta\ua{E}}{T}\right)}{\left(\frac{\Theta\ua{E}}{T}-1\right)^2}, \quad \text{mit} \quad \Theta\ua{E} = \frac{\hbar\omega\ua{E}}{\map{k_B}}
 \end{equation}
-Wird die Approximation \eqref{eq:CV_einstein} für hohe und niedrige Temperatruen
+Wird die Approximation \eqref{eq:CV_einstein} für hohe und niedrige Temperaturen
 betrachtet, folgt:
 \begin{equation}
   C\ua{V}^{\map{E}}=
@@ -127,8 +127,8 @@ experimentelle Daten beschreibt.
   gegebene theoretische Beschreibung mit eigezeichnet \cite[S. 225]{marx}.}
   \label{fig: einstein_modell_plot}
 \end{figure}
-Das Einstein-Modell eignet sich sich gut, wenn optische Phononen dominieren oder eine
-flache Dispersionsrelation vorligen (vgl. Abbildung \ref{fig: dispersions_relation}).
+Das Einstein-Modell eignet sich gut, wenn optische Phononen dominieren oder eine
+flache Dispersionsrelation vorliegen (vgl. Abbildung \ref{fig: dispersions_relation}).
 \begin{figure}
   \centering
   \includegraphics[width = 0.65\textwidth]{./content/images/optische_akustische.PNG}
@@ -136,20 +136,20 @@ flache Dispersionsrelation vorligen (vgl. Abbildung \ref{fig: dispersions_relati
   \label{fig: dispersions_relation}
 \end{figure}
 Zusätzlich ist in der Abbildung \ref{fig: dispersions_relation} deutlich zu erkennen,
-das akustische Phonen um Null eine annähernd lineare Dispersionsrealtion aufweist.
+dass akustische Phononen um Null eine annähernd lineare Dispersionsrelation aufweist.
 Dies ist die Motivation für das zweite quantenmechanische Modell, das
 Debye-Modell.
 
 \subsubsection{Debye-Modell}
-Im Debye-Modell wird eine lineare Dispersionrelation angenommen:
+Im Debye-Modell wird eine lineare Dispersionsrelation angenommen:
 \begin{equation*}
    \omega = \hbar \be{\vec{k}}.
 \end{equation*}
 Hierdurch muss die Summation in Gleichung \eqref{eq:Zustandsumme} durch eine
-Integration ersetzt werden. Die Integrationsgrenzen wird so gewählt, dass über die
+Integration ersetzt werden. Die Integrationsgrenzen werden so gewählt, dass über die
 erste Brillouin-Zone integriert wird. Hierbei wird die erste Brillouin-Zone
 weiter als Kugel mit dem Radius $k\ua{D}$ genährt. Der Betrag des Debye-Wellenvektors
-$k\ua{D}$ kann über die Zustandsvolumen bestimmt weden. Ein Zustand besitzt im $k$-Raum
+$k\ua{D}$ kann über die Zustandsvolumen bestimmt werden. Ein Zustand besitzt im $k$-Raum
 ein Volumen von $V=\frac{8\pi^3}{L^3}$. Ingesamt betrachten wir $N$ Zustände pro
 Dispersionszweig, daraus ergibt sich:
 \begin{align*}
@@ -178,7 +178,7 @@ Hierbei wurde eine Mittelung über alle Schallgeschwindigkeiten $\nu^3$ durchgef
 \begin{equation*}
   \nu^3= \frac{1}{3}\left(\frac{1}{\nu^3\ua{L}} + \frac{2}{\nu^3\ua{T}}\right)^{-1}.
 \end{equation*}
-Wird Gleichung \eqref{eq:Debye_freuqenz} in Gleichung \eqref{eq:Zustandsdichte_all_togther}
+Wird die Gleichung \eqref{eq:Debye_freuqenz} in Formel \eqref{eq:Zustandsdichte_all_togther}
 eingesetzt ergibt sich:
 \begin{equation}
   \label{eq:Zustandsdichte_Debye}
@@ -215,6 +215,6 @@ Für hohe und tiefe Temperaturen ergibt sich approximativ:
      3N\map{k_B}, & \text{für } T \gg \Theta\ua{D}.
   \end{cases}
 \end{equation}
-Damit folgt aus dem Debye-Modell der selbe hochtemperatur Limes, wie beim Einstein-Modell.
-Die Debye-Temperatur kann somit als Maß dafür verwendet werden, ob eine klassiche
+Damit folgt aus dem Debye-Modell derselbe hochtemperatur Limes, wie beim Einstein-Modell.
+Die Debye-Temperatur kann somit als Maß dafür verwendet werden, ob eine klassische
 oder quantenmechanische Beschreibung der Wärmekapazität einer Probe benötigt wird.
