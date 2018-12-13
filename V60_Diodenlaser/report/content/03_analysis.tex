@@ -6,8 +6,10 @@ adjust correctly.
 
 To operate the setup properly, the rubidium gas cell must be heated
 continiously to $\SI{50}{\degreeCelsius}$. During the heating process, an infrared display
-card is inserted in the path of the laser beam. The diode current is increased slowly until a
-light spot is visible on the display card. Therefore, a camera is used.
+card is inserted in the path of the laser beam.
+The diode current increased slowly until the camera observes a light spot on the
+display card.
+
 Depending on the current, two emission modes of the laser are observable as presented in
 figure~\ref{fig: emission_modes}.
 \begin{figure}
@@ -39,12 +41,12 @@ the external cavity and how the light reflected from the grating hits the diode.
 The process is repeated as long as it is possible to get coherent light. The minimal
 current is determined with a voltage measurement. With the resistance
 of the current source ($\SI{100}{\ohm}$) and Ohm's law, the current can be calculated
-to $I\ua{min}=\SI{0.33}{\ampere}$. As the next step, the display card has to be removed
+to $I\ua{min}=\SI{0.033}{\ampere}$. As the next step, the display card has to be removed
 and a rubidium gas cell is mounted into the laser path. As shown in figure~\ref{fig: positioning_cell_camera},
 the camera is repositioned to record the center of the cell.
 \begin{figure}
   \centering
-  \includegraphics[width = 0.75\textwidth]{./content/images/cell_camera_heater.png}
+  \includegraphics[width = 0.55\textwidth]{./content/images/cell_camera_heater.png}
   \caption{Positioning of cell and camera.}
   \label{fig: positioning_cell_camera}
 \end{figure}
@@ -65,44 +67,31 @@ and piezo controller. This makes it possible to vary the energy of the beam slig
 Instead of the beam blocker, a photodiode is placed on the
 optical table. Whenever the energy of the beam is equal to one of the rubidium
 absorption energies, the beam intensity drops and can be detected as a peak.
-Graph~\ref{fig: spectrum} shows such a spectrum exemplary.
-\begin{figure}
-  \centering
-  \includegraphics[width = 0.75\textwidth]{../analysis/plots/modeshift.pdf}
-  \caption{Example of the spectrum measured with the photodiode. This kind of spectrum also
-          shows mode hops.}
-  \label{fig: spectrum}
-\end{figure}
+Graph~\ref{fig: spectrum_measured} \textbf{(a)} shows such a spectrum exemplary.
 The plot also shows mode hops of the lasers, which decrease the accuracy of the
 measurement. A reduction of mode hops can be achieved, when the ramp generator
 controls the diode current as well. In order to shift the external and internal cavity
 simultaneously. As a result of the improved experimental method, the absorption
-spectrum of rubidium can be detected as shown in figure~\ref{fig: spectrum_measured}.
-\begin{figure}
-  \centering
-  \includegraphics[width = 0.75\textwidth]{../analysis/plots/spectrum_angled.pdf}
-  \caption{Measured absorption spectrum of rubidium with one photodiode.}
-  \label{fig: spectrum_measured}
-\end{figure}
+spectrum of rubidium can be detected as shown in figure~\ref{fig: spectrum_measured} \textbf{(b)}.
 To identify the peaks, figure~\ref{fig: spectrum_manual} was used.
 \begin{figure}
   \centering
-  \includegraphics[width = 0.75\textwidth]{./content/images/absorption_spectrum_rubidium.png}
+  \includegraphics[width = 0.55\textwidth]{./content/images/absorption_spectrum_rubidium.png}
   \caption{Absorption spectrum of rubidium given by the manual~\cite{anleitung60}.}
   \label{fig: spectrum_manual}
 \end{figure}
 Finally, a second photodiode and a 50:50 beam splitter as shown in figure~\ref{fig: setup}
-are used to remove the angle in the plot~\ref{fig: spectrum_measured}. The two signals of
+are used to remove the angle and slop respectively in the plot~\ref{fig: spectrum_measured} \textbf{(b)}. The two signals of
 the photodiode are subtracted. Hence, the oscilloscope only shows the
 absorption spectrum of rubidium, instead of the spectrum plus the varying intensity created by the
-ramp generator. The measured spectrum is shown in figure~\ref{fig: spectrum_measured_straight}.
+ramp generator. The measured spectrum is shown in figure~\ref{fig: spectrum_measured} \textbf{(c)}.
 \begin{figure}
   \centering
-  \includegraphics[width = 0.75\textwidth]{../analysis/plots/spectrum_straight.pdf}
-  \caption{Measured absorption spectrum of rubidium with two photodiodes.}
-  \label{fig: spectrum_measured_straight}
+  \includegraphics[width = 0.75\textwidth]{../analysis/results/results.pdf}
+  \caption{\textbf{(a)} - Example of the spectrum measured with the photodiode. This kind of spectrum also
+          shows mode hops. \textbf{(b)} - Measured absorption spectrum of rubidium with one photodiode. \textbf{(c)} - Measured absorption spectrum of rubidium with two photodiodes.}
+  \label{fig: spectrum_measured}
 \end{figure}
 In conclusion, the experimentel setup is suitable to measure a part of
 rubidium's absorption spectrum. Especially, the two diode measurment shows
-a precise result
-.
+a precise result.
