@@ -277,7 +277,7 @@ make_table(filename = abs_path('tabs/wertetabelle.tex'),
     data = [range(16)] + [ data[:, i] for i in range(np.shape(data)[1]) ],
     header = [r'$\frac{\Theta_D}{T}$'] + [f'${i}$' for i in range(10)],
     places = [1.0] + [2.4 for i in range(10)],
-    caption = r'Wertetabelle für die Debyefunktion aus~\cite{anleitung47}.',
+    caption = r'Wertetabelle für die Debyefunktion aus~\cite{anleitungV47}.',
     label = 'tab: wertetabelle',
     big = True
 ) 
