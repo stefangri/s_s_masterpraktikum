@@ -33,7 +33,7 @@ Modelle befindet sich in Abbildung~\ref{fig: alpha_T_R}.
 
 
 \subsection{Bestimmung der Debye-Temperatur von Kupfer}
-Die gewonnen Messdaten für den Widerstand der Probe und des Zylinders, sowie der Spannung und des Stroms
+Die gewonnen Messdaten für die Widerstände der \ce{Pt}-Elemente, sowie der Spannung und des Stroms
 als Funktion der Zeit sind in Tabelle~\ref{tab: data} aufgeführt. Für alle Daten wird eine $1$ auf der letzten
 Nachkommastelle der Messwerte als Fehler angenommen.
 Mit dem dem Modell~\eqref{eq: T_R} ergeben sich aus den Widerständen die Temperaturen von Probe und Zylinder.
@@ -70,7 +70,7 @@ Der rot eingefärbte Wert weicht deutlich von dem zu erwartenden Verlauf ab. Die
 zugehörigen Temperaturwerte in Tabelle~\ref{tab: data} bzw. deren Darstellung in Abbildung~\ref{fig: temp} diskutieren. In Abbildung~\ref{fig: temp}(b)
 sind die Differenzen zwischen $T\ua{prob}$ und $T\ua{Zyl}$ für die jenigen Temperaturwerte, die in die Berechnung des
 ausreißenden Datenpunktes in Abbildung~\ref{fig: C_V} eingehen, ebenfalls in rot markiert. Beide sind relativ hoch im Vergleich zu den
-sonstigen auftretenden Abweichungen, was eine mögliche Erklärung für den fehlerhaften Datenpunkt darstellt.
+sonstigen auftretenden Abweichungen, was eine mögliche Erklärung für den Ausreißer darstellt.
 
 Nun soll eine gute Schätzung für die Debye-Temperatur gefunden werden. Hierzu werden die gefundenen Daten mit der
 Wertetabelle~\ref{tab: wertetabelle} aus~\cite{anleitungV47} verglichen. Einem Bestwert $C_V$ wird derjenige Quotient $\Theta / T$ zugeordnet, dessen
@@ -87,18 +87,27 @@ Abstand ist also $\Theta_D / T = \num{0.2}$. Also wird angegeben: $\Theta_D / T 
 Als mit den inversen Varianzen gewichteter Mittelwert ergibt sich
 \begin{equation}
         \Theta\ua{D, exp} = \input{../analysis/results/result_T_debye_exp.tex}.
+        \label{eq: T_D_exp}
 \end{equation}
+Die Debye-Funktion mit der in~\eqref{eq: T_D_exp} bestimmten Debye-Temperatur ist in Abbildung~\ref{fig: C_V} eingezeichnet. Um ein Gefühl für den
+auftretenden Fehler zu geben, ist ebenfalls die $1\sigma$-Umgebung eingezeichnet (also $f(\Theta \pm \Delta\Theta_D)$).
 Für größere $T$ wird der Fehler der ermittelten Debye-Temperaturen groß (siehe Tabelle~\ref{tab: results}), da sich die Debye-Funktion für
 $T \rightarrow \Theta_D$ für beliebige $\Theta_D$ gleich verhält. Durch die gewichtete Mittelung werden diese Werte aber nur schwach
-berücksichtigt, was man alternativ durch ein einfaches Weglassen der Werte ab einer bestimmten Temperatur hätte erreichen können.
-Die Debye-Funktion mit der bestimmten Debye-Temperatur ist in Abbildung~\ref{fig: C_V} eingezeichnet. Um ein Gefühl für den
-auftretenden Fehler zu geben, ist ebenfalls die $1\sigma$-Umgebung eingezeichnet (also $f(\Theta \pm \Delta\Theta_D)$).
+berücksichtigt, was man alternativ durch ein einfaches Weglassen der Werte oberhalb einer bestimmten Temperatur erreichen kann.
+Wie in \cite{anleitungV47} vorgeschlagen, wird hierzu die Temperatur $T = \SI{170}{\kelvin}$ gewählt und der arithmetische Mittelwert 
+der Debye-Temperaturen bestimmt:
+\begin{equation}
+        \Theta\ua{D, arith} = \input{../analysis/results/result_T_debye_arithmetic.tex}.
+        \label{eq: T_D_arith}
+\end{equation}
+Bei dem Fehler handelt es sich um die Standardabweichung des Mittelwertes. 
 
 Abschließend sollen die theoretischen Werte für die Debye-Temperatur und die Debye-Frequenz berechnet werden.
 Gemäß der Gleichungen~\eqref{eq:Debye_freuqenz} und~\eqref{eq:Debye_Temp} ergeben sich mit $v_T = \SI{2.26}{\kilo\meter\per\second}$
 und $v_L = \SI{4.7}{\kilo\meter\per\second}$ zu
 \begin{equation}
         \omega_D \approx \SI{43.5}{\per\second} \, \text{und} \quad \Theta\ua{D, theo} \approx \SI{332.5}{\kelvin}.
+        \label{eq: T_D_theo}
 \end{equation}
 Die Debye-Funktion mit dem Theoriewert $\Theta\ua{D, theo}$ ist ebenfalls in Abbildung~\ref{fig: C_V} eingezeichnet.
 
@@ -106,7 +115,8 @@ Die Debye-Funktion mit dem Theoriewert $\Theta\ua{D, theo}$ ist ebenfalls in Abb
 \centering
 \includegraphics[scale = 1]{../analysis/results/C_V.pdf}
 \caption{Temperaturverlauf der spezifischen Wärmekapazitet bei konstantem Volumen. Neben den Messdaten sind auch die
-Debye-Funktioen mit den experimentellen und theoretischen Debye-Funktionen und das Dulong-Petit-Gesetz eingezeichnet.}
+Debye-Funktionen mit den experimentellen und theoretischen Debye-Temperaturen \eqref{eq: T_D_exp} und \eqref{eq: T_D_theo} 
+sowie das Dulong-Petit-Gesetz eingezeichnet.}
 \label{fig: C_V}
 \end{figure}
 

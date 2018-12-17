@@ -91,7 +91,7 @@ make_table(filename = abs_path('tabs/alpha.tex'),
     data = [np.split(T, 2)[0], np.split(alpha, 2)[0], np.split(T, 2)[1], np.split(alpha, 2)[1]], 
     header = [r'$T$ / \kelvin', r'$\alpha$ / 10^{-6}\per \kelvin', r'$T$ / \kelvin', r'$\alpha$ / 10^{-6}\per \kelvin'],
     places = [3.0, 2.1, 3.0, 2.1],
-    caption = r'Aus der Anleitung~\cite{anleitung47} entnommene Wertepaare für $T$ und $\alpha$.',
+    caption = r'Aus der Anleitung~\cite{anleitungV47} entnommene Wertepaare für $T$ und $\alpha$.',
     label = 'tab: alpha'
 )
 
@@ -136,7 +136,7 @@ make_table(filename = abs_path('tabs/T_R.tex'),
     data = [R[:l], T[:l], R[l:], T[l:]], 
     header = [r'$R$ / \ohm', r'$T$ / \kelvin', r'$R$ / \ohm', r'$T$ / \kelvin'],
     places = [3.2, 3.2, 3.2, 3.2],
-    caption = r'Aus der Anleitung~\cite{anleitung47} entnommene Wertepaare für $R$ und $T$.',
+    caption = r'Aus der Anleitung~\cite{anleitungV47} entnommene Wertepaare für $R$ und $T$.',
     label = 'tab: T_R'
 )
 
@@ -192,7 +192,7 @@ make_table(filename = abs_path('tabs/data.tex'),
     data = [t.magnitude, U.magnitude, I.magnitude, R_zyl.magnitude, T_zyl.magnitude, R_prob.magnitude, T_prob.magnitude], 
     header = [r'$t$ / \second', r'$U$ / \volt', r'$I$ / \milli\ampere', r'$R_{\text{zyl}}$ / \kilo\ohm', r'$T_{\text{zyl}}$ / \kelvin', r'$R_{\text{prob}}$ / \kilo\ohm', r'$T_{\text{prob}}$ / \kelvin'],
     places = [(4.0, 1.0), (2.2, 1.2), (3.1, 1.1), (1.4, 1.4), (3.2, 1.2), (1.4, 1.4), (3.2, 1.2)],
-    caption = r'Aufgenommene Messdaten zur Bestimmung der Debye Temperatur von Kupfer. Teit $t$, anliegende Spannung $U$ an der Probe, Strom $I$ durch die Probe, Widerstand $R_{\text{zyl}}$ des Zylinder-Pt-Elements und Widerstand $R_{\text{probe}}$ des Proben-Pt-Elements. Aus den Widerständen werden die Temperaturen $T_{\text{zyl}}$ und $T_{\text{probe}}$ berechnet.',
+    caption = r'Aufgenommene Messdaten zur Bestimmung der Debye Temperatur von Kupfer. Zeit $t$, anliegende Spannung $U$ an der Probe, Strom $I$ durch die Probe, Widerstand $R_{\text{zyl}}$ des Zylinder-Pt-Elements und Widerstand $R_{\text{probe}}$ des Proben-Pt-Elements. Aus den Widerständen werden die Temperaturen $T_{\text{zyl}}$ und $T_{\text{probe}}$ berechnet.',
     label = 'tab: data',
     big = True
 ) 
@@ -284,8 +284,8 @@ make_table(filename = abs_path('tabs/wertetabelle.tex'),
 
 best_theta_D = []
 best_theta_std = []
-mask_25 = noms(C_v) < 40
-for C_v_i in C_v[mask_25].magnitude:
+
+for C_v_i in C_v.magnitude:
     index = np.unravel_index((abs(data - C_v_i.n)).argmin(), data.shape)
     theta = index[0] + 0.1 * index[1]
     best_theta_D.append(theta)
@@ -296,7 +296,7 @@ for C_v_i in C_v[mask_25].magnitude:
     best_theta_std.append(max(abs(theta - theta_lower), abs(theta - theta_upper)))
 
 best_theta_D = unp.uarray(best_theta_D, best_theta_std)
-theta_D = best_theta_D * (T_mean[:-1])[mask_25]
+theta_D = best_theta_D * (T_mean[:-1])
 
 
 make_table(filename = abs_path('tabs/results.tex'),
@@ -307,6 +307,10 @@ make_table(filename = abs_path('tabs/results.tex'),
     label = 'tab: results',
     big = True
 ) 
+
+theta_D_arithmetic_mean = ufloat(np.mean(noms(theta_D)[noms(T_mean[:-1]) <= 170]), 
+                                np.std(noms(theta_D)[noms(T_mean[:-1]) <= 170]) / np.sqrt(len(noms(T_mean[:-1])[noms(T_mean[:-1]) <= 170]))) 
+r.add_result(name = 'T_debye_arithmetic', value = Q_(theta_D_arithmetic_mean, 'kelvin'))
 
 theta_D_mean = weight_mean(theta_D)   
 r.add_result(name = 'T_debye_exp', value = Q_(theta_D_mean, 'kelvin'))  
